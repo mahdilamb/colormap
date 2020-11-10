@@ -9,16 +9,16 @@ import net.mahdilamb.colormap.color.Color;
  */
 public class CategoricalColorMap extends ColorMap {
 
-    public CategoricalColorMap(Float lowValue, Float highValue) {
+    public CategoricalColorMap(Double lowValue, Double highValue) {
         super(lowValue, highValue);
     }
 
     @Override
-    public Color colorAt(Float value) {
+    public Color colorAt(Double value) {
         if (getColorNodes().containsKey(value)) {
             return getColorNodes().get(value).clone();
         } else {
-            final float lowerVal = getColorNodes().floorKey(value);
+            final double lowerVal = getColorNodes().floorKey(value);
             final Color lower = getColorNodes().get(lowerVal);
             return lower.clone();
         }
@@ -30,27 +30,9 @@ public class CategoricalColorMap extends ColorMap {
         if (currentColorNodes.size() == 0) {
             currentColorNodes.putAll(definedColorNodes);
             for (int i = 0; i < colorNodes.size(); i++) {
-                currentColorNodes.put(((float) i / (colorNodes.size())), colorNodes.get(i));
+                currentColorNodes.put(((double) i / (colorNodes.size())), colorNodes.get(i));
             }
         }
-    }
-
-    @Override
-    public CategoricalColorMap clone() {
-
-        final CategoricalColorMap newColorMap = new CategoricalColorMap(lowValue, highValue);
-        newColorMap.currentMaxValue = this.currentMaxValue;
-        newColorMap.currentMinValue = this.currentMinValue;
-        newColorMap.highColor = this.highColor;
-        newColorMap.lowColor = this.lowColor;
-
-        newColorMap.NaNColor = this.NaNColor;
-        newColorMap.isReversed = this.isReversed;
-        newColorMap.definedColorNodes.putAll(this.definedColorNodes);
-        newColorMap.colorNodes.addAll(this.colorNodes);
-        newColorMap.recalculateColors();
-        return newColorMap;
-
     }
 
 

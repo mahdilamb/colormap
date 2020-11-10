@@ -10,31 +10,29 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.*;
 
-import static net.mahdilamb.utils.ColorUtils.isValidHexadecimal;
-
 /**
  * Abstract color map
  *
  * @author mahdilamb
  */
-public abstract class ColorMap implements Cloneable {
+public abstract class ColorMap {
     protected final static Map<String, Class<ColorMap>> colorMaps = new HashMap<>();
     protected final static TreeSet<String> defaultColorMaps = new TreeSet<>();
 
-    protected final Map<Float, Color> definedColorNodes = new HashMap<>();
+    protected final Map<Double, Color> definedColorNodes = new HashMap<>();
     protected final List<Color> colorNodes = new Vector<>();
-    protected final NavigableMap<Float, Color> currentColorNodes = new TreeMap<>();
+    protected final NavigableMap<Double, Color> currentColorNodes = new TreeMap<>();
     protected final List<ColorMapNode> colorValues = new Vector<>();
-    protected float currentMinValue = Float.MAX_VALUE;
-    protected float currentMaxValue = Float.MIN_VALUE;
-    protected Float lowValue;
-    protected Float highValue;
+    protected double currentMinValue = Double.MAX_VALUE;
+    protected double currentMaxValue = Double.MIN_VALUE;
+    protected Double lowValue;
+    protected Double highValue;
     protected Color NaNColor = new Color(Color.black);
     protected Color lowColor = null;
     protected Color highColor = null;
     protected boolean isReversed = false;
 
-    public ColorMap(Float lowValue, Float highValue) {
+    public ColorMap(Double lowValue, Double highValue) {
         this.lowValue = lowValue;
         this.highValue = highValue;
     }
@@ -48,7 +46,7 @@ public abstract class ColorMap implements Cloneable {
     /**
      * add color node based on a specified position
      */
-    public void addColorNode(final Float position, final Color color) {
+    public void addColorNode(final Double position, final Color color) {
         if (position == null) {
             addColorNode(color);
             return;
@@ -69,28 +67,6 @@ public abstract class ColorMap implements Cloneable {
 
     }
 
-    public void addColorNode(final float r, final float g, final float b) {
-        addColorNode(new Color(r, g, b));
-
-    }
-
-    public void addColorNode(final int r, final int g, final int b) {
-        addColorNode(new Color(r, g, b));
-
-    }
-
-    public void addColorNode(final Float position, final String hex) {
-        addColorNode(position, new Color(hex));
-    }
-
-    public void addColorNode(final String string) {
-        if (isValidHexadecimal(string)) {
-            addColorNode(new Color(string));
-        } else {
-            addColorNode(Color.getColor(string));
-        }
-
-    }
 
     /**
      * Calculate color nodes based on position (if undefined) and cache them
@@ -99,7 +75,7 @@ public abstract class ColorMap implements Cloneable {
         if (currentColorNodes.size() == 0) {
             currentColorNodes.putAll(definedColorNodes);
             for (int i = 0; i < colorNodes.size(); i++) {
-                currentColorNodes.put((float) i / (colorNodes.size() - 1), colorNodes.get(i));
+                currentColorNodes.put((double) i / (colorNodes.size() - 1), colorNodes.get(i));
             }
         }
     }
@@ -107,14 +83,14 @@ public abstract class ColorMap implements Cloneable {
     /**
      * given a value between 0f and 1f return a color
      */
-    public abstract Color colorAt(Float value);
+    public abstract Color colorAt(Double value);
 
-    public Color getColorAt(final Float value) {
+    public Color getColorAt(final Double value) {
         return colorAt(isReversed ? (1 - value) : value);
 
     }
 
-    Color calculateColor(final Float value) {
+    Color calculateColor(final Double value) {
         final Color color;
         if (value == null || getLowValue() == null || getHighValue() == null) {
             color = getNaNColor().clone();
@@ -124,8 +100,8 @@ public abstract class ColorMap implements Cloneable {
             } else if (value > getHighValue()) {
                 color = getHighColor().clone();
             } else {
-                if (getHighValue() - getLowValue() == 0f) {
-                    color = getColorAt(.5f);
+                if (getHighValue() - getLowValue() == 0) {
+                    color = getColorAt(.5);
                 } else {
                     color = getColorAt((value - getLowValue()) / (getHighValue() - getLowValue()));
                 }
@@ -134,7 +110,7 @@ public abstract class ColorMap implements Cloneable {
         return color;
     }
 
-    public ColorMapNode getColorFromValue(final float value) {
+    public ColorMapNode getColorFromValue(final double value) {
         if (value < currentMinValue || value > currentMaxValue) {
             if (value < currentMinValue) {
                 currentMinValue = value;
@@ -150,11 +126,11 @@ public abstract class ColorMap implements Cloneable {
         return color;
     }
 
-    Float getHighValue() {
+    Double getHighValue() {
         return highValue == null ? currentMaxValue : highValue;
     }
 
-    public void setHighValue(final Float highValue) {
+    public void setHighValue(final Double highValue) {
         if (!this.highValue.equals(highValue)) {
             this.highValue = highValue;
             currentColorNodes.clear();
@@ -162,11 +138,11 @@ public abstract class ColorMap implements Cloneable {
         }
     }
 
-    Float getLowValue() {
+    Double getLowValue() {
         return lowValue == null ? currentMinValue : lowValue;
     }
 
-    public void setLowValue(final Float lowValue) {
+    public void setLowValue(final Double lowValue) {
         if (this.lowValue.equals(lowValue)) {
             return;
         }
@@ -177,7 +153,7 @@ public abstract class ColorMap implements Cloneable {
     }
 
     Color getLowColor() {
-        return lowColor == null ? getColorAt(0f) : lowColor;
+        return lowColor == null ? getColorAt(0d) : lowColor;
     }
 
     public void setLowColor(final Color lowColor) {
@@ -188,7 +164,7 @@ public abstract class ColorMap implements Cloneable {
     }
 
     Color getHighColor() {
-        return highColor == null ? getColorAt(1f) : highColor;
+        return highColor == null ? getColorAt(1d) : highColor;
     }
 
     public void setHighColor(final Color highColor) {
@@ -209,7 +185,7 @@ public abstract class ColorMap implements Cloneable {
         }
     }
 
-    protected NavigableMap<Float, Color> getColorNodes() {
+    protected NavigableMap<Double, Color> getColorNodes() {
         calculateColorNodes();
         return currentColorNodes;
     }
@@ -236,12 +212,9 @@ public abstract class ColorMap implements Cloneable {
         }
     }
 
-    @Override
-    public abstract ColorMap clone();
-
 
     protected void recalculateMaxValue() {
-        Float currentMaxValue = null;
+        Double currentMaxValue = null;
 
         for (final ColorMapNode node : colorValues) {
             if (node.value == null) {
@@ -259,7 +232,7 @@ public abstract class ColorMap implements Cloneable {
     }
 
     protected void recalculateMinValue() {
-        Float currentMinValue = null;
+        Double currentMinValue = null;
         for (final ColorMapNode node : colorValues) {
             if (node.value == null) {
                 continue;

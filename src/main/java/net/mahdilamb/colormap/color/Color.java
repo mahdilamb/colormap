@@ -1,10 +1,7 @@
 package net.mahdilamb.colormap.color;
 
 import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static net.mahdilamb.utils.ColorUtils.*;
 
@@ -377,6 +374,8 @@ public class Color implements Cloneable {
     public static final String tab_lightolive = "#dbdb8d";
     @NewColor(type = ColorType.TABLEAU, name = "lightaqua")
     public static final String tab_lightaqua = "#9edae5";
+
+
     private final static Map<String, Color> css4Colors = new HashMap<>();
     private final static Map<String, Color> awtColors = new HashMap<>();
     private final static Map<String, Color> tableauColors = new HashMap<>();
@@ -393,8 +392,8 @@ public class Color implements Cloneable {
      * @param b Blue
      * @param a Alpha
      */
-    public Color(final float r, final float g, final float b, final float a) {
-        rgba = new float[]{r, g, b, a};
+    public Color(final double r, final double g, final double b, final double a) {
+        rgba = new float[]{(float) r, (float) g, (float) b, (float) a};
 
     }
 
@@ -436,8 +435,8 @@ public class Color implements Cloneable {
      * @param g Green (0.0-1.0)
      * @param b Blue (0.0-1.0)
      */
-    public Color(final float r, final float g, final float b) {
-        this(r, g, b, 1f);
+    public Color(final double r, final double g, final double b) {
+        this(r, g, b, 1.);
 
     }
 
@@ -668,12 +667,15 @@ public class Color implements Cloneable {
     }
 
     @Override
-    public boolean equals(final Object other) {
-        return (other instanceof Color && this.asDecimal() == ((Color) other).asDecimal());
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        final Color color = (Color) o;
+        return Arrays.equals(rgba, color.rgba);
     }
 
+    @Override
     public int hashCode() {
-        return Integer.hashCode(getRGB());
+        return Arrays.hashCode(rgba);
     }
-
 }

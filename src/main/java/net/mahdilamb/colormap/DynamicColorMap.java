@@ -12,7 +12,7 @@ import java.io.IOException;
 public final class DynamicColorMap extends ColorMap {
     volatile ColorMap currentColorMap;
 
-    public DynamicColorMap(ColorMap colorMap, Float lowValue, Float highValue) {
+    public DynamicColorMap(ColorMap colorMap, Double lowValue, Double highValue) {
         super(lowValue, highValue);
         currentColorMap = colorMap;
     }
@@ -31,27 +31,27 @@ public final class DynamicColorMap extends ColorMap {
 
 
     @Override
-    public Color colorAt(Float value) {
+    public Color colorAt(Double value) {
         return currentColorMap.colorAt(value);
     }
 
     @Override
-    Float getHighValue() {
+    Double getHighValue() {
         return currentColorMap.getHighValue();
     }
 
     @Override
-    public void setHighValue(Float highValue) {
+    public void setHighValue(Double highValue) {
         currentColorMap.setHighValue(highValue);
     }
 
     @Override
-    Float getLowValue() {
+    Double getLowValue() {
         return currentColorMap.getLowValue();
     }
 
     @Override
-    public void setLowValue(Float lowValue) {
+    public void setLowValue(Double lowValue) {
         currentColorMap.setLowValue(lowValue);
     }
 
@@ -86,7 +86,7 @@ public final class DynamicColorMap extends ColorMap {
     }
 
     @Override
-    Color calculateColor(Float value) {
+    Color calculateColor(Double value) {
         return currentColorMap.calculateColor(value);
     }
 
@@ -101,7 +101,7 @@ public final class DynamicColorMap extends ColorMap {
     }
 
     @Override
-    public ColorMapNode getColorFromValue(float value) {
+    public ColorMapNode getColorFromValue(double value) {
         return currentColorMap.getColorFromValue(value);
     }
 
@@ -128,12 +128,5 @@ public final class DynamicColorMap extends ColorMap {
 
     }
 
-    @Override
-    public DynamicColorMap clone() {
 
-        final DynamicColorMap newColorMap = new DynamicColorMap();
-        newColorMap.currentColorMap = this.currentColorMap.clone();
-        return newColorMap;
-
-    }
 }

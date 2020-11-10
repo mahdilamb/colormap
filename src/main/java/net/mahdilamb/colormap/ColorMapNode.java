@@ -6,9 +6,9 @@ import net.mahdilamb.colormap.color.ColorListener;
 public class ColorMapNode extends Color {
     final Color color;
     ColorMap colorMap;
-    Float value;
+    Double value;
 
-    public ColorMapNode(ColorMap colorMap, Color color, Float value) {
+    public ColorMapNode(ColorMap colorMap, Color color, Double value) {
         super(color);
         this.colorMap = colorMap;
         this.value = value;
@@ -20,11 +20,11 @@ public class ColorMapNode extends Color {
         color.setColor(newColor);
     }
 
-    public void setValue(Float value) {
+    public void setValue(Double value) {
         if (value.equals(this.value)) {
             return;
         }
-        final Float oldValue = this.value;
+        final Double oldValue = this.value;
         this.value = value;
         recalculate();
 

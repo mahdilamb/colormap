@@ -33,7 +33,7 @@ public class ColorMapTest {
                 } else if (e.getButton() == 1 && e.getClickCount() == 2) {
                     String inputValue = JOptionPane.showInputDialog("Please input a value");
                     try {
-                        final Float newValue = Float.parseFloat(inputValue);
+                        final Double newValue = Double.parseDouble(inputValue);
                         selected.color.setValue(newValue);
                         selected.setText(String.format("%.2f", newValue));
                     } catch (Exception exception) {
@@ -60,10 +60,10 @@ public class ColorMapTest {
                 cb.setSelectedIndex(cbModel.getSize() - 1);
             }
         }
-        for (float i = 0; i <= 1; i += 0.05) {
+        for (double i = 0; i <= 1; i += 0.05) {
             colors.add(new ColorLabel(i, cmap));
         }
-        //FormInput<Float> valInput = new FloatVariable(0).factory();
+        //FormInput<Double> valInput = new DoubleVariable(0).factory();
 
         //colorTools.add(valInput.getComponent());
 				/*JButton btn = new JButton("Add");
@@ -82,9 +82,9 @@ public class ColorMapTest {
         final JCheckBox reversed = new JCheckBox("reverse?");
         reversed.addActionListener(e -> cmap.setReversed(((JCheckBox) e.getSource()).isSelected()));
         colorTools.add(reversed);
-				/*valInput.addInputChangeListener(new MantisInputChangeListener<Float>() {
+				/*valInput.addInputChangeListener(new MantisInputChangeListener<Double>() {
 					@Override
-					public void inputChanged(MantisInputChangeListener<Float> source, Object value, Float validatedValue, boolean isValid) {
+					public void inputChanged(MantisInputChangeListener<Double> source, Object value, Double validatedValue, boolean isValid) {
 						btn.setEnabled(isValid);
 					}
 				});*/
@@ -111,14 +111,14 @@ public class ColorMapTest {
             final JList<? extends ColorMap> list;
 
             public ColorBar(JList<? extends ColorMap> list, ColorMap colorMap) {
-                this.colorMap = colorMap.clone();
+                this.colorMap = colorMap;
                 this.list = list;
             }
 
             @Override
             public void paintIcon(Component c, Graphics g, int x, int y) {
                 for (int i = 0; i < getIconWidth(); i++) {
-                    final float j = ((float) i) / getIconWidth();
+                    final double j = ((double) i) / getIconWidth();
                     g.setColor(new java.awt.Color(colorMap.colorAt(j).asDecimal()));
                     g.drawLine(i, 1, i, getIconHeight() - 1);
                 }
@@ -142,7 +142,7 @@ public class ColorMapTest {
         private static final long serialVersionUID = -5090637998127930769L;
         final ColorMapNode color;
 
-        ColorLabel(Float value, ColorMap cmap) {
+        ColorLabel(Double value, ColorMap cmap) {
             setText(String.format("%.2f", value));
             setAlignmentX(SwingConstants.LEFT);
             color = cmap.getColorFromValue(value);
