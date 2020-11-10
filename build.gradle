@@ -1,0 +1,14 @@
+plugins {
+    id 'java-library'
+}
+test {
+    useJUnit()
+}
+repositories{
+    mavenCentral()
+}
+
+dependencies {
+
+    testImplementation 'junit:junit:4.13'
+}
