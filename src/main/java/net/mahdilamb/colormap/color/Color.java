@@ -668,10 +668,7 @@ public class Color implements Cloneable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        final Color color = (Color) o;
-        return Arrays.equals(rgba, color.rgba);
+        return (o instanceof Color && Arrays.equals(((Color) o).rgba, rgba));
     }
 
     @Override
