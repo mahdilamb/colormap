@@ -60,7 +60,7 @@ public class ColorMapTest {
                 cb.setSelectedIndex(cbModel.getSize() - 1);
             }
         }
-        for (double i = 0; i <= 1; i += 0.05) {
+        for (double i = 0; i <= 1; i += 0.01) {
             colors.add(new ColorLabel(i, cmap));
         }
         //FormInput<Double> valInput = new DoubleVariable(0).factory();
@@ -149,10 +149,10 @@ public class ColorMapTest {
 
             color.addColorListener((Color color) -> SwingUtilities.invokeLater(() -> {
                 final Border border = BorderFactory.createCompoundBorder(
-                        BorderFactory.createLineBorder(new java.awt.Color(color.getRGB()), 0),
+                        BorderFactory.createLineBorder(new java.awt.Color(color.asDecimal()), 0),
                         BorderFactory.createCompoundBorder(
                                 BorderFactory.createLineBorder(UIManager.getColor("Panel.background"), 1),
-                                BorderFactory.createLineBorder(new java.awt.Color(color.getRGB()), 2)));
+                                BorderFactory.createLineBorder(new java.awt.Color(color.asDecimal()), 2)));
                 ColorLabel.this.setBorder(border);
             }));
 
