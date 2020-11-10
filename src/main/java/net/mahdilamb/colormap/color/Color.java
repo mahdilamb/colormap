@@ -473,6 +473,145 @@ public class Color implements Cloneable {
 
     /*
      *
+     * Listeners
+     *
+     */
+    public void addColorListener(final ColorListener listener) {
+        listeners.add(listener);
+        fireColorChanged();
+
+    }
+
+    public void removeColorListener(final ColorListener listener) {
+        listeners.remove(listener);
+    }
+
+    public void removeColorListeners() {
+        listeners.clear();
+    }
+
+    protected void fireColorChanged() {
+        for (final ColorListener listener : listeners) {
+            listener.colorChanged(this);
+
+        }
+    }
+
+    /*
+     *
+     * Setters and getters
+     *
+     */
+
+    public void setColor(final Color newColor) {
+        System.arraycopy(newColor.rgba, 0, rgba, 0, rgba.length);
+        fireColorChanged();
+    }
+
+
+    public int getRed() {
+        return Math.round(this.rgba[0] * 255);
+    }
+
+    public void setRed(final double red) {
+        this.rgba[0] = (float) red;
+        fireColorChanged();
+    }
+
+    public void setRed(final int red) {
+        setRed(red / 255f);
+    }
+
+    public int getGreen() {
+        return Math.round(this.rgba[1] * 255);
+    }
+
+    public void setGreen(final double green) {
+        this.rgba[1] = (float) green;
+        fireColorChanged();
+    }
+
+
+    public int getBlue() {
+        return Math.round(this.rgba[2] * 255);
+    }
+
+    public void setBlue(final double blue) {
+        this.rgba[2] = (float) blue;
+        fireColorChanged();
+    }
+
+    public void setBlue(final int blue) {
+        setBlue(blue / 255f);
+    }
+
+    public int getAlpha() {
+        return Math.round(this.rgba[3] * 255);
+    }
+
+    public void setAlpha(final double alpha) {
+        this.rgba[3] = (float) alpha;
+        fireColorChanged();
+    }
+
+    public void setAlpha(final int alpha) {
+        setAlpha(alpha / 255f);
+    }
+
+    /*
+     *
+     * Converters
+     *
+     */
+    public int[] asRGB() {
+        return new int[]{getRed(), getGreen(), getBlue()};
+    }
+
+    public int[] asRGBA() {
+        return new int[]{
+                getRed(),
+                getGreen(),
+                getBlue(),
+                getAlpha()
+        };
+    }
+
+    public float[] asLab() {
+        return RGBToLab(asRGB());
+    }
+
+    public int asDecimal() {
+        return RGBAToDecimal(rgba);
+    }
+
+    public String asHexadecimal() {
+        return toHexadecimal(asRGBA());
+    }
+
+    @SuppressWarnings("MethodDoesntCallSuperMethod")
+    @Override
+    public Color clone() {
+        return new Color(rgba.clone());
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Color (%s, %.3f)", asHexadecimal(), getAlpha() / 255f);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return (o instanceof Color && Arrays.equals(((Color) o).rgba, rgba));
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(rgba);
+    }
+
+
+    /*
+     *
      * get color from reflection
      *
      */
@@ -515,7 +654,7 @@ public class Color implements Cloneable {
     public static Color getColor(final String colorName) {
         if (colorName.toLowerCase().startsWith("css:")) {
             return getCSSColor(colorName.toLowerCase().split(":")[1]);
-        } else if (colorName.toLowerCase().startsWith("swing:")) {
+        } else if (colorName.toLowerCase().startsWith("awt:")) {
             return getAWTColor(colorName.toLowerCase().split(":")[1]);
         } else if (colorName.toLowerCase().startsWith("tab:") || colorName.toLowerCase().startsWith("tableau:")) {
 
@@ -527,152 +666,4 @@ public class Color implements Cloneable {
         }
     }
 
-    /*
-     *
-     * Listeners
-     *
-     */
-    public void addColorListener(final ColorListener listener) {
-        listeners.add(listener);
-        fireColorChanged();
-
-    }
-
-    public void removeColorListener(final ColorListener listener) {
-        listeners.remove(listener);
-    }
-
-    public void removeColorListeners() {
-        listeners.clear();
-    }
-
-    protected void fireColorChanged() {
-        for (final ColorListener listener : listeners) {
-            listener.colorChanged(this);
-
-        }
-    }
-
-
-    /*
-     *
-     * Setters and getters
-     *
-     */
-    public void setColor(final String hexString) {
-        setColor(hexadecimalToRGB(hexString));
-    }
-
-    public void setColor(final Color newColor) {
-        setColor(newColor.asHexadecimal());
-    }
-
-    public void setColor(final int[] rgb) {
-        rgba[0] = rgb[0] / 255f;
-        rgba[1] = rgb[1] / 255f;
-        rgba[2] = rgb[2] / 255f;
-        rgba[3] = rgb.length == 3 ? this.rgba[3] : (rgb[3] / 255f);
-        fireColorChanged();
-    }
-
-    public int getRed() {
-        return Math.round(this.rgba[0] * 255);
-    }
-
-    public void setRed(final float red) {
-        this.rgba[0] = red;
-        fireColorChanged();
-    }
-
-    public void setRed(final int red) {
-        setRed(red / 255f);
-    }
-
-    public int getGreen() {
-        return Math.round(this.rgba[1] * 255);
-    }
-
-    public void setGreen(final float green) {
-        this.rgba[1] = green;
-        fireColorChanged();
-    }
-
-
-    public int getBlue() {
-        return Math.round(this.rgba[2] * 255);
-    }
-
-    public void setBlue(final float blue) {
-        this.rgba[2] = blue;
-        fireColorChanged();
-    }
-
-    public void setBlue(final int blue) {
-        setBlue(blue / 255f);
-    }
-
-    public int getAlpha() {
-        return Math.round(this.rgba[3] * 255);
-    }
-
-    public void setAlpha(final float alpha) {
-        this.rgba[3] = alpha;
-        fireColorChanged();
-    }
-
-    public void setAlpha(final int alpha) {
-        setAlpha(alpha / 255f);
-    }
-
-    /*
-     *
-     * Converters
-     *
-     */
-    public int[] asRGB() {
-        return new int[]{getRed(), getGreen(), getBlue()};
-    }
-
-    public float[] asLab() {
-        return RGBToLab(asRGB());
-    }
-
-    public int asDecimal() {
-        return RGBAToDecimal(rgba);
-    }
-
-    public String asHexadecimal() {
-        final int[] colorAsRGBA = new int[]{
-                getRed(),
-                getGreen(),
-                getBlue(),
-                getAlpha()
-        };
-        return toHexadecimal(colorAsRGBA);
-    }
-
-    public int getRGB() {
-        return asDecimal();
-    }
-
-    @SuppressWarnings("MethodDoesntCallSuperMethod")
-    @Override
-    public Color clone() {
-        return new Color(rgba.clone());
-    }
-
-    @Override
-    public String toString() {
-        return String.format("Color (%s, %.3f)", asHexadecimal(), getAlpha() / 255f);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        return (o instanceof Color && Arrays.equals(((Color) o).rgba, rgba));
-    }
-
-    @Override
-    public int hashCode() {
-        return Arrays.hashCode(rgba);
-    }
 }
