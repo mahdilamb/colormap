@@ -336,9 +336,9 @@ public abstract class ColorMap implements Cloneable {
             final File packageName = new File(ColorMap.class.getPackage().getName().replace(".", File.separator));
             final Enumeration<URL> resources = ColorMap.class.getClassLoader().getResources(String.valueOf(packageName));
             final Stack<File> directories = new Stack<>();
-            resources.asIterator().forEachRemaining(resource -> {
+            while (resources.hasMoreElements()){
                 try {
-                    final File dir = new File(resource.toURI());
+                    final File dir = new File(resources.nextElement().toURI());
                     if (dir.isDirectory()) {
                         directories.push(dir);
                     } else {
@@ -347,7 +347,8 @@ public abstract class ColorMap implements Cloneable {
                 } catch (URISyntaxException | ClassNotFoundException e) {
                     e.printStackTrace();
                 }
-            });
+            }
+
             while (!directories.empty()) {
                 final File dir = directories.pop();
                 if (dir == null) {
