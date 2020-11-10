@@ -1,10 +1,13 @@
 package net.mahdilamb.colormap.tests;
 
+import net.mahdilamb.colormap.ColorMap;
 import net.mahdilamb.colormap.color.Color;
 import net.mahdilamb.colormap.ColorMapNode;
 import net.mahdilamb.colormap.LinearColorMap;
 import org.junit.Test;
 
+import java.io.IOException;
+import java.lang.annotation.Target;
 import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
@@ -144,4 +147,8 @@ public class JUnitTests {
         assertEquals(-107.860, blueLab[2], precision);
     }
 
+    @Test
+    public void ensureDefaultColorMapsLoadTest() throws IOException, ClassNotFoundException {
+        assertTrue(ColorMap.listDefaultColorMaps().size() > 0);
+    }
 }

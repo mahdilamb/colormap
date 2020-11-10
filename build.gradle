@@ -12,3 +12,8 @@ dependencies {
 
     testImplementation 'junit:junit:4.13'
 }
+task swingDemo(type: JavaExec, dependsOn: ['testClasses']) {
+    classpath sourceSets.test.runtimeClasspath
+
+    main = "net.mahdilamb.colormap.tests.ColorMapTest"
+}
