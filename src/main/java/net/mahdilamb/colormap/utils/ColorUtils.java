@@ -12,8 +12,7 @@ public final class ColorUtils {
 
     /*
      * based on easyrgb.com
-     * @param rgb
-     * @return
+
      */
     public static float[] RGBToXYZ(final float[] rgb) {
         final float[] temp = rgb.clone();
@@ -148,6 +147,12 @@ public final class ColorUtils {
         return RGBAToDecimal(rgba[0], rgba[1], rgba[2], rgba[3]);
     }
 
+    /**
+     * Converts a decimal representation of a Color to it's 8-bit RGBA representation.
+     *
+     * @param value Decimal representation of an sRGB color.
+     * @return A 4 component, 8-bit array.
+     */
     public static int[] decimalToRBGA(final int value) {
         return new int[]{
                 (value >> 16) & 0xff,
@@ -158,50 +163,84 @@ public final class ColorUtils {
         };
     }
 
-    public static String toHexadecimal(final int value) {
-        return "#" + String.format("%05X", value);
-    }
-
-    public static String toHexadecimal(final String value) {
-        return toHexadecimal(Integer.parseInt(value));
-    }
-
+    /**
+     * Convert a color to it's RGB hexadecimal representation
+     *
+     * @param color Color to convert
+     * @return Hexadecimal string representation of the color
+     */
     public static String toHexadecimal(final Color color) {
         return "#" + String.format("%02X%02X%02X", color.getRed(), color.getGreen(), color.getBlue());
     }
 
-    public static String toHexadecimal(final int[] value) {
+    /**
+     * Converts an 8-bit RGB to a hexadecimal string representation.
+     *
+     * @param value A 3-component RGB 8-bit array
+     * @return A hexadecimal string representation of the color
+     */
+    public static String RGBtoHexadecimal(final int[] value) {
         return String.format("#%02x%02x%02x", value[0], value[1], value[2]);
     }
 
+    /**
+     * Check if a hex string is a valid color
+     *
+     * @param hexadecimal String to check validation
+     * @param isRGBA      Whether the string is expected to represent an RGB or RGBA color.
+     * @return Whether the hex string is a valid color.
+     */
     public static boolean isValidHexadecimal(final String hexadecimal, final Boolean isRGBA) {
         return hexadecimal.matches("[#]?[0-9A-Fa-f]{" + (isRGBA == null ? "6,8" : (isRGBA ? 8 : 6)) + "}");
     }
 
+    /**
+     * Check if a hex string is a valid color
+     *
+     * @param hexadecimal String to check validation
+     * @return Whether the hex string is a valid color.
+     */
     public static boolean isValidHexadecimal(final String hexadecimal) {
         return isValidHexadecimal(hexadecimal, null);
     }
 
+    /**
+     * Validates a hexadecimal string
+     *
+     * @param hex    The string to validate
+     * @param isRGBA Whether to validate as RGB or RGBA
+     * @return The validated hexadecimal color. Throws and exception if it is not valid and can't be validated.
+     */
     public static String validateHexadecimal(String hex, final Boolean isRGBA) {
-        if (hex.charAt(0) != '#') {
-            hex = '#' + hex;
-        }
-        if (!isValidHexadecimal(hex, isRGBA)) {
+        final String testHex = hex.charAt(0) != '#' ? '#' + hex : hex;
+
+        if (!isValidHexadecimal(testHex, isRGBA)) {
             throw new UnsupportedOperationException("Can only convert colors in the form #000000");
         }
-        return hex;
+        return testHex;
     }
 
-    public static String validateHexadecimal(String hex) {
-        if (hex.charAt(0) != '#') {
-            hex = '#' + hex;
-        }
-        if (!isValidHexadecimal(hex)) {
+    /**
+     * Validate a hexadecimal string representation of a color
+     *
+     * @param hex Input hexadecimal string representation.
+     * @return The validated hexadecimal color. Throws and exception if it is not valid and can't be validated.
+     */
+    public static String validateHexadecimal(final String hex) {
+        final String testHex = hex.charAt(0) != '#' ? '#' + hex : hex;
+
+        if (!isValidHexadecimal(testHex)) {
             throw new UnsupportedOperationException("Can only convert colors in the form #000000");
         }
-        return hex;
+        return testHex;
     }
 
+    /**
+     * Convert a hexadecimal String representation of a color to an 8-bit RGB int array.
+     *
+     * @param hexadecimal The hexadecimal string representation of the color.
+     * @return An 8-bit RGB int array.
+     */
     public static int[] hexadecimalToRGB(final String hexadecimal) {
         final String hex = validateHexadecimal(hexadecimal, false);
 
@@ -210,6 +249,12 @@ public final class ColorUtils {
                 Integer.valueOf(hex.substring(5, 7), 16)};
     }
 
+    /**
+     * Convert a hexadecimal String representation of a color to an 8-bit RGBA int array.
+     *
+     * @param hexadecimal The hexadecimal string representation of the color.
+     * @return An 8-bit RGBA int array.
+     */
     public static int[] hexadecimalToRGBA(final String hexadecimal) {
         final String hex = validateHexadecimal(hexadecimal, true);
         return new int[]{Integer.valueOf(hex.substring(1, 3), 16),
@@ -218,11 +263,23 @@ public final class ColorUtils {
                 Integer.valueOf(hex.substring(7, 9), 16)};
     }
 
+    /**
+     * Convert a hexadecimal string representation of a color to an actual Color.
+     *
+     * @param hexadecimal The hexadecimal string representation of the color
+     * @return The actual color.
+     */
     public static Color hexadecimalToColor(final String hexadecimal) {
         final int[] rgb = hexadecimalToRGB(hexadecimal);
         return new Color(rgb[0], rgb[1], rgb[2]);
     }
 
+    /**
+     * Convert a color from a hexadecimal string representation to a byte array. Useful for making LUTs
+     *
+     * @param hexadecimal The hexadecimal representation of the Color
+     * @return A 3-component, 8-bit RGB array of the color.
+     */
     public static byte[][] hexadecimalToByteArray(final String hexadecimal) {
         final String hex = validateHexadecimal(hexadecimal);
         final byte[] red = new byte[255];
@@ -239,36 +296,37 @@ public final class ColorUtils {
     /**
      * Return val clamped between min and max
      *
-     * @param val
-     * @param max
-     * @param min
-     * @return
+     * @param val Value to clamp
+     * @param min Minimum the value can be
+     * @param max Maximum the value can be
+     * @param <T> The type of the values.
+     * @return Value clamped between min and max
      */
-    public static <T extends Number & Comparable<T>> T clamp(final T val, final T max, final T min) {
+    public static <T extends Number & Comparable<T>> T clamp(final T val, final T min, final T max) {
         return val.compareTo(max) > 0 ? max : val.compareTo(min) < 0 ? min : val;
 
     }
 
     /**
-     * linear interpolation
+     * Linear interpolation
      *
-     * @param a   left value
-     * @param b   right value
-     * @param amt amount of interpolation between 0 and 1;
-     * @return
+     * @param a   Left value
+     * @param b   Right value
+     * @param amt Amount of interpolation between 0 and 1;
+     * @return A linearly interpolated value
      */
     public static double lerp(final double a, final double b, double amt) {
-        amt = clamp(amt, 1d, 0d);
+        amt = clamp(amt, 0d, 1d);
         return a * amt + b * (1 - amt);
     }
 
     /**
-     * linearly interpolate between colors in L*ab space
+     * Linearly interpolate between colors in L*ab space
      *
-     * @param lower
-     * @param upper
-     * @param amount
-     * @return
+     * @param lower  Lower color to interpolate from
+     * @param upper  Higher color to interpolate to
+     * @param amount The amount to interpolate between the two colors
+     * @return A new color interpolated in L*ab space between lower and upper
      */
     public static Color lerp(final Color lower, final Color upper, final double amount) {
         final float[] lowerLab = lower.asLab();

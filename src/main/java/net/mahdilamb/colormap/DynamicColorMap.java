@@ -33,7 +33,7 @@ public final class DynamicColorMap extends ColorMap {
         isReversed = newColorMap.isReversed;
 
         currentColormap = newColorMap;
-        recalculateColors();
+        recalculateNodes();
 
     }
 

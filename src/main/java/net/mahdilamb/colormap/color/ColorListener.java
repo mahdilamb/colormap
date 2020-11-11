@@ -7,5 +7,10 @@ package net.mahdilamb.colormap.color;
  */
 @FunctionalInterface
 public interface ColorListener {
-    void colorChanged(Color currentColor);
+    /**
+     * Method called when a color changes
+     *
+     * @param currentColor The current Color.
+     */
+    void colorChanged(final Color currentColor);
 }

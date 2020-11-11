@@ -28,19 +28,19 @@ public class JUnitTests {
 
     @Test
     public void greyColorMapShouldStartAtBlackTest() {
-        assertTrue(colors.get(0).getColor().equals(Color.getColor("black")));
+        assertEquals(colors.get(0).getColor(), Color.getColor("black"));
     }
 
     @Test
     public void greyColorMapShouldEndAtWhiteTest() {
-        assertTrue(colors.get(maxRange).getColor().equals(Color.getColor("white")));
+        assertEquals(colors.get(maxRange).getColor(), Color.getColor("white"));
     }
 
     @Test
     public void cloningShouldReturnSameColorTest() {
         final int color = 10;
         final Color clone = colors.get(color).getColor().clone();
-        assertTrue(colors.get(color).getColor().equals(clone));
+        assertEquals(colors.get(color).getColor(), clone);
     }
 
     @Test

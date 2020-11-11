@@ -1,6 +1,5 @@
 package net.mahdilamb.colormap;
 
-
 import net.mahdilamb.colormap.color.Color;
 
 import java.io.File;
@@ -9,18 +8,20 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
- * Abstract color map
+ * Abstract color map that allows or the definition of a color map that is evenly spaced, or spaced at defined locations apart.
  *
  * @author mahdilamb
  */
 public abstract class ColorMap {
+    /**
+     * A node that belongs to ColorMap, primarily defined by its value
+     */
     public static final class ColorMapNode {
-        final Color color;
-        final ColorMap colorMap;
-        Double value;
+        private final Color color;
+        private final ColorMap colorMap;
+        private Double value;
 
         private ColorMapNode(final ColorMap colorMap, final Color color, final Double value) {
             this.colorMap = colorMap;
@@ -34,7 +35,7 @@ public abstract class ColorMap {
         }
 
         public void setValue(final Double value) {
-            if (value.equals(this.value)) {
+            if (Objects.equals(value, this.value)) {
                 return;
             }
             final Double oldValue = this.value;
@@ -97,22 +98,60 @@ public abstract class ColorMap {
 
     private final static Map<String, Class<ColorMap>> colorMaps = new HashMap<>();
     private final static NavigableSet<String> defaultColorMaps = new TreeSet<>();
-
+    /**
+     * Map of colors with their respective positions.
+     */
     protected final Map<Double, Color> definedColorNodes = new HashMap<>();
+    /**
+     * List of colors with undefined positions.
+     */
     protected final List<Color> colorMapColors = new Vector<>();
+    /**
+     * The cache of colors associated with this color map whose positions have been calculated from {@link net.mahdilamb.colormap.ColorMap#colorMapColors}
+     */
     protected final NavigableMap<Double, Color> currentColors = new TreeMap<>();
+    /**
+     * The current list of nodes associated with this color map
+     */
     protected final List<ColorMapNode> currentNodes = new Vector<>();
+    /**
+     * Current minimum value
+     */
     protected double currentMinValue = Double.MAX_VALUE;
+    /**
+     * Current maximum value
+     */
     protected double currentMaxValue = Double.MIN_VALUE;
+    /**
+     * Lowest range of the color map
+     */
     protected Double lowValue = null;
+    /**
+     * Highest range of the color map.
+     */
     protected Double highValue = null;
+    /**
+     * Color for {@code null} values
+     */
     protected Color NaNColor = new Color(Color.black);
+    /**
+     * Color for values lower than or equal to {@link net.mahdilamb.colormap.ColorMap#lowValue}
+     */
     protected Color lowColor = null;
+    /**
+     * Color for values higher than or equal to {@link net.mahdilamb.colormap.ColorMap#highValue}
+     */
     protected Color highColor = null;
+    /**
+     * whether the color map is reversed
+     */
     protected boolean isReversed = false;
 
     /**
      * Add color node based on a specified position
+     *
+     * @param position The position (0.0-1.0) to place this Color
+     * @param color    Color to add to color map
      */
     public void addColor(final Double position, final Color color) {
         if (position == null) {
@@ -128,6 +167,8 @@ public abstract class ColorMap {
 
     /**
      * Add color node whose position is later calculated based on its order
+     *
+     * @param color Color to add to color map
      */
     public void addColor(final Color color) {
         currentColors.clear();
@@ -135,9 +176,14 @@ public abstract class ColorMap {
 
     }
 
-    public void addColors(final Color... colorNodes) {
+    /**
+     * Add colors to color map that are are calculated based on order.
+     *
+     * @param colors Colors to add to the color map.
+     */
+    public void addColors(final Color... colors) {
         currentColors.clear();
-        this.colorMapColors.addAll(Arrays.stream(colorNodes).filter(Objects::nonNull).collect(Collectors.toList()));
+        this.colorMapColors.addAll(Arrays.asList(colors));
 
     }
 
@@ -153,21 +199,32 @@ public abstract class ColorMap {
         }
     }
 
-    protected final void recalculateColors() {
+    /**
+     * Recalculate the nodes belonging to this color map.
+     */
+    protected final void recalculateNodes() {
         for (final ColorMapNode node : currentNodes) {
             node.recalculate();
         }
     }
 
     /**
-     * given a value between 0f and 1f return a color
+     * Get the Color at a specified value. Does not add the value to the color map. Considers whether the color map is
+     * reversed or not.
+     *
+     * @param value Value to get the associated Color from
+     * @return The associated Color
      */
-    public abstract Color colorAt(Double value);
-
-    public Color getColorAt(final Double value) {
+    protected Color getColorAt(final Double value) {
         return colorAt(isReversed ? (1 - value) : value);
     }
 
+    /**
+     * Calculate the Color of a value considering the bounds of the Colormap.
+     *
+     * @param value Value from which to calculate a color
+     * @return The calculated color
+     */
     protected final Color calculateColor(final Double value) {
         final Color color;
         if (value == null) {
@@ -188,7 +245,21 @@ public abstract class ColorMap {
         return color;
     }
 
-    public ColorMapNode getColorFromValue(final double value) {
+    /**
+     * Get the Color at a specified value. Does not add the value to the color map. Primary way to show a graphical representation of this color map.
+     *
+     * @param value Value to get the associated Color from
+     * @return The associated Color
+     */
+    public abstract Color colorAt(Double value);
+
+    /**
+     * Get the color node from a value
+     *
+     * @param value The value to get the associated node form
+     * @return The associated color node.
+     */
+    public final ColorMapNode getColorFromValue(final double value) {
         if (value < currentMinValue || value > currentMaxValue) {
             if (value < currentMinValue) {
                 currentMinValue = value;
@@ -196,7 +267,7 @@ public abstract class ColorMap {
             if (value > currentMaxValue) {
                 currentMaxValue = value;
             }
-            recalculateColors();
+            recalculateNodes();
         }
 
         final ColorMapNode color = new ColorMapNode(this, calculateColor(value), value);
@@ -204,27 +275,45 @@ public abstract class ColorMap {
         return color;
     }
 
-    private Double getHighValue() {
+    /**
+     * @return The maximum value before all Colors are represented by {@link ColorMap#highColor}.
+     * {@code null} means no such ceiling exists.
+     */
+    public Double getHighValue() {
         return highValue == null ? currentMaxValue : highValue;
     }
 
-    public void setHighValue(final Double highValue) {
+    /**
+     * Set the upper bound of this color map
+     *
+     * @param highValue The upper bound
+     */
+    public final void setHighValue(final Double highValue) {
         if (this.highValue == null || !this.highValue.equals(highValue)) {
             this.highValue = highValue;
             currentColors.clear();
-            recalculateColors();
+            recalculateNodes();
         }
     }
 
-    private Double getLowValue() {
+    /**
+     * @return The minimum value before all Colors are represented by {@link ColorMap#lowColor}.
+     * {@code null} means no such floor exists.
+     */
+    public Double getLowValue() {
         return lowValue == null ? currentMinValue : lowValue;
     }
 
-    public void setLowValue(final Double lowValue) {
+    /**
+     * Set the lower bound of this color map
+     *
+     * @param lowValue Lower bound of this color map
+     */
+    public final void setLowValue(final Double lowValue) {
         if (this.lowValue == null || !this.lowValue.equals(lowValue)) {
             this.lowValue = lowValue;
             currentColors.clear();
-            recalculateColors();
+            recalculateNodes();
         }
 
     }
@@ -233,10 +322,16 @@ public abstract class ColorMap {
         return lowColor == null ? getColorAt(0d) : lowColor;
     }
 
-    public void setLowColor(final Color lowColor) {
+    /**
+     * Set the color to use if the value in a color map is lower than {@link ColorMap#getLowValue()}.
+     * To disable this floor set {@link ColorMap#getLowValue()} to {@code null}.
+     *
+     * @param lowColor The Color to provide if a value is lower than {@link ColorMap#getLowValue()}
+     */
+    protected final void setLowColor(final Color lowColor) {
         if (!this.lowColor.equals(lowColor)) {
             this.lowColor = lowColor;
-            recalculateColors();
+            recalculateNodes();
         }
     }
 
@@ -244,10 +339,16 @@ public abstract class ColorMap {
         return highColor == null ? getColorAt(1d) : highColor;
     }
 
-    public void setHighColor(final Color highColor) {
+    /**
+     * Set the color to use if the value in a color map is greater than {@link ColorMap#getHighValue()}.
+     * To disable this ceiling set {@link ColorMap#getHighValue()} to {@code null}.
+     *
+     * @param highColor The Color to provide if a value is higher than {@link ColorMap#getHighValue()}
+     */
+    protected final void setHighColor(final Color highColor) {
         if (!this.highColor.equals(highColor)) {
             this.highColor = highColor;
-            recalculateColors();
+            recalculateNodes();
         }
     }
 
@@ -255,26 +356,42 @@ public abstract class ColorMap {
         return NaNColor;
     }
 
-    public void setNaNColor(final Color NaNColor) {
+    /**
+     * Set the color to use if the value is {@code null}
+     *
+     * @param NaNColor Color to use if the value is not a number.
+     */
+    public final void setNaNColor(final Color NaNColor) {
         if (!this.NaNColor.equals(NaNColor)) {
             this.NaNColor = NaNColor;
-            recalculateColors();
+            recalculateNodes();
         }
     }
 
+    /**
+     * @return The current colors in this colormap, including those whose positions were originally undefined.
+     */
     protected final NavigableMap<Double, Color> getColorNodes() {
         calculateColors();
         return currentColors;
     }
 
-    public boolean isReversed() {
+    /**
+     * @return If the order of this color map is reversed
+     */
+    public final boolean isReversed() {
         return isReversed;
     }
 
-    public void setReversed(final boolean isReversed) {
+    /**
+     * Set the color map as reversed
+     *
+     * @param isReversed Whether to reverse or not.
+     */
+    public final void setReversed(final boolean isReversed) {
         if (this.isReversed != isReversed) {
             this.isReversed = isReversed;
-            recalculateColors();
+            recalculateNodes();
         }
 
     }
@@ -289,6 +406,9 @@ public abstract class ColorMap {
         }
     }
 
+    /**
+     * Recalculates the current highest value (not Colormap ceiling)
+     */
     protected final void recalculateMaxValue() {
         Double currentMaxValue = null;
 
@@ -303,10 +423,13 @@ public abstract class ColorMap {
 
         if (currentMaxValue != null && currentMaxValue != this.currentMaxValue) {
             this.currentMaxValue = currentMaxValue;
-            recalculateColors();
+            recalculateNodes();
         }
     }
 
+    /**
+     * Recalculates the current lowest value (not Colormap floor)
+     */
     protected final void recalculateMinValue() {
         Double currentMinValue = null;
         for (final ColorMapNode node : currentNodes) {
@@ -320,12 +443,20 @@ public abstract class ColorMap {
 
         if (currentMinValue != null && currentMinValue != this.currentMinValue) {
             this.currentMinValue = currentMinValue;
-            recalculateColors();
+            recalculateNodes();
         }
     }
 
-
+    /**
+     * Register a color map so that it can be found by {@link ColorMap#getColorMap(String)}
+     *
+     * @param colorMapName  The name used to later find this color map
+     * @param colorMapClass The class of the color map.
+     */
     public static void registerColorMap(final String colorMapName, final Class<ColorMap> colorMapClass) {
+        if (Arrays.stream(colorMapClass.getConstructors()).allMatch(c -> c.getParameterCount() != 0)) {
+            throw new UnsupportedOperationException("Registered colormaps must contain a no args constructor");
+        }
         colorMaps.put(colorMapName, colorMapClass);
     }
 

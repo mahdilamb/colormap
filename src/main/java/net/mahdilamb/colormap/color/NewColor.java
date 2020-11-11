@@ -12,8 +12,15 @@ import static java.lang.annotation.ElementType.FIELD;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(FIELD)
 public @interface NewColor {
-
+    /**
+     *
+     * @return Category of the Color
+     */
     ColorType type();
 
+    /**
+     *
+     * @return Name of the color
+     */
     String name();
 }
