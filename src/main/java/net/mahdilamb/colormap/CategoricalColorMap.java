@@ -9,8 +9,8 @@ import net.mahdilamb.colormap.color.Color;
  */
 public class CategoricalColorMap extends ColorMap {
 
-    public CategoricalColorMap(Double lowValue, Double highValue) {
-        super(lowValue, highValue);
+    public CategoricalColorMap(Double lowValue, Double highValue, final Color... colorNodes) {
+        super(lowValue, highValue, colorNodes);
     }
 
     @Override

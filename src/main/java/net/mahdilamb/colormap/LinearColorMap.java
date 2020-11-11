@@ -3,11 +3,9 @@ package net.mahdilamb.colormap;
 import net.mahdilamb.colormap.color.Color;
 import net.mahdilamb.utils.ColorUtils;
 
-import java.util.NavigableSet;
-
 public class LinearColorMap extends ColorMap {
-    public LinearColorMap(Double lowValue, Double highValue) {
-        super(lowValue, highValue);
+    public LinearColorMap(final Double lowValue, final Double highValue, final Color... colorNodes) {
+        super(lowValue, highValue, colorNodes);
     }
 
     /**

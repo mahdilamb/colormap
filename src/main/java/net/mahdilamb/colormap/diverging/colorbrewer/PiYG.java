@@ -8,23 +8,18 @@ import net.mahdilamb.colormap.color.Color;
 @NewColorMap(type = ColorMapType.DIVERGING, name = "PiYG")
 public final class PiYG extends LinearColorMap {
     public PiYG(Double lowValue, Double highValue) {
-        super(lowValue, highValue);
-        addColorNode(new Color(142, 1, 82));
-        addColorNode(new Color(197, 27, 125));
-        addColorNode(new Color(222, 119, 174));
-        addColorNode(new Color(241, 182, 218));
-        addColorNode(new Color(253, 224, 239));
-        addColorNode(new Color(247, 247, 247));
-        addColorNode(new Color(230, 245, 208));
-        addColorNode(new Color(184, 225, 134));
-        addColorNode(new Color(127, 188, 65));
-        addColorNode(new Color(77, 146, 33));
-        addColorNode(new Color(39, 100, 25));
-
-    }
-
-    public PiYG() {
-        this(null, null);
+        super(lowValue, highValue,
+                new Color(142, 1, 82),
+                new Color(197, 27, 125),
+                new Color(222, 119, 174),
+                new Color(241, 182, 218),
+                new Color(253, 224, 239),
+                new Color(247, 247, 247),
+                new Color(230, 245, 208),
+                new Color(184, 225, 134),
+                new Color(127, 188, 65),
+                new Color(77, 146, 33),
+                new Color(39, 100, 25));
 
     }
 

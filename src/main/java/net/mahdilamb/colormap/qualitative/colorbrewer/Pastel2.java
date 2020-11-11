@@ -8,20 +8,15 @@ import net.mahdilamb.colormap.color.Color;
 @NewColorMap(type = ColorMapType.QUALITATIVE, name = "Pastel2")
 public final class Pastel2 extends CategoricalColorMap {
     public Pastel2(Double lowValue, Double highValue) {
-        super(lowValue, highValue);
-        addColorNode(new Color(179, 226, 205));
-        addColorNode(new Color(253, 205, 172));
-        addColorNode(new Color(203, 213, 232));
-        addColorNode(new Color(244, 202, 228));
-        addColorNode(new Color(230, 245, 201));
-        addColorNode(new Color(255, 242, 174));
-        addColorNode(new Color(241, 226, 204));
-        addColorNode(new Color(204, 204, 204));
-    }
-
-    public Pastel2() {
-        this(null, null);
-
+        super(lowValue, highValue,
+                new Color(179, 226, 205),
+                new Color(253, 205, 172),
+                new Color(203, 213, 232),
+                new Color(244, 202, 228),
+                new Color(230, 245, 201),
+                new Color(255, 242, 174),
+                new Color(241, 226, 204),
+                new Color(204, 204, 204));
     }
 
 }

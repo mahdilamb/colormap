@@ -4,8 +4,6 @@ package net.mahdilamb.colormap;
 import net.mahdilamb.colormap.color.Color;
 import net.mahdilamb.colormap.sequential.uniformsequential.Viridis;
 
-import java.io.IOException;
-
 /**
  * colormap that can be changed
  */
