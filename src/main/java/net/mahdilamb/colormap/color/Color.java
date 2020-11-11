@@ -6,7 +6,10 @@ import java.util.*;
 import static net.mahdilamb.utils.ColorUtils.*;
 
 /**
- * Class for holding color information. Includes a listenable interface to monitor changes in a color
+ * The Color class is a framework independent holder of color. The primary motivation of this class is to hold a 4-component float representation o
+ * of an RGBA color that is mutable, and for those changes to be listenable.
+ * <p>
+ * In addition, there contain string constants that represent generally used colors from AWT, CSS4 and Tableau.
  */
 public class Color implements Cloneable {
 
@@ -380,8 +383,10 @@ public class Color implements Cloneable {
     private final static Map<String, Color> awtColors = new HashMap<>();
     private final static Map<String, Color> tableauColors = new HashMap<>();
 
-    protected final Set<ColorListener> listeners = new HashSet<>();
-
+    private final Set<ColorListener> listeners = new HashSet<>();
+    /**
+     * The main field holding the numeric representation of the color.
+     */
     protected final float[] rgba;
 
     /**
@@ -453,7 +458,7 @@ public class Color implements Cloneable {
     }
 
     /**
-     * Copy constructor (shallow copy)
+     * Copy constructor
      *
      * @param original the original color
      */
@@ -462,7 +467,7 @@ public class Color implements Cloneable {
     }
 
     /**
-     * Constrcut a color from a hexadecimal string representation
+     * Construct a color from a hexadecimal string representation
      *
      * @param hexString Hexadecimal representation of the color
      */
@@ -471,10 +476,10 @@ public class Color implements Cloneable {
     }
 
 
-    /*
+    /**
+     * Add a listener
      *
-     * Listeners
-     *
+     * @param listener Listener to add to this Color.
      */
     public void addColorListener(final ColorListener listener) {
         listeners.add(listener);
@@ -482,14 +487,25 @@ public class Color implements Cloneable {
 
     }
 
+    /**
+     * Remove a listener
+     *
+     * @param listener Listener to remove, if already listening, to this Color.
+     */
     public void removeColorListener(final ColorListener listener) {
         listeners.remove(listener);
     }
 
+    /**
+     * Remove all listeners
+     */
     public void removeColorListeners() {
         listeners.clear();
     }
 
+    /**
+     * When a change has been made to this Color, use this method to update listeners.
+     */
     protected void fireColorChanged() {
         for (final ColorListener listener : listeners) {
             listener.colorChanged(this);
@@ -497,76 +513,135 @@ public class Color implements Cloneable {
         }
     }
 
-    /*
+    /**
+     * Set the color based on the value of a different Color;
      *
-     * Setters and getters
-     *
+     * @param newColor The new Color which this color will take its value from.
      */
-
     public void setColor(final Color newColor) {
         System.arraycopy(newColor.rgba, 0, rgba, 0, rgba.length);
         fireColorChanged();
     }
 
-
-    public int getRed() {
-        return Math.round(this.rgba[0] * 255);
+    /**
+     * @return The float representation of the red component
+     */
+    public float red() {
+        return this.rgba[0];
     }
 
+    /**
+     * @return 8-bit representation of the red component.
+     */
+    public int getRed() {
+        return Math.round(red() * 255);
+    }
+
+    /**
+     * @param red The new red component, as a floating point number.
+     */
     public void setRed(final double red) {
         this.rgba[0] = (float) red;
         fireColorChanged();
     }
 
+    /**
+     * @param red The new red component, as an integer number;
+     */
     public void setRed(final int red) {
         setRed(red / 255f);
     }
 
-    public int getGreen() {
-        return Math.round(this.rgba[1] * 255);
+    /**
+     * @return The floating-point representation of the green component.
+     */
+    public float green() {
+        return this.rgba[1];
     }
 
+    /**
+     * @return The 8-bit representation of the green component.
+     */
+    public int getGreen() {
+        return Math.round(green() * 255);
+    }
+
+    /**
+     * @param green The floating-point representation of the green component.
+     */
     public void setGreen(final double green) {
         this.rgba[1] = (float) green;
         fireColorChanged();
     }
 
-
-    public int getBlue() {
-        return Math.round(this.rgba[2] * 255);
+    /**
+     * @return The floating-point representation of the blue component.
+     */
+    public float blue() {
+        return this.rgba[2];
     }
 
+    /**
+     * @return The integer representation of the blue component.
+     */
+    public int getBlue() {
+        return Math.round(blue() * 255);
+    }
+
+    /**
+     * @param blue The floating-point representation of the blue component.
+     */
     public void setBlue(final double blue) {
         this.rgba[2] = (float) blue;
         fireColorChanged();
     }
 
+    /**
+     * @param blue The integer representation of the blue component.
+     */
     public void setBlue(final int blue) {
         setBlue(blue / 255f);
     }
 
-    public int getAlpha() {
-        return Math.round(this.rgba[3] * 255);
+    /**
+     * @return The floating-point representation of the alpha component.
+     */
+    public float alpha() {
+        return this.rgba[3];
     }
 
+    /**
+     * @return The 8-bit representation of the alpha component.
+     */
+    public int getAlpha() {
+        return Math.round(alpha() * 255);
+    }
+
+    /**
+     * @param alpha The floating-point representation of the alpha component.
+     */
     public void setAlpha(final double alpha) {
         this.rgba[3] = (float) alpha;
         fireColorChanged();
     }
 
+    /**
+     * @param alpha The 8-bit representation of the alpha component.
+     */
     public void setAlpha(final int alpha) {
         setAlpha(alpha / 255f);
     }
 
-    /*
-     *
-     * Converters
-     *
+    /**
+     * @return A 3-component array containing the 8-bit representation of the red, green and blue components of this color.
      */
     public int[] asRGB() {
         return new int[]{getRed(), getGreen(), getBlue()};
     }
 
+    /**
+     * @return A 4-component array containing the 8-bit representation of the red, green, blue and alpha components of this color.
+     */
     public int[] asRGBA() {
         return new int[]{
                 getRed(),
@@ -576,48 +651,67 @@ public class Color implements Cloneable {
         };
     }
 
+    /**
+     * @return This color represented in L*ab space. See {@link net.mahdilamb.utils.ColorUtils#RGBToLab(float[])} for more details.
+     */
     public float[] asLab() {
         return RGBToLab(asRGB());
     }
 
+    /**
+     * @return This color represented as a decimal value;
+     */
     public int asDecimal() {
         return RGBAToDecimal(rgba);
     }
 
+    /**
+     * @return A string representation of this color in hexadecimal (includes the alpha component);
+     */
     public String asHexadecimal() {
         return toHexadecimal(asRGBA());
     }
 
+    /**
+     * @return A copy of this Color;
+     */
     @SuppressWarnings("MethodDoesntCallSuperMethod")
     @Override
     public Color clone() {
-        return new Color(rgba.clone());
+        return new Color(this);
     }
 
+    /**
+     * @return A console friendly version of this color.
+     */
     @Override
     public String toString() {
-        return String.format("Color (%s, %.3f)", asHexadecimal(), getAlpha() / 255f);
+        return String.format("Color (%s, %.3f)", asHexadecimal(), alpha());
     }
 
+    /**
+     * Compare objects
+     *
+     * @param o Object to compare to this one
+     * @return Whether the two objects are the same by value.
+     */
     @Override
     public boolean equals(Object o) {
         return (o instanceof Color && Arrays.equals(((Color) o).rgba, rgba));
     }
 
+    /**
+     * @return A hash-code representation of this color.
+     */
     @Override
     public int hashCode() {
         return Arrays.hashCode(rgba);
     }
 
-
-    /*
-     *
-     * get color from reflection
-     *
-     */
     private static Color getColorWithReflection(final String colorName, final ColorType type, final Map<String, Color> cache) {
-        if (cache.containsKey(colorName)) {
-            return cache.get(colorName).clone();
+        final Color cached = cache.get(colorName);
+        if (cached != null) {
+            return cached.clone();
         }
         for (final Field field : Color.class.getDeclaredFields()) {
             if (field.isAnnotationPresent(NewColor.class) && field.getType() == String.class) {
@@ -639,25 +733,48 @@ public class Color implements Cloneable {
         return null;
     }
 
+    /**
+     * Get a CSS4 color by name.
+     *
+     * @param colorName The name of the CSS4 color.
+     * @return A color of the CSS4 color requested or {@code null} if color cannot be found.
+     */
     public static Color getCSSColor(final String colorName) {
         return getColorWithReflection(colorName, ColorType.CSS, css4Colors);
     }
 
+    /**
+     * Get a AWT color by name.
+     *
+     * @param colorName The name of the AWT color.
+     * @return A color of the AWT color requested or {@code null} if color cannot be found.
+     */
     public static Color getAWTColor(final String colorName) {
         return getColorWithReflection(colorName, ColorType.AWT, awtColors);
     }
 
+    /**
+     * Get a Tableau color by name.
+     *
+     * @param colorName The name of the Tableau color.
+     * @return A color of the Tableau color requested or {@code null} if color cannot be found.
+     */
     public static Color getTableauColor(final String colorName) {
         return getColorWithReflection(colorName, ColorType.TABLEAU, tableauColors);
     }
 
+    /**
+     * Get any of the colors by name using prefixes such as "css:", "awt:", "tableau". Color search is not case-sensitive.
+     *
+     * @param colorName The name of the color to search for
+     * @return The requested color or {@code null} if none can be found.
+     */
     public static Color getColor(final String colorName) {
         if (colorName.toLowerCase().startsWith("css:")) {
             return getCSSColor(colorName.toLowerCase().split(":")[1]);
         } else if (colorName.toLowerCase().startsWith("awt:")) {
             return getAWTColor(colorName.toLowerCase().split(":")[1]);
         } else if (colorName.toLowerCase().startsWith("tab:") || colorName.toLowerCase().startsWith("tableau:")) {
-
             return getTableauColor(colorName.toLowerCase().split(":")[1]);
         } else if (!colorName.contains(":")) {
             return getCSSColor(colorName.toLowerCase());
