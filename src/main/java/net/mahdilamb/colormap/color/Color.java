@@ -382,12 +382,11 @@ public class Color implements Cloneable {
     private final static Map<String, Color> css4Colors = new HashMap<>();
     private final static Map<String, Color> awtColors = new HashMap<>();
     private final static Map<String, Color> tableauColors = new HashMap<>();
-
-    private final Set<ColorListener> listeners = new HashSet<>();
     /**
      * The main field holding the numeric representation of the color.
      */
     protected final float[] rgba;
+    private final Set<ColorListener> listeners = new HashSet<>();
 
     /**
      * Primary constructor based on float representations of each component
@@ -475,6 +474,80 @@ public class Color implements Cloneable {
         this(hexadecimalToRGB(hexString));
     }
 
+    private static Color getColorWithReflection(final String colorName, final ColorType type, final Map<String, Color> cache) {
+        final Color cached = cache.get(colorName);
+        if (cached != null) {
+            return cached.clone();
+        }
+        for (final Field field : Color.class.getDeclaredFields()) {
+            if (field.isAnnotationPresent(NewColor.class) && field.getType() == String.class) {
+                try {
+
+                    final String cName = field.getDeclaredAnnotationsByType(NewColor.class)[0].name();
+                    final ColorType cType = field.getDeclaredAnnotationsByType(NewColor.class)[0].type();
+                    if (cName.compareTo(colorName) == 0 && cType == type) {
+                        cache.put(cName, new Color((String) field.get(null)));
+                        return cache.get(cName).clone();
+                    }
+
+                } catch (final IllegalArgumentException | IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+        return null;
+    }
+
+    /**
+     * Get a CSS4 color by name.
+     *
+     * @param colorName The name of the CSS4 color.
+     * @return A color of the CSS4 color requested or {@code null} if color cannot be found.
+     */
+    public static Color getCSSColor(final String colorName) {
+        return getColorWithReflection(colorName, ColorType.CSS, css4Colors);
+    }
+
+    /**
+     * Get a AWT color by name.
+     *
+     * @param colorName The name of the AWT color.
+     * @return A color of the AWT color requested or {@code null} if color cannot be found.
+     */
+    public static Color getAWTColor(final String colorName) {
+        return getColorWithReflection(colorName, ColorType.AWT, awtColors);
+    }
+
+    /**
+     * Get a Tableau color by name.
+     *
+     * @param colorName The name of the Tableau color.
+     * @return A color of the Tableau color requested or {@code null} if color cannot be found.
+     */
+    public static Color getTableauColor(final String colorName) {
+        return getColorWithReflection(colorName, ColorType.TABLEAU, tableauColors);
+    }
+
+    /**
+     * Get any of the colors by name using prefixes such as "css:", "awt:", "tableau". Color search is not case-sensitive.
+     *
+     * @param colorName The name of the color to search for
+     * @return The requested color or {@code null} if none can be found.
+     */
+    public static Color getColor(final String colorName) {
+        if (colorName.toLowerCase().startsWith("css:")) {
+            return getCSSColor(colorName.toLowerCase().split(":")[1]);
+        } else if (colorName.toLowerCase().startsWith("awt:")) {
+            return getAWTColor(colorName.toLowerCase().split(":")[1]);
+        } else if (colorName.toLowerCase().startsWith("tab:") || colorName.toLowerCase().startsWith("tableau:")) {
+            return getTableauColor(colorName.toLowerCase().split(":")[1]);
+        } else if (!colorName.contains(":")) {
+            return getCSSColor(colorName.toLowerCase());
+        } else {
+            return null;
+        }
+    }
 
     /**
      * Add a listener
@@ -706,81 +779,6 @@ public class Color implements Cloneable {
     @Override
     public int hashCode() {
         return Arrays.hashCode(rgba);
-    }
-
-    private static Color getColorWithReflection(final String colorName, final ColorType type, final Map<String, Color> cache) {
-        final Color cached = cache.get(colorName);
-        if (cached != null) {
-            return cached.clone();
-        }
-        for (final Field field : Color.class.getDeclaredFields()) {
-            if (field.isAnnotationPresent(NewColor.class) && field.getType() == String.class) {
-                try {
-
-                    final String cName = field.getDeclaredAnnotationsByType(NewColor.class)[0].name();
-                    final ColorType cType = field.getDeclaredAnnotationsByType(NewColor.class)[0].type();
-                    if (cName.compareTo(colorName) == 0 && cType == type) {
-                        cache.put(cName, new Color((String) field.get(null)));
-                        return cache.get(cName).clone();
-                    }
-
-                } catch (final IllegalArgumentException | IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-            }
-
-        }
-        return null;
-    }
-
-    /**
-     * Get a CSS4 color by name.
-     *
-     * @param colorName The name of the CSS4 color.
-     * @return A color of the CSS4 color requested or {@code null} if color cannot be found.
-     */
-    public static Color getCSSColor(final String colorName) {
-        return getColorWithReflection(colorName, ColorType.CSS, css4Colors);
-    }
-
-    /**
-     * Get a AWT color by name.
-     *
-     * @param colorName The name of the AWT color.
-     * @return A color of the AWT color requested or {@code null} if color cannot be found.
-     */
-    public static Color getAWTColor(final String colorName) {
-        return getColorWithReflection(colorName, ColorType.AWT, awtColors);
-    }
-
-    /**
-     * Get a Tableau color by name.
-     *
-     * @param colorName The name of the Tableau color.
-     * @return A color of the Tableau color requested or {@code null} if color cannot be found.
-     */
-    public static Color getTableauColor(final String colorName) {
-        return getColorWithReflection(colorName, ColorType.TABLEAU, tableauColors);
-    }
-
-    /**
-     * Get any of the colors by name using prefixes such as "css:", "awt:", "tableau". Color search is not case-sensitive.
-     *
-     * @param colorName The name of the color to search for
-     * @return The requested color or {@code null} if none can be found.
-     */
-    public static Color getColor(final String colorName) {
-        if (colorName.toLowerCase().startsWith("css:")) {
-            return getCSSColor(colorName.toLowerCase().split(":")[1]);
-        } else if (colorName.toLowerCase().startsWith("awt:")) {
-            return getAWTColor(colorName.toLowerCase().split(":")[1]);
-        } else if (colorName.toLowerCase().startsWith("tab:") || colorName.toLowerCase().startsWith("tableau:")) {
-            return getTableauColor(colorName.toLowerCase().split(":")[1]);
-        } else if (!colorName.contains(":")) {
-            return getCSSColor(colorName.toLowerCase());
-        } else {
-            return null;
-        }
     }
 
 }

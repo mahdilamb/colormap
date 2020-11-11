@@ -4,8 +4,6 @@ package net.mahdilamb.colormap;
 import net.mahdilamb.colormap.color.Color;
 import net.mahdilamb.colormap.sequential.uniformsequential.Viridis;
 
-import java.io.IOException;
-
 /**
  * colormap that can be changed
  */
@@ -22,7 +20,7 @@ public final class DynamicColorMap extends ColorMap {
     }
 
     public DynamicColorMap() {
-        this(new Viridis());
+        this(new Viridis(null,null));
     }
 
     public DynamicColorMap(String colorMapName) {

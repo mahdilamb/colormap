@@ -8,32 +8,28 @@ import net.mahdilamb.colormap.color.Color;
 @NewColorMap(type = ColorMapType.QUALITATIVE, name = "Tab20")
 public final class Tab20 extends CategoricalColorMap {
     public Tab20(Double lowValue, Double highValue) {
-        super(lowValue, highValue);
-        addColorNode(Color.getTableauColor("blue"));
-        addColorNode(Color.getTableauColor("lightblue"));
-        addColorNode(Color.getTableauColor("orange"));
-        addColorNode(Color.getTableauColor("lightorange"));
-        addColorNode(Color.getTableauColor("green"));
-        addColorNode(Color.getTableauColor("lightgreen"));
-        addColorNode(Color.getTableauColor("red"));
-        addColorNode(Color.getTableauColor("lightred"));
-        addColorNode(Color.getTableauColor("purple"));
-        addColorNode(Color.getTableauColor("lightpurple"));
-        addColorNode(Color.getTableauColor("brown"));
-        addColorNode(Color.getTableauColor("lightbrown"));
-        addColorNode(Color.getTableauColor("pink"));
-        addColorNode(Color.getTableauColor("lightpink"));
-        addColorNode(Color.getTableauColor("grey"));
-        addColorNode(Color.getTableauColor("lightgrey"));
-        addColorNode(Color.getTableauColor("olive"));
-        addColorNode(Color.getTableauColor("lightolive"));
-        addColorNode(Color.getTableauColor("aqua"));
-        addColorNode(Color.getTableauColor("lightaqua"));
+        super(lowValue, highValue,
+                Color.getTableauColor("blue"),
+                Color.getTableauColor("lightblue"),
+                Color.getTableauColor("orange"),
+                Color.getTableauColor("lightorange"),
+                Color.getTableauColor("green"),
+                Color.getTableauColor("lightgreen"),
+                Color.getTableauColor("red"),
+                Color.getTableauColor("lightred"),
+                Color.getTableauColor("purple"),
+                Color.getTableauColor("lightpurple"),
+                Color.getTableauColor("brown"),
+                Color.getTableauColor("lightbrown"),
+                Color.getTableauColor("pink"),
+                Color.getTableauColor("lightpink"),
+                Color.getTableauColor("grey"),
+                Color.getTableauColor("lightgrey"),
+                Color.getTableauColor("olive"),
+                Color.getTableauColor("lightolive"),
+                Color.getTableauColor("aqua"),
+                Color.getTableauColor("lightaqua"));
     }
 
-    public Tab20() {
-        this(null, null);
-
-    }
 
 }

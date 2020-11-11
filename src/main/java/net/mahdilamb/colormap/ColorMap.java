@@ -32,9 +32,130 @@ public abstract class ColorMap {
     protected Color highColor = null;
     protected boolean isReversed = false;
 
-    public ColorMap(Double lowValue, Double highValue) {
+
+    public ColorMap(Double lowValue, Double highValue, Color... colorNodes) {
         this.lowValue = lowValue;
         this.highValue = highValue;
+        addColorNodes(colorNodes);
+    }
+
+    public static void registerColorMap(final String colorMapName, final Class<ColorMap> colorMapClass) {
+        colorMaps.put(colorMapName, colorMapClass);
+    }
+
+    /**
+     * convenience method to get colormap through java reflection
+     */
+
+    public static ColorMap getColorMap(final String colormapType, final String colormapName, final boolean isReversed) {
+        final Class<?> colormapClass;
+        final String requestedClass = String.format("%s.%s", colormapType == null ? "*" : colormapType.toLowerCase(), colormapName.toLowerCase());
+        if (colorMaps.containsKey(requestedClass)) {
+            assert colormapType != null;
+            colormapClass = colorMaps.get(String.format("%s.%s", colormapType.toLowerCase(), colormapName.toLowerCase()));
+        } else {
+
+            try {
+                cacheDefaultColorMaps();
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+                System.exit(-1);
+            }
+            colormapClass = colorMaps.get(requestedClass);
+
+        }
+
+        try {
+            final ColorMap out = (ColorMap) colormapClass.getConstructor(Double.class, Double.class).newInstance(null,null);
+            out.setReversed(isReversed);
+            return out;
+        } catch (final InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+                | NoSuchMethodException | SecurityException e) {
+            e.printStackTrace();
+        }
+        return null;
+
+    }
+
+    public static ColorMap getColorMap(final String colormap) {
+        final String[] cmparts = colormap.split("\\.");
+        if (cmparts.length == 2) {
+            if (cmparts[1].compareTo("reversed") == 0) {
+                return getColorMap(null, cmparts[0].toLowerCase(), true);
+            } else {
+                return getColorMap(cmparts[0].toLowerCase(), cmparts[1].toLowerCase(), false);
+            }
+
+        } else if (cmparts.length == 3) {
+            return getColorMap(cmparts[0].toLowerCase(), cmparts[1].toLowerCase(), cmparts[2].compareTo("reversed") == 0);
+        } else if (cmparts.length == 1) {
+            return getColorMap(null, cmparts[0].toLowerCase(), false);
+        } else {
+            throw new IllegalArgumentException("argument should be in the form A.B.[C]. Where A is the category such as sequential, qualitative, diverging. "
+                    + "B is the name of the color map. And C is \"reversed\" if the color maps should be reversed.  ");
+        }
+    }
+
+    private static void cacheDefaultColorMaps() throws IOException, ClassNotFoundException {
+        if (defaultColorMaps.size() == 0) {
+            final File packageName = new File(ColorMap.class.getPackage().getName().replace(".", File.separator));
+            final Enumeration<URL> resources = ColorMap.class.getClassLoader().getResources(String.valueOf(packageName));
+            final Stack<File> directories = new Stack<>();
+            while (resources.hasMoreElements()) {
+                try {
+                    final File dir = new File(resources.nextElement().toURI());
+                    if (dir.isDirectory()) {
+                        directories.push(dir);
+                    } else {
+                        addColorMapClass(packageName, dir);
+                    }
+                } catch (URISyntaxException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            while (!directories.empty()) {
+                final File dir = directories.pop();
+                if (dir == null) {
+                    continue;
+                }
+                final File[] files = dir.listFiles();
+                if (files == null) {
+                    continue;
+                }
+                for (final File file : files) {
+                    if (file.isDirectory()) {
+                        directories.push(file);
+                    } else {
+                        addColorMapClass(packageName, file);
+                    }
+                }
+            }
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private static void addColorMapClass(final File packageName, final File file) throws ClassNotFoundException {
+        final Class<?> colorMap = Class.forName(file.toString().substring(file.toString().indexOf(packageName.toString())).replace(File.separator, ".").replace(".class", ""));
+        final NewColorMap annotation = colorMap.getDeclaredAnnotation(NewColorMap.class);
+        if (annotation == null) {
+            return;
+        }
+        final String name = annotation.name().toLowerCase();
+        final String type = annotation.type().name().toLowerCase();
+        final String withWildCard = String.format("*.%s", name);
+        final String withoutWildCard = String.format("%s.%s", type, name);
+        if (ColorMap.class.isAssignableFrom(colorMap)) {
+            defaultColorMaps.add(String.format("%s.%s", annotation.type(), annotation.name()));
+            registerColorMap(withWildCard, (Class<ColorMap>) colorMap);
+            registerColorMap(withoutWildCard, (Class<ColorMap>) colorMap);
+        }
+
+    }
+
+    public static Set<String> listDefaultColorMaps() throws IOException, ClassNotFoundException {
+        cacheDefaultColorMaps();
+        return defaultColorMaps;
     }
 
     protected void recalculateColors() {
@@ -67,6 +188,11 @@ public abstract class ColorMap {
 
     }
 
+    public void addColorNodes(final Color... colorNodes) {
+        currentColorNodes.clear();
+        this.colorNodes.addAll(Arrays.asList(colorNodes));
+
+    }
 
     /**
      * Calculate color nodes based on position (if undefined) and cache them
@@ -212,7 +338,6 @@ public abstract class ColorMap {
         }
     }
 
-
     protected void recalculateMaxValue() {
         Double currentMaxValue = null;
 
@@ -246,123 +371,5 @@ public abstract class ColorMap {
             this.currentMinValue = currentMinValue;
             recalculateColors();
         }
-    }
-    public static void registerColorMap(final String colorMapName, final Class<ColorMap> colorMapClass) {
-        colorMaps.put(colorMapName, colorMapClass);
-    }
-
-    /**
-     * convenience method to get colormap through java reflection
-     */
-
-    public static ColorMap getColorMap(final String colormapType, final String colormapName, final boolean isReversed) {
-        final Class<?> colormapClass;
-        final String requestedClass = String.format("%s.%s", colormapType == null ? "*" : colormapType.toLowerCase(), colormapName.toLowerCase());
-        if (colorMaps.containsKey(requestedClass)) {
-            assert colormapType != null;
-            colormapClass = colorMaps.get(String.format("%s.%s", colormapType.toLowerCase(), colormapName.toLowerCase()));
-        } else {
-
-            try {
-                cacheDefaultColorMaps();
-            } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
-                System.exit(-1);
-            }
-            colormapClass = colorMaps.get(requestedClass);
-
-        }
-
-        try {
-            final ColorMap out = (ColorMap) colormapClass.getConstructor().newInstance();
-            out.setReversed(isReversed);
-            return out;
-        } catch (final InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
-                | NoSuchMethodException | SecurityException e) {
-            e.printStackTrace();
-        }
-        return null;
-
-    }
-
-    public static ColorMap getColorMap(final String colormap) {
-        final String[] cmparts = colormap.split("\\.");
-        if (cmparts.length == 2) {
-            if (cmparts[1].compareTo("reversed") == 0) {
-                return getColorMap(null, cmparts[0].toLowerCase(), true);
-            } else {
-                return getColorMap(cmparts[0].toLowerCase(), cmparts[1].toLowerCase(), false);
-            }
-
-        } else if (cmparts.length == 3) {
-            return getColorMap(cmparts[0].toLowerCase(), cmparts[1].toLowerCase(), cmparts[2].compareTo("reversed") == 0);
-        } else if (cmparts.length == 1) {
-            return getColorMap(null, cmparts[0].toLowerCase(), false);
-        } else {
-            throw new IllegalArgumentException("argument should be in the form A.B.[C]. Where A is the category such as sequential, qualitative, diverging. "
-                    + "B is the name of the color map. And C is \"reversed\" if the color maps should be reversed.  ");
-        }
-    }
-
-    private static void cacheDefaultColorMaps() throws IOException, ClassNotFoundException {
-        if (defaultColorMaps.size() == 0) {
-            final File packageName = new File(ColorMap.class.getPackage().getName().replace(".", File.separator));
-            final Enumeration<URL> resources = ColorMap.class.getClassLoader().getResources(String.valueOf(packageName));
-            final Stack<File> directories = new Stack<>();
-            while (resources.hasMoreElements()){
-                try {
-                    final File dir = new File(resources.nextElement().toURI());
-                    if (dir.isDirectory()) {
-                        directories.push(dir);
-                    } else {
-                        addColorMapClass(packageName, dir);
-                    }
-                } catch (URISyntaxException | ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            while (!directories.empty()) {
-                final File dir = directories.pop();
-                if (dir == null) {
-                    continue;
-                }
-                final File[] files = dir.listFiles();
-                if (files == null) {
-                    continue;
-                }
-                for (final File file : files) {
-                    if (file.isDirectory()) {
-                        directories.push(file);
-                    } else {
-                        addColorMapClass(packageName, file);
-                    }
-                }
-            }
-        }
-    }
-
-    @SuppressWarnings("unchecked")
-    private static void addColorMapClass(final File packageName, final File file) throws ClassNotFoundException {
-        final Class<?> colorMap = Class.forName(file.toString().substring(file.toString().indexOf(packageName.toString())).replace(File.separator, ".").replace(".class", ""));
-        final NewColorMap annotation = colorMap.getDeclaredAnnotation(NewColorMap.class);
-        if(annotation == null){
-            return;
-        }
-        final String name = annotation.name().toLowerCase();
-        final String type = annotation.type().name().toLowerCase();
-        final String withWildCard = String.format("*.%s", name);
-        final String withoutWildCard = String.format("%s.%s", type, name);
-        if (ColorMap.class.isAssignableFrom(colorMap)) {
-            defaultColorMaps.add(String.format("%s.%s", annotation.type(), annotation.name()));
-            registerColorMap(withWildCard, (Class<ColorMap>) colorMap);
-            registerColorMap(withoutWildCard, (Class<ColorMap>) colorMap);
-        }
-
-    }
-
-    public static Set<String> listDefaultColorMaps() throws IOException, ClassNotFoundException {
-        cacheDefaultColorMaps();
-        return defaultColorMaps;
     }
 }
