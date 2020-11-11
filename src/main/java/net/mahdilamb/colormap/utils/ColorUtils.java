@@ -1,9 +1,11 @@
-package net.mahdilamb.utils;
+package net.mahdilamb.colormap.utils;
 
 import net.mahdilamb.colormap.color.Color;
 
 public final class ColorUtils {
-    private ColorUtils(){}
+    private ColorUtils() {
+    }
+
     private static final float[] D65 = new float[]{
             95.04f, 100, 108.884f
     };
@@ -131,6 +133,7 @@ public final class ColorUtils {
     public static int[] LabToRGB(final float[] lab) {
         return XYZToRGB(LabToXYZ(lab));
     }
+
     public static int RGBAToDecimal(final int r, final int g, final int b, final int a) {
         return ((a & 0xFF) << 24) |
                 ((r & 0xFF) << 16) |
@@ -232,5 +235,50 @@ public final class ColorUtils {
             blue[i] = (byte) (Integer.valueOf(hex.substring(5, 7), 16) * (i) / 255);
         }
         return new byte[][]{red, green, blue};
+    }
+
+    /**
+     * Return val clamped between min and max
+     *
+     * @param val
+     * @param max
+     * @param min
+     * @return
+     */
+    public static <T extends Number & Comparable<T>> T clamp(final T val, final T max, final T min) {
+        return val.compareTo(max) > 0 ? max : val.compareTo(min) < 0 ? min : val;
+
+    }
+
+    /**
+     * linear interpolation
+     *
+     * @param a   left value
+     * @param b   right value
+     * @param amt amount of interpolation between 0 and 1;
+     * @return
+     */
+    public static double lerp(final double a, final double b, double amt) {
+        amt = clamp(amt, 1d, 0d);
+        return a * amt + b * (1 - amt);
+    }
+
+    /**
+     * linearly interpolate between colors in L*ab space
+     *
+     * @param lower
+     * @param upper
+     * @param amount
+     * @return
+     */
+    public static Color lerp(final Color lower, final Color upper, final double amount) {
+        final float[] lowerLab = lower.asLab();
+        final float[] upperLab = upper.asLab();
+        final float[] newLab = new float[3];
+        for (int i = 0; i < 3; i++) {
+            newLab[i] = (float) lerp(lowerLab[i], upperLab[i], amount);
+        }
+        final int[] rgb = LabToRGB(newLab);
+        return new Color(rgb[0], rgb[1], rgb[2]);
     }
 }

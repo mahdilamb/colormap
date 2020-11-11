@@ -19,9 +19,8 @@ public final class PRGn extends LinearColorMap {
                 new Color(166, 219, 160),
                 new Color(90, 174, 97),
                 new Color(27, 120, 55),
-                new Color(0, 68, 27));
-
-
+                new Color(0, 68, 27)
+        );
     }
 
 }

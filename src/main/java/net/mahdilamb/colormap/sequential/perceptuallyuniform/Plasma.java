@@ -1,4 +1,4 @@
-package net.mahdilamb.colormap.sequential.uniformsequential;
+package net.mahdilamb.colormap.sequential.perceptuallyuniform;
 
 import net.mahdilamb.colormap.ColorMapType;
 import net.mahdilamb.colormap.LinearColorMap;

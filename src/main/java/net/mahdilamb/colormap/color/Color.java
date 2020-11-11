@@ -3,7 +3,7 @@ package net.mahdilamb.colormap.color;
 import java.lang.reflect.Field;
 import java.util.*;
 
-import static net.mahdilamb.utils.ColorUtils.*;
+import static net.mahdilamb.colormap.utils.ColorUtils.*;
 
 /**
  * The Color class is a framework independent holder of color. The primary motivation of this class is to hold a 4-component float representation o
@@ -725,7 +725,7 @@ public class Color implements Cloneable {
     }
 
     /**
-     * @return This color represented in L*ab space. See {@link net.mahdilamb.utils.ColorUtils#RGBToLab(float[])} for more details.
+     * @return This color represented in L*ab space. See {@link net.mahdilamb.colormap.utils.ColorUtils#RGBToLab(float[])} for more details.
      */
     public float[] asLab() {
         return RGBToLab(asRGB());

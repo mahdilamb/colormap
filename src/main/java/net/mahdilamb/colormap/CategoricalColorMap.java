@@ -26,7 +26,7 @@ public class CategoricalColorMap extends ColorMap {
 
     // modified so that last element repeats and used as last element rather than only upper bound
     @Override
-    void calculateColorNodes() {
+    protected final void calculateColorNodes() {
         if (currentColorNodes.size() == 0) {
             currentColorNodes.putAll(definedColorNodes);
             for (int i = 0; i < colorNodes.size(); i++) {
@@ -34,6 +34,5 @@ public class CategoricalColorMap extends ColorMap {
             }
         }
     }
-
 
 }

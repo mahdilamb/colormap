@@ -4,6 +4,7 @@ import net.mahdilamb.colormap.ColorMap;
 import net.mahdilamb.colormap.ColorMapNode;
 import net.mahdilamb.colormap.DynamicColorMap;
 import net.mahdilamb.colormap.color.Color;
+import net.mahdilamb.colormap.sequential.perceptuallyuniform.Viridis;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -17,7 +18,7 @@ public class ColorMapTest {
     public static void main(String... args) throws IOException, ClassNotFoundException {
         final JFrame frame = new JFrame();
 
-        final DynamicColorMap cmap = new DynamicColorMap("Viridis");
+        final DynamicColorMap cmap = new DynamicColorMap(new Viridis(null,null));
         frame.getContentPane().setLayout(new GridBagLayout());
         final JPanel colors = new JPanel(new GridLayout(10, 10));
         colors.addMouseListener(new MouseAdapter() {
@@ -155,7 +156,6 @@ public class ColorMapTest {
                                 BorderFactory.createLineBorder(new java.awt.Color(color.asDecimal()), 2)));
                 ColorLabel.this.setBorder(border);
             }));
-
 
         }
     }

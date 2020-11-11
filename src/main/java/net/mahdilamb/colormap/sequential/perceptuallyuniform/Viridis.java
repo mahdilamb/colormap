@@ -1,4 +1,4 @@
-package net.mahdilamb.colormap.sequential.uniformsequential;
+package net.mahdilamb.colormap.sequential.perceptuallyuniform;
 
 import net.mahdilamb.colormap.ColorMapType;
 import net.mahdilamb.colormap.LinearColorMap;
@@ -264,7 +264,8 @@ public final class Viridis extends LinearColorMap {
                 new Color(0.964894f, 0.902323f, 0.123941f),
                 new Color(0.974417f, 0.903590f, 0.130215f),
                 new Color(0.983868f, 0.904867f, 0.136897f),
-                new Color(0.993248f, 0.906157f, 0.143936f));
+                new Color(0.993248f, 0.906157f, 0.143936f)
+        );
 
     }
 
