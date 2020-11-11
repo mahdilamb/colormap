@@ -7,8 +7,7 @@ import net.mahdilamb.colormap.color.Color;
 
 @NewColorMap(type = ColorMapType.DIVERGING, name = "BrBG")
 public final class BrBG extends LinearColorMap {
-    public BrBG(Double lowValue, Double highValue) {
-        super(lowValue, highValue,
+    public BrBG(){super(
                 new Color(84, 48, 5),
                 new Color(140, 81, 10),
                 new Color(191, 129, 45),

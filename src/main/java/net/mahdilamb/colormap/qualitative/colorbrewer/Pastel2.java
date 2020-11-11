@@ -7,8 +7,7 @@ import net.mahdilamb.colormap.color.Color;
 
 @NewColorMap(type = ColorMapType.QUALITATIVE, name = "Pastel2")
 public final class Pastel2 extends CategoricalColorMap {
-    public Pastel2(Double lowValue, Double highValue) {
-        super(lowValue, highValue,
+    public Pastel2(){super(
                 new Color(179, 226, 205),
                 new Color(253, 205, 172),
                 new Color(203, 213, 232),

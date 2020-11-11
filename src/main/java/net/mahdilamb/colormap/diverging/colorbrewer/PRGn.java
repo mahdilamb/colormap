@@ -7,8 +7,7 @@ import net.mahdilamb.colormap.color.Color;
 
 @NewColorMap(type = ColorMapType.DIVERGING, name = "PRGn")
 public final class PRGn extends LinearColorMap {
-    public PRGn(Double lowValue, Double highValue) {
-        super(lowValue, highValue,
+    public PRGn(){super(
                 new Color(64, 0, 75),
                 new Color(118, 42, 131),
                 new Color(153, 112, 171),

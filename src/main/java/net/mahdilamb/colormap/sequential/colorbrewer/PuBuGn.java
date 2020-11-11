@@ -7,8 +7,7 @@ import net.mahdilamb.colormap.color.Color;
 
 @NewColorMap(type = ColorMapType.SEQUENTIAL, name = "PuBuGn")
 public final class PuBuGn extends LinearColorMap {
-    public PuBuGn(Double lowValue, Double highValue) {
-        super(lowValue, highValue,
+    public PuBuGn(){super(
                 new Color(255, 247, 251),
                 new Color(236, 226, 240),
                 new Color(208, 209, 230),

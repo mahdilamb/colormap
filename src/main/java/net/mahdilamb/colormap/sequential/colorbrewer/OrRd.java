@@ -7,8 +7,7 @@ import net.mahdilamb.colormap.color.Color;
 
 @NewColorMap(type = ColorMapType.SEQUENTIAL, name = "OrRd")
 public final class OrRd extends LinearColorMap {
-    public OrRd(Double lowValue, Double highValue) {
-        super(lowValue, highValue,
+    public OrRd(){super(
                 new Color(255, 247, 236),
                 new Color(254, 232, 200),
                 new Color(253, 212, 158),

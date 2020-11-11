@@ -7,8 +7,7 @@ import net.mahdilamb.colormap.color.Color;
 
 @NewColorMap(type = ColorMapType.SEQUENTIAL, name = "Purples")
 public final class Purples extends LinearColorMap {
-    public Purples(Double lowValue, Double highValue) {
-        super(lowValue, highValue,
+    public Purples(){super(
                 new Color(252, 251, 253),
                 new Color(239, 237, 245),
                 new Color(218, 218, 235),

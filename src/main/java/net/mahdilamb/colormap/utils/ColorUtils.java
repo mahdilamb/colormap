@@ -11,7 +11,7 @@ public final class ColorUtils {
     };
 
     /*
-     * based on EasyRBG.com
+     * based on easyrgb.com
      * @param rgb
      * @return
      */
@@ -26,7 +26,6 @@ public final class ColorUtils {
             }
             temp[i] *= 100f;
         }
-        // values form skimage
         return new float[]{
                 (temp[0] * 0.4124f + temp[1] * 0.3576f + temp[2] * 0.1805f),
                 (temp[0] * 0.2126f + temp[1] * 0.7152f + temp[2] * 0.0722f),

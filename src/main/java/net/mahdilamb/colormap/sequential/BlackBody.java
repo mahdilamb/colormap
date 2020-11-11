@@ -7,8 +7,7 @@ import net.mahdilamb.colormap.color.Color;
 
 @NewColorMap(type = ColorMapType.SEQUENTIAL, name = "BlackBody")
 public final class BlackBody extends LinearColorMap {
-    public BlackBody(Double lowValue, Double highValue) {
-        super(lowValue, highValue,
+    public BlackBody(){super(
                 new Color(0.0124985675549f, 0.00376710208302f, 0.00210713336054f),
                 new Color(0.0249971351098f, 0.00753420416604f, 0.00421426672107f),
                 new Color(0.0374957026647f, 0.0113013062491f, 0.00632140008161f),

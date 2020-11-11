@@ -5,8 +5,8 @@ import net.mahdilamb.colormap.color.Color;
 import static net.mahdilamb.colormap.utils.ColorUtils.lerp;
 
 public class LinearColorMap extends ColorMap {
-    public LinearColorMap(final Double lowValue, final Double highValue, final Color... colorNodes) {
-        super(lowValue, highValue, colorNodes);
+    public LinearColorMap( final Color... colorNodes) {
+        addColors( colorNodes);
     }
 
     @Override
@@ -17,8 +17,8 @@ public class LinearColorMap extends ColorMap {
             final double lowerVal = getColorNodes().floorKey(value);
             final double upperVal = getColorNodes().ceilingKey(value);
 
-            final Color lower = currentColorNodes.get(lowerVal);
-            final Color upper = currentColorNodes.get(upperVal);
+            final Color lower = currentColors.get(lowerVal);
+            final Color upper = currentColors.get(upperVal);
 
             final Color outColor = lerp(upper, lower, (value - lowerVal) / (upperVal - lowerVal));
             outColor.setAlpha((float) lerp(upper.getAlpha() / 255f, lower.getAlpha() / 255f, value));

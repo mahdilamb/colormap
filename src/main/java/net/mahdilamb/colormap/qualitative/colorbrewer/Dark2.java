@@ -7,8 +7,7 @@ import net.mahdilamb.colormap.color.Color;
 
 @NewColorMap(type = ColorMapType.QUALITATIVE, name = "Dark2")
 public final class Dark2 extends CategoricalColorMap {
-    public Dark2(Double lowValue, Double highValue) {
-        super(lowValue, highValue,
+    public Dark2(){super(
                 new Color(27, 158, 119),
                 new Color(217, 95, 2),
                 new Color(117, 112, 179),

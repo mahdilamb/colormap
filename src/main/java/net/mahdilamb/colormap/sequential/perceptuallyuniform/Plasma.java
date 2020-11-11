@@ -7,8 +7,7 @@ import net.mahdilamb.colormap.color.Color;
 
 @NewColorMap(type = ColorMapType.SEQUENTIAL, name = "Plasma")
 public final class Plasma extends LinearColorMap {
-    public Plasma(Double lowValue, Double highValue) {
-        super(lowValue, highValue,
+    public Plasma(){super(
                 new Color(0.050383f, 0.029803f, 0.527975f),
                 new Color(0.063536f, 0.028426f, 0.533124f),
                 new Color(0.075353f, 0.027206f, 0.538007f),

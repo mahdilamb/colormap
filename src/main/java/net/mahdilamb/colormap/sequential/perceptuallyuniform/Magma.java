@@ -7,8 +7,7 @@ import net.mahdilamb.colormap.color.Color;
 
 @NewColorMap(type = ColorMapType.SEQUENTIAL, name = "Magma")
 public final class Magma extends LinearColorMap {
-    public Magma(Double lowValue, Double highValue) {
-        super(lowValue, highValue,
+    public Magma(){super(
                 new Color(0.001462f, 0.000466f, 0.013866f),
                 new Color(0.002258f, 0.001295f, 0.018331f),
                 new Color(0.003279f, 0.002305f, 0.023708f),

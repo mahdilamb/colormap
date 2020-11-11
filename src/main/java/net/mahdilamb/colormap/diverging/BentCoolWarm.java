@@ -7,8 +7,8 @@ import net.mahdilamb.colormap.color.Color;
 
 @NewColorMap(type = ColorMapType.DIVERGING, name = "BentCoolWarm")
 public final class BentCoolWarm extends LinearColorMap {
-    public BentCoolWarm(Double lowValue, Double highValue) {
-        super(lowValue, highValue,
+    public BentCoolWarm() {
+        super(
                 new Color(0.337561290171f, 0.288870665307f, 0.75908755887f),
                 new Color(0.340361067513f, 0.294629646599f, 0.761656612554f),
                 new Color(0.343190362832f, 0.300362947941f, 0.764202486914f),

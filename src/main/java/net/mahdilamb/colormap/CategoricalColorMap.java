@@ -9,8 +9,8 @@ import net.mahdilamb.colormap.color.Color;
  */
 public class CategoricalColorMap extends ColorMap {
 
-    public CategoricalColorMap(Double lowValue, Double highValue, final Color... colorNodes) {
-        super(lowValue, highValue, colorNodes);
+    public CategoricalColorMap(final Color... colors) {
+        addColors(colors);
     }
 
     @Override
@@ -26,11 +26,11 @@ public class CategoricalColorMap extends ColorMap {
 
     // modified so that last element repeats and used as last element rather than only upper bound
     @Override
-    protected final void calculateColorNodes() {
-        if (currentColorNodes.size() == 0) {
-            currentColorNodes.putAll(definedColorNodes);
-            for (int i = 0; i < colorNodes.size(); i++) {
-                currentColorNodes.put(((double) i / (colorNodes.size())), colorNodes.get(i));
+    protected final void calculateColors() {
+        if (currentColors.size() == 0) {
+            currentColors.putAll(definedColorNodes);
+            for (int i = 0; i < colorMapColors.size(); i++) {
+                currentColors.put(((double) i / (colorMapColors.size())), colorMapColors.get(i));
             }
         }
     }

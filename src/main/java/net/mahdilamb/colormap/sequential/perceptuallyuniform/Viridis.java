@@ -7,8 +7,8 @@ import net.mahdilamb.colormap.color.Color;
 
 @NewColorMap(type = ColorMapType.SEQUENTIAL, name = "Viridis")
 public final class Viridis extends LinearColorMap {
-    public Viridis(Double lowValue, Double highValue) {
-        super(lowValue, highValue,
+    public Viridis() {
+        super(
                 new Color(0.267004f, 0.004874f, 0.329415f),
                 new Color(0.268510f, 0.009605f, 0.335427f),
                 new Color(0.269944f, 0.014625f, 0.341379f),
@@ -268,6 +268,5 @@ public final class Viridis extends LinearColorMap {
         );
 
     }
-
 
 }

@@ -7,8 +7,7 @@ import net.mahdilamb.colormap.color.Color;
 
 @NewColorMap(type = ColorMapType.SEQUENTIAL, name = "Laguna")
 public final class Laguna extends LinearColorMap {
-    public Laguna(Double lowValue, Double highValue) {
-        super(lowValue, highValue,
+    public Laguna(){super(
                 new Color(0f, 0f, 0f),
                 new Color(0.0120523458472091f, 0.00302976375346293f, 0.0121816260969515f),
                 new Color(0.0240095399463226f, 0.0060712599355588f, 0.0245273871238326f),

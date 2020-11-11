@@ -7,8 +7,7 @@ import net.mahdilamb.colormap.color.Color;
 
 @NewColorMap(type = ColorMapType.SEQUENTIAL, name = "Lacerta")
 public final class Lacerta extends LinearColorMap {
-    public Lacerta(Double lowValue, Double highValue) {
-        super(lowValue, highValue,
+    public Lacerta(){super(
                 new Color(0f, 0f, 0f),
                 new Color(0.0106800027858887f, 0.000336853776647296f, 0.0428855412549295f),
                 new Color(0.019010352975483f, 0.00120549836908178f, 0.0766233766318336f),

@@ -7,8 +7,7 @@ import net.mahdilamb.colormap.color.Color;
 
 @NewColorMap(type = ColorMapType.QUALITATIVE, name = "Accent")
 public final class Accent extends CategoricalColorMap {
-    public Accent(Double lowValue, Double highValue) {
-        super(lowValue, highValue,
+    public Accent(){super(
                 new Color(127, 201, 127),
                 new Color(190, 174, 212),
                 new Color(253, 192, 134),

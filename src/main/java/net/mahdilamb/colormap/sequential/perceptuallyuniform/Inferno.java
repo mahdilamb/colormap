@@ -7,8 +7,7 @@ import net.mahdilamb.colormap.color.Color;
 
 @NewColorMap(type = ColorMapType.SEQUENTIAL, name = "Inferno")
 public final class Inferno extends LinearColorMap {
-    public Inferno(Double lowValue, Double highValue) {
-        super(lowValue, highValue,
+    public Inferno(){super(
                 new Color(0.001462f, 0.000466f, 0.013866f),
                 new Color(0.002267f, 0.00127f, 0.01857f),
                 new Color(0.003299f, 0.002249f, 0.024239f),

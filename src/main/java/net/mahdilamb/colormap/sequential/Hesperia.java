@@ -7,8 +7,7 @@ import net.mahdilamb.colormap.color.Color;
 
 @NewColorMap(type = ColorMapType.SEQUENTIAL, name = "Hesperia")
 public final class Hesperia extends LinearColorMap {
-    public Hesperia(Double lowValue, Double highValue) {
-        super(lowValue, highValue,
+    public Hesperia(){super(
                 new Color(0f, 0f, 0f),
                 new Color(0.00868039904247769f, 0.000131163051981201f, 0.0499894378955346f),
                 new Color(0.0156888063524926f, 0.000457427004985309f, 0.086853393096286f),

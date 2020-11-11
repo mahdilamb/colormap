@@ -7,8 +7,7 @@ import net.mahdilamb.colormap.color.Color;
 
 @NewColorMap(type = ColorMapType.SEQUENTIAL, name = "ExtendedKindlmann")
 public final class ExtendedKindlmann extends LinearColorMap {
-    public ExtendedKindlmann(Double lowValue, Double highValue) {
-        super(lowValue, highValue,
+    public ExtendedKindlmann(){super(
                 new Color(0.0180584653964f, 0.000875333094297f, 0.0158976099199f),
                 new Color(0.0358446051389f, 0.00174980699631f, 0.0328047687723f),
                 new Color(0.0522636499211f, 0.00255635257187f, 0.050049172046f),

@@ -7,8 +7,7 @@ import net.mahdilamb.colormap.color.Color;
 
 @NewColorMap(type = ColorMapType.QUALITATIVE, name = "Tab20")
 public final class Tab20 extends CategoricalColorMap {
-    public Tab20(Double lowValue, Double highValue) {
-        super(lowValue, highValue,
+    public Tab20(){super(
                 Color.getTableauColor("blue"),
                 Color.getTableauColor("lightblue"),
                 Color.getTableauColor("orange"),

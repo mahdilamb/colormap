@@ -1,13 +1,11 @@
 package net.mahdilamb.colormap.tests;
 
 import net.mahdilamb.colormap.ColorMap;
-import net.mahdilamb.colormap.color.Color;
-import net.mahdilamb.colormap.ColorMapNode;
 import net.mahdilamb.colormap.LinearColorMap;
+import net.mahdilamb.colormap.color.Color;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.lang.annotation.Target;
 import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
@@ -16,13 +14,13 @@ import static org.junit.Assert.*;
 
 
 public class JUnitTests {
-    static final LinearColorMap grays = new LinearColorMap(null, null);
-    static final Map<Integer, ColorMapNode> colors = new TreeMap<>();
+    static final LinearColorMap grays = new LinearColorMap();
+    static final Map<Integer, ColorMap.ColorMapNode> colors = new TreeMap<>();
     static final int maxRange = 255;
 
     static {
-        grays.addColorNode(Color.getColor("black"));
-        grays.addColorNode(Color.getColor("white"));
+        grays.addColor(Color.getColor("black"));
+        grays.addColor(Color.getColor("white"));
         for (int i = 0; i <= maxRange; i++) {
             colors.put(i, grays.getColorFromValue(((float) i) / maxRange));
         }
@@ -30,19 +28,19 @@ public class JUnitTests {
 
     @Test
     public void greyColorMapShouldStartAtBlackTest() {
-        assertTrue(colors.get(0).equalsColor(Color.getColor("black")));
+        assertTrue(colors.get(0).getColor().equals(Color.getColor("black")));
     }
 
     @Test
     public void greyColorMapShouldEndAtWhiteTest() {
-        assertTrue(colors.get(maxRange).equalsColor(Color.getColor("white")));
+        assertTrue(colors.get(maxRange).getColor().equals(Color.getColor("white")));
     }
 
     @Test
     public void cloningShouldReturnSameColorTest() {
         final int color = 10;
-        final Color clone = colors.get(color).clone();
-        assertTrue(colors.get(color).equalsColor(clone));
+        final Color clone = colors.get(color).getColor().clone();
+        assertTrue(colors.get(color).getColor().equals(clone));
     }
 
     @Test

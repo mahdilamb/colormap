@@ -2,7 +2,6 @@ package net.mahdilamb.colormap;
 
 
 import net.mahdilamb.colormap.color.Color;
-import net.mahdilamb.colormap.sequential.perceptuallyuniform.Viridis;
 
 /**
  * colormap that can be changed
@@ -11,7 +10,6 @@ public final class DynamicColorMap extends ColorMap {
     private ColorMap currentColormap;
 
     public DynamicColorMap(ColorMap colorMap) {
-        super(colorMap.lowValue, colorMap.highValue);
         setColorMap(colorMap);
     }
 
@@ -19,11 +17,11 @@ public final class DynamicColorMap extends ColorMap {
         definedColorNodes.clear();
         definedColorNodes.putAll(newColorMap.definedColorNodes);
 
-        colorNodes.clear();
-        colorNodes.addAll(newColorMap.colorNodes);
+        colorMapColors.clear();
+        colorMapColors.addAll(newColorMap.colorMapColors);
 
-        currentColorNodes.clear();
-        currentColorNodes.putAll(newColorMap.currentColorNodes);
+        currentColors.clear();
+        currentColors.putAll(newColorMap.currentColors);
 
         lowValue = newColorMap.lowValue;
         highValue = newColorMap.highValue;

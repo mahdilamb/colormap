@@ -7,8 +7,7 @@ import net.mahdilamb.colormap.color.Color;
 
 @NewColorMap(type = ColorMapType.SEQUENTIAL, name = "Turbo")
 public final class Turbo extends LinearColorMap {
-    public Turbo(Double lowValue, Double highValue) {
-        super(lowValue, highValue,
+    public Turbo(){super(
                 new Color(0.18995f, 0.07176f, 0.23217f),
                 new Color(0.19483f, 0.08339f, 0.26149f),
                 new Color(0.19956f, 0.09498f, 0.29024f),

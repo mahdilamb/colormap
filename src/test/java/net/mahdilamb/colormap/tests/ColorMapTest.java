@@ -1,7 +1,6 @@
 package net.mahdilamb.colormap.tests;
 
 import net.mahdilamb.colormap.ColorMap;
-import net.mahdilamb.colormap.ColorMapNode;
 import net.mahdilamb.colormap.DynamicColorMap;
 import net.mahdilamb.colormap.color.Color;
 import net.mahdilamb.colormap.sequential.perceptuallyuniform.Viridis;
@@ -13,12 +12,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 
-//TODO check dynamic
+@SuppressWarnings("unchecked")
 public class ColorMapTest {
     public static void main(String... args) throws IOException, ClassNotFoundException {
         final JFrame frame = new JFrame();
 
-        final DynamicColorMap cmap = new DynamicColorMap(new Viridis(null,null));
+        final DynamicColorMap cmap = new DynamicColorMap(new Viridis());
         frame.getContentPane().setLayout(new GridBagLayout());
         final JPanel colors = new JPanel(new GridLayout(10, 10));
         colors.addMouseListener(new MouseAdapter() {
@@ -52,8 +51,7 @@ public class ColorMapTest {
         final DefaultComboBoxModel<ColorMap> cbModel = new DefaultComboBoxModel<>();
         final JComboBox<ColorMap> cb = new JComboBox<>(cbModel);
         cb.setRenderer(new ColorMapCellRenderer());
-        //noinspection unchecked
-        cb.addActionListener(e -> cmap.setColorMap((ColorMap) ((JComboBox<ColorMap>) e.getSource()).getSelectedItem()));
+
         colorTools.add(cb);
         for (final String cmapName : ColorMap.listDefaultColorMaps()) {
             cbModel.addElement(ColorMap.getColorMap(cmapName));
@@ -90,7 +88,10 @@ public class ColorMapTest {
 					}
 				});*/
 
-
+        cb.addActionListener(e -> {
+            cmap.setColorMap((ColorMap) ((JComboBox<ColorMap>) e.getSource()).getSelectedItem());
+            cmap.setReversed(reversed.isSelected());
+        });
         frame.pack();
         frame.setVisible(true);
 
@@ -141,14 +142,14 @@ public class ColorMapTest {
     static class ColorLabel extends JLabel {
 
         private static final long serialVersionUID = -5090637998127930769L;
-        final ColorMapNode color;
+        final ColorMap.ColorMapNode color;
 
         ColorLabel(Double value, ColorMap cmap) {
             setText(String.format("%.2f", value));
             setAlignmentX(SwingConstants.LEFT);
             color = cmap.getColorFromValue(value);
 
-            color.addColorListener((Color color) -> SwingUtilities.invokeLater(() -> {
+            color.getColor().addColorListener((Color color) -> SwingUtilities.invokeLater(() -> {
                 final Border border = BorderFactory.createCompoundBorder(
                         BorderFactory.createLineBorder(new java.awt.Color(color.asDecimal()), 0),
                         BorderFactory.createCompoundBorder(

@@ -9,6 +9,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Abstract color map
@@ -16,74 +17,145 @@ import java.util.*;
  * @author mahdilamb
  */
 public abstract class ColorMap {
+    public static final class ColorMapNode {
+        final Color color;
+        final ColorMap colorMap;
+        Double value;
+
+        private ColorMapNode(final ColorMap colorMap, final Color color, final Double value) {
+            this.colorMap = colorMap;
+            this.value = value;
+            this.color = color;
+        }
+
+        private void recalculate() {
+            final Color newColor = colorMap.calculateColor(value);
+            color.setColor(newColor);
+        }
+
+        public void setValue(final Double value) {
+            if (value.equals(this.value)) {
+                return;
+            }
+            final Double oldValue = this.value;
+            this.value = value;
+            recalculate();
+
+            if (value <= colorMap.currentMinValue || oldValue != null && oldValue <= colorMap.currentMinValue) {
+                colorMap.recalculateMinValue();
+            }
+            if (value >= colorMap.currentMaxValue || oldValue != null && oldValue >= colorMap.currentMaxValue) {
+                colorMap.recalculateMaxValue();
+            }
+        }
+
+        @Override
+        public String toString() {
+            return String.format("%s at %.3f", color.toString(), value);
+        }
+
+        public void remove() {
+            colorMap.currentNodes.remove(this);
+            if (colorMap.currentMinValue <= value) {
+                colorMap.recalculateMinValue();
+            }
+            if (colorMap.currentMaxValue >= value) {
+                colorMap.recalculateMaxValue();
+            }
+        }
+
+        public final Color getColor() {
+            return color;
+        }
+
+        public final Double getValue() {
+            return value;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            if (!super.equals(o)) return false;
+
+            ColorMapNode that = (ColorMapNode) o;
+
+            if (!Objects.equals(color, that.color)) return false;
+            if (!Objects.equals(colorMap, that.colorMap)) return false;
+            return Objects.equals(value, that.value);
+        }
+
+        @Override
+        public int hashCode() {
+            int result = super.hashCode();
+            result = 31 * result + (color != null ? color.hashCode() : 0);
+            result = 31 * result + (colorMap != null ? colorMap.hashCode() : 0);
+            result = 31 * result + (value != null ? value.hashCode() : 0);
+            return result;
+        }
+    }
+
     private final static Map<String, Class<ColorMap>> colorMaps = new HashMap<>();
-    private final static TreeSet<String> defaultColorMaps = new TreeSet<>();
+    private final static NavigableSet<String> defaultColorMaps = new TreeSet<>();
 
     protected final Map<Double, Color> definedColorNodes = new HashMap<>();
-    protected final List<Color> colorNodes = new Vector<>();
-    protected final NavigableMap<Double, Color> currentColorNodes = new TreeMap<>();
-    protected final List<ColorMapNode> colorValues = new Vector<>();
+    protected final List<Color> colorMapColors = new Vector<>();
+    protected final NavigableMap<Double, Color> currentColors = new TreeMap<>();
+    protected final List<ColorMapNode> currentNodes = new Vector<>();
     protected double currentMinValue = Double.MAX_VALUE;
     protected double currentMaxValue = Double.MIN_VALUE;
-    protected Double lowValue;
-    protected Double highValue;
+    protected Double lowValue = null;
+    protected Double highValue = null;
     protected Color NaNColor = new Color(Color.black);
     protected Color lowColor = null;
     protected Color highColor = null;
     protected boolean isReversed = false;
 
-    protected ColorMap(final Double lowValue, final Double highValue, final Color... colorNodes) {
-        this.lowValue = lowValue;
-        this.highValue = highValue;
-        addColorNodes(colorNodes);
-    }
-
-
-    protected void recalculateColors() {
-        for (final ColorMapNode node : colorValues) {
-            node.recalculate();
-        }
-    }
-
     /**
-     * add color node based on a specified position
+     * Add color node based on a specified position
      */
-    public void addColorNode(final Double position, final Color color) {
+    public void addColor(final Double position, final Color color) {
         if (position == null) {
-            addColorNode(color);
+            addColor(color);
             return;
         }
-        if (position < 0f || position > 1f) {
+        if (position < 0 || position > 1) {
             throw new IllegalArgumentException("position must be in range 0>= position <= 1");
         }
-        currentColorNodes.clear();
+        currentColors.clear();
         definedColorNodes.put(position, color);
     }
 
     /**
-     * add color node whose position is later calculated based on its order
+     * Add color node whose position is later calculated based on its order
      */
-    public void addColorNode(final Color color) {
-        currentColorNodes.clear();
-        colorNodes.add(color);
+    public void addColor(final Color color) {
+        currentColors.clear();
+        colorMapColors.add(color);
 
     }
 
-    public void addColorNodes(final Color... colorNodes) {
-        currentColorNodes.clear();
-        this.colorNodes.addAll(Arrays.asList(colorNodes));
+    public void addColors(final Color... colorNodes) {
+        currentColors.clear();
+        this.colorMapColors.addAll(Arrays.stream(colorNodes).filter(Objects::nonNull).collect(Collectors.toList()));
 
     }
 
     /**
      * Calculate color nodes based on position (if undefined) and cache them
      */
-    void calculateColorNodes() {
-        if (currentColorNodes.size() == 0) {
-            currentColorNodes.putAll(definedColorNodes);
-            for (int i = 0; i < colorNodes.size(); i++) {
-                currentColorNodes.put((double) i / (colorNodes.size() - 1), colorNodes.get(i));
+    protected void calculateColors() {
+        if (currentColors.size() == 0) {
+            currentColors.putAll(definedColorNodes);
+            for (int i = 0; i < colorMapColors.size(); i++) {
+                currentColors.put((double) i / (colorMapColors.size() - 1), colorMapColors.get(i));
             }
+        }
+    }
+
+    protected final void recalculateColors() {
+        for (final ColorMapNode node : currentNodes) {
+            node.recalculate();
         }
     }
 
@@ -94,12 +166,11 @@ public abstract class ColorMap {
 
     public Color getColorAt(final Double value) {
         return colorAt(isReversed ? (1 - value) : value);
-
     }
 
-    Color calculateColor(final Double value) {
+    protected final Color calculateColor(final Double value) {
         final Color color;
-        if (value == null || getLowValue() == null || getHighValue() == null) {
+        if (value == null) {
             color = getNaNColor().clone();
         } else {
             if (value < getLowValue()) {
@@ -129,37 +200,36 @@ public abstract class ColorMap {
         }
 
         final ColorMapNode color = new ColorMapNode(this, calculateColor(value), value);
-        colorValues.add(color);
+        currentNodes.add(color);
         return color;
     }
 
-    Double getHighValue() {
+    private Double getHighValue() {
         return highValue == null ? currentMaxValue : highValue;
     }
 
     public void setHighValue(final Double highValue) {
-        if (!this.highValue.equals(highValue)) {
+        if (this.highValue == null || !this.highValue.equals(highValue)) {
             this.highValue = highValue;
-            currentColorNodes.clear();
+            currentColors.clear();
             recalculateColors();
         }
     }
 
-    Double getLowValue() {
+    private Double getLowValue() {
         return lowValue == null ? currentMinValue : lowValue;
     }
 
     public void setLowValue(final Double lowValue) {
-        if (this.lowValue.equals(lowValue)) {
-            return;
+        if (this.lowValue == null || !this.lowValue.equals(lowValue)) {
+            this.lowValue = lowValue;
+            currentColors.clear();
+            recalculateColors();
         }
-        this.lowValue = lowValue;
-        currentColorNodes.clear();
-        recalculateColors();
 
     }
 
-    Color getLowColor() {
+    private Color getLowColor() {
         return lowColor == null ? getColorAt(0d) : lowColor;
     }
 
@@ -170,7 +240,7 @@ public abstract class ColorMap {
         }
     }
 
-    Color getHighColor() {
+    private Color getHighColor() {
         return highColor == null ? getColorAt(1d) : highColor;
     }
 
@@ -181,8 +251,8 @@ public abstract class ColorMap {
         }
     }
 
-    public Color getNaNColor() {
-        return NaNColor.clone();
+    private Color getNaNColor() {
+        return NaNColor;
     }
 
     public void setNaNColor(final Color NaNColor) {
@@ -192,9 +262,9 @@ public abstract class ColorMap {
         }
     }
 
-    protected NavigableMap<Double, Color> getColorNodes() {
-        calculateColorNodes();
-        return currentColorNodes;
+    protected final NavigableMap<Double, Color> getColorNodes() {
+        calculateColors();
+        return currentColors;
     }
 
     public boolean isReversed() {
@@ -219,10 +289,10 @@ public abstract class ColorMap {
         }
     }
 
-    protected void recalculateMaxValue() {
+    protected final void recalculateMaxValue() {
         Double currentMaxValue = null;
 
-        for (final ColorMapNode node : colorValues) {
+        for (final ColorMapNode node : currentNodes) {
             if (node.value == null) {
                 continue;
             }
@@ -237,9 +307,9 @@ public abstract class ColorMap {
         }
     }
 
-    protected void recalculateMinValue() {
+    protected final void recalculateMinValue() {
         Double currentMinValue = null;
-        for (final ColorMapNode node : colorValues) {
+        for (final ColorMapNode node : currentNodes) {
             if (node.value == null) {
                 continue;
             }
@@ -281,7 +351,7 @@ public abstract class ColorMap {
         }
 
         try {
-            final ColorMap out = (ColorMap) colormapClass.getConstructor(Double.class, Double.class).newInstance(null, null);
+            final ColorMap out = (ColorMap) colormapClass.getConstructor().newInstance();
             out.setReversed(isReversed);
             return out;
         } catch (final InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
@@ -366,6 +436,7 @@ public abstract class ColorMap {
         final String type = annotation.type().name().toLowerCase();
         final String withWildCard = String.format("*.%s", name);
         final String withoutWildCard = String.format("%s.%s", type, name);
+
         if (ColorMap.class.isAssignableFrom(colorMap)) {
             defaultColorMaps.add(String.format("%s.%s", annotation.type(), annotation.name()));
             registerColorMap(withWildCard, (Class<ColorMap>) colorMap);
@@ -376,6 +447,7 @@ public abstract class ColorMap {
 
     public static Set<String> listDefaultColorMaps() throws IOException, ClassNotFoundException {
         cacheDefaultColorMaps();
+
         return defaultColorMaps;
     }
 

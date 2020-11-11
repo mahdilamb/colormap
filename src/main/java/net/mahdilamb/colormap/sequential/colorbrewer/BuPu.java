@@ -7,8 +7,7 @@ import net.mahdilamb.colormap.color.Color;
 
 @NewColorMap(type = ColorMapType.SEQUENTIAL, name = "BuPu")
 public final class BuPu extends LinearColorMap {
-    public BuPu(Double lowValue, Double highValue) {
-        super(lowValue, highValue,
+    public BuPu(){super(
                 new Color(247, 252, 253),
                 new Color(224, 236, 244),
                 new Color(191, 211, 230),
