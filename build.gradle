@@ -29,12 +29,10 @@ test {
 repositories {
     jcenter()
     mavenCentral()
-
 }
 
-version = '0.9.2'
+version = '0.9.21'
 group = 'net.mahdilamb'
-
 
 dependencies {
 
