@@ -6,8 +6,6 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
@@ -40,7 +38,7 @@ public final class GenerateReadme {
                 final File path = new File(String.format("swatches/%s.png", cmapName));
                 ImageIO.write(image, "png", path);
                 final String[] cmapSplit = cmapName.split("\\.");
-                readme.append(String.format("|%s|%s|![%s](%s)|\n", toTitleCase(cmapSplit[0]), cmapSplit[1], cmapSplit[1], URLEncoder.encode(path.toString(), StandardCharsets.UTF_8)));
+                readme.append(String.format("|%s|%s|![%s](%s)|\n", toTitleCase(cmapSplit[0]), cmapSplit[1], cmapSplit[1], path.toString().replace("\\", "/")));
             } catch (IOException e) {
                 e.printStackTrace();
             }
