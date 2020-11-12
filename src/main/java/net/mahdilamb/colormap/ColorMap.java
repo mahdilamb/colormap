@@ -411,6 +411,13 @@ public abstract class ColorMap {
 
     }
 
+    /**
+     * @return The number of colors in this colormap.
+     */
+    public final int numColors() {
+        return colorMapColors.size() + definedColorNodes.size();
+    }
+
     @Override
     public String toString() {
         final NewColorMap annotation = getClass().getDeclaredAnnotation(NewColorMap.class);
