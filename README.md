@@ -16,6 +16,8 @@ Includes a number of default colormaps. When the bounds of the colormap nodes ch
 ## Default colormaps
 |Category|ColorMap|Sample|
 |---|---|---|
+|Cyclic|Twilight|![Twilight](swatches/CYCLIC.Twilight.png)|
+|Cyclic|TwilightShifted|![TwilightShifted](swatches/CYCLIC.TwilightShifted.png)|
 |Diverging|BentCoolWarm|![BentCoolWarm](swatches/DIVERGING.BentCoolWarm.png)|
 |Diverging|BrBG|![BrBG](swatches/DIVERGING.BrBG.png)|
 |Diverging|PRGn|![PRGn](swatches/DIVERGING.PRGn.png)|

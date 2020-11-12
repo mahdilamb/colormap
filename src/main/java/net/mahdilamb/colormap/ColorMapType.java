@@ -15,5 +15,9 @@ public enum ColorMapType {
     /**
      * A color map where colors interpolate from one to another.
      */
-    SEQUENTIAL
+    SEQUENTIAL,
+    /**
+     * A colormap which starts and ends on the same color, but changes within.
+     */
+    CYCLIC
 }
