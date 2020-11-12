@@ -243,23 +243,21 @@ public abstract class ColorMap {
      * @return The calculated color
      */
     protected final Color calculateColor(final Double value) {
-        final Color color;
         if (value == null) {
-            color = getNaNColor().clone();
+            return getNaNColor().clone();
         } else {
-            if (value < getLowValue()) {
-                color = getLowColor().clone();
+
+            if (currentNodes.size() == 0) {
+                return getColorAt(.5).clone();
+            } else if (value < getLowValue()) {
+                return getLowColor().clone();
             } else if (value > getHighValue()) {
-                color = getHighColor().clone();
+                return getHighColor().clone();
             } else {
-                if (getHighValue() - getLowValue() == 0) {
-                    color = getColorAt(.5);
-                } else {
-                    color = getColorAt((value - getLowValue()) / (getHighValue() - getLowValue()));
-                }
+                return getColorAt((value - getLowValue()) / (getHighValue() - getLowValue()));
+
             }
         }
-        return color;
     }
 
     /**
@@ -277,6 +275,7 @@ public abstract class ColorMap {
      * @return The associated color node.
      */
     public final ColorMapNode getColorFromValue(final double value) {
+
         if (value < currentMinValue || value > currentMaxValue) {
             if (value < currentMinValue) {
                 currentMinValue = value;
@@ -286,7 +285,6 @@ public abstract class ColorMap {
             }
             recalculateNodes();
         }
-
         final ColorMapNode color = new ColorMapNode(this, calculateColor(value), value);
         currentNodes.add(color);
         return color;
@@ -296,7 +294,7 @@ public abstract class ColorMap {
      * @return The maximum value before all Colors are represented by {@link ColorMap#highColor}.
      * {@code null} means no such ceiling exists.
      */
-    public Double getHighValue() {
+    protected Double getHighValue() {
         return highValue == null ? currentMaxValue : highValue;
     }
 
@@ -317,7 +315,7 @@ public abstract class ColorMap {
      * @return The minimum value before all Colors are represented by {@link ColorMap#lowColor}.
      * {@code null} means no such floor exists.
      */
-    public Double getLowValue() {
+    protected Double getLowValue() {
         return lowValue == null ? currentMinValue : lowValue;
     }
 
@@ -588,7 +586,7 @@ public abstract class ColorMap {
                     ZipEntry ze;
                     while ((ze = jar.getNextEntry()) != null) {
                         final File file = new File(ze.toString());
-                        if(!file.toString().endsWith(".class") || file.toString().length() < packagePath.length() || !file.toString().contains(packageName.toString())){
+                        if (!file.toString().endsWith(".class") || file.toString().length() < packagePath.length() || !file.toString().contains(packageName.toString())) {
                             continue;
                         }
 

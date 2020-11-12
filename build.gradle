@@ -32,7 +32,7 @@ repositories {
 
 }
 
-version = '0.9.1'
+version = '0.9.2'
 group = 'net.mahdilamb'
 
 
@@ -49,6 +49,7 @@ task generateReadme(type: JavaExec, dependsOn: ['testClasses']) {
     classpath sourceSets.test.runtimeClasspath
     main = "net.mahdilamb.colormap.tests.GenerateReadme"
 }
+
 
 modifyPom {
 
