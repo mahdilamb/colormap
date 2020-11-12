@@ -6,22 +6,27 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public final class GenerateReadme {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         final File out = new File("swatches/");
         final StringBuilder readme = new StringBuilder();
-        readme.append(Files.readString(new File("readme.template/before.txt").toPath()));
+        readme.append(new String(Files.readAllBytes(Paths.get("readme.template/before.txt")), StandardCharsets.UTF_8));
+
+
         readme.append('\n');
         readme.append("|Category|ColorMap|Sample|\n" +
                 "|---|---|---|\n"
         );
         if (out.exists()) {
-            Arrays.stream(Objects.requireNonNull(new File("swatches/").listFiles())).iterator().forEachRemaining(File::delete);
+            Arrays.stream(Objects.requireNonNull(out.listFiles())).iterator().forEachRemaining(File::delete);
         } else {
             Files.createDirectory(out.toPath());
         }
@@ -44,12 +49,14 @@ public final class GenerateReadme {
             }
         });
 
-        readme.append(Files.readString(new File("readme.template/after.txt").toPath()));
+        readme.append(new String(Files.readAllBytes(Paths.get("readme.template/after.txt")), StandardCharsets.UTF_8));
 
-        Files.writeString(Path.of("README.md"), readme.toString());
+        Files.writeString(new File("README.md").toPath(), readme.toString());
     }
 
     private static String toTitleCase(final String text) {
-        return String.valueOf(text.charAt(0)).toUpperCase() + text.toLowerCase().substring(1);
+        return text.length() <= 1 ?
+                text.toUpperCase() :
+                Arrays.stream(text.split(" ")).map(w -> String.valueOf(w.charAt(0)).toUpperCase() + w.substring(1).toLowerCase()).collect(Collectors.joining(" "));
     }
 }

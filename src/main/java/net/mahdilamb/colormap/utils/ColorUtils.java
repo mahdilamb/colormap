@@ -151,7 +151,7 @@ public final class ColorUtils {
     }
 
     /**
-     * Converts a decimal representation of a Color to it's 8-bit RGBA representation.
+     * Converts a decimal representation of a Color to its 8-bit RGBA representation.
      *
      * @param value Decimal representation of an sRGB color.
      * @return A 4 component, 8-bit array.
@@ -167,7 +167,7 @@ public final class ColorUtils {
     }
 
     /**
-     * Convert a color to it's RGB hexadecimal representation
+     * Convert a color to its RGB hexadecimal representation
      *
      * @param color Color to convert
      * @return Hexadecimal string representation of the color
@@ -289,9 +289,9 @@ public final class ColorUtils {
         final byte[] green = new byte[255];
         final byte[] blue = new byte[255];
         for (int i = 0; i < 255; i++) {
-            red[i] = (byte) (Integer.valueOf(hex.substring(1, 3), 16) * (i) / 255);
-            green[i] = (byte) (Integer.valueOf(hex.substring(3, 5), 16) * (i) / 255);
-            blue[i] = (byte) (Integer.valueOf(hex.substring(5, 7), 16) * (i) / 255);
+            red[i] = (byte) (Integer.valueOf(hex.substring(1, 3), 16) * i / 255);
+            green[i] = (byte) (Integer.valueOf(hex.substring(3, 5), 16) * i / 255);
+            blue[i] = (byte) (Integer.valueOf(hex.substring(5, 7), 16) * i / 255);
         }
         return new byte[][]{red, green, blue};
     }
@@ -307,7 +307,6 @@ public final class ColorUtils {
      */
     public static <T extends Number & Comparable<T>> T clamp(final T val, final T min, final T max) {
         return val.compareTo(max) > 0 ? max : val.compareTo(min) < 0 ? min : val;
-
     }
 
     /**
