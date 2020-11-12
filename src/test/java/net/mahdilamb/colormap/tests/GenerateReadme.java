@@ -27,7 +27,7 @@ public final class GenerateReadme {
         }
         ColorMap.listDefaultColorMaps().forEach(cmapName -> {
             final ColorMap cmap = ColorMap.getColorMap(cmapName);
-            final BufferedImage image = new BufferedImage(192, 24, BufferedImage.TYPE_INT_ARGB);
+            final BufferedImage image = new BufferedImage(192, 20, BufferedImage.TYPE_INT_ARGB);
             for (int x = 0; x < image.getWidth(); ++x) {
                 final int rgb = cmap.colorAt(((double) x) / image.getWidth()).asDecimal();
                 for (int y = 0; y < image.getHeight(); ++y) {
