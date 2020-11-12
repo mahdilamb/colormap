@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/mahdilamb/colormap.svg?token=fWb9xzvbfoQpG3hUJ2qH&branch=master)](https://travis-ci.com/mahdilamb/colormap)
+
 # ColorMap
 A Java-based colormap/heatmap that linearly interpolates in L*ab space.
 
