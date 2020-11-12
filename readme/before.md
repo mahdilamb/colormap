@@ -3,7 +3,7 @@
 # Colormap
 This is a Java-based package that enables the easy creation of linear and categorical colormaps. 
 
-There are many default colormaps, including many from [Matplotlib](https://matplotlib.org/), [Tableau](https://www.tableau.com/) and other sources (see [credits](## Credits)).
+There are many default colormaps, including many from [Matplotlib](https://matplotlib.org/), [Tableau](https://www.tableau.com/) and other sources (see [credits](#credits)).
 For ease, most colormaps can be obtained by using the following command:
 
 ```
