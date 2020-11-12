@@ -1,7 +1,4 @@
 
-## Color
-The Color class extends java.awt.Color and adds convenience functions to use css and Tableau colors.
-
 ## Credits
 * This product includes color specifications and designs developed by Cynthia Brewer (http://colorbrewer.org/).
 * "Why We Use Bad Color Maps and What You Can Do About It." Kenneth Moreland. In Proceedings of Human Vision and Electronic Imaging (HVEI), February 2016. DOI 10.2352/ISSN.2470-1173.2016.16.HVEI-133.

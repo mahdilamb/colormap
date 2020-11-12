@@ -17,7 +17,7 @@ public final class GenerateReadme {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         final File out = new File("swatches/");
         final StringBuilder readme = new StringBuilder();
-        readme.append(new String(Files.readAllBytes(Paths.get("readme.template/before.txt")), StandardCharsets.UTF_8));
+        readme.append(new String(Files.readAllBytes(Paths.get("readme.template/before.md")), StandardCharsets.UTF_8));
 
 
         readme.append('\n');
@@ -48,7 +48,7 @@ public final class GenerateReadme {
             }
         });
 
-        readme.append(new String(Files.readAllBytes(Paths.get("readme.template/after.txt")), StandardCharsets.UTF_8));
+        readme.append(new String(Files.readAllBytes(Paths.get("readme.template/after.md")), StandardCharsets.UTF_8));
         Files.write(new File("README.md").toPath(), readme.toString().getBytes());
     }
 
