@@ -8,12 +8,12 @@ import net.mahdilamb.colormap.color.Color;
 /**
  * An extended version of the colormap presented in Kindlmann
  */
-@NewColorMap(type = ColorMapType.SEQUENTIAL, name = "ExtendedKindlmann")
-public final class ExtendedKindlmann extends LinearColorMap {
+@NewColorMap(type = ColorMapType.SEQUENTIAL, name = "KindlmannExtended")
+public final class KindlmannExtended extends LinearColorMap {
     /**
      * Create a colormap based on the derived colormap from Kindlmann, et al.
      */
-    public ExtendedKindlmann() {
+    public KindlmannExtended() {
         super(
                 new Color(0.0180584653964f, 0.000875333094297f, 0.0158976099199f),
                 new Color(0.0358446051389f, 0.00174980699631f, 0.0328047687723f),

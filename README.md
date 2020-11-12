@@ -64,13 +64,13 @@ The Color class is provided as a framework-agnostic way of generating colors. It
 |Sequential|BuGn|![BuGn](swatches/SEQUENTIAL.BuGn.png)|
 |Sequential|BuPu|![BuPu](swatches/SEQUENTIAL.BuPu.png)|
 |Sequential|Cividis|![Cividis](swatches/SEQUENTIAL.Cividis.png)|
-|Sequential|ExtendedKindlmann|![ExtendedKindlmann](swatches/SEQUENTIAL.ExtendedKindlmann.png)|
 |Sequential|GnBu|![GnBu](swatches/SEQUENTIAL.GnBu.png)|
 |Sequential|Greens|![Greens](swatches/SEQUENTIAL.Greens.png)|
 |Sequential|Greys|![Greys](swatches/SEQUENTIAL.Greys.png)|
 |Sequential|Hesperia|![Hesperia](swatches/SEQUENTIAL.Hesperia.png)|
 |Sequential|Inferno|![Inferno](swatches/SEQUENTIAL.Inferno.png)|
 |Sequential|Kindlmann|![Kindlmann](swatches/SEQUENTIAL.Kindlmann.png)|
+|Sequential|KindlmannExtended|![KindlmannExtended](swatches/SEQUENTIAL.KindlmannExtended.png)|
 |Sequential|Lacerta|![Lacerta](swatches/SEQUENTIAL.Lacerta.png)|
 |Sequential|Laguna|![Laguna](swatches/SEQUENTIAL.Laguna.png)|
 |Sequential|Magma|![Magma](swatches/SEQUENTIAL.Magma.png)|
