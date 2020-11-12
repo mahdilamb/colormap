@@ -8,7 +8,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Objects;
@@ -50,8 +49,7 @@ public final class GenerateReadme {
         });
 
         readme.append(new String(Files.readAllBytes(Paths.get("readme.template/after.txt")), StandardCharsets.UTF_8));
-
-        Files.writeString(new File("README.md").toPath(), readme.toString());
+        Files.write(new File("README.md").toPath(), readme.toString().getBytes());
     }
 
     private static String toTitleCase(final String text) {
