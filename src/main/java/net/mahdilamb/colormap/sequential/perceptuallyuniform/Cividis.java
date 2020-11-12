@@ -12,7 +12,8 @@ import net.mahdilamb.colormap.color.Color;
  */
 @NewColorMap(type = ColorMapType.SEQUENTIAL, name = "Cividis")
 public final class Cividis extends LinearColorMap {
-    public Cividis(){super(
+    public Cividis() {
+        super(
                 new Color(0f, 0.1262f, 0.3015f),
                 new Color(0f, 0.1292f, 0.3077f),
                 new Color(0f, 0.1321f, 0.3142f),

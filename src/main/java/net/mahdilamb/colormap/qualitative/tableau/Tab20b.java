@@ -9,7 +9,6 @@ import net.mahdilamb.colormap.color.Color;
 public final class Tab20b extends CategoricalColorMap {
     public Tab20b(){super(
                 new Color("#393B79"),
-                new Color("#393B79"),
                 new Color("#5254A3"),
                 new Color("#6B6ECF"),
                 new Color("#9C9EDE"),

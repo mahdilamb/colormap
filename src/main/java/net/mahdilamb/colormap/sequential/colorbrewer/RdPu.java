@@ -7,7 +7,8 @@ import net.mahdilamb.colormap.color.Color;
 
 @NewColorMap(type = ColorMapType.SEQUENTIAL, name = "RdPu")
 public final class RdPu extends LinearColorMap {
-    public RdPu(){super(
+    public RdPu() {
+        super(
                 new Color(255, 247, 243),
                 new Color(253, 224, 221),
                 new Color(252, 197, 192),

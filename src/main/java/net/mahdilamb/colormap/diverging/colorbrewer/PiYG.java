@@ -7,7 +7,8 @@ import net.mahdilamb.colormap.color.Color;
 
 @NewColorMap(type = ColorMapType.DIVERGING, name = "PiYG")
 public final class PiYG extends LinearColorMap {
-    public PiYG(){super(
+    public PiYG() {
+        super(
                 new Color(142, 1, 82),
                 new Color(197, 27, 125),
                 new Color(222, 119, 174),

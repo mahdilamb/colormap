@@ -7,7 +7,8 @@ import net.mahdilamb.colormap.color.Color;
 
 @NewColorMap(type = ColorMapType.DIVERGING, name = "RdGy")
 public final class RdGy extends LinearColorMap {
-    public RdGy(){super(
+    public RdGy() {
+        super(
                 new Color(103, 0, 31),
                 new Color(178, 24, 43),
                 new Color(214, 96, 77),

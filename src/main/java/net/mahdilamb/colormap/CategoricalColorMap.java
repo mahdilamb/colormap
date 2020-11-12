@@ -3,12 +3,16 @@ package net.mahdilamb.colormap;
 import net.mahdilamb.colormap.color.Color;
 
 /**
- * abstract class whereby colors are sampled based on the floor of their current position
+ * A colormap whereby colors are sampled based on the floor of their current position
  *
  * @author mahdi
  */
 public class CategoricalColorMap extends ColorMap {
-
+    /**
+     * Construct a categorical color map with the provided colors
+     *
+     * @param colors A list of the colors to initialize the color map with.
+     */
     public CategoricalColorMap(final Color... colors) {
         addColors(colors);
     }

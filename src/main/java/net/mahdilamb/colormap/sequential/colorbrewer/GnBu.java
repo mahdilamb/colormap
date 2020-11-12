@@ -5,9 +5,13 @@ import net.mahdilamb.colormap.LinearColorMap;
 import net.mahdilamb.colormap.NewColorMap;
 import net.mahdilamb.colormap.color.Color;
 
+/**
+ * Sequential ColorBrewer colormap from Green to Blue.
+ */
 @NewColorMap(type = ColorMapType.SEQUENTIAL, name = "GnBu")
 public final class GnBu extends LinearColorMap {
-    public GnBu(){super(
+    public GnBu() {
+        super(
                 new Color(247, 252, 240),
                 new Color(224, 243, 219),
                 new Color(204, 235, 197),

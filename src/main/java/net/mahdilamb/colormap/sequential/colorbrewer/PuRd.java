@@ -7,7 +7,8 @@ import net.mahdilamb.colormap.color.Color;
 
 @NewColorMap(type = ColorMapType.SEQUENTIAL, name = "PuRd")
 public final class PuRd extends LinearColorMap {
-    public PuRd(){super(
+    public PuRd() {
+        super(
                 new Color(247, 244, 249),
                 new Color(231, 225, 239),
                 new Color(212, 185, 218),

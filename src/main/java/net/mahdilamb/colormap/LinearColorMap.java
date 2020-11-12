@@ -5,8 +5,8 @@ import net.mahdilamb.colormap.color.Color;
 import static net.mahdilamb.colormap.utils.ColorUtils.lerp;
 
 public class LinearColorMap extends ColorMap {
-    public LinearColorMap( final Color... colorNodes) {
-        addColors( colorNodes);
+    public LinearColorMap(final Color... colorNodes) {
+        addColors(colorNodes);
     }
 
     @Override
@@ -26,5 +26,4 @@ public class LinearColorMap extends ColorMap {
 
         }
     }
-
 }

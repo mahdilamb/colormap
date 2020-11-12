@@ -7,7 +7,8 @@ import net.mahdilamb.colormap.color.Color;
 
 @NewColorMap(type = ColorMapType.DIVERGING, name = "Spectral")
 public final class Spectral extends LinearColorMap {
-    public Spectral(){super(
+    public Spectral() {
+        super(
                 new Color(158, 1, 66),
                 new Color(213, 62, 79),
                 new Color(244, 109, 67),

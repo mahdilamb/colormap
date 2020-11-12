@@ -7,7 +7,8 @@ import net.mahdilamb.colormap.color.Color;
 
 @NewColorMap(type = ColorMapType.QUALITATIVE, name = "Paired")
 public final class Paired extends CategoricalColorMap {
-    public Paired(){super(
+    public Paired() {
+        super(
                 new Color(166, 206, 227),
                 new Color(31, 120, 180),
                 new Color(178, 223, 138),
