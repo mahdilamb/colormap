@@ -1,10 +1,13 @@
 plugins {
     id 'java-library'
 }
+compileJava {
+    sourceCompatibility = 1.9
+}
 test {
     useJUnit()
 }
-repositories{
+repositories {
     mavenCentral()
 }
 
@@ -14,11 +17,10 @@ dependencies {
 }
 task swingDemo(type: JavaExec, dependsOn: ['testClasses']) {
     classpath sourceSets.test.runtimeClasspath
-
     main = "net.mahdilamb.colormap.tests.ColorMapTest"
 }
+
 task generateReadme(type: JavaExec, dependsOn: ['testClasses']) {
     classpath sourceSets.test.runtimeClasspath
-
     main = "net.mahdilamb.colormap.tests.GenerateReadme"
 }
