@@ -4,9 +4,14 @@ import net.mahdilamb.colormap.CategoricalColorMap;
 import net.mahdilamb.colormap.ColorMapType;
 import net.mahdilamb.colormap.NewColorMap;
 import net.mahdilamb.colormap.color.Color;
-
+/**
+ * Colorbrewer 2.0 Accent
+ */
 @NewColorMap(type = ColorMapType.QUALITATIVE, name = "Accent")
 public final class Accent extends CategoricalColorMap {
+    /**
+     * Create a colormap based on Colorbrewer 2.0 Accent
+     */
     public Accent() {
         super(
                 new Color(127, 201, 127),

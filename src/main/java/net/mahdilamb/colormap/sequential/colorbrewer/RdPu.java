@@ -5,8 +5,14 @@ import net.mahdilamb.colormap.LinearColorMap;
 import net.mahdilamb.colormap.NewColorMap;
 import net.mahdilamb.colormap.color.Color;
 
+/**
+ * Colorbrewer 2.0 RdPu.
+ */
 @NewColorMap(type = ColorMapType.SEQUENTIAL, name = "RdPu")
 public final class RdPu extends LinearColorMap {
+    /**
+     * Create a colormap based on Colorbrewer 2.0 RdPu.
+     */
     public RdPu() {
         super(
                 new Color(255, 247, 243),

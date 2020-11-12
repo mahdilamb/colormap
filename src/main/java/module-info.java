@@ -1,4 +1,7 @@
-module mahdilamb.colormap {
+/**
+ * A colormap module to provide the easy construction of linear and categorical colormaps.
+ */
+module net.mahdilamb.colormap {
     exports net.mahdilamb.colormap;
     exports net.mahdilamb.colormap.color;
     exports net.mahdilamb.colormap.diverging.colorbrewer;

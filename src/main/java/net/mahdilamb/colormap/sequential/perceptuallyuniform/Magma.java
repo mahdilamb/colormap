@@ -5,12 +5,17 @@ import net.mahdilamb.colormap.LinearColorMap;
 import net.mahdilamb.colormap.NewColorMap;
 import net.mahdilamb.colormap.color.Color;
 
+/**
+ * MPL Magma
+ */
 @NewColorMap(type = ColorMapType.SEQUENTIAL, name = "Magma")
 public final class Magma extends LinearColorMap {
+    /**
+     * Create a colormap based on MPL Magna
+     */
     public Magma() {
         //data from https://github.com/matplotlib/matplotlib/blob/f2116d82dfd6b82fe178230766d95ea9ac2b0c8c/lib/matplotlib/_cm_listed.py#L1288
         super(
-                //data from https://github.com/matplotlib/matplotlib/blob/f2116d82dfd6b82fe178230766d95ea9ac2b0c8c/lib/matplotlib/_cm_listed.py#L1288
                 new Color(0.001462, 0.000466, 0.013866),
                 new Color(0.002258, 0.001295, 0.018331),
                 new Color(0.003279, 0.002305, 0.023708),

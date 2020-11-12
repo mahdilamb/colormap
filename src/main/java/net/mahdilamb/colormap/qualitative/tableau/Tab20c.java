@@ -5,9 +5,16 @@ import net.mahdilamb.colormap.ColorMapType;
 import net.mahdilamb.colormap.NewColorMap;
 import net.mahdilamb.colormap.color.Color;
 
+/**
+ * Tableau colormap Tab20c
+ */
 @NewColorMap(type = ColorMapType.QUALITATIVE, name = "Tab20c")
 public final class Tab20c extends CategoricalColorMap {
-    public Tab20c(){super(
+    /**
+     * Create a colormap based on Tableau Tab20c
+     */
+    public Tab20c() {
+        super(
                 new Color("#3182BD"),
                 new Color("#6BAED6"),
                 new Color("#9ECAE1"),

@@ -5,8 +5,14 @@ import net.mahdilamb.colormap.LinearColorMap;
 import net.mahdilamb.colormap.NewColorMap;
 import net.mahdilamb.colormap.color.Color;
 
+/**
+ * MPL colormap Cividis
+ */
 @NewColorMap(type = ColorMapType.SEQUENTIAL, name = "Cividis")
 public final class Cividis extends LinearColorMap {
+    /**
+     * Create a colormap based on MPL Cividis
+     */
     public Cividis() {
         super(
                 //data from https://github.com/matplotlib/matplotlib/blob/f2116d82dfd6b82fe178230766d95ea9ac2b0c8c/lib/matplotlib/_cm_listed.py#L1288

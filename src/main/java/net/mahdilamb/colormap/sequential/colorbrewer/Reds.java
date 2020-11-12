@@ -10,7 +10,9 @@ import net.mahdilamb.colormap.color.Color;
  */
 @NewColorMap(type = ColorMapType.SEQUENTIAL, name = "Reds")
 public final class Reds extends LinearColorMap {
-
+    /**
+     * Create a colormap based on ColorBrewer Reds.
+     */
     public Reds() {
         super(
                 new Color(255, 245, 240),

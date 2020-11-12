@@ -5,11 +5,16 @@ import net.mahdilamb.colormap.LinearColorMap;
 import net.mahdilamb.colormap.NewColorMap;
 import net.mahdilamb.colormap.color.Color;
 
+/**
+ * MPL Plasma
+ */
 @NewColorMap(type = ColorMapType.SEQUENTIAL, name = "Plasma")
 public final class Plasma extends LinearColorMap {
+    /**
+     * Create a colormap based on MPL Plasma.
+     */
     public Plasma() {
         //data from https://github.com/matplotlib/matplotlib/blob/f2116d82dfd6b82fe178230766d95ea9ac2b0c8c/lib/matplotlib/_cm_listed.py#L1288
-
         super(
                 new Color(0.050383, 0.029803, 0.527975),
                 new Color(0.063536, 0.028426, 0.533124),

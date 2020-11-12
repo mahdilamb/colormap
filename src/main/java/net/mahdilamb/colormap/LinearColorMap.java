@@ -4,9 +4,17 @@ import net.mahdilamb.colormap.color.Color;
 
 import static net.mahdilamb.colormap.utils.ColorUtils.lerp;
 
+/**
+ * A colormap which linearly interpolates between colors in L*ab space.
+ */
 public class LinearColorMap extends ColorMap {
-    public LinearColorMap(final Color... colorNodes) {
-        addColors(colorNodes);
+    /**
+     * Create a linear color map with the provided colors
+     *
+     * @param colors The colors to generate a linear color map with.
+     */
+    public LinearColorMap(final Color... colors) {
+        addColors(colors);
     }
 
     @Override

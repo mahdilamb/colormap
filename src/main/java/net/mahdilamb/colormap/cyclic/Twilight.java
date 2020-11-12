@@ -5,8 +5,14 @@ import net.mahdilamb.colormap.LinearColorMap;
 import net.mahdilamb.colormap.NewColorMap;
 import net.mahdilamb.colormap.color.Color;
 
+/**
+ * Matplotlib cyclic colormap Twilight.
+ */
 @NewColorMap(type = ColorMapType.CYCLIC, name = "Twilight")
 public class Twilight extends LinearColorMap {
+    /**
+     * Create a colormap based on the matplotlib colormap Twilight.
+     */
     public Twilight() {
         //Colors from https://github.com/matplotlib/matplotlib/blob/f2116d82dfd6b82fe178230766d95ea9ac2b0c8c/lib/matplotlib/_cm_listed.py#L1288
         super(

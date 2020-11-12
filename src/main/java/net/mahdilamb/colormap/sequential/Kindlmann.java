@@ -5,9 +5,16 @@ import net.mahdilamb.colormap.LinearColorMap;
 import net.mahdilamb.colormap.NewColorMap;
 import net.mahdilamb.colormap.color.Color;
 
+/**
+ * Colormap from 10.1109/VISUAL.2002.1183788
+ */
 @NewColorMap(type = ColorMapType.SEQUENTIAL, name = "Kindlmann")
 public final class Kindlmann extends LinearColorMap {
-    public Kindlmann(){super(
+    /**
+     * Create a colormap based on Kindlmann, et al.
+     */
+    public Kindlmann() {
+        super(
                 new Color(0.0179911464229f, 0.000920064923514f, 0.0156157177605f),
                 new Color(0.0359573389421f, 0.00178553210759f, 0.0319686152223f),
                 new Color(0.052717504614f, 0.00252887372289f, 0.0485944475368f),

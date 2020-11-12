@@ -5,8 +5,14 @@ import net.mahdilamb.colormap.LinearColorMap;
 import net.mahdilamb.colormap.NewColorMap;
 import net.mahdilamb.colormap.color.Color;
 
+/**
+ * Colorbrewer 2.0 colormap BrBG.
+ */
 @NewColorMap(type = ColorMapType.DIVERGING, name = "BrBG")
 public final class BrBG extends LinearColorMap {
+    /**
+     * Create a colormap based on Colorbrewer 2.0 colormap BrBG.
+     */
     public BrBG() {
         super(
                 new Color(84, 48, 5),

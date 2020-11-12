@@ -4,9 +4,14 @@ import net.mahdilamb.colormap.ColorMapType;
 import net.mahdilamb.colormap.LinearColorMap;
 import net.mahdilamb.colormap.NewColorMap;
 import net.mahdilamb.colormap.color.Color;
-
+/**
+ * Kenneth Moreland's SmoothCoolWarm colormap.
+ */
 @NewColorMap(type = ColorMapType.DIVERGING, name = "SmoothCoolWarm")
 public final class SmoothCoolWarm extends LinearColorMap {
+    /**
+     * Create a colormap based on Kenneth Moreland's SmoothCoolWarm colormap.
+     */
     public SmoothCoolWarm() {
         super(
                 new Color(0.338999030442358f, 0.290177126281036f, 0.762712567787502f),

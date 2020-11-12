@@ -5,9 +5,16 @@ import net.mahdilamb.colormap.LinearColorMap;
 import net.mahdilamb.colormap.NewColorMap;
 import net.mahdilamb.colormap.color.Color;
 
+/**
+ * Colormap from Peter Karpov @see <a href="http://inversed.ru/index.htm">Peter Karpov</a>. Modifed Plasma
+ */
 @NewColorMap(type = ColorMapType.SEQUENTIAL, name = "ModifiedPlasma")
 public final class ModifiedPlasma extends LinearColorMap {
-    public ModifiedPlasma(){super(
+    /**
+     * Create a colormap based on Modified Plasma.
+     */
+    public ModifiedPlasma() {
+        super(
                 new Color(0f, 0f, 0f),
                 new Color(0.0049277731503758f, 0.00220467048209427f, 0.041348172917105f),
                 new Color(0.0106171701346941f, 0.00383334725532445f, 0.0758045798971295f),

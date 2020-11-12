@@ -9,13 +9,18 @@ public final class ColorUtils {
     private ColorUtils() {
     }
 
+    /**
+     * D65 illuminant factors
+     */
     private static final float[] D65 = new float[]{
             95.04f, 100, 108.884f
     };
 
-    /*
-     * based on easyrgb.com
-
+    /**
+     * Convert a 3-component float representation of an sRGB color into XYZ space.
+     *
+     * @param rgb 3-component float RGB representation of an sRGB color
+     * @return A 3-component float array containing the color in XYZ space.
      */
     public static float[] RGBToXYZ(final float[] rgb) {
         final float[] temp = rgb.clone();
@@ -35,6 +40,12 @@ public final class ColorUtils {
         };
     }
 
+    /**
+     * Convert a 3-component 8-bit representation of an sRGB color into XYZ space.
+     *
+     * @param rgb 3-component 8-bit RGB representation of an sRGB color
+     * @return A 3-component float array containing the color in XYZ space.
+     */
     public static float[] RGBToXYZ(final int[] rgb) {
         return RGBToXYZ(new float[]{
                 rgb[0] / 255f,
@@ -66,10 +77,22 @@ public final class ColorUtils {
         };
     }
 
+    /**
+     * Convert an sRGB color to L*ab
+     *
+     * @param RGB A 3-component float array representation of a color.
+     * @return A 3-component float array containing the L*ab representation of the color.
+     */
     public static float[] RGBToLab(final float[] RGB) {
         return XYZToLab(RGBToXYZ(RGB));
     }
 
+    /**
+     * Convert an sRGB color to L*ab
+     *
+     * @param RGB A 3-component int array containing an 8-bit representation of a color.
+     * @return A 3-component float array containing the L*ab representation of the color.
+     */
     public static float[] RGBToLab(final int[] RGB) {
         return XYZToLab(RGBToXYZ(RGB));
     }
@@ -111,7 +134,7 @@ public final class ColorUtils {
      * based on http://www.easyrgb.com/en/math.php
      *
      * @param Lab input Lab float array
-     * @return XYZ array of input Lab color
+     * @return XYZ array of input L*ab color
      */
     public static float[] LabToXYZ(final float[] Lab) {
         final float[] temp = Lab.clone();
@@ -131,10 +154,25 @@ public final class ColorUtils {
         return temp;
     }
 
+    /**
+     * Convert a float array containing an L*ab color to an 8-bit sRGB int array.
+     *
+     * @param lab A 3-component L*ab float array.
+     * @return An 8-bit int array containing the L*ab color in sRGB space.
+     */
     public static int[] LabToRGB(final float[] lab) {
         return XYZToRGB(LabToXYZ(lab));
     }
 
+    /**
+     * Convert an 8-bit RGBA color to decimal.
+     *
+     * @param r Red
+     * @param g Green
+     * @param b Blue
+     * @param a Alpha
+     * @return A decimal representation of the color.
+     */
     public static int RGBAToDecimal(final int r, final int g, final int b, final int a) {
         return ((a & 0xFF) << 24) |
                 ((r & 0xFF) << 16) |
@@ -142,10 +180,25 @@ public final class ColorUtils {
                 ((b & 0xFF));
     }
 
+    /**
+     * Convert a float RGBA color to a decimal
+     *
+     * @param r Red
+     * @param g Green
+     * @param b Blue
+     * @param a Alpha
+     * @return A decimal representation of the color.
+     */
     public static int RGBAToDecimal(final float r, final float g, final float b, final float a) {
         return RGBAToDecimal(Math.round(r * 255), Math.round(g * 255), Math.round(b * 255), Math.round(a * 255));
     }
 
+    /**
+     * Convert a float RGBA array to a decimal representation of the color
+     *
+     * @param rgba A 4-component float array
+     * @return A decimal representation of the color.
+     */
     public static int RGBAToDecimal(final float[] rgba) {
         return RGBAToDecimal(rgba[0], rgba[1], rgba[2], rgba[3]);
     }

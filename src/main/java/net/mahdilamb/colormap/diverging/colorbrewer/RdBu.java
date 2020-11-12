@@ -5,8 +5,14 @@ import net.mahdilamb.colormap.LinearColorMap;
 import net.mahdilamb.colormap.NewColorMap;
 import net.mahdilamb.colormap.color.Color;
 
+/**
+ * Colorbrewer 2.0 RdBu
+ */
 @NewColorMap(type = ColorMapType.DIVERGING, name = "RdBu")
 public final class RdBu extends LinearColorMap {
+    /**
+     * Create a colormap based on Colorbrewer 2.0 RdBu.
+     */
     public RdBu() {
         super(
                 new Color(103, 0, 31),

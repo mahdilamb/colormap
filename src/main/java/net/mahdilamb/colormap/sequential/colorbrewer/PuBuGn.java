@@ -5,8 +5,14 @@ import net.mahdilamb.colormap.LinearColorMap;
 import net.mahdilamb.colormap.NewColorMap;
 import net.mahdilamb.colormap.color.Color;
 
+/**
+ * Colorbrewer 2.0 PuBuGn.
+ */
 @NewColorMap(type = ColorMapType.SEQUENTIAL, name = "PuBuGn")
 public final class PuBuGn extends LinearColorMap {
+    /**
+     * Create a colormap based on Colorbrewer 2.0 PuBuGn.
+     */
     public PuBuGn() {
         super(
                 new Color(255, 247, 251),

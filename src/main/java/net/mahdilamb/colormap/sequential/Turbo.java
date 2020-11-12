@@ -5,9 +5,16 @@ import net.mahdilamb.colormap.LinearColorMap;
 import net.mahdilamb.colormap.NewColorMap;
 import net.mahdilamb.colormap.color.Color;
 
+/**
+ * Google AI's Turbo
+ */
 @NewColorMap(type = ColorMapType.SEQUENTIAL, name = "Turbo")
 public final class Turbo extends LinearColorMap {
-    public Turbo(){super(
+    /**
+     * Create a colormap based on Google AI's Turbo.
+     */
+    public Turbo() {
+        super(
                 new Color(0.18995f, 0.07176f, 0.23217f),
                 new Color(0.19483f, 0.08339f, 0.26149f),
                 new Color(0.19956f, 0.09498f, 0.29024f),

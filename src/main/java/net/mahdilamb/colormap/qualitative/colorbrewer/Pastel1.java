@@ -4,9 +4,14 @@ import net.mahdilamb.colormap.CategoricalColorMap;
 import net.mahdilamb.colormap.ColorMapType;
 import net.mahdilamb.colormap.NewColorMap;
 import net.mahdilamb.colormap.color.Color;
-
+/**
+ * Colorbrewer 2.0 Pastel1
+ */
 @NewColorMap(type = ColorMapType.QUALITATIVE, name = "Pastel1")
 public final class Pastel1 extends CategoricalColorMap {
+    /**
+     * Create a colormap based on Colorbrewer 2.0 Pastel1
+     */
     public Pastel1() {
         super(
                 new Color(251, 180, 174),

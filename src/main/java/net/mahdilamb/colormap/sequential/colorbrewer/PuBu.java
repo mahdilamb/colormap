@@ -10,6 +10,9 @@ import net.mahdilamb.colormap.color.Color;
  */
 @NewColorMap(type = ColorMapType.SEQUENTIAL, name = "PuBu")
 public final class PuBu extends LinearColorMap {
+    /**
+     * Create a colormap based on ColorBrewer PuBu.
+     */
     public PuBu() {
         super(
                 new Color(255, 247, 251),

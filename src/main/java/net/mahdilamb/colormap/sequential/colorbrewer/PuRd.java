@@ -4,9 +4,14 @@ import net.mahdilamb.colormap.ColorMapType;
 import net.mahdilamb.colormap.LinearColorMap;
 import net.mahdilamb.colormap.NewColorMap;
 import net.mahdilamb.colormap.color.Color;
-
+/**
+ * Colorbrewer 2.0 PuRd.
+ */
 @NewColorMap(type = ColorMapType.SEQUENTIAL, name = "PuRd")
 public final class PuRd extends LinearColorMap {
+    /**
+     * Create a colormap based on Colorbrewer 2.0 PuRd.
+     */
     public PuRd() {
         super(
                 new Color(247, 244, 249),

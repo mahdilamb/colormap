@@ -4,9 +4,14 @@ import net.mahdilamb.colormap.ColorMapType;
 import net.mahdilamb.colormap.LinearColorMap;
 import net.mahdilamb.colormap.NewColorMap;
 import net.mahdilamb.colormap.color.Color;
-
+/**
+ * MPL Viridis
+ */
 @NewColorMap(type = ColorMapType.SEQUENTIAL, name = "Viridis")
 public final class Viridis extends LinearColorMap {
+    /**
+     * Create a colormap based on MPL Viridis
+     */
     public Viridis() {
         //data from https://github.com/matplotlib/matplotlib/blob/f2116d82dfd6b82fe178230766d95ea9ac2b0c8c/lib/matplotlib/_cm_listed.py#L1288
         super(

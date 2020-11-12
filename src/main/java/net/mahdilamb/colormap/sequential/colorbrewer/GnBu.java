@@ -10,6 +10,9 @@ import net.mahdilamb.colormap.color.Color;
  */
 @NewColorMap(type = ColorMapType.SEQUENTIAL, name = "GnBu")
 public final class GnBu extends LinearColorMap {
+    /**
+     * Create a colormap based on ColorBrewer GnBu.
+     */
     public GnBu() {
         super(
                 new Color(247, 252, 240),

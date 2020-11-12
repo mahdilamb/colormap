@@ -4,9 +4,14 @@ import net.mahdilamb.colormap.ColorMapType;
 import net.mahdilamb.colormap.LinearColorMap;
 import net.mahdilamb.colormap.NewColorMap;
 import net.mahdilamb.colormap.color.Color;
-
+/**
+ * Colorbrewer 2.0 PuOr.
+ */
 @NewColorMap(type = ColorMapType.DIVERGING, name = "PuOr")
 public final class PuOr extends LinearColorMap {
+    /**
+     * Create a colormap based on Colorbrewer 2.0 PuOr.
+     */
     public PuOr() {
         super(
                 new Color(127, 59, 8),

@@ -5,8 +5,14 @@ import net.mahdilamb.colormap.LinearColorMap;
 import net.mahdilamb.colormap.NewColorMap;
 import net.mahdilamb.colormap.color.Color;
 
+/**
+ * Colorbrewer 2.0 colormap PiYG.
+ */
 @NewColorMap(type = ColorMapType.DIVERGING, name = "PiYG")
 public final class PiYG extends LinearColorMap {
+    /**
+     * Create a colormap based on Colorbrewer 2.0 colormap PiYG.
+     */
     public PiYG() {
         super(
                 new Color(142, 1, 82),

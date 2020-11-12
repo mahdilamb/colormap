@@ -4,9 +4,14 @@ import net.mahdilamb.colormap.ColorMapType;
 import net.mahdilamb.colormap.LinearColorMap;
 import net.mahdilamb.colormap.NewColorMap;
 import net.mahdilamb.colormap.color.Color;
-
+/**
+ * Colorbrewer 2.0 YlGn.
+ */
 @NewColorMap(type = ColorMapType.SEQUENTIAL, name = "YlGn")
 public final class YlGn extends LinearColorMap {
+    /**
+     * Create a colormap based on Colorbrewer 2.0 YlGn.
+     */
     public YlGn() {
         super(
                 new Color(255, 255, 229),

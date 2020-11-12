@@ -5,8 +5,14 @@ import net.mahdilamb.colormap.LinearColorMap;
 import net.mahdilamb.colormap.NewColorMap;
 import net.mahdilamb.colormap.color.Color;
 
+/**
+ * Kenneth Moreland's BentCoolWarm colormap.
+ */
 @NewColorMap(type = ColorMapType.DIVERGING, name = "BentCoolWarm")
 public final class BentCoolWarm extends LinearColorMap {
+    /**
+     * Create a colormap based on Kenneth Moreland's BentCoolWarm colormap.
+     */
     public BentCoolWarm() {
         super(
                 new Color(0.337561290171f, 0.288870665307f, 0.75908755887f),

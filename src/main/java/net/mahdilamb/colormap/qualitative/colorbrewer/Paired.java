@@ -4,9 +4,14 @@ import net.mahdilamb.colormap.CategoricalColorMap;
 import net.mahdilamb.colormap.ColorMapType;
 import net.mahdilamb.colormap.NewColorMap;
 import net.mahdilamb.colormap.color.Color;
-
+/**
+ * Colorbrewer 2.0 Paired
+ */
 @NewColorMap(type = ColorMapType.QUALITATIVE, name = "Paired")
 public final class Paired extends CategoricalColorMap {
+    /**
+     * Create a colormap based on Colorbrewer 2.0 Paired
+     */
     public Paired() {
         super(
                 new Color(166, 206, 227),

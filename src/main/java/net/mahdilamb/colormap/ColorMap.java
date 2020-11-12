@@ -478,10 +478,10 @@ public abstract class ColorMap {
     /**
      * Convenience method to get colormap through java reflection
      *
-     * @param colormapType
-     * @param colormapName
-     * @param isReversed
-     * @return
+     * @param colormapType The colormap type (e.g. qualitative, sequential, diverging, cyclic)
+     * @param colormapName The name of the colormap (e.g. Viridis)
+     * @param isReversed   Whether the colormap should be reversed
+     * @return An instance of the requested colormap, or {@code null} if it cannot be found.
      */
     public static ColorMap getColorMap(final String colormapType, final String colormapName, final boolean isReversed) {
         final Class<?> colormapClass;
@@ -512,6 +512,15 @@ public abstract class ColorMap {
 
     }
 
+    /**
+     * Get a colormap using a string representation of the colormap in the form:
+     * A.B[.C] Where A is the category such as sequential, qualitative, diverging.
+     * B is the name of the color map, and C (optional) is reversed if the color maps should be reversed.
+     * All parts are case-insensitive.
+     *
+     * @param colormap A string representation of a colormap (e.g. "sequential.viridis.reversed", note sequential can be omitted).
+     * @return An instance of the requested colormap or {@code null} if it cannot be found.
+     */
     public static ColorMap getColorMap(final String colormap) {
         final String[] cmparts = colormap.split("\\.");
         switch (cmparts.length) {
@@ -595,8 +604,19 @@ public abstract class ColorMap {
 
     }
 
-    public static Set<String> listDefaultColorMaps() throws IOException, ClassNotFoundException {
-        cacheDefaultColorMaps();
+    /**
+     * Get a String list of all the default colormaps.
+     *
+     * @return A list (set) of the Strings representing the default colormaps.
+     */
+    public static Set<String> listDefaultColorMaps() {
+        try {
+            cacheDefaultColorMaps();
+        } catch (Exception e) {
+            System.out.println("Could not load default colormaps.");
+            e.printStackTrace();
+            System.exit(-1);
+        }
         return defaultColorMaps;
     }
 

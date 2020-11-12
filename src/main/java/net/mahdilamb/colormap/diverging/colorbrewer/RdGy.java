@@ -5,8 +5,14 @@ import net.mahdilamb.colormap.LinearColorMap;
 import net.mahdilamb.colormap.NewColorMap;
 import net.mahdilamb.colormap.color.Color;
 
+/**
+ * Colorbrewer 2.0 RdGy.
+ */
 @NewColorMap(type = ColorMapType.DIVERGING, name = "RdGy")
 public final class RdGy extends LinearColorMap {
+    /**
+     * Create a colormap based on Colorbrewer 2.0 RdGy.
+     */
     public RdGy() {
         super(
                 new Color(103, 0, 31),

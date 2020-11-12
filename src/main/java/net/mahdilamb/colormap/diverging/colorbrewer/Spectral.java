@@ -5,8 +5,14 @@ import net.mahdilamb.colormap.LinearColorMap;
 import net.mahdilamb.colormap.NewColorMap;
 import net.mahdilamb.colormap.color.Color;
 
+/**
+ * Colorbrewer 2.0 Spectral
+ */
 @NewColorMap(type = ColorMapType.DIVERGING, name = "Spectral")
 public final class Spectral extends LinearColorMap {
+    /**
+     * Create a colormap based on Colorbrewer 2.0 Spectral
+     */
     public Spectral() {
         super(
                 new Color(158, 1, 66),

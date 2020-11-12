@@ -14,10 +14,10 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public final class GenerateReadme {
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    public static void main(String[] args) throws IOException {
         final File out = new File("swatches/");
         final StringBuilder readme = new StringBuilder();
-        readme.append(new String(Files.readAllBytes(Paths.get("readme.template/before.md")), StandardCharsets.UTF_8));
+        readme.append(new String(Files.readAllBytes(Paths.get("readme/before.md")), StandardCharsets.UTF_8));
 
 
         readme.append('\n');
@@ -48,7 +48,7 @@ public final class GenerateReadme {
             }
         });
 
-        readme.append(new String(Files.readAllBytes(Paths.get("readme.template/after.md")), StandardCharsets.UTF_8));
+        readme.append(new String(Files.readAllBytes(Paths.get("readme/after.md")), StandardCharsets.UTF_8));
         Files.write(new File("README.md").toPath(), readme.toString().getBytes());
     }
 

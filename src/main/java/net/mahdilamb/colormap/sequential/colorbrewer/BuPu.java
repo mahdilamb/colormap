@@ -5,8 +5,14 @@ import net.mahdilamb.colormap.LinearColorMap;
 import net.mahdilamb.colormap.NewColorMap;
 import net.mahdilamb.colormap.color.Color;
 
+/**
+ * Colorbrewer 2.0 BuPu
+ */
 @NewColorMap(type = ColorMapType.SEQUENTIAL, name = "BuPu")
 public final class BuPu extends LinearColorMap {
+    /**
+     * Create a colormap based on Colorbrewer 2.0 BuPu.
+     */
     public BuPu() {
         super(
                 new Color(247, 252, 253),
