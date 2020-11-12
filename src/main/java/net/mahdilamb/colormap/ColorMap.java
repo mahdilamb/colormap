@@ -5,9 +5,12 @@ import net.mahdilamb.colormap.color.Color;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.util.*;
+import java.util.jar.JarInputStream;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 /**
  * Abstract color map that allows or the definition of a color map that is evenly spaced, or spaced at defined locations apart.
@@ -542,44 +545,65 @@ public abstract class ColorMap {
 
     private static void cacheDefaultColorMaps() throws IOException, ClassNotFoundException {
         if (defaultColorMaps.size() == 0) {
-            final File packageName = new File(ColorMap.class.getPackage().getName().replace(".", File.separator));
-            final Enumeration<URL> resources = ColorMap.class.getClassLoader().getResources(String.valueOf(packageName));
-            final Stack<File> directories = new Stack<>();
-            while (resources.hasMoreElements()) {
-                try {
-                    final File dir = new File(resources.nextElement().toURI());
-                    if (dir.isDirectory()) {
-                        directories.push(dir);
-                    } else {
-                        addColorMapClass(packageName, dir);
-                    }
-                } catch (URISyntaxException | ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
-            }
+            final String packagePath = ColorMap.class.getPackageName().replace(".", "/");
+            final File packageName = new File(packagePath);
+            final URL codeSource = ColorMap.class.getProtectionDomain().getCodeSource().getLocation();
+            if (new File(codeSource.getPath()).isDirectory()) {
 
-            while (!directories.empty()) {
-                final File dir = directories.pop();
-                if (dir == null) {
-                    continue;
+                final Enumeration<URL> resources = Thread.currentThread().getContextClassLoader().getResources(packagePath);
+                final Stack<File> directories = new Stack<>();
+                while (resources.hasMoreElements()) {
+                    try {
+                        final File file = new File(URLDecoder.decode(resources.nextElement().getPath(), "UTF-8"));
+                        //System.out.println(file);
+                        //System.out.println(Arrays.toString(file.listFiles()));
+                        if (!file.isFile()) {
+                            directories.push(file);
+                        } else {
+                            addColorMapClass(packageName, file);
+                        }
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
                 }
-                final File[] files = dir.listFiles();
-                if (files == null) {
-                    continue;
+                while (!directories.empty()) {
+                    final File dir = directories.pop();
+                    if (dir == null) {
+                        continue;
+                    }
+                    final File[] files = dir.listFiles();
+                    if (files == null) {
+                        continue;
+                    }
+                    for (final File file : files) {
+                        if (!file.isFile()) {
+                            directories.push(file);
+                        } else {
+                            addColorMapClass(packageName, file);
+                        }
+                    }
                 }
-                for (final File file : files) {
-                    if (file.isDirectory()) {
-                        directories.push(file);
-                    } else {
+            } else {
+                try (final ZipInputStream jar = new JarInputStream(codeSource.openStream())) {
+                    ZipEntry ze;
+                    while ((ze = jar.getNextEntry()) != null) {
+                        final File file = new File(ze.toString());
+                        if(!file.toString().endsWith(".class") || file.toString().length() < packagePath.length() || !file.toString().contains(packageName.toString())){
+                            continue;
+                        }
+
                         addColorMapClass(packageName, file);
                     }
                 }
             }
+
+
         }
     }
 
     @SuppressWarnings("unchecked")
     private static void addColorMapClass(final File packageName, final File file) throws ClassNotFoundException {
+
         final Class<?> colorMap = Class.forName(
                 file
                         .toString()
