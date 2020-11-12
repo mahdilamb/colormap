@@ -2,6 +2,9 @@ package net.mahdilamb.colormap.utils;
 
 import net.mahdilamb.colormap.color.Color;
 
+/**
+ * A series of static methods for working with Colors.
+ */
 public final class ColorUtils {
     private ColorUtils() {
     }

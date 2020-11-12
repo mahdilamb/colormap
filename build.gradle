@@ -17,3 +17,8 @@ task swingDemo(type: JavaExec, dependsOn: ['testClasses']) {
 
     main = "net.mahdilamb.colormap.tests.ColorMapTest"
 }
+task generateReadme(type: JavaExec, dependsOn: ['testClasses']) {
+    classpath sourceSets.test.runtimeClasspath
+
+    main = "net.mahdilamb.colormap.tests.GenerateReadme"
+}

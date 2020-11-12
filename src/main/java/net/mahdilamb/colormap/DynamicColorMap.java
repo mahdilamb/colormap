@@ -3,17 +3,30 @@ package net.mahdilamb.colormap;
 
 import net.mahdilamb.colormap.color.Color;
 
+import java.util.Objects;
+
 /**
- * colormap that can be changed
+ * Colormap that can be changed
  */
 public final class DynamicColorMap extends ColorMap {
     private ColorMap currentColormap;
 
+    /**
+     * Construct a dynamic colormap
+     *
+     * @param colorMap The initial colormap. Should not be {@code null}
+     */
     public DynamicColorMap(ColorMap colorMap) {
         setColorMap(colorMap);
     }
 
+    /**
+     * Set the current colormap.
+     *
+     * @param newColorMap Thew new color map.
+     */
     public void setColorMap(ColorMap newColorMap) {
+        Objects.requireNonNull(newColorMap);
         definedColorNodes.clear();
         definedColorNodes.putAll(newColorMap.definedColorNodes);
 

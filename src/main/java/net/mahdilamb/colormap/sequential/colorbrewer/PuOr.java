@@ -7,7 +7,8 @@ import net.mahdilamb.colormap.color.Color;
 
 @NewColorMap(type = ColorMapType.DIVERGING, name = "PuOr")
 public final class PuOr extends LinearColorMap {
-    public PuOr(){super(
+    public PuOr() {
+        super(
                 new Color(127, 59, 8),
                 new Color(179, 88, 6),
                 new Color(224, 130, 20),

@@ -7,7 +7,8 @@ import net.mahdilamb.colormap.color.Color;
 
 @NewColorMap(type = ColorMapType.DIVERGING, name = "SmoothCoolWarm")
 public final class SmoothCoolWarm extends LinearColorMap {
-    public SmoothCoolWarm(){super(
+    public SmoothCoolWarm() {
+        super(
                 new Color(0.338999030442358f, 0.290177126281036f, 0.762712567787502f),
                 new Color(0.343207654143344f, 0.297250670551253f, 0.768868415518558f),
                 new Color(0.347417047891218f, 0.304305324276927f, 0.774961782940433f),

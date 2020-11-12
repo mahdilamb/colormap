@@ -34,6 +34,11 @@ public abstract class ColorMap {
             color.setColor(newColor);
         }
 
+        /**
+         * Set the value of this node
+         *
+         * @param value Value to set this node to.
+         */
         public void setValue(final Double value) {
             if (Objects.equals(value, this.value)) {
                 return;
@@ -55,6 +60,9 @@ public abstract class ColorMap {
             return String.format("%s at %.3f", color.toString(), value);
         }
 
+        /**
+         * Remove this node from its colormap.
+         */
         public void remove() {
             colorMap.currentNodes.remove(this);
             if (colorMap.currentMinValue <= value) {
@@ -65,10 +73,16 @@ public abstract class ColorMap {
             }
         }
 
+        /**
+         * @return The color of the node
+         */
         public final Color getColor() {
             return color;
         }
 
+        /**
+         * @return The value of the node.
+         */
         public final Double getValue() {
             return value;
         }
@@ -460,10 +474,15 @@ public abstract class ColorMap {
         colorMaps.put(colorMapName, colorMapClass);
     }
 
-    /**
-     * convenience method to get colormap through java reflection
-     */
 
+    /**
+     * Convenience method to get colormap through java reflection
+     *
+     * @param colormapType
+     * @param colormapName
+     * @param isReversed
+     * @return
+     */
     public static ColorMap getColorMap(final String colormapType, final String colormapName, final boolean isReversed) {
         final Class<?> colormapClass;
         final String requestedClass = String.format("%s.%s", colormapType == null ? "*" : colormapType.toLowerCase(), colormapName.toLowerCase());
@@ -578,7 +597,6 @@ public abstract class ColorMap {
 
     public static Set<String> listDefaultColorMaps() throws IOException, ClassNotFoundException {
         cacheDefaultColorMaps();
-
         return defaultColorMaps;
     }
 
