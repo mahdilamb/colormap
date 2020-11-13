@@ -14,89 +14,6 @@ import java.io.IOException;
 
 @SuppressWarnings("unchecked")
 public class ColorMapTest {
-    public static void main(String... args) throws IOException, ClassNotFoundException {
-        final JFrame frame = new JFrame();
-
-        final DynamicColorMap cmap = new DynamicColorMap(new Viridis());
-        frame.getContentPane().setLayout(new GridBagLayout());
-        final JPanel colors = new JPanel(new GridLayout(10, 10));
-        colors.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                final ColorLabel selected = (ColorLabel) colors.getComponentAt(e.getX(), e.getY());
-
-                if (e.getButton() == 3 && colors.getComponentAt(e.getX(), e.getY()) instanceof ColorLabel) {
-                    selected.color.remove();
-                    colors.remove(selected);
-                    colors.repaint();
-
-                } else if (e.getButton() == 1 && e.getClickCount() == 2) {
-                    String inputValue = JOptionPane.showInputDialog("Please input a value");
-                    try {
-                        final Double newValue = Double.parseDouble(inputValue);
-                        selected.color.setValue(newValue);
-                        selected.setText(String.format("%.2f", newValue));
-                    } catch (Exception exception) {
-                        exception.printStackTrace();
-                    }
-                }
-            }
-        });
-        final GridBagConstraints gbc = new GridBagConstraints();
-        gbc.fill = GridBagConstraints.BOTH;
-        gbc.gridx = 0;
-        frame.add(colors, gbc);
-        final JPanel colorTools = new JPanel(new GridBagLayout());
-        frame.add(colorTools, gbc);
-        final DefaultComboBoxModel<ColorMap> cbModel = new DefaultComboBoxModel<>();
-        final JComboBox<ColorMap> cb = new JComboBox<>(cbModel);
-        cb.setRenderer(new ColorMapCellRenderer());
-
-        colorTools.add(cb);
-        for (final String cmapName : ColorMap.listDefaultColorMaps()) {
-            cbModel.addElement(ColorMap.getColorMap(cmapName));
-            if (cmapName.compareTo("SEQUENTIAL.Viridis") == 0) {
-                cb.setSelectedIndex(cbModel.getSize() - 1);
-            }
-        }
-        for (double i = 0; i <= 1; i += 0.01) {
-            colors.add(new ColorLabel(i, cmap));
-        }
-        //FormInput<Double> valInput = new DoubleVariable(0).factory();
-
-        //colorTools.add(valInput.getComponent());
-				/*JButton btn = new JButton("Add");
-				btn.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						MantisUtils.edtTaskInvokeLater(()->{
-							colors.add(new net.mahdilamb.test.ColorLabel(valInput.getValidatedValue(),cmap));
-							valInput.setValue("");
-							frame.pack();
-						});
-					}
-				});
-				btn.setEnabled(false);
-				colorTools.add(btn);*/
-        final JCheckBox reversed = new JCheckBox("reverse?");
-        reversed.addActionListener(e -> cmap.setReversed(((JCheckBox) e.getSource()).isSelected()));
-        colorTools.add(reversed);
-				/*valInput.addInputChangeListener(new MantisInputChangeListener<Double>() {
-					@Override
-					public void inputChanged(MantisInputChangeListener<Double> source, Object value, Double validatedValue, boolean isValid) {
-						btn.setEnabled(isValid);
-					}
-				});*/
-
-        cb.addActionListener(e -> {
-            cmap.setColorMap((ColorMap) ((JComboBox<ColorMap>) e.getSource()).getSelectedItem());
-            cmap.setReversed(reversed.isSelected());
-        });
-        frame.pack();
-        frame.setVisible(true);
-
-    }
-
     static class ColorMapCellRenderer implements ListCellRenderer<ColorMap> {
         private final DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
 
@@ -160,4 +77,88 @@ public class ColorMapTest {
 
         }
     }
+    public static void main(String... args) {
+        final JFrame frame = new JFrame();
+
+        final DynamicColorMap cmap = new DynamicColorMap(new Viridis());
+        frame.getContentPane().setLayout(new GridBagLayout());
+        final JPanel colors = new JPanel(new GridLayout(10, 10));
+        colors.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                final ColorLabel selected = (ColorLabel) colors.getComponentAt(e.getX(), e.getY());
+
+                if (e.getButton() == 3 && colors.getComponentAt(e.getX(), e.getY()) instanceof ColorLabel) {
+                    selected.color.remove();
+                    colors.remove(selected);
+                    colors.repaint();
+
+                } else if (e.getButton() == 1 && e.getClickCount() == 2) {
+                    String inputValue = JOptionPane.showInputDialog("Please input a value");
+                    try {
+                        final Double newValue = Double.parseDouble(inputValue);
+                        selected.color.setValue(newValue);
+                        selected.setText(String.format("%.2f", newValue));
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                }
+            }
+        });
+        final GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.gridx = 0;
+        frame.add(colors, gbc);
+        final JPanel colorTools = new JPanel(new GridBagLayout());
+        frame.add(colorTools, gbc);
+        final DefaultComboBoxModel<ColorMap> cbModel = new DefaultComboBoxModel<>();
+        final JComboBox<ColorMap> cb = new JComboBox<>(cbModel);
+        cb.setRenderer(new ColorMapCellRenderer());
+
+        colorTools.add(cb);
+        for (final String cmapName : ColorMap.listDefaultColorMaps()) {
+            cbModel.addElement(ColorMap.getColorMap(cmapName));
+            if (cmapName.compareTo("SEQUENTIAL.Viridis") == 0) {
+                cb.setSelectedIndex(cbModel.getSize() - 1);
+            }
+        }
+        for (double i = 0; i <= 1; i += 0.05) {
+            colors.add(new ColorLabel(i, cmap));
+        }
+        //FormInput<Double> valInput = new DoubleVariable(0).factory();
+
+        //colorTools.add(valInput.getComponent());
+				/*JButton btn = new JButton("Add");
+				btn.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						MantisUtils.edtTaskInvokeLater(()->{
+							colors.add(new net.mahdilamb.test.ColorLabel(valInput.getValidatedValue(),cmap));
+							valInput.setValue("");
+							frame.pack();
+						});
+					}
+				});
+				btn.setEnabled(false);
+				colorTools.add(btn);*/
+        final JCheckBox reversed = new JCheckBox("reverse?");
+        reversed.addActionListener(e -> cmap.setReversed(((JCheckBox) e.getSource()).isSelected()));
+        colorTools.add(reversed);
+				/*valInput.addInputChangeListener(new MantisInputChangeListener<Double>() {
+					@Override
+					public void inputChanged(MantisInputChangeListener<Double> source, Object value, Double validatedValue, boolean isValid) {
+						btn.setEnabled(isValid);
+					}
+				});*/
+
+        cb.addActionListener(e -> {
+            cmap.setColorMap((ColorMap) ((JComboBox<ColorMap>) e.getSource()).getSelectedItem());
+            cmap.setReversed(reversed.isSelected());
+        });
+        frame.pack();
+        frame.setVisible(true);
+
+    }
+
+
 }

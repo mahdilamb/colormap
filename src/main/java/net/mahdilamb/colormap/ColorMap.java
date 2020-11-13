@@ -247,7 +247,7 @@ public abstract class ColorMap {
             return getNaNColor().clone();
         } else {
 
-            if (currentNodes.size() == 0) {
+            if (currentNodes.size() <= 1) {
                 return getColorAt(.5).clone();
             } else if (value < getLowValue()) {
                 return getLowColor().clone();
@@ -560,8 +560,6 @@ public abstract class ColorMap {
                 while (resources.hasMoreElements()) {
                     try {
                         final File file = new File(URLDecoder.decode(resources.nextElement().getPath(), "UTF-8"));
-                        //System.out.println(file);
-                        //System.out.println(Arrays.toString(file.listFiles()));
                         if (!file.isFile()) {
                             directories.push(file);
                         } else {
