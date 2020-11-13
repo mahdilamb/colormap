@@ -14,13 +14,14 @@ import static org.junit.Assert.*;
 
 
 public class JUnitTests {
-    static final LinearColorMap grays = new LinearColorMap();
+    static final LinearColorMap grays = new LinearColorMap(
+            Color.getColor("black"),
+            Color.getColor("white")
+    );
     static final Map<Integer, ColorMap.ColorMapNode> colors = new TreeMap<>();
     static final int maxRange = 255;
 
     static {
-        grays.addColor(Color.getColor("black"));
-        grays.addColor(Color.getColor("white"));
         for (int i = 0; i <= maxRange; i++) {
             colors.put(i, grays.getColorFromValue(((float) i) / maxRange));
         }
