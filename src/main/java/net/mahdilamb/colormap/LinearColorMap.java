@@ -16,7 +16,15 @@ public class LinearColorMap extends ColorMap {
     public LinearColorMap(final Color... colors) {
         addColors(colors);
     }
-
+    /**
+     * Copy/converter constructor
+     *
+     * @param other the colormap to copy/convert from
+     */
+    protected LinearColorMap(final CategoricalColorMap other) {
+        definedColorNodes.putAll(other.definedColorNodes);
+        colorMapColors.addAll(other.colorMapColors);
+    }
     @Override
     public Color colorAt(final Double value) {
         if (getColorNodes().containsKey(value)) {
