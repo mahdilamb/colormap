@@ -16,6 +16,7 @@ public class CategoricalColorMap extends ColorMap {
     public CategoricalColorMap(final Color... colors) {
         addColors(colors);
     }
+
     /**
      * Copy/converter constructor
      *
@@ -25,6 +26,7 @@ public class CategoricalColorMap extends ColorMap {
         definedColorNodes.putAll(other.definedColorNodes);
         colorMapColors.addAll(other.colorMapColors);
     }
+
     @Override
     public Color colorAt(Double value) {
         if (getColorNodes().containsKey(value)) {
