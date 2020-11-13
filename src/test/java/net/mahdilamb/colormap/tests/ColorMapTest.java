@@ -10,7 +10,6 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
 
 @SuppressWarnings("unchecked")
 public class ColorMapTest {
