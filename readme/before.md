@@ -1,4 +1,4 @@
-[![Build Status](https://github.com/mahdilamb/colormap/workflows/Java%20CI%20with%20Gradle/badge.svg)](https://github.com/mahdilamb/colormap/actions?query=workflow%3A%22Java+CI+with+Gradle%22)
+![Java CI with Gradle](https://github.com/mahdilamb/colormap/workflows/Java%20CI%20with%20Gradle/badge.svg)
 
 # Colormap
 This is a Java-based package that enables the easy creation of linear and categorical colormaps. 
@@ -27,7 +27,7 @@ public class Test {
 ```
 
 The getColorMap method is case insensitive and can also be used to obtain the colormap reversed (e.g. `Viridis.reversed`). The `ColorMap.listDefaultColorMaps()` will provide a list of all the default colormaps available.
-T
+
 ## Color
 The Color class is provided as a framework-agnostic way of generating colors. It includes String constants that represent CSS4, AWT and [Tableau](https://www.tableau.com/) colors.
 
