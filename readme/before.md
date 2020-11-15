@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/mahdilamb/colormap.svg?token=fWb9xzvbfoQpG3hUJ2qH&branch=master)](https://travis-ci.com/mahdilamb/colormap)
+[![Build Status](https://github.com/mahdilamb/colormap/workflows/Java%20CI%20with%20Gradle/badge.svg)](https://github.com/mahdilamb/colormap/actions?query=workflow%3A%22Java+CI+with+Gradle%22)
 
 # Colormap
 This is a Java-based package that enables the easy creation of linear and categorical colormaps. 
