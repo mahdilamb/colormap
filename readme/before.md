@@ -27,7 +27,7 @@ public class Test {
 ```
 
 The getColorMap method is case insensitive and can also be used to obtain the colormap reversed (e.g. `Viridis.reversed`). The `ColorMap.listDefaultColorMaps()` will provide a list of all the default colormaps available.
-T
+
 ## Color
 The Color class is provided as a framework-agnostic way of generating colors. It includes String constants that represent CSS4, AWT and [Tableau](https://www.tableau.com/) colors.
 
