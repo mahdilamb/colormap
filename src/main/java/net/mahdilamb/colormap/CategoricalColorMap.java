@@ -7,7 +7,7 @@ import net.mahdilamb.colormap.color.Color;
  *
  * @author mahdi
  */
-public class CategoricalColorMap extends ColorMap {
+public class CategoricalColorMap extends ColorMapImpl {
     /**
      * Construct a categorical color map with the provided colors
      *
@@ -22,12 +22,12 @@ public class CategoricalColorMap extends ColorMap {
      *
      * @param other the colormap to copy/convert from
      */
-    protected CategoricalColorMap(final ColorMap other) {
+    protected CategoricalColorMap(final ColorMapImpl other) {
         super(other);
     }
 
     @Override
-    public Color colorAt(Double value) {
+    public Color colorAt(double value) {
         if (getColorNodes().containsKey(value)) {
             return getColorNodes().get(value).clone();
         } else {

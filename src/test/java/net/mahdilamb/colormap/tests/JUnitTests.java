@@ -1,11 +1,10 @@
 package net.mahdilamb.colormap.tests;
 
-import net.mahdilamb.colormap.ColorMap;
+import net.mahdilamb.colormap.ColorMapImpl;
 import net.mahdilamb.colormap.LinearColorMap;
 import net.mahdilamb.colormap.color.Color;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
@@ -18,7 +17,7 @@ public class JUnitTests {
             Color.getColor("black"),
             Color.getColor("white")
     );
-    static final Map<Integer, ColorMap.ColorMapNode> colors = new TreeMap<>();
+    static final Map<Integer, ColorMapImpl.ColorMapNode> colors = new TreeMap<>();
     static final int maxRange = 255;
 
     static {
@@ -148,7 +147,7 @@ public class JUnitTests {
 
     @Test
     public void ensureDefaultColorMapsLoadTest() {
-        assertTrue(ColorMap.listDefaultColorMaps().size() > 0);
+        assertTrue(ColorMapImpl.listDefaultColorMaps().size() > 0);
     }
 
 }

@@ -10,7 +10,7 @@ The colormaps are autoranging so, in the example below, the color will change de
 Upper and lower bounds can be set to a color map using the `ColorMap.setLowValue(...)`  and `ColorMap.setHighValue(...)` methods. 
 
 ```
-import net.mahdilamb.colormap.ColorMap;
+import net.mahdilamb.colormap.ColorMapImpl;
 
 
 public class Test {

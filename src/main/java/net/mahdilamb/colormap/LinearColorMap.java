@@ -7,7 +7,7 @@ import static net.mahdilamb.colormap.utils.ColorUtils.lerp;
 /**
  * A colormap which linearly interpolates between colors in L*ab space.
  */
-public class LinearColorMap extends ColorMap {
+public class LinearColorMap extends ColorMapImpl {
     /**
      * Create a linear color map with the provided colors
      *
@@ -22,12 +22,12 @@ public class LinearColorMap extends ColorMap {
      *
      * @param other the colormap to copy/convert from
      */
-    public LinearColorMap(final ColorMap other) {
+    public LinearColorMap(final ColorMapImpl other) {
         super(other);
     }
 
     @Override
-    public Color colorAt(final Double value) {
+    public Color colorAt(final double value) {
         if (getColorNodes().containsKey(value)) {
             return getColorNodes().get(value).clone();
         } else {
