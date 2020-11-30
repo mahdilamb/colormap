@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.net.URLDecoder;
+import java.time.OffsetTime;
 import java.util.*;
 import java.util.jar.JarInputStream;
 import java.util.zip.ZipEntry;
@@ -163,6 +164,29 @@ public abstract class ColorMap {
      * whether the color map is reversed
      */
     boolean isReversed = false;
+
+    ColorMap() {
+
+    }
+
+    /**
+     * Copy constructor - copies all elements of a colormap except dynamic elements
+     * (e.g. current mapped nodes, current high and low value)
+     *
+     * @param other colormap to copy
+     */
+    public ColorMap(final ColorMap other) {
+        isReversed = other.isReversed;
+        highColor = other.highColor;
+        lowColor = other.lowColor;
+        NaNColor = other.NaNColor;
+        highValue = other.highValue;
+        lowValue = other.lowValue;
+
+        definedColorNodes.putAll(other.definedColorNodes);
+        colorMapColors.addAll(other.colorMapColors);
+
+    }
 
     /**
      * Add color node based on a specified position

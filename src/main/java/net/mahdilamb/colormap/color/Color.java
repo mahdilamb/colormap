@@ -1006,7 +1006,7 @@ public class Color implements Cloneable {
      * @param original the original color
      */
     public Color(final Color original) {
-        this(original.rgba);
+        this(original.rgba.clone());
     }
 
     /**
