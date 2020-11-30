@@ -1,5 +1,6 @@
 package net.mahdilamb.colormap.tests;
 
+import net.mahdilamb.colormap.ColorMap;
 import net.mahdilamb.colormap.ColorMapImpl;
 
 import javax.imageio.ImageIO;
@@ -29,8 +30,8 @@ public final class GenerateReadme {
         } else {
             Files.createDirectory(out.toPath());
         }
-        ColorMapImpl.listDefaultColorMaps().forEach(cmapName -> {
-            final ColorMapImpl cmap = ColorMapImpl.getColorMap(cmapName);
+        ColorMap.listDefaultColorMaps().forEach(cmapName -> {
+            final ColorMap cmap = ColorMap.getColorMap(cmapName);
             final BufferedImage image = new BufferedImage(192, 20, BufferedImage.TYPE_INT_ARGB);
             for (int x = 0; x < image.getWidth(); ++x) {
                 final int rgb = cmap.colorAt(((double) x) / image.getWidth()).asDecimal();

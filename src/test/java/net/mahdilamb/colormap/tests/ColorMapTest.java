@@ -1,5 +1,6 @@
 package net.mahdilamb.colormap.tests;
 
+import net.mahdilamb.colormap.ColorMap;
 import net.mahdilamb.colormap.ColorMapImpl;
 import net.mahdilamb.colormap.DynamicColorMap;
 import net.mahdilamb.colormap.color.Color;
@@ -13,11 +14,11 @@ import java.awt.event.MouseEvent;
 
 @SuppressWarnings("unchecked")
 public class ColorMapTest {
-    static class ColorMapCellRenderer implements ListCellRenderer<ColorMapImpl> {
+    static class ColorMapCellRenderer implements ListCellRenderer<ColorMap> {
         private final DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
 
         @Override
-        public Component getListCellRendererComponent(JList<? extends ColorMapImpl> list, ColorMapImpl value, int index,
+        public Component getListCellRendererComponent(JList<? extends ColorMap> list, ColorMap value, int index,
                                                       boolean isSelected, boolean cellHasFocus) {
             final JLabel renderer = (JLabel) defaultRenderer.getListCellRendererComponent(list, value.toString().split("\\.").length == 3 ? value.toString().replace(".Reversed", "") : value.toString(), index, isSelected, cellHasFocus);
             renderer.setIcon(new ColorBar(list, value));
@@ -25,10 +26,10 @@ public class ColorMapTest {
         }
 
         static class ColorBar implements Icon {
-            final ColorMapImpl colorMap;
-            final JList<? extends ColorMapImpl> list;
+            final ColorMap colorMap;
+            final JList<? extends ColorMap> list;
 
-            public ColorBar(JList<? extends ColorMapImpl> list, ColorMapImpl colorMap) {
+            public ColorBar(JList<? extends ColorMap> list, ColorMap colorMap) {
                 this.colorMap = colorMap;
                 this.list = list;
             }
@@ -110,13 +111,13 @@ public class ColorMapTest {
         frame.add(colors, gbc);
         final JPanel colorTools = new JPanel(new GridBagLayout());
         frame.add(colorTools, gbc);
-        final DefaultComboBoxModel<ColorMapImpl> cbModel = new DefaultComboBoxModel<>();
-        final JComboBox<ColorMapImpl> cb = new JComboBox<>(cbModel);
+        final DefaultComboBoxModel<ColorMap> cbModel = new DefaultComboBoxModel<>();
+        final JComboBox<ColorMap> cb = new JComboBox<>(cbModel);
         cb.setRenderer(new ColorMapCellRenderer());
 
         colorTools.add(cb);
-        for (final String cmapName : ColorMapImpl.listDefaultColorMaps()) {
-            cbModel.addElement(ColorMapImpl.getColorMap(cmapName));
+        for (final String cmapName : ColorMap.listDefaultColorMaps()) {
+            cbModel.addElement(ColorMap.getColorMap(cmapName));
             if (cmapName.compareTo("SEQUENTIAL.Viridis") == 0) {
                 cb.setSelectedIndex(cbModel.getSize() - 1);
             }
