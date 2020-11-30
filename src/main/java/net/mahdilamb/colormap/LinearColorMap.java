@@ -22,9 +22,8 @@ public class LinearColorMap extends ColorMap {
      *
      * @param other the colormap to copy/convert from
      */
-    protected LinearColorMap(final CategoricalColorMap other) {
-        definedColorNodes.putAll(other.definedColorNodes);
-        colorMapColors.addAll(other.colorMapColors);
+    public LinearColorMap(final ColorMap other) {
+        super(other);
     }
 
     @Override
@@ -43,5 +42,10 @@ public class LinearColorMap extends ColorMap {
             return outColor;
 
         }
+    }
+
+    @Override
+    public LinearColorMap clone() {
+        return new LinearColorMap(this);
     }
 }

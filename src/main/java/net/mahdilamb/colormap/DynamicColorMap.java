@@ -54,4 +54,9 @@ public final class DynamicColorMap extends ColorMap {
     public Color colorAt(Double value) {
         return currentColormap.colorAt(value);
     }
+
+    @Override
+    public DynamicColorMap clone() {
+        return new DynamicColorMap(this);
+    }
 }

@@ -31,11 +31,10 @@ repositories {
     mavenCentral()
 }
 
-version = '0.9.25'
+version = '0.9.26'
 group = 'net.mahdilamb'
 
 dependencies {
-
     testImplementation 'junit:junit:4.13'
 }
 task swingDemo(type: JavaExec, dependsOn: ['testClasses']) {

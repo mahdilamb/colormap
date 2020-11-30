@@ -22,9 +22,8 @@ public class CategoricalColorMap extends ColorMap {
      *
      * @param other the colormap to copy/convert from
      */
-    protected CategoricalColorMap(final LinearColorMap other) {
-        definedColorNodes.putAll(other.definedColorNodes);
-        colorMapColors.addAll(other.colorMapColors);
+    protected CategoricalColorMap(final ColorMap other) {
+        super(other);
     }
 
     @Override
@@ -36,6 +35,11 @@ public class CategoricalColorMap extends ColorMap {
             final Color lower = getColorNodes().get(lowerVal);
             return lower.clone();
         }
+    }
+
+    @Override
+    public CategoricalColorMap clone() {
+        return new CategoricalColorMap(this);
     }
 
     // modified so that last element repeats and used as last element rather than only upper bound

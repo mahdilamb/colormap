@@ -18,7 +18,7 @@ import java.util.zip.ZipInputStream;
  *
  * @author mahdilamb
  */
-public abstract class ColorMap {
+public abstract class ColorMap implements Cloneable {
     /**
      * A node that belongs to ColorMap, primarily defined by its value
      */
@@ -175,7 +175,7 @@ public abstract class ColorMap {
      *
      * @param other colormap to copy
      */
-    public ColorMap(final ColorMap other) {
+    ColorMap(final ColorMap other) {
         isReversed = other.isReversed;
         highColor = other.highColor;
         lowColor = other.lowColor;
@@ -289,7 +289,7 @@ public abstract class ColorMap {
      * @param value Value to get the associated Color from
      * @return The associated Color
      */
-    public abstract Color colorAt(Double value);
+    public abstract Color colorAt(Double value) ;
 
     /**
      * Get the color node from a value
@@ -678,5 +678,6 @@ public abstract class ColorMap {
         }
         return defaultColorMaps;
     }
-
+    @Override
+    public abstract ColorMap clone();
 }

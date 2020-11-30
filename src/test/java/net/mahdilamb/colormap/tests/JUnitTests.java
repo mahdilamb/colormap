@@ -147,7 +147,7 @@ public class JUnitTests {
     }
 
     @Test
-    public void ensureDefaultColorMapsLoadTest() throws IOException, ClassNotFoundException {
+    public void ensureDefaultColorMapsLoadTest() {
         assertTrue(ColorMap.listDefaultColorMaps().size() > 0);
     }
 
