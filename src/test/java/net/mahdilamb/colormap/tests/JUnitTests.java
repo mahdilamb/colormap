@@ -1,5 +1,6 @@
 package net.mahdilamb.colormap.tests;
 
+import net.mahdilamb.colormap.ColorMap;
 import net.mahdilamb.colormap.ColorMapImpl;
 import net.mahdilamb.colormap.LinearColorMap;
 import net.mahdilamb.colormap.color.Color;
@@ -147,7 +148,7 @@ public class JUnitTests {
 
     @Test
     public void ensureDefaultColorMapsLoadTest() {
-        assertTrue(ColorMapImpl.listDefaultColorMaps().size() > 0);
+        assertTrue(ColorMap.listDefaultColorMaps().size() > 0);
     }
 
 }
