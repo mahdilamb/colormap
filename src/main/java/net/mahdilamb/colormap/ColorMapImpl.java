@@ -13,9 +13,8 @@ import java.util.zip.ZipInputStream;
 
 /**
  * Abstract color map that allows or the definition of a color map that is evenly spaced, or spaced at defined locations apart.
- *
  */
-public abstract class ColorMapImpl implements ColorMap  {
+public abstract class ColorMapImpl implements ColorMap {
     /**
      * All registered colormaps
      */
@@ -582,4 +581,7 @@ public abstract class ColorMapImpl implements ColorMap  {
         allColors.addAll(currentColors.keySet());
         return allColors.iterator();
     }
+
+    @Override
+    public abstract ColorMap clone();
 }
