@@ -11,7 +11,7 @@ import java.util.Set;
 /**
  * Interface for all colormaps
  */
-public interface ColorMap extends Cloneable, Iterable<Double> {
+public interface ColorMap extends Iterable<Double> {
 
     /**
      * Get the Color at a specified value. Does not add the value to the color map. Primary way to show a graphical representation of this color map.
@@ -141,5 +141,9 @@ public interface ColorMap extends Cloneable, Iterable<Double> {
         return Collections.unmodifiableSet(ColorMapImpl.defaultColorMaps);
     }
 
+    /**
+     *
+     * @return a deep copy of this color map
+     */
     ColorMap clone();
 }
