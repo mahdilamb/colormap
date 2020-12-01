@@ -14,9 +14,8 @@ import java.util.zip.ZipInputStream;
 /**
  * Abstract color map that allows or the definition of a color map that is evenly spaced, or spaced at defined locations apart.
  *
- * @author mahdilamb
  */
-public abstract class ColorMapImpl implements ColorMap, Cloneable {
+public abstract class ColorMapImpl implements ColorMap  {
     /**
      * All registered colormaps
      */
@@ -25,6 +24,7 @@ public abstract class ColorMapImpl implements ColorMap, Cloneable {
      * A subset of all the color maps - those that are the defaults.
      */
     static final NavigableSet<String> defaultColorMaps = new TreeSet<>();
+
     /**
      * A node that belongs to ColorMap, primarily defined by its value
      */
@@ -571,6 +571,15 @@ public abstract class ColorMapImpl implements ColorMap, Cloneable {
         }
 
     }
+
+    /**
+     * @return an iterator over the positions where there are colors
+     */
     @Override
-    public abstract ColorMap clone();
+    public final Iterator<Double> iterator() {
+        calculateColors();
+        final NavigableSet<Double> allColors = new TreeSet<>(definedColorNodes.keySet());
+        allColors.addAll(currentColors.keySet());
+        return allColors.iterator();
+    }
 }

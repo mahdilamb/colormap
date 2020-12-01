@@ -11,7 +11,7 @@ import java.util.Set;
 /**
  * Interface for all colormaps
  */
-public interface ColorMap {
+public interface ColorMap extends Cloneable, Iterable<Double> {
 
     /**
      * Get the Color at a specified value. Does not add the value to the color map. Primary way to show a graphical representation of this color map.
@@ -22,13 +22,13 @@ public interface ColorMap {
     Color colorAt(double value);
 
     /**
-     *
      * @return whether the colormap is reversed
      */
     boolean isReversed();
 
     /**
      * Set the color map as reversed
+     *
      * @param isReversed whether the colormap should be set as reversed
      */
     void setReversed(boolean isReversed);
@@ -43,6 +43,7 @@ public interface ColorMap {
     default Color getColorAt(final double value) {
         return colorAt(isReversed() ? 1 - value : value);
     }
+
     /**
      * Register a color map so that it can be found by {@link ColorMap#getColorMap(String)}
      *
@@ -124,7 +125,6 @@ public interface ColorMap {
     }
 
 
-
     /**
      * Get a String list of all the default colormaps.
      *
@@ -140,4 +140,6 @@ public interface ColorMap {
         }
         return Collections.unmodifiableSet(ColorMapImpl.defaultColorMaps);
     }
+
+    ColorMap clone();
 }

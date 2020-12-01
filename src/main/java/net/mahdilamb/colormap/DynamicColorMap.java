@@ -9,7 +9,7 @@ import java.util.Objects;
  * Colormap that can be changed
  */
 public final class DynamicColorMap extends ColorMapImpl {
-    private ColorMapImpl currentColormap;
+    private ColorMap currentColormap;
 
     /**
      * Construct a dynamic colormap
@@ -25,7 +25,7 @@ public final class DynamicColorMap extends ColorMapImpl {
      *
      * @param newColorMap Thew new color map.
      */
-    public void setColorMap(ColorMapImpl newColorMap) {
+    public final void setColorMap(ColorMapImpl newColorMap) {
         Objects.requireNonNull(newColorMap);
         definedColorNodes.clear();
         definedColorNodes.putAll(newColorMap.definedColorNodes);
@@ -51,12 +51,12 @@ public final class DynamicColorMap extends ColorMapImpl {
     }
 
     @Override
-    public Color colorAt(double value) {
+    public final Color colorAt(double value) {
         return currentColormap.colorAt(value);
     }
 
     @Override
-    public DynamicColorMap clone() {
+    public final DynamicColorMap clone() {
         return new DynamicColorMap(this);
     }
 }
