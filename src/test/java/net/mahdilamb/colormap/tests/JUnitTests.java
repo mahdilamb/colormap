@@ -1,8 +1,8 @@
 package net.mahdilamb.colormap.tests;
 
 import net.mahdilamb.colormap.ColorMap;
-import net.mahdilamb.colormap.ColorMapImpl;
 import net.mahdilamb.colormap.LinearColorMap;
+import net.mahdilamb.colormap.ColorMapNode;
 import net.mahdilamb.colormap.color.Color;
 import org.junit.Test;
 
@@ -15,10 +15,10 @@ import static org.junit.Assert.*;
 
 public class JUnitTests {
     static final LinearColorMap grays = new LinearColorMap(
-            Color.getColor("black"),
-            Color.getColor("white")
+            Color.get("black"),
+            Color.get("white")
     );
-    static final Map<Integer, ColorMapImpl.ColorMapNode> colors = new TreeMap<>();
+    static final Map<Integer, ColorMapNode> colors = new TreeMap<>();
     static final int maxRange = 255;
 
     static {
@@ -29,12 +29,12 @@ public class JUnitTests {
 
     @Test
     public void greyColorMapShouldStartAtBlackTest() {
-        assertEquals(colors.get(0).getColor(), Color.getColor("black"));
+        assertEquals(colors.get(0).getColor(), Color.get("black"));
     }
 
     @Test
     public void greyColorMapShouldEndAtWhiteTest() {
-        assertEquals(colors.get(maxRange).getColor(), Color.getColor("white"));
+        assertEquals(colors.get(maxRange).getColor(), Color.get("white"));
     }
 
     @Test
@@ -129,17 +129,17 @@ public class JUnitTests {
     @Test
     public void testRGBToLabIsCorrectTest() {
         final double precision = 5e-2;
-        final Color red = Color.getColor("red");
+        final Color red = Color.get("red");
         final float[] redLab = red.asLab();
         assertEquals(53.241, redLab[0], precision);
         assertEquals(80.092, redLab[1], precision);
         assertEquals(67.203, redLab[2], precision);
-        final Color green = Color.getColor("lime");
+        final Color green = Color.get("lime");
         final float[] greenLab = green.asLab();
         assertEquals(87.735, greenLab[0], precision);
         assertEquals(-86.183, greenLab[1], precision);
         assertEquals(83.179, greenLab[2], precision);
-        final Color blue = Color.getColor("blue");
+        final Color blue = Color.get("blue");
         final float[] blueLab = blue.asLab();
         assertEquals(32.297, blueLab[0], precision);
         assertEquals(79.188, blueLab[1], precision);

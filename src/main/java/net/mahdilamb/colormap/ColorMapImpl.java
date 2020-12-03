@@ -26,102 +26,6 @@ public abstract class ColorMapImpl implements ColorMap {
 
 
     /**
-     * A node that belongs to ColorMap, primarily defined by its value
-     */
-    public static final class ColorMapNode {
-        private final Color color;
-        private final ColorMapImpl colorMap;
-        private Double value;
-
-        private ColorMapNode(final ColorMapImpl colorMap, final Color color, final Double value) {
-            this.colorMap = colorMap;
-            this.value = value;
-            this.color = color;
-        }
-
-        private void recalculate() {
-            final Color newColor = colorMap.calculateColor(value);
-            color.setColor(newColor);
-        }
-
-        /**
-         * Set the value of this node
-         *
-         * @param value Value to set this node to.
-         */
-        public void setValue(final Double value) {
-            if (Objects.equals(value, this.value)) {
-                return;
-            }
-            final Double oldValue = this.value;
-            this.value = value;
-            recalculate();
-
-            if (value <= colorMap.currentMinValue || oldValue != null && oldValue <= colorMap.currentMinValue) {
-                colorMap.recalculateMinValue();
-            }
-            if (value >= colorMap.currentMaxValue || oldValue != null && oldValue >= colorMap.currentMaxValue) {
-                colorMap.recalculateMaxValue();
-            }
-        }
-
-        @Override
-        public String toString() {
-            return String.format("%s at %.3f", color.toString(), value);
-        }
-
-        /**
-         * Remove this node from its colormap.
-         */
-        public void remove() {
-            colorMap.currentNodes.remove(this);
-            if (colorMap.currentMinValue <= value) {
-                colorMap.recalculateMinValue();
-            }
-            if (colorMap.currentMaxValue >= value) {
-                colorMap.recalculateMaxValue();
-            }
-        }
-
-        /**
-         * @return The color of the node
-         */
-        public final Color getColor() {
-            return color;
-        }
-
-        /**
-         * @return The value of the node.
-         */
-        public final Double getValue() {
-            return value;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            if (!super.equals(o)) return false;
-
-            ColorMapNode that = (ColorMapNode) o;
-
-            if (!Objects.equals(color, that.color)) return false;
-            if (!Objects.equals(colorMap, that.colorMap)) return false;
-            return Objects.equals(value, that.value);
-        }
-
-        @Override
-        public int hashCode() {
-            int result = super.hashCode();
-            result = 31 * result + (color != null ? color.hashCode() : 0);
-            result = 31 * result + (colorMap != null ? colorMap.hashCode() : 0);
-            result = 31 * result + (value != null ? value.hashCode() : 0);
-            return result;
-        }
-    }
-
-
-    /**
      * Map of colors with their respective positions.
      */
     final Map<Double, Color> definedColorNodes = new HashMap<>();
@@ -140,11 +44,11 @@ public abstract class ColorMapImpl implements ColorMap {
     /**
      * Current minimum value
      */
-    double currentMinValue = Double.MAX_VALUE;
+    transient double currentMinValue = Double.MAX_VALUE;
     /**
      * Current maximum value
      */
-    double currentMaxValue = Double.MIN_VALUE;
+    transient double currentMaxValue = Double.MIN_VALUE;
     /**
      * Lowest range of the color map
      */
@@ -277,12 +181,7 @@ public abstract class ColorMapImpl implements ColorMap {
         }
     }
 
-    /**
-     * Get the color node from a value
-     *
-     * @param value The value to get the associated node form
-     * @return The associated color node.
-     */
+    @Override
     public final ColorMapNode getColorFromValue(final double value) {
 
         if (value < currentMinValue || value > currentMaxValue) {
@@ -307,11 +206,7 @@ public abstract class ColorMapImpl implements ColorMap {
         return highValue == null ? currentMaxValue : highValue;
     }
 
-    /**
-     * Set the upper bound of this color map
-     *
-     * @param highValue The upper bound
-     */
+    @Override
     public final void setHighValue(final Double highValue) {
         if (this.highValue == null || !this.highValue.equals(highValue)) {
             this.highValue = highValue;
@@ -328,11 +223,7 @@ public abstract class ColorMapImpl implements ColorMap {
         return lowValue == null ? currentMinValue : lowValue;
     }
 
-    /**
-     * Set the lower bound of this color map
-     *
-     * @param lowValue Lower bound of this color map
-     */
+    @Override
     public final void setLowValue(final Double lowValue) {
         if (this.lowValue == null || !this.lowValue.equals(lowValue)) {
             this.lowValue = lowValue;
@@ -349,12 +240,7 @@ public abstract class ColorMapImpl implements ColorMap {
         return lowColor == null ? getColorAt(0d) : lowColor;
     }
 
-    /**
-     * Set the color to use if the value in a color map is lower than {@link ColorMapImpl#getLowValue()}.
-     * To disable this floor set {@link ColorMapImpl#getLowValue()} to {@code null}.
-     *
-     * @param lowColor The Color to provide if a value is lower than {@link ColorMapImpl#getLowValue()}
-     */
+    @Override
     public final void setLowColor(final Color lowColor) {
         if (!this.lowColor.equals(lowColor)) {
             this.lowColor = lowColor;
@@ -369,12 +255,7 @@ public abstract class ColorMapImpl implements ColorMap {
         return highColor == null ? getColorAt(1d) : highColor;
     }
 
-    /**
-     * Set the color to use if the value in a color map is greater than {@link ColorMapImpl#getHighValue()}.
-     * To disable this ceiling set {@link ColorMapImpl#getHighValue()} to {@code null}.
-     *
-     * @param highColor The Color to provide if a value is higher than {@link ColorMapImpl#getHighValue()}
-     */
+    @Override
     public final void setHighColor(final Color highColor) {
         if (!this.highColor.equals(highColor)) {
             this.highColor = highColor;
@@ -394,6 +275,7 @@ public abstract class ColorMapImpl implements ColorMap {
      *
      * @param NaNColor Color to use if the value is not a number.
      */
+    @Override
     public final void setNaNColor(final Color NaNColor) {
         if (!this.NaNColor.equals(NaNColor)) {
             this.NaNColor = NaNColor;
@@ -439,18 +321,18 @@ public abstract class ColorMapImpl implements ColorMap {
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         final NewColorMap annotation = getClass().getDeclaredAnnotation(NewColorMap.class);
         if (annotation != null) {
-            return String.format("%s.%s%s", annotation.type(), annotation.name(), isReversed ? ".Reversed" : "");
+            return String.format("Colormap {%s.%s%s}", annotation.type(), annotation.name(), isReversed ? ".Reversed" : "");
         }
-        return super.toString();
+        return String.format("Colormap {%s}", getClass().getSimpleName());
     }
 
     /**
      * Recalculates the current highest value (not Colormap ceiling)
      */
-    private void recalculateMaxValue() {
+    void recalculateMaxValue() {
         Double currentMaxValue = null;
 
         for (final ColorMapNode node : currentNodes) {
@@ -471,7 +353,7 @@ public abstract class ColorMapImpl implements ColorMap {
     /**
      * Recalculates the current lowest value (not Colormap floor)
      */
-    private void recalculateMinValue() {
+    void recalculateMinValue() {
         Double currentMinValue = null;
         for (final ColorMapNode node : currentNodes) {
             if (node.value == null) {
@@ -587,24 +469,24 @@ public abstract class ColorMapImpl implements ColorMap {
     public abstract ColorMap clone();
 
     @Override
-    public boolean equals(final Object o) {
+    public final boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof ColorMapImpl)) return false;
         final ColorMapImpl other = (ColorMapImpl) o;
-        return Double.compare(other.currentMinValue, currentMinValue) == 0 &&
+        return isReversed == other.isReversed &&
+                Double.compare(other.currentMinValue, currentMinValue) == 0 &&
                 Double.compare(other.currentMaxValue, currentMaxValue) == 0 &&
-                isReversed == other.isReversed &&
-                definedColorNodes.equals(other.definedColorNodes) &&
-                colorMapColors.equals(other.colorMapColors) &&
                 Objects.equals(lowValue, other.lowValue) &&
                 Objects.equals(highValue, other.highValue) &&
                 Objects.equals(NaNColor, other.NaNColor) &&
                 Objects.equals(lowColor, other.lowColor) &&
-                Objects.equals(highColor, other.highColor);
+                Objects.equals(highColor, other.highColor) &&
+                definedColorNodes.equals(other.definedColorNodes) &&
+                colorMapColors.equals(other.colorMapColors);
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         return Objects.hash(definedColorNodes, colorMapColors, currentMinValue, currentMaxValue, lowValue, highValue, NaNColor, lowColor, highColor, isReversed);
     }
 

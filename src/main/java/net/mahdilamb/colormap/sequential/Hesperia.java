@@ -270,7 +270,8 @@ public final class Hesperia extends LinearColorMap {
                 new Color(0.999992148744034f, 0.987855677272055f, 0.932994241085229f),
                 new Color(0.999997652879396f, 0.992010284109248f, 0.954691418579787f),
                 new Color(0.999999704012626f, 0.99606017126661f, 0.97702474968637f),
-                new Color(1f, 1f, 1f));
+                new Color(1f, 1f, 1f)
+        );
 
     }
 

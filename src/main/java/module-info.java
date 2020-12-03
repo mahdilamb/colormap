@@ -13,5 +13,4 @@ module net.mahdilamb.colormap {
     exports net.mahdilamb.colormap.sequential.colorbrewer;
     exports net.mahdilamb.colormap.sequential.perceptuallyuniform;
     exports net.mahdilamb.colormap.sequential;
-    exports net.mahdilamb.colormap.utils;
 }

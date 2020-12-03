@@ -1,6 +1,4 @@
-package net.mahdilamb.colormap.utils;
-
-import net.mahdilamb.colormap.color.Color;
+package net.mahdilamb.colormap.color;
 
 /**
  * A series of static methods for working with Colors.
@@ -107,7 +105,6 @@ public final class ColorUtils {
         final float[] temp = XYZ.clone();
         for (int i = 0; i < 3; i++) {
             temp[i] /= 100f;
-
         }
         final float[] rgb = temp.clone();
         rgb[0] = temp[0] * 3.2406f + temp[1] * -1.5372f + temp[2] * -0.4986f;
@@ -226,7 +223,7 @@ public final class ColorUtils {
      * @return Hexadecimal string representation of the color
      */
     public static String toHexadecimal(final Color color) {
-        return "#" + String.format("%02X%02X%02X", color.getRed(), color.getGreen(), color.getBlue());
+        return String.format("#%02X%02X%02X", color.getRed(), color.getGreen(), color.getBlue());
     }
 
     /**
@@ -300,9 +297,11 @@ public final class ColorUtils {
     public static int[] hexadecimalToRGB(final String hexadecimal) {
         final String hex = validateHexadecimal(hexadecimal, false);
 
-        return new int[]{Integer.valueOf(hex.substring(1, 3), 16),
+        return new int[]{
+                Integer.valueOf(hex.substring(1, 3), 16),
                 Integer.valueOf(hex.substring(3, 5), 16),
-                Integer.valueOf(hex.substring(5, 7), 16)};
+                Integer.valueOf(hex.substring(5, 7), 16)
+        };
     }
 
     /**
@@ -313,10 +312,12 @@ public final class ColorUtils {
      */
     public static int[] hexadecimalToRGBA(final String hexadecimal) {
         final String hex = validateHexadecimal(hexadecimal, true);
-        return new int[]{Integer.valueOf(hex.substring(1, 3), 16),
+        return new int[]{
+                Integer.valueOf(hex.substring(1, 3), 16),
                 Integer.valueOf(hex.substring(3, 5), 16),
                 Integer.valueOf(hex.substring(5, 7), 16),
-                Integer.valueOf(hex.substring(7, 9), 16)};
+                Integer.valueOf(hex.substring(7, 9), 16)
+        };
     }
 
     /**
@@ -358,7 +359,7 @@ public final class ColorUtils {
      * @param <T> The type of the values.
      * @return Value clamped between min and max
      */
-    public static <T extends Number & Comparable<T>> T clamp(final T val, final T min, final T max) {
+    public static <T extends Comparable<T>> T clamp(final T val, final T min, final T max) {
         return val.compareTo(max) > 0 ? max : val.compareTo(min) < 0 ? min : val;
     }
 

@@ -9,7 +9,7 @@ import net.mahdilamb.colormap.color.Color;
  * Matplotlib cyclic colormap Twilight shifted.
  */
 @NewColorMap(type = ColorMapType.CYCLIC, name = "TwilightShifted")
-public class TwilightShifted extends LinearColorMap {
+public final class TwilightShifted extends LinearColorMap {
     /**
      * Create a colormap based on the matplotlib colormap Twilight shifted.
      */

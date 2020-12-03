@@ -3,7 +3,7 @@ package net.mahdilamb.colormap.color;
 import java.lang.reflect.Field;
 import java.util.*;
 
-import static net.mahdilamb.colormap.utils.ColorUtils.*;
+import static net.mahdilamb.colormap.color.ColorUtils.*;
 
 /**
  * The Color class is a framework independent holder of color. The primary motivation of this class is to hold a 4-component float representation o
@@ -11,7 +11,7 @@ import static net.mahdilamb.colormap.utils.ColorUtils.*;
  * <p>
  * In addition, there contain string constants that represent generally used colors from AWT, CSS4 and Tableau.
  */
-public class Color implements Cloneable {
+public final class Color implements Cloneable {
 
     /**
      * Hexadecimal representation of AWT color "red".
@@ -996,7 +996,6 @@ public class Color implements Cloneable {
      */
     public Color(final int r, final int g, final int b) {
         this(r, g, b, 255);
-
     }
 
     /**
@@ -1015,81 +1014,6 @@ public class Color implements Cloneable {
      */
     public Color(final String hexString) {
         this(hexadecimalToRGB(hexString));
-    }
-
-    private static Color getColorWithReflection(final String colorName, final ColorType type, final Map<String, Color> cache) {
-        final Color cached = cache.get(colorName);
-        if (cached != null) {
-            return cached.clone();
-        }
-        for (final Field field : Color.class.getDeclaredFields()) {
-            if (field.isAnnotationPresent(NewColor.class) && field.getType() == String.class) {
-                try {
-
-                    final String cName = field.getDeclaredAnnotationsByType(NewColor.class)[0].name();
-                    final ColorType cType = field.getDeclaredAnnotationsByType(NewColor.class)[0].type();
-                    if (cName.compareTo(colorName) == 0 && cType == type) {
-                        cache.put(cName, new Color((String) field.get(null)));
-                        return cache.get(cName).clone();
-                    }
-
-                } catch (final IllegalArgumentException | IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-            }
-
-        }
-        return null;
-    }
-
-    /**
-     * Get a CSS4 color by name.
-     *
-     * @param colorName The name of the CSS4 color.
-     * @return A color of the CSS4 color requested or {@code null} if color cannot be found.
-     */
-    public static Color getCSSColor(final String colorName) {
-        return getColorWithReflection(colorName, ColorType.CSS, css4Colors);
-    }
-
-    /**
-     * Get a AWT color by name.
-     *
-     * @param colorName The name of the AWT color.
-     * @return A color of the AWT color requested or {@code null} if color cannot be found.
-     */
-    public static Color getAWTColor(final String colorName) {
-        return getColorWithReflection(colorName, ColorType.AWT, awtColors);
-    }
-
-    /**
-     * Get a Tableau color by name.
-     *
-     * @param colorName The name of the Tableau color.
-     * @return A color of the Tableau color requested or {@code null} if color cannot be found.
-     */
-    public static Color getTableauColor(final String colorName) {
-        return getColorWithReflection(colorName, ColorType.TABLEAU, tableauColors);
-    }
-
-    /**
-     * Get any of the colors by name using prefixes such as "css:", "awt:", "tableau". Color search is not case-sensitive.
-     *
-     * @param colorName The name of the color to search for
-     * @return The requested color or {@code null} if none can be found.
-     */
-    public static Color getColor(final String colorName) {
-        if (colorName.toLowerCase().startsWith("css:")) {
-            return getCSSColor(colorName.toLowerCase().split(":")[1]);
-        } else if (colorName.toLowerCase().startsWith("awt:")) {
-            return getAWTColor(colorName.toLowerCase().split(":")[1]);
-        } else if (colorName.toLowerCase().startsWith("tab:") || colorName.toLowerCase().startsWith("tableau:")) {
-            return getTableauColor(colorName.toLowerCase().split(":")[1]);
-        } else if (!colorName.contains(":")) {
-            return getCSSColor(colorName.toLowerCase());
-        } else {
-            return null;
-        }
     }
 
     /**
@@ -1244,21 +1168,21 @@ public class Color implements Cloneable {
     /**
      * @param alpha The 8-bit representation of the alpha component.
      */
-    public void setAlpha(final int alpha) {
+    public final void setAlpha(final int alpha) {
         setAlpha(alpha / 255f);
     }
 
     /**
      * @return A 3-component array containing the 8-bit representation of the red, green and blue components of this color.
      */
-    public int[] asRGB() {
+    public final int[] asRGB() {
         return new int[]{getRed(), getGreen(), getBlue()};
     }
 
     /**
      * @return A 4-component array containing the 8-bit representation of the red, green, blue and alpha components of this color.
      */
-    public int[] asRGBA() {
+    public final int[] asRGBA() {
         return new int[]{
                 getRed(),
                 getGreen(),
@@ -1268,60 +1192,122 @@ public class Color implements Cloneable {
     }
 
     /**
-     * @return This color represented in L*ab space. See {@link net.mahdilamb.colormap.utils.ColorUtils#RGBToLab(float[])} for more details.
+     * @return This color represented in L*ab space. See {@link ColorUtils#RGBToLab(float[])} for more details.
      */
-    public float[] asLab() {
+    public final float[] asLab() {
         return RGBToLab(asRGB());
     }
 
     /**
      * @return This color represented as a decimal value;
      */
-    public int asDecimal() {
-        return RGBAToDecimal(rgba);
+    public final int asDecimal() {
+        return RGBAToDecimal(red(), green(), blue(), alpha());
     }
 
     /**
      * @return A string representation of this color in hexadecimal (includes the alpha component);
      */
-    public String asHexadecimal() {
+    public final String asHexadecimal() {
         return RGBtoHexadecimal(asRGBA());
     }
 
-    /**
-     * @return A copy of this Color;
-     */
     @SuppressWarnings("MethodDoesntCallSuperMethod")
     @Override
-    public Color clone() {
+    public final Color clone() {
         return new Color(this);
     }
 
-    /**
-     * @return A console friendly version of this color.
-     */
     @Override
-    public String toString() {
-        return String.format("Color (%s, %.3f)", asHexadecimal(), alpha());
+    public final String toString() {
+        return String.format("Color {%s, %.3f}", asHexadecimal(), alpha());
     }
 
-    /**
-     * Compare objects
-     *
-     * @param o Object to compare to this one
-     * @return Whether the two objects are the same by value.
-     */
     @Override
-    public boolean equals(Object o) {
-        return (o instanceof Color && Arrays.equals(((Color) o).rgba, rgba));
+    public final boolean equals(Object o) {
+        return o == this || (o instanceof Color && Arrays.equals(((Color) o).rgba, rgba));
     }
 
-    /**
-     * @return A hash-code representation of this color.
-     */
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         return Arrays.hashCode(rgba);
+    }
+
+    private static Color getColorWithReflection(final String colorName, final ColorType type, final Map<String, Color> cache) {
+        final Color cached = cache.get(colorName);
+        if (cached != null) {
+            return cached.clone();
+        }
+        for (final Field field : Color.class.getDeclaredFields()) {
+            if (field.isAnnotationPresent(NewColor.class) && field.getType() == String.class) {
+                try {
+
+                    final String cName = field.getDeclaredAnnotationsByType(NewColor.class)[0].name();
+                    final ColorType cType = field.getDeclaredAnnotationsByType(NewColor.class)[0].type();
+                    if (cName.compareTo(colorName) == 0 && cType == type) {
+                        cache.put(cName, new Color((String) field.get(null)));
+                        return cache.get(cName).clone();
+                    }
+
+                } catch (final IllegalArgumentException | IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+        System.out.printf("Color {%s, %s} could not be found%n", colorName, type);
+        return null;
+    }
+
+    /**
+     * Get a CSS4 color by name.
+     *
+     * @param colorName The name of the CSS4 color.
+     * @return A color of the CSS4 color requested or {@code null} if color cannot be found.
+     */
+    public static Color getCSSColor(final String colorName) {
+        return getColorWithReflection(colorName, ColorType.CSS, css4Colors);
+    }
+
+    /**
+     * Get a AWT color by name.
+     *
+     * @param colorName The name of the AWT color.
+     * @return A color of the AWT color requested or {@code null} if color cannot be found.
+     */
+    public static Color getAWTColor(final String colorName) {
+        return getColorWithReflection(colorName, ColorType.AWT, awtColors);
+    }
+
+    /**
+     * Get a Tableau color by name.
+     *
+     * @param colorName The name of the Tableau color.
+     * @return A color of the Tableau color requested or {@code null} if color cannot be found.
+     */
+    public static Color getTableauColor(final String colorName) {
+        return getColorWithReflection(colorName, ColorType.TABLEAU, tableauColors);
+    }
+
+    /**
+     * Get any of the colors by name using prefixes such as "css:", "awt:", "tableau". Color search is not case-sensitive.
+     *
+     * @param colorName The name of the color to search for
+     * @return The requested color or {@code null} if none can be found.
+     */
+    public static Color get(final String colorName) {
+        if (colorName.toLowerCase().startsWith("css:")) {
+            return getCSSColor(colorName.toLowerCase().split(":")[1]);
+        } else if (colorName.toLowerCase().startsWith("awt:")) {
+            return getAWTColor(colorName.toLowerCase().split(":")[1]);
+        } else if (colorName.toLowerCase().startsWith("tab:") || colorName.toLowerCase().startsWith("tableau:")) {
+            return getTableauColor(colorName.toLowerCase().split(":")[1]);
+        } else if (!colorName.contains(":")) {
+            return getCSSColor(colorName.toLowerCase());
+        } else {
+            System.out.printf("Color %s could not be found%n", colorName);
+            return null;
+        }
     }
 
 }

@@ -3,6 +3,7 @@ package net.mahdilamb.colormap.tests;
 import net.mahdilamb.colormap.ColorMap;
 import net.mahdilamb.colormap.ColorMapImpl;
 import net.mahdilamb.colormap.DynamicColorMap;
+import net.mahdilamb.colormap.ColorMapNode;
 import net.mahdilamb.colormap.color.Color;
 import net.mahdilamb.colormap.sequential.perceptuallyuniform.Viridis;
 
@@ -59,7 +60,7 @@ public class ColorMapTest {
     static class ColorLabel extends JLabel {
 
         private static final long serialVersionUID = -5090637998127930769L;
-        final ColorMapImpl.ColorMapNode color;
+        final ColorMapNode color;
 
         ColorLabel(Double value, ColorMapImpl cmap) {
             setText(String.format("%.2f", value));
@@ -117,7 +118,7 @@ public class ColorMapTest {
 
         colorTools.add(cb);
         for (final String cmapName : ColorMap.listDefaultColorMaps()) {
-            cbModel.addElement(ColorMap.getColorMap(cmapName));
+            cbModel.addElement(ColorMap.get(cmapName));
             if (cmapName.compareTo("SEQUENTIAL.Viridis") == 0) {
                 cb.setSelectedIndex(cbModel.getSize() - 1);
             }

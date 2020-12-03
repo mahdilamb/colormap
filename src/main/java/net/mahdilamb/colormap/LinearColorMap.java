@@ -2,7 +2,7 @@ package net.mahdilamb.colormap;
 
 import net.mahdilamb.colormap.color.Color;
 
-import static net.mahdilamb.colormap.utils.ColorUtils.lerp;
+import static net.mahdilamb.colormap.color.ColorUtils.lerp;
 
 /**
  * A colormap which linearly interpolates between colors in L*ab space.
