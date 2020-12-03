@@ -11,7 +11,6 @@ import static net.mahdilamb.colormap.utils.ColorUtils.*;
  * <p>
  * In addition, there contain string constants that represent generally used colors from AWT, CSS4 and Tableau.
  */
-@SuppressWarnings("SpellCheckingInspection")
 public class Color implements Cloneable {
 
     /**

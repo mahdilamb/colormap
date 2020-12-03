@@ -24,6 +24,7 @@ public abstract class ColorMapImpl implements ColorMap {
      */
     static final NavigableSet<String> defaultColorMaps = new TreeSet<>();
 
+
     /**
      * A node that belongs to ColorMap, primarily defined by its value
      */
@@ -584,4 +585,27 @@ public abstract class ColorMapImpl implements ColorMap {
 
     @Override
     public abstract ColorMap clone();
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ColorMapImpl)) return false;
+        final ColorMapImpl other = (ColorMapImpl) o;
+        return Double.compare(other.currentMinValue, currentMinValue) == 0 &&
+                Double.compare(other.currentMaxValue, currentMaxValue) == 0 &&
+                isReversed == other.isReversed &&
+                definedColorNodes.equals(other.definedColorNodes) &&
+                colorMapColors.equals(other.colorMapColors) &&
+                Objects.equals(lowValue, other.lowValue) &&
+                Objects.equals(highValue, other.highValue) &&
+                Objects.equals(NaNColor, other.NaNColor) &&
+                Objects.equals(lowColor, other.lowColor) &&
+                Objects.equals(highColor, other.highColor);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(definedColorNodes, colorMapColors, currentMinValue, currentMaxValue, lowValue, highValue, NaNColor, lowColor, highColor, isReversed);
+    }
+
 }

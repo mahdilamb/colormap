@@ -66,22 +66,22 @@ public interface ColorMap extends Iterable<Double> {
      * @param isReversed   Whether the colormap should be reversed
      * @return An instance of the requested colormap, or {@code null} if it cannot be found.
      */
-    static ColorMap getColorMap(final String colormapType, final String colormapName, final boolean isReversed) {
+    static ColorMap getColorMap(String colormapType, final String colormapName, final boolean isReversed) {
         final Class<?> colormapClass;
-        final String requestedClass = String.format("%s.%s", colormapType == null ? "*" : colormapType.toLowerCase(), colormapName.toLowerCase());
-        if (ColorMapImpl.colorMaps.containsKey(requestedClass)) {
-            assert colormapType != null;
-            colormapClass = ColorMapImpl.colorMaps.get(String.format("%s.%s", colormapType.toLowerCase(), colormapName.toLowerCase()));
-        } else {
+        if (colormapType == null) {
+            colormapType = "*";
+        }
+        final String requestedClass = String.format("%s.%s", colormapType.toLowerCase(), colormapName.toLowerCase());
+        if (!ColorMapImpl.colorMaps.containsKey(requestedClass)) {
             try {
                 ColorMapImpl.cacheDefaultColorMaps();
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
                 System.exit(-1);
             }
-            colormapClass = ColorMapImpl.colorMaps.get(requestedClass);
 
         }
+        colormapClass = ColorMapImpl.colorMaps.get(requestedClass);
 
         try {
             final ColorMap out = (ColorMapImpl) colormapClass.getConstructor().newInstance();
@@ -142,7 +142,6 @@ public interface ColorMap extends Iterable<Double> {
     }
 
     /**
-     *
      * @return a deep copy of this color map
      */
     ColorMap clone();
