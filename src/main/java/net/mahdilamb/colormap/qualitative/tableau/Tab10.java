@@ -15,16 +15,16 @@ public final class Tab10 extends CategoricalColorMap {
      */
     public Tab10() {
         super(
-                Color.getTableauColor("blue"),
-                Color.getTableauColor("orange"),
-                Color.getTableauColor("green"),
-                Color.getTableauColor("red"),
-                Color.getTableauColor("purple"),
-                Color.getTableauColor("brown"),
-                Color.getTableauColor("pink"),
-                Color.getTableauColor("grey"),
-                Color.getTableauColor("olive"),
-                Color.getTableauColor("aqua"));
+                Color.getTableau("blue"),
+                Color.getTableau("orange"),
+                Color.getTableau("green"),
+                Color.getTableau("red"),
+                Color.getTableau("purple"),
+                Color.getTableau("brown"),
+                Color.getTableau("pink"),
+                Color.getTableau("grey"),
+                Color.getTableau("olive"),
+                Color.getTableau("aqua"));
     }
 
 

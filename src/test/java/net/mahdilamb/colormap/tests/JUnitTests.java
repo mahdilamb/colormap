@@ -148,7 +148,14 @@ public class JUnitTests {
 
     @Test
     public void ensureDefaultColorMapsLoadTest() {
-        assertTrue(ColorMap.listDefaultColorMaps().size() > 0);
+        assertFalse(ColorMap.listDefaultColorMaps().isEmpty());
     }
 
+    @Test(expected = UnsupportedOperationException.class)
+    public void UnmodifiableColorKeepsContractTest() {
+        Color.getAWT("blue")
+                .asUnmodifiable()
+                .setBlue(200);
+
+    }
 }

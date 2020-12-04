@@ -14,26 +14,26 @@ public final class Tab20 extends CategoricalColorMap {
      */
     public Tab20() {
         super(
-                Color.getTableauColor("blue"),
-                Color.getTableauColor("lightblue"),
-                Color.getTableauColor("orange"),
-                Color.getTableauColor("lightorange"),
-                Color.getTableauColor("green"),
-                Color.getTableauColor("lightgreen"),
-                Color.getTableauColor("red"),
-                Color.getTableauColor("lightred"),
-                Color.getTableauColor("purple"),
-                Color.getTableauColor("lightpurple"),
-                Color.getTableauColor("brown"),
-                Color.getTableauColor("lightbrown"),
-                Color.getTableauColor("pink"),
-                Color.getTableauColor("lightpink"),
-                Color.getTableauColor("grey"),
-                Color.getTableauColor("lightgrey"),
-                Color.getTableauColor("olive"),
-                Color.getTableauColor("lightolive"),
-                Color.getTableauColor("aqua"),
-                Color.getTableauColor("lightaqua"));
+                Color.getTableau("blue"),
+                Color.getTableau("lightblue"),
+                Color.getTableau("orange"),
+                Color.getTableau("lightorange"),
+                Color.getTableau("green"),
+                Color.getTableau("lightgreen"),
+                Color.getTableau("red"),
+                Color.getTableau("lightred"),
+                Color.getTableau("purple"),
+                Color.getTableau("lightpurple"),
+                Color.getTableau("brown"),
+                Color.getTableau("lightbrown"),
+                Color.getTableau("pink"),
+                Color.getTableau("lightpink"),
+                Color.getTableau("grey"),
+                Color.getTableau("lightgrey"),
+                Color.getTableau("olive"),
+                Color.getTableau("lightolive"),
+                Color.getTableau("aqua"),
+                Color.getTableau("lightaqua"));
     }
 
 

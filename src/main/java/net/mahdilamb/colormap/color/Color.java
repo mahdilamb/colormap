@@ -11,7 +11,43 @@ import static net.mahdilamb.colormap.color.ColorUtils.*;
  * <p>
  * In addition, there contain string constants that represent generally used colors from AWT, CSS4 and Tableau.
  */
-public final class Color implements Cloneable {
+public class Color implements Cloneable {
+    /**
+     * An unmodifiable version of a color
+     */
+    public static final class UnmodifiableColor extends Color {
+        /**
+         * @param color the color to create an unmodifiable version of
+         */
+        UnmodifiableColor(Color color) {
+            super(color);
+        }
+
+        @Override
+        public Color setRed(final double red) throws UnsupportedOperationException {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public Color setGreen(final double green) throws UnsupportedOperationException {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public Color setBlue(final double blue) throws UnsupportedOperationException {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public Color setAlpha(final double alpha) throws UnsupportedOperationException {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public final boolean isModifiable() {
+            return false;
+        }
+    }
 
     /**
      * Hexadecimal representation of AWT color "red".
@@ -1079,17 +1115,20 @@ public final class Color implements Cloneable {
 
     /**
      * @param red The new red component, as a floating point number.
+     * @return this color
      */
-    public void setRed(final double red) {
+    public Color setRed(final double red) {
         this.rgba[0] = (float) red;
         fireColorChanged();
+        return this;
     }
 
     /**
      * @param red The new red component, as an integer number;
+     * @return this color
      */
-    public void setRed(final int red) {
-        setRed(red / 255f);
+    public Color setRed(final int red) {
+        return setRed(red / 255f);
     }
 
     /**
@@ -1108,10 +1147,20 @@ public final class Color implements Cloneable {
 
     /**
      * @param green The floating-point representation of the green component.
+     * @return this color
      */
-    public void setGreen(final double green) {
+    public Color setGreen(final double green) {
         this.rgba[1] = (float) green;
         fireColorChanged();
+        return this;
+    }
+
+    /**
+     * @param green The new green component, as an integer number;
+     * @return this color
+     */
+    public Color setGreen(final int green) {
+        return setGreen(green / 255f);
     }
 
     /**
@@ -1130,17 +1179,20 @@ public final class Color implements Cloneable {
 
     /**
      * @param blue The floating-point representation of the blue component.
+     * @return this color
      */
-    public void setBlue(final double blue) {
+    public Color setBlue(final double blue) {
         this.rgba[2] = (float) blue;
         fireColorChanged();
+        return this;
     }
 
     /**
      * @param blue The integer representation of the blue component.
+     * @return this color
      */
-    public void setBlue(final int blue) {
-        setBlue(blue / 255f);
+    public Color setBlue(final int blue) {
+        return setBlue(blue / 255f);
     }
 
     /**
@@ -1159,17 +1211,20 @@ public final class Color implements Cloneable {
 
     /**
      * @param alpha The floating-point representation of the alpha component.
+     * @return this color
      */
-    public void setAlpha(final double alpha) {
+    public Color setAlpha(final double alpha) {
         this.rgba[3] = (float) alpha;
         fireColorChanged();
+        return this;
     }
 
     /**
      * @param alpha The 8-bit representation of the alpha component.
+     * @return this color
      */
-    public final void setAlpha(final int alpha) {
-        setAlpha(alpha / 255f);
+    public final Color setAlpha(final int alpha) {
+        return setAlpha(alpha / 255f);
     }
 
     /**
@@ -1265,7 +1320,7 @@ public final class Color implements Cloneable {
      * @param colorName The name of the CSS4 color.
      * @return A color of the CSS4 color requested or {@code null} if color cannot be found.
      */
-    public static Color getCSSColor(final String colorName) {
+    public static Color getCSS(final String colorName) {
         return getColorWithReflection(colorName, ColorType.CSS, css4Colors);
     }
 
@@ -1275,7 +1330,7 @@ public final class Color implements Cloneable {
      * @param colorName The name of the AWT color.
      * @return A color of the AWT color requested or {@code null} if color cannot be found.
      */
-    public static Color getAWTColor(final String colorName) {
+    public static Color getAWT(final String colorName) {
         return getColorWithReflection(colorName, ColorType.AWT, awtColors);
     }
 
@@ -1285,7 +1340,7 @@ public final class Color implements Cloneable {
      * @param colorName The name of the Tableau color.
      * @return A color of the Tableau color requested or {@code null} if color cannot be found.
      */
-    public static Color getTableauColor(final String colorName) {
+    public static Color getTableau(final String colorName) {
         return getColorWithReflection(colorName, ColorType.TABLEAU, tableauColors);
     }
 
@@ -1297,17 +1352,34 @@ public final class Color implements Cloneable {
      */
     public static Color get(final String colorName) {
         if (colorName.toLowerCase().startsWith("css:")) {
-            return getCSSColor(colorName.toLowerCase().split(":")[1]);
+            return getCSS(colorName.toLowerCase().split(":")[1]);
         } else if (colorName.toLowerCase().startsWith("awt:")) {
-            return getAWTColor(colorName.toLowerCase().split(":")[1]);
+            return getAWT(colorName.toLowerCase().split(":")[1]);
         } else if (colorName.toLowerCase().startsWith("tab:") || colorName.toLowerCase().startsWith("tableau:")) {
-            return getTableauColor(colorName.toLowerCase().split(":")[1]);
+            return getTableau(colorName.toLowerCase().split(":")[1]);
         } else if (!colorName.contains(":")) {
-            return getCSSColor(colorName.toLowerCase());
+            return getCSS(colorName.toLowerCase());
         } else {
             System.out.printf("Color %s could not be found%n", colorName);
             return null;
         }
+    }
+
+    /**
+     * @return whether this color is modifiable
+     */
+    public boolean isModifiable() {
+        return true;
+    }
+
+    /**
+     * @return an unmodifiable version of this color
+     */
+    public final UnmodifiableColor asUnmodifiable() {
+        if (this.getClass() == UnmodifiableColor.class) {
+            return (UnmodifiableColor) this;
+        }
+        return new UnmodifiableColor(this);
     }
 
 }
