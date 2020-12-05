@@ -5,22 +5,23 @@ buildscript {
 
     }
     dependencies {
-        classpath 'com.bmuschko:gradle-nexus-plugin:2.3.1'
+        classpath("com.bmuschko:gradle-nexus-plugin:2.3.1")
 
     }
 }
 plugins {
-    id 'java-library'
-    id 'maven'
-    id 'signing'
-    id 'org.spongepowered.plugin' version '0.6'
+    id("java-library")
+    id("maven")
+    id("signing")
+    id("org.spongepowered.plugin") version "0.6"
 
 }
-apply plugin: 'com.bmuschko.nexus'
+apply plugin: "com.bmuschko.nexus"
 
 compileJava {
-    sourceCompatibility = 1.9//will work with Java 1.8, but this is required as there is a module-info.java
-    targetCompatibility = 1.9
+    sourceCompatibility = JavaVersion.VERSION_1_9
+//will work with Java 1.8, but this is required as there is a module-info.java
+    targetCompatibility = JavaVersion.VERSION_1_9
 }
 
 test {
@@ -31,19 +32,19 @@ repositories {
     mavenCentral()
 }
 
-version = '0.9.28'
-group = 'net.mahdilamb'
+version = "0.9.29"
+group = "net.mahdilamb"
 
 dependencies {
-    testImplementation 'junit:junit:4.13'
+    testImplementation("junit:junit:4.13")
 }
-task swingDemo(type: JavaExec, dependsOn: ['testClasses']) {
-    classpath sourceSets.test.runtimeClasspath
+task swingDemo(type: JavaExec, dependsOn: ["testClasses"]) {
+    classpath = sourceSets["test"].runtimeClasspath
     main = "net.mahdilamb.colormap.tests.ColorMapTest"
 }
 
-task generateReadme(type: JavaExec, dependsOn: ['testClasses']) {
-    classpath sourceSets.test.runtimeClasspath
+task generateReadme(type: JavaExec, dependsOn: ["testClasses"]) {
+    classpath = sourceSets["test"].runtimeClasspath
     main = "net.mahdilamb.colormap.tests.GenerateReadme"
 }
 
@@ -51,29 +52,29 @@ task generateReadme(type: JavaExec, dependsOn: ['testClasses']) {
 modifyPom {
 
     project {
-        name 'Colormap'
-        description 'A Java-based colormap generator.'
-        url 'https://github.com/mahdilamb/colormap'
-        inceptionYear '2020'
+        name = "Colormap"
+        description = "A Java-based colormap generator."
+        url = "https://github.com/mahdilamb/colormap"
+        inceptionYear = "2020"
 
         licenses {
             license {
-                name 'The Apache Software License, Version 2.0'
-                url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                distribution 'repo'
+                name = "The Apache Software License, Version 2.0"
+                url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                distribution = "repo"
             }
         }
         developers {
             developer {
-                id 'mahdilamb'
-                name 'Mahdi Lamb'
-                email 'mahdilamb[at]gmail[dot]com'
+                id = "mahdilamb"
+                name = "Mahdi Lamb"
+                email = "mahdilamb[at]gmail[dot]com"
             }
         }
         scm {
-            url 'https://github.com/mahdilamb/colormap'
-            connection 'scm:https://mahdilamb@github.com/mahdilamb/colormap.git'
-            developerConnection 'scm:git://github.com/mahdilamb/colormap.git'
+            url = "https://github.com/mahdilamb/colormap"
+            connection = "scm:https://mahdilamb@github.com/mahdilamb/colormap.git"
+            developerConnection = "scm:git://github.com/mahdilamb/colormap.git"
         }
 
 
@@ -89,6 +90,6 @@ extraArchive {
 
 nexus {
     sign = !version.endsWith("SNAPSHOT")
-    repositoryUrl = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
-    snapshotRepositoryUrl = 'https://oss.sonatype.org/content/repositories/snapshots/'
+    repositoryUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+    snapshotRepositoryUrl = "https://oss.sonatype.org/content/repositories/snapshots/"
 }
