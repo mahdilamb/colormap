@@ -7,13 +7,13 @@ import net.mahdilamb.colormap.color.Color;
  *
  * @author mahdi
  */
-public class CategoricalColorMap extends ColorMapImpl {
+public class CategoricalColormap extends AbstractColormap {
     /**
      * Construct a categorical color map with the provided colors
      *
      * @param colors A list of the colors to initialize the color map with.
      */
-    public CategoricalColorMap(final Color... colors) {
+    public CategoricalColormap(final Color... colors) {
         addColors(colors);
     }
 
@@ -22,7 +22,7 @@ public class CategoricalColorMap extends ColorMapImpl {
      *
      * @param other the colormap to copy/convert from
      */
-    protected CategoricalColorMap(final ColorMapImpl other) {
+    protected CategoricalColormap(final AbstractColormap other) {
         super(other);
     }
 
@@ -38,8 +38,8 @@ public class CategoricalColorMap extends ColorMapImpl {
     }
 
     @Override
-    public CategoricalColorMap clone() {
-        return new CategoricalColorMap(this);
+    public CategoricalColormap clone() {
+        return new CategoricalColormap(this);
     }
 
     // modified so that last element repeats and used as last element rather than only upper bound

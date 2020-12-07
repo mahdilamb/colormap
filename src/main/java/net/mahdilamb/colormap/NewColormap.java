@@ -11,11 +11,11 @@ import static java.lang.annotation.ElementType.TYPE;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(TYPE)
-public @interface NewColorMap {
+public @interface NewColormap {
     /**
      * @return The type of the color map
      */
-    ColorMapType type();
+    ColormapType type();
 
     /**
      * @return The name of the color map.

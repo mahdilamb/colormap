@@ -40,7 +40,7 @@ dependencies {
 }
 task swingDemo(type: JavaExec, dependsOn: ["testClasses"]) {
     classpath = sourceSets["test"].runtimeClasspath
-    main = "net.mahdilamb.colormap.tests.ColorMapTest"
+    main = "net.mahdilamb.colormap.tests.ColormapTest"
 }
 
 task generateReadme(type: JavaExec, dependsOn: ["testClasses"]) {

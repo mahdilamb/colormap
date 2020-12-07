@@ -7,13 +7,13 @@ import static net.mahdilamb.colormap.color.ColorUtils.lerp;
 /**
  * A colormap which linearly interpolates between colors in L*ab space.
  */
-public class LinearColorMap extends ColorMapImpl {
+public class LinearColormap extends AbstractColormap {
     /**
      * Create a linear color map with the provided colors
      *
      * @param colors The colors to generate a linear color map with.
      */
-    public LinearColorMap(final Color... colors) {
+    public LinearColormap(final Color... colors) {
         addColors(colors);
     }
 
@@ -22,7 +22,7 @@ public class LinearColorMap extends ColorMapImpl {
      *
      * @param other the colormap to copy/convert from
      */
-    public LinearColorMap(final ColorMapImpl other) {
+    public LinearColormap(final AbstractColormap other) {
         super(other);
     }
 
@@ -38,14 +38,14 @@ public class LinearColorMap extends ColorMapImpl {
             final Color upper = currentColors.get(upperVal);
 
             final Color outColor = lerp(upper, lower, (value - lowerVal) / (upperVal - lowerVal));
-            outColor.setAlpha((float) lerp(upper.getAlpha() / 255f, lower.getAlpha() / 255f, value));
+            outColor.alpha((float) lerp(upper.alpha() , lower.alpha() , value));
             return outColor;
 
         }
     }
 
     @Override
-    public LinearColorMap clone() {
-        return new LinearColorMap(this);
+    public LinearColormap clone() {
+        return new LinearColormap(this);
     }
 }

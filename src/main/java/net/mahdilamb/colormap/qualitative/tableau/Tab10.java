@@ -1,15 +1,15 @@
 package net.mahdilamb.colormap.qualitative.tableau;
 
-import net.mahdilamb.colormap.CategoricalColorMap;
-import net.mahdilamb.colormap.ColorMapType;
-import net.mahdilamb.colormap.NewColorMap;
+import net.mahdilamb.colormap.CategoricalColormap;
+import net.mahdilamb.colormap.ColormapType;
+import net.mahdilamb.colormap.NewColormap;
 import net.mahdilamb.colormap.color.Color;
 
 /**
  * Tableau Tab10
  */
-@NewColorMap(type = ColorMapType.QUALITATIVE, name = "Tab10")
-public final class Tab10 extends CategoricalColorMap {
+@NewColormap(type = ColormapType.QUALITATIVE, name = "Tab10")
+public final class Tab10 extends CategoricalColormap {
     /**
      * Create a colormap based on Tableau Tab10
      */

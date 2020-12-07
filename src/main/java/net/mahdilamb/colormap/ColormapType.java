@@ -3,7 +3,7 @@ package net.mahdilamb.colormap;
 /**
  * The type of ColorMap
  */
-public enum ColorMapType {
+public enum ColormapType {
     /**
      * A color map that diverges from the middle value in a sequential manner.
      */
