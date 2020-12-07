@@ -2,6 +2,9 @@ package net.mahdilamb.colormap.color;
 
 import static net.mahdilamb.colormap.color.ColorUtils.*;
 
+/**
+ * Main interface for color
+ */
 public interface Color extends Cloneable {
 
     /**
@@ -126,6 +129,7 @@ public interface Color extends Cloneable {
      * Remove a listener
      *
      * @param listener Listener to remove, if already listening, to this Color.
+     * @return if the listener was removed
      */
     boolean removeListener(final ColorListener listener);
 
@@ -134,6 +138,11 @@ public interface Color extends Cloneable {
      */
     void removeListeners();
 
+    /**
+     * Clone the color
+     *
+     * @return a clone of the color
+     */
     Color clone();
 
     /**
@@ -217,6 +226,7 @@ public interface Color extends Cloneable {
      * @param red   Red (0-255)
      * @param green Green (0-255)
      * @param blue  Blue (0-255)
+     * @return a color from ints
      */
     static Color from(int red, int green, int blue) {
         return from(red, green, blue, 255);

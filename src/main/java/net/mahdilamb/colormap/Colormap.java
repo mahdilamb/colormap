@@ -83,13 +83,13 @@ public interface Colormap extends Iterable<Double>, Cloneable {
 
     /**
      * @return the current colors that are mapped to a position.
-     * @apiNote The returned map should be assumed to be unmodifiable
+     * The returned map should be assumed to be unmodifiable
      */
     Map<Double, Color> getFixedColors();
 
     /**
      * @return an ordered list containing the sparse colors whose positions are defined by the colormap type.
-     * @apiNote The returned list should be assumed to be unmodifiable
+     * The returned list should be assumed to be unmodifiable
      */
     List<Color> getSparseColors();
 
