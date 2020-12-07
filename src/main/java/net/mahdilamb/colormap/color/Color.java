@@ -195,7 +195,6 @@ public interface Color extends Cloneable {
         return new ColorImpl.UnmodifiableColor(color);
     }
 
-
     /**
      * Create a color from a hex string
      *
@@ -204,32 +203,7 @@ public interface Color extends Cloneable {
      */
     static Color from(String hexString) {
         final int[] fromHex = hexadecimalToRGB(hexString);
-        return from(fromHex[0], fromHex[1], fromHex[2]);
-    }
-
-    /**
-     * Create a color from 4 ints
-     *
-     * @param red   red
-     * @param green green
-     * @param blue  blue
-     * @param alpha alpha
-     * @return a color representing the four ints
-     */
-    static Color from(int red, int green, int blue, int alpha) {
-        return new ColorImpl(red, green, blue, alpha);
-    }
-
-    /**
-     * Construct a Color with full alpha
-     *
-     * @param red   Red (0-255)
-     * @param green Green (0-255)
-     * @param blue  Blue (0-255)
-     * @return a color from ints
-     */
-    static Color from(int red, int green, int blue) {
-        return from(red, green, blue, 255);
+        return new ColorImpl(fromHex[0], fromHex[1], fromHex[2]);
     }
 
     /**

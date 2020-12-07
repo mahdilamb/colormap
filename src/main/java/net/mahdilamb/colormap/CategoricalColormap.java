@@ -22,7 +22,7 @@ public class CategoricalColormap extends AbstractColormap {
      *
      * @param other the colormap to copy/convert from
      */
-    protected CategoricalColormap(final AbstractColormap other) {
+    protected CategoricalColormap(final Colormap other) {
         super(other);
     }
 

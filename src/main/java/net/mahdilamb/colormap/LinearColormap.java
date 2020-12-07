@@ -22,7 +22,7 @@ public class LinearColormap extends AbstractColormap {
      *
      * @param other the colormap to copy/convert from
      */
-    public LinearColormap(final AbstractColormap other) {
+    public LinearColormap(final Colormap other) {
         super(other);
     }
 

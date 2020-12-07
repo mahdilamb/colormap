@@ -328,7 +328,7 @@ public final class ColorUtils {
      */
     public static Color hexadecimalToColor(final String hexadecimal) {
         final int[] rgb = hexadecimalToRGB(hexadecimal);
-        return Color.from(rgb[0], rgb[1], rgb[2]);
+        return new ColorImpl(rgb[0], rgb[1], rgb[2]);
     }
 
     /**
@@ -392,6 +392,6 @@ public final class ColorUtils {
             newLab[i] = (float) lerp(lowerLab[i], upperLab[i], amount);
         }
         final int[] rgb = LabToRGB(newLab);
-        return Color.from(rgb[0], rgb[1], rgb[2]);
+        return new ColorImpl(rgb[0], rgb[1], rgb[2]);
     }
 }

@@ -83,16 +83,16 @@ public abstract class AbstractColormap implements Colormap {
      *
      * @param other colormap to copy
      */
-    AbstractColormap(final AbstractColormap other) {
-        isReversed = other.isReversed;
-        highColor = other.highColor;
-        lowColor = other.lowColor;
-        NaNColor = other.NaNColor;
-        highValue = other.highValue;
-        lowValue = other.lowValue;
+    AbstractColormap(final Colormap other) {
+        isReversed = other.isReversed();
+        highColor = other.getHighColor();
+        lowColor = other.getLowColor();
+        NaNColor = other.getNaNColor();
+        highValue = other.highValue();
+        lowValue = other.lowValue();
 
-        definedColorNodes.putAll(other.definedColorNodes);
-        colorMapColors.addAll(other.colorMapColors);
+        definedColorNodes.putAll(other.getFixedColors());
+        colorMapColors.addAll(other.getSparseColors());
 
     }
 

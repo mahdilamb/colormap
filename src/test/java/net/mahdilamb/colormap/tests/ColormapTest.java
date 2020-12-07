@@ -3,7 +3,6 @@ package net.mahdilamb.colormap.tests;
 import net.mahdilamb.colormap.Colormap;
 import net.mahdilamb.colormap.ColormapNode;
 import net.mahdilamb.colormap.DynamicColormap;
-import net.mahdilamb.colormap.color.ColorImpl;
 import net.mahdilamb.colormap.sequential.perceptuallyuniform.Viridis;
 
 import javax.swing.*;

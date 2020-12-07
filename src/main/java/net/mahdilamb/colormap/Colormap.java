@@ -102,22 +102,22 @@ public interface Colormap extends Iterable<Double>, Cloneable {
      * @return the user set high value
      */
     Double highValue();
+
     /**
-     *
      * @return the color that is returned when a value is not a number
      */
     Color getNaNColor();
+
     /**
-     *
      * @return the color that is returned when a value lower than the lower bound is requested
      */
     Color getLowColor();
 
     /**
-     *
      * @return the color that is returned when a value higher than the upper bound is requested
      */
     Color getHighColor();
+
     /**
      * Get the Color at a specified value. Does not add the value to the color map. Considers whether the color map is
      * reversed or not.
@@ -224,4 +224,23 @@ public interface Colormap extends Iterable<Double>, Cloneable {
         return Collections.unmodifiableSet(AbstractColormap.defaultColorMaps);
     }
 
+    /**
+     * Create a linear colormap
+     *
+     * @param colors colors to create a colormap from
+     * @return linear color map
+     */
+    static LinearColormap createLinear(final Color... colors) {
+        return new LinearColormap(colors);
+    }
+
+    /**
+     * Create a categorical colormap
+     *
+     * @param colors colors to create a colormap from
+     * @return categorical color map
+     */
+    static CategoricalColormap createCategorical(final Color... colors) {
+        return new CategoricalColormap(colors);
+    }
 }

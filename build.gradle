@@ -32,7 +32,7 @@ repositories {
     mavenCentral()
 }
 
-version = "0.9.29-SNAPSHOT"
+version = "0.9.29"
 group = "net.mahdilamb"
 
 dependencies {
