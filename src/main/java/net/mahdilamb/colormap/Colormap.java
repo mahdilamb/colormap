@@ -4,14 +4,12 @@ import net.mahdilamb.colormap.color.Color;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Interface for all colormaps
  */
-public interface ColorMap extends Iterable<Double>, Cloneable {
+public interface Colormap extends Iterable<Double>, Cloneable {
 
     /**
      * Get the Color at a specified value. Does not add the value to the color map. Primary way to show a graphical representation of this color map.
@@ -34,6 +32,93 @@ public interface ColorMap extends Iterable<Double>, Cloneable {
     void setReversed(boolean isReversed);
 
     /**
+     * @return a deep copy of this color map
+     */
+    Colormap clone();
+
+    /**
+     * Set the color to use if the value is {@code null}
+     *
+     * @param NaNColor Color to use if the value is not a number.
+     */
+    void setNaNColor(final Color NaNColor);
+
+    /**
+     * Set the color to use if the value in a color map is greater than {@link AbstractColormap#getHighValue()}.
+     * To disable this ceiling set {@link AbstractColormap#getHighValue()} to {@code null}.
+     *
+     * @param highColor The Color to provide if a value is higher than {@link AbstractColormap#getHighValue()}
+     */
+    void setHighColor(final Color highColor);
+
+    /**
+     * Set the color to use if the value in a color map is lower than {@link AbstractColormap#getLowValue()}.
+     * To disable this floor set {@link AbstractColormap#getLowValue()} to {@code null}.
+     *
+     * @param lowColor The Color to provide if a value is lower than {@link AbstractColormap#getLowValue()}
+     */
+    void setLowColor(final Color lowColor);
+
+    /**
+     * Set the lower bound of this color map
+     *
+     * @param lowValue Lower bound of this color map
+     */
+    void setLowValue(final Double lowValue);
+
+    /**
+     * Set the upper bound of this color map
+     *
+     * @param highValue The upper bound
+     */
+    void setHighValue(final Double highValue);
+
+    /**
+     * Get the color node from a value
+     *
+     * @param value The value to get the associated node form
+     * @return The associated color node.
+     */
+    ColormapNode getColorFromValue(final double value);
+
+    /**
+     * @return the current colors that are mapped to a position.
+     * @apiNote The returned map should be assumed to be unmodifiable
+     */
+    Map<Double, Color> getFixedColors();
+
+    /**
+     * @return an ordered list containing the sparse colors whose positions are defined by the colormap type.
+     * @apiNote The returned list should be assumed to be unmodifiable
+     */
+    List<Color> getSparseColors();
+
+    /**
+     * @return the user set low value.
+     */
+    Double lowValue();
+
+    /**
+     * @return the user set high value
+     */
+    Double highValue();
+    /**
+     *
+     * @return the color that is returned when a value is not a number
+     */
+    Color getNaNColor();
+    /**
+     *
+     * @return the color that is returned when a value lower than the lower bound is requested
+     */
+    Color getLowColor();
+
+    /**
+     *
+     * @return the color that is returned when a value higher than the upper bound is requested
+     */
+    Color getHighColor();
+    /**
      * Get the Color at a specified value. Does not add the value to the color map. Considers whether the color map is
      * reversed or not.
      *
@@ -45,16 +130,16 @@ public interface ColorMap extends Iterable<Double>, Cloneable {
     }
 
     /**
-     * Register a color map so that it can be found by {@link ColorMap#get(String)}
+     * Register a color map so that it can be found by {@link Colormap#get(String)}
      *
      * @param colorMapName  The name used to later find this color map
      * @param colorMapClass The class of the color map.
      */
-    static void registerColorMap(final String colorMapName, final Class<ColorMap> colorMapClass) {
+    static void registerColorMap(final String colorMapName, final Class<Colormap> colorMapClass) {
         if (Arrays.stream(colorMapClass.getConstructors()).allMatch(c -> c.getParameterCount() != 0)) {
             throw new UnsupportedOperationException("Registered colormaps must contain a no args constructor");
         }
-        ColorMapImpl.colorMaps.put(colorMapName, colorMapClass);
+        AbstractColormap.colorMaps.put(colorMapName, colorMapClass);
     }
 
 
@@ -66,24 +151,24 @@ public interface ColorMap extends Iterable<Double>, Cloneable {
      * @param isReversed   Whether the colormap should be reversed
      * @return An instance of the requested colormap, or {@code null} if it cannot be found.
      */
-    static ColorMap get(String colormapType, final String colormapName, final boolean isReversed) {
+    static Colormap get(String colormapType, final String colormapName, final boolean isReversed) {
         final Class<?> colormapClass;
         if (colormapType == null) {
             colormapType = "*";
         }
         final String requestedClass = String.format("%s.%s", colormapType.toLowerCase(), colormapName.toLowerCase());
-        if (!ColorMapImpl.colorMaps.containsKey(requestedClass)) {
+        if (!AbstractColormap.colorMaps.containsKey(requestedClass)) {
             try {
-                ColorMapImpl.cacheDefaultColorMaps();
+                AbstractColormap.cacheDefaultColorMaps();
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
 
         }
-        colormapClass = ColorMapImpl.colorMaps.get(requestedClass);
+        colormapClass = AbstractColormap.colorMaps.get(requestedClass);
 
         try {
-            final ColorMap out = (ColorMapImpl) colormapClass.getConstructor().newInstance();
+            final Colormap out = (AbstractColormap) colormapClass.getConstructor().newInstance();
             out.setReversed(isReversed);
             return out;
         } catch (final InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
@@ -104,7 +189,7 @@ public interface ColorMap extends Iterable<Double>, Cloneable {
      * @param colormap A string representation of a colormap (e.g. "sequential.viridis.reversed", note sequential can be omitted).
      * @return An instance of the requested colormap or {@code null} if it cannot be found.
      */
-    static ColorMap get(final String colormap) {
+    static Colormap get(final String colormap) {
         final String[] cmparts = colormap.split("\\.");
         switch (cmparts.length) {
             case 2:
@@ -131,61 +216,12 @@ public interface ColorMap extends Iterable<Double>, Cloneable {
      */
     static Set<String> listDefaultColorMaps() {
         try {
-            ColorMapImpl.cacheDefaultColorMaps();
+            AbstractColormap.cacheDefaultColorMaps();
         } catch (Exception e) {
             System.out.println("Could not load default colormaps.");
             e.printStackTrace();
         }
-        return Collections.unmodifiableSet(ColorMapImpl.defaultColorMaps);
+        return Collections.unmodifiableSet(AbstractColormap.defaultColorMaps);
     }
 
-    /**
-     * @return a deep copy of this color map
-     */
-    ColorMap clone();
-
-    /**
-     * Set the color to use if the value is {@code null}
-     *
-     * @param NaNColor Color to use if the value is not a number.
-     */
-    void setNaNColor(final Color NaNColor);
-
-    /**
-     * Set the color to use if the value in a color map is greater than {@link ColorMapImpl#getHighValue()}.
-     * To disable this ceiling set {@link ColorMapImpl#getHighValue()} to {@code null}.
-     *
-     * @param highColor The Color to provide if a value is higher than {@link ColorMapImpl#getHighValue()}
-     */
-    void setHighColor(final Color highColor);
-
-    /**
-     * Set the color to use if the value in a color map is lower than {@link ColorMapImpl#getLowValue()}.
-     * To disable this floor set {@link ColorMapImpl#getLowValue()} to {@code null}.
-     *
-     * @param lowColor The Color to provide if a value is lower than {@link ColorMapImpl#getLowValue()}
-     */
-    void setLowColor(final Color lowColor);
-
-    /**
-     * Set the lower bound of this color map
-     *
-     * @param lowValue Lower bound of this color map
-     */
-    void setLowValue(final Double lowValue);
-
-    /**
-     * Set the upper bound of this color map
-     *
-     * @param highValue The upper bound
-     */
-    void setHighValue(final Double highValue);
-
-    /**
-     * Get the color node from a value
-     *
-     * @param value The value to get the associated node form
-     * @return The associated color node.
-     */
-    ColorMapNode getColorFromValue(final double value);
 }

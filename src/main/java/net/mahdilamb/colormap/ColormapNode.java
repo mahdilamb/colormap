@@ -7,12 +7,12 @@ import java.util.Objects;
 /**
  * A node that belongs to ColorMap, primarily defined by its value
  */
-public final class ColorMapNode {
+public final class ColormapNode {
     private final Color color;
-    private final ColorMapImpl colorMap;
+    private final AbstractColormap colorMap;
     Double value;
 
-    ColorMapNode(final ColorMapImpl colorMap, final Color color, final Double value) {
+    ColormapNode(final AbstractColormap colorMap, final Color color, final Double value) {
         this.colorMap = colorMap;
         this.value = value;
         this.color = color;
@@ -20,7 +20,7 @@ public final class ColorMapNode {
 
     void recalculate() {
         final Color newColor = colorMap.calculateColor(value);
-        color.setColor(newColor);
+        color.set(newColor);
     }
 
     /**
@@ -82,7 +82,7 @@ public final class ColorMapNode {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
 
-        ColorMapNode that = (ColorMapNode) o;
+        ColormapNode that = (ColormapNode) o;
 
         if (!Objects.equals(color, that.color)) return false;
         if (!Objects.equals(colorMap, that.colorMap)) return false;

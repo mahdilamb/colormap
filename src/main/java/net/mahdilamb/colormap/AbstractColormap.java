@@ -14,16 +14,15 @@ import java.util.zip.ZipInputStream;
 /**
  * Abstract color map that allows or the definition of a color map that is evenly spaced, or spaced at defined locations apart.
  */
-public abstract class ColorMapImpl implements ColorMap {
+public abstract class AbstractColormap implements Colormap {
     /**
      * All registered colormaps
      */
-    static final Map<String, Class<ColorMap>> colorMaps = new HashMap<>();
+    static final Map<String, Class<Colormap>> colorMaps = new HashMap<>();
     /**
      * A subset of all the color maps - those that are the defaults.
      */
     static final NavigableSet<String> defaultColorMaps = new TreeSet<>();
-
 
     /**
      * Map of colors with their respective positions.
@@ -34,13 +33,13 @@ public abstract class ColorMapImpl implements ColorMap {
      */
     final List<Color> colorMapColors = new Vector<>();
     /**
-     * The cache of colors associated with this color map whose positions have been calculated from {@link ColorMapImpl#colorMapColors}
+     * The cache of colors associated with this color map whose positions have been calculated from {@link AbstractColormap#colorMapColors}
      */
     final NavigableMap<Double, Color> currentColors = new TreeMap<>();
     /**
      * The current list of nodes associated with this color map
      */
-    final List<ColorMapNode> currentNodes = new Vector<>();
+    final List<ColormapNode> currentNodes = new Vector<>();
     /**
      * Current minimum value
      */
@@ -60,13 +59,13 @@ public abstract class ColorMapImpl implements ColorMap {
     /**
      * Color for {@code null} values
      */
-    Color NaNColor = new Color(Color.black);
+    Color NaNColor = Color.from(Color.black);
     /**
-     * Color for values lower than or equal to {@link ColorMapImpl#lowValue}
+     * Color for values lower than or equal to {@link AbstractColormap#lowValue}
      */
     Color lowColor = null;
     /**
-     * Color for values higher than or equal to {@link ColorMapImpl#highValue}
+     * Color for values higher than or equal to {@link AbstractColormap#highValue}
      */
     Color highColor = null;
     /**
@@ -74,7 +73,7 @@ public abstract class ColorMapImpl implements ColorMap {
      */
     boolean isReversed = false;
 
-    ColorMapImpl() {
+    AbstractColormap() {
 
     }
 
@@ -84,7 +83,7 @@ public abstract class ColorMapImpl implements ColorMap {
      *
      * @param other colormap to copy
      */
-    ColorMapImpl(final ColorMapImpl other) {
+    AbstractColormap(final AbstractColormap other) {
         isReversed = other.isReversed;
         highColor = other.highColor;
         lowColor = other.lowColor;
@@ -103,11 +102,7 @@ public abstract class ColorMapImpl implements ColorMap {
      * @param position The position (0.0-1.0) to place this Color
      * @param color    Color to add to color map
      */
-    protected void addColor(final Double position, final Color color) {
-        if (position == null) {
-            addColor(color);
-            return;
-        }
+    protected void addColor(final double position, final Color color) {
         if (position < 0 || position > 1) {
             throw new IllegalArgumentException("position must be in range 0>= position <= 1");
         }
@@ -153,7 +148,7 @@ public abstract class ColorMapImpl implements ColorMap {
      * Recalculate the nodes belonging to this color map.
      */
     protected final void recalculateNodes() {
-        for (final ColorMapNode node : currentNodes) {
+        for (final ColormapNode node : currentNodes) {
             node.recalculate();
         }
     }
@@ -165,15 +160,15 @@ public abstract class ColorMapImpl implements ColorMap {
      * @return The calculated color
      */
     final Color calculateColor(final Double value) {
-        if (value == null) {
+        if (value == null || Double.isNaN(value)) {
             return getNaNColor().clone();
         } else {
             if (currentNodes.size() <= 1) {
                 return getColorAt(.5).clone();
             } else if (value < getLowValue()) {
-                return getLowColor().clone();
+                return lowColor().clone();
             } else if (value > getHighValue()) {
-                return getHighColor().clone();
+                return highColor().clone();
             } else {
                 return getColorAt((value - getLowValue()) / (getHighValue() - getLowValue()));
 
@@ -182,7 +177,7 @@ public abstract class ColorMapImpl implements ColorMap {
     }
 
     @Override
-    public final ColorMapNode getColorFromValue(final double value) {
+    public final ColormapNode getColorFromValue(final double value) {
 
         if (value < currentMinValue || value > currentMaxValue) {
             if (value < currentMinValue) {
@@ -193,13 +188,48 @@ public abstract class ColorMapImpl implements ColorMap {
             }
             recalculateNodes();
         }
-        final ColorMapNode color = new ColorMapNode(this, calculateColor(value), value);
+        final ColormapNode color = new ColormapNode(this, calculateColor(value), value);
         currentNodes.add(color);
         return color;
     }
 
+    @Override
+    public final Map<Double, Color> getFixedColors() {
+        return Collections.unmodifiableMap(definedColorNodes);
+    }
+
+    @Override
+    public final List<Color> getSparseColors() {
+        return Collections.unmodifiableList(colorMapColors);
+    }
+
+    @Override
+    public final Double lowValue() {
+        return lowValue;
+    }
+
+    @Override
+    public final Double highValue() {
+        return highValue;
+    }
+
+    @Override
+    public Color getNaNColor() {
+        return NaNColor;
+    }
+
+    @Override
+    public Color getLowColor() {
+        return lowColor;
+    }
+
+    @Override
+    public Color getHighColor() {
+        return highColor;
+    }
+
     /**
-     * @return The maximum value before all Colors are represented by {@link ColorMapImpl#highColor}.
+     * @return The maximum value before all Colors are represented by {@link AbstractColormap#highColor}.
      * {@code null} means no such ceiling exists.
      */
     protected Double getHighValue() {
@@ -216,7 +246,7 @@ public abstract class ColorMapImpl implements ColorMap {
     }
 
     /**
-     * @return The minimum value before all Colors are represented by {@link ColorMapImpl#lowColor}.
+     * @return The minimum value before all Colors are represented by {@link AbstractColormap#lowColor}.
      * {@code null} means no such floor exists.
      */
     protected Double getLowValue() {
@@ -234,9 +264,9 @@ public abstract class ColorMapImpl implements ColorMap {
     }
 
     /**
-     * @return The color of a value if it is lower than {@link ColorMapImpl#lowValue}
+     * @return The color of a value if it is lower than {@link AbstractColormap#lowValue}
      */
-    protected final Color getLowColor() {
+    protected final Color lowColor() {
         return lowColor == null ? getColorAt(0d) : lowColor;
     }
 
@@ -249,9 +279,9 @@ public abstract class ColorMapImpl implements ColorMap {
     }
 
     /**
-     * @return The color of a value if it is higher than {@link ColorMapImpl#highValue}
+     * @return The color of a value if it is higher than {@link AbstractColormap#highValue}
      */
-    protected final Color getHighColor() {
+    protected final Color highColor() {
         return highColor == null ? getColorAt(1d) : highColor;
     }
 
@@ -266,15 +296,10 @@ public abstract class ColorMapImpl implements ColorMap {
     /**
      * @return The color of a value if it is null
      */
-    protected final Color getNaNColor() {
+    protected final Color NaNColor() {
         return NaNColor;
     }
 
-    /**
-     * Set the color to use if the value is {@code null}
-     *
-     * @param NaNColor Color to use if the value is not a number.
-     */
     @Override
     public final void setNaNColor(final Color NaNColor) {
         if (!this.NaNColor.equals(NaNColor)) {
@@ -322,7 +347,7 @@ public abstract class ColorMapImpl implements ColorMap {
 
     @Override
     public final String toString() {
-        final NewColorMap annotation = getClass().getDeclaredAnnotation(NewColorMap.class);
+        final NewColormap annotation = getClass().getDeclaredAnnotation(NewColormap.class);
         if (annotation != null) {
             return String.format("Colormap {%s.%s%s}", annotation.type(), annotation.name(), isReversed ? ".Reversed" : "");
         }
@@ -335,7 +360,7 @@ public abstract class ColorMapImpl implements ColorMap {
     void recalculateMaxValue() {
         Double currentMaxValue = null;
 
-        for (final ColorMapNode node : currentNodes) {
+        for (final ColormapNode node : currentNodes) {
             if (node.value == null) {
                 continue;
             }
@@ -355,7 +380,7 @@ public abstract class ColorMapImpl implements ColorMap {
      */
     void recalculateMinValue() {
         Double currentMinValue = null;
-        for (final ColorMapNode node : currentNodes) {
+        for (final ColormapNode node : currentNodes) {
             if (node.value == null) {
                 continue;
             }
@@ -372,10 +397,10 @@ public abstract class ColorMapImpl implements ColorMap {
 
 
     static void cacheDefaultColorMaps() throws IOException, ClassNotFoundException {
-        if (ColorMapImpl.defaultColorMaps.size() == 0) {
-            final String packagePath = ColorMap.class.getPackageName().replace(".", "/");
+        if (AbstractColormap.defaultColorMaps.size() == 0) {
+            final String packagePath = Colormap.class.getPackageName().replace(".", "/");
             final File packageName = new File(packagePath);
-            final URL codeSource = ColorMap.class.getProtectionDomain().getCodeSource().getLocation();
+            final URL codeSource = Colormap.class.getProtectionDomain().getCodeSource().getLocation();
             if (new File(codeSource.getPath()).isDirectory()) {
 
                 final Enumeration<URL> resources = Thread.currentThread().getContextClassLoader().getResources(packagePath);
@@ -437,7 +462,7 @@ public abstract class ColorMapImpl implements ColorMap {
                         .replace(File.separator, ".")
                         .replace(".class", "")
         );
-        final NewColorMap annotation = colorMap.getDeclaredAnnotation(NewColorMap.class);
+        final NewColormap annotation = colorMap.getDeclaredAnnotation(NewColormap.class);
         if (annotation == null) {
             return;
         }
@@ -446,10 +471,10 @@ public abstract class ColorMapImpl implements ColorMap {
         final String withWildCard = String.format("*.%s", name);
         final String withoutWildCard = String.format("%s.%s", type, name);
 
-        if (ColorMap.class.isAssignableFrom(colorMap)) {
+        if (Colormap.class.isAssignableFrom(colorMap)) {
             defaultColorMaps.add(String.format("%s.%s", annotation.type(), annotation.name()));
-            ColorMap.registerColorMap(withWildCard, (Class<ColorMap>) colorMap);
-            ColorMap.registerColorMap(withoutWildCard, (Class<ColorMap>) colorMap);
+            Colormap.registerColorMap(withWildCard, (Class<Colormap>) colorMap);
+            Colormap.registerColorMap(withoutWildCard, (Class<Colormap>) colorMap);
         }
 
     }
@@ -466,13 +491,13 @@ public abstract class ColorMapImpl implements ColorMap {
     }
 
     @Override
-    public abstract ColorMap clone();
+    public abstract Colormap clone();
 
     @Override
     public final boolean equals(final Object o) {
         if (this == o) return true;
-        if (!(o instanceof ColorMapImpl)) return false;
-        final ColorMapImpl other = (ColorMapImpl) o;
+        if (!(o instanceof AbstractColormap)) return false;
+        final AbstractColormap other = (AbstractColormap) o;
         return isReversed == other.isReversed &&
                 Double.compare(other.currentMinValue, currentMinValue) == 0 &&
                 Double.compare(other.currentMaxValue, currentMaxValue) == 0 &&

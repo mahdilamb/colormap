@@ -1,28 +1,28 @@
 package net.mahdilamb.colormap.sequential.colorbrewer;
 
-import net.mahdilamb.colormap.ColorMapType;
-import net.mahdilamb.colormap.LinearColorMap;
-import net.mahdilamb.colormap.NewColorMap;
-import net.mahdilamb.colormap.color.Color;
+import net.mahdilamb.colormap.ColormapType;
+import net.mahdilamb.colormap.LinearColormap;
+import net.mahdilamb.colormap.NewColormap;
+import net.mahdilamb.colormap.color.ColorImpl;
 /**
  * Colorbrewer 2.0 PuRd.
  */
-@NewColorMap(type = ColorMapType.SEQUENTIAL, name = "PuRd")
-public final class PuRd extends LinearColorMap {
+@NewColormap(type = ColormapType.SEQUENTIAL, name = "PuRd")
+public final class PuRd extends LinearColormap {
     /**
      * Create a colormap based on Colorbrewer 2.0 PuRd.
      */
     public PuRd() {
         super(
-                new Color(247, 244, 249),
-                new Color(231, 225, 239),
-                new Color(212, 185, 218),
-                new Color(201, 148, 199),
-                new Color(223, 101, 176),
-                new Color(231, 41, 138),
-                new Color(206, 18, 86),
-                new Color(152, 0, 67),
-                new Color(103, 0, 31));
+                new ColorImpl(247, 244, 249),
+                new ColorImpl(231, 225, 239),
+                new ColorImpl(212, 185, 218),
+                new ColorImpl(201, 148, 199),
+                new ColorImpl(223, 101, 176),
+                new ColorImpl(231, 41, 138),
+                new ColorImpl(206, 18, 86),
+                new ColorImpl(152, 0, 67),
+                new ColorImpl(103, 0, 31));
 
 
     }

@@ -1,8 +1,8 @@
 package net.mahdilamb.colormap.tests;
 
-import net.mahdilamb.colormap.ColorMap;
-import net.mahdilamb.colormap.LinearColorMap;
-import net.mahdilamb.colormap.ColorMapNode;
+import net.mahdilamb.colormap.Colormap;
+import net.mahdilamb.colormap.ColormapNode;
+import net.mahdilamb.colormap.LinearColormap;
 import net.mahdilamb.colormap.color.Color;
 import org.junit.Test;
 
@@ -14,11 +14,11 @@ import static org.junit.Assert.*;
 
 
 public class JUnitTests {
-    static final LinearColorMap grays = new LinearColorMap(
+    static final LinearColormap grays = new LinearColormap(
             Color.get("black"),
             Color.get("white")
     );
-    static final Map<Integer, ColorMapNode> colors = new TreeMap<>();
+    static final Map<Integer, ColormapNode> colors = new TreeMap<>();
     static final int maxRange = 255;
 
     static {
@@ -148,13 +148,13 @@ public class JUnitTests {
 
     @Test
     public void ensureDefaultColorMapsLoadTest() {
-        assertFalse(ColorMap.listDefaultColorMaps().isEmpty());
+        assertFalse(Colormap.listDefaultColorMaps().isEmpty());
     }
 
     @Test(expected = UnsupportedOperationException.class)
     public void UnmodifiableColorKeepsContractTest() {
-        Color.getAWT("blue")
-                .asUnmodifiable()
+
+        Color.asUnmodifiable(Color.getAWT("blue"))
                 .setBlue(200);
 
     }

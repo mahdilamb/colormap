@@ -1,29 +1,29 @@
 package net.mahdilamb.colormap.sequential.colorbrewer;
 
-import net.mahdilamb.colormap.ColorMapType;
-import net.mahdilamb.colormap.LinearColorMap;
-import net.mahdilamb.colormap.NewColorMap;
-import net.mahdilamb.colormap.color.Color;
+import net.mahdilamb.colormap.ColormapType;
+import net.mahdilamb.colormap.LinearColormap;
+import net.mahdilamb.colormap.NewColormap;
+import net.mahdilamb.colormap.color.ColorImpl;
 
 /**
  * Sequential ColorBrewer colormap going through Purples.
  */
-@NewColorMap(type = ColorMapType.SEQUENTIAL, name = "Purples")
-public final class Purples extends LinearColorMap {
+@NewColormap(type = ColormapType.SEQUENTIAL, name = "Purples")
+public final class Purples extends LinearColormap {
     /**
      * Create a colormap based on ColorBrewer Purples.
      */
     public Purples() {
         super(
-                new Color(252, 251, 253),
-                new Color(239, 237, 245),
-                new Color(218, 218, 235),
-                new Color(188, 189, 220),
-                new Color(158, 154, 200),
-                new Color(128, 125, 186),
-                new Color(106, 81, 163),
-                new Color(84, 39, 143),
-                new Color(63, 0, 125));
+                new ColorImpl(252, 251, 253),
+                new ColorImpl(239, 237, 245),
+                new ColorImpl(218, 218, 235),
+                new ColorImpl(188, 189, 220),
+                new ColorImpl(158, 154, 200),
+                new ColorImpl(128, 125, 186),
+                new ColorImpl(106, 81, 163),
+                new ColorImpl(84, 39, 143),
+                new ColorImpl(63, 0, 125));
 
     }
 

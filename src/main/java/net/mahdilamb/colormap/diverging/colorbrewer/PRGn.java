@@ -1,30 +1,30 @@
 package net.mahdilamb.colormap.diverging.colorbrewer;
 
-import net.mahdilamb.colormap.ColorMapType;
-import net.mahdilamb.colormap.LinearColorMap;
-import net.mahdilamb.colormap.NewColorMap;
-import net.mahdilamb.colormap.color.Color;
+import net.mahdilamb.colormap.ColormapType;
+import net.mahdilamb.colormap.LinearColormap;
+import net.mahdilamb.colormap.NewColormap;
+import net.mahdilamb.colormap.color.ColorImpl;
 /**
  * Colorbrewer 2.0 colormap PRGn.
  */
-@NewColorMap(type = ColorMapType.DIVERGING, name = "PRGn")
-public final class PRGn extends LinearColorMap {
+@NewColormap(type = ColormapType.DIVERGING, name = "PRGn")
+public final class PRGn extends LinearColormap {
     /**
      * Create a colormap based on Colorbrewer 2.0 colormap PRGn.
      */
     public PRGn() {
         super(
-                new Color(64, 0, 75),
-                new Color(118, 42, 131),
-                new Color(153, 112, 171),
-                new Color(194, 165, 207),
-                new Color(231, 212, 232),
-                new Color(247, 247, 247),
-                new Color(217, 240, 211),
-                new Color(166, 219, 160),
-                new Color(90, 174, 97),
-                new Color(27, 120, 55),
-                new Color(0, 68, 27)
+                new ColorImpl(64, 0, 75),
+                new ColorImpl(118, 42, 131),
+                new ColorImpl(153, 112, 171),
+                new ColorImpl(194, 165, 207),
+                new ColorImpl(231, 212, 232),
+                new ColorImpl(247, 247, 247),
+                new ColorImpl(217, 240, 211),
+                new ColorImpl(166, 219, 160),
+                new ColorImpl(90, 174, 97),
+                new ColorImpl(27, 120, 55),
+                new ColorImpl(0, 68, 27)
         );
     }
 
