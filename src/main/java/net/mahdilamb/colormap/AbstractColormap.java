@@ -16,6 +16,113 @@ import java.util.zip.ZipInputStream;
  */
 abstract class AbstractColormap implements Colormap {
     /**
+     * An unmodifiable version of colormap
+     */
+    static final class UnmodifiableColormap implements Colormap {
+        private final Colormap original;
+
+        UnmodifiableColormap(Colormap original) {
+            this.original = original;
+
+        }
+
+        @Override
+        public Color colorAt(double value) {
+            return original.colorAt(value);
+        }
+
+        @Override
+        public boolean isReversed() {
+            return original.isReversed();
+        }
+
+        @Override
+        public void setReversed(boolean isReversed) {
+            throw new UnsupportedOperationException();
+
+        }
+
+        /**
+         * @return the same object as input
+         */
+        @Override
+        @SuppressWarnings("MethodDoesntCallSuperMethod")
+        public Colormap clone() {
+            return this;
+        }
+
+        @Override
+        public void setLowValue(Double lowValue) {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public void setHighValue(Double highValue) {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public ColormapNode getColorFromValue(double value) {
+            return original.getColorFromValue(value);
+        }
+
+        @Override
+        public Map<Double, Color> getFixedColors() {
+            return original.getFixedColors();
+        }
+
+        @Override
+        public List<Color> getSparseColors() {
+            return original.getSparseColors();
+        }
+
+        @Override
+        public Double lowValue() {
+            return original.lowValue();
+        }
+
+        @Override
+        public Double highValue() {
+            return original.highValue();
+        }
+
+        @Override
+        public Color getNaNColor() {
+            return original.getNaNColor();
+        }
+
+        @Override
+        public void setNaNColor(Color NaNColor) {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public Color getLowColor() {
+            return original.getLowColor();
+        }
+
+        @Override
+        public void setLowColor(Color lowColor) {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public Color getHighColor() {
+            return original.getHighColor();
+        }
+
+        @Override
+        public void setHighColor(Color highColor) {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public Iterator<Double> iterator() {
+            return original.iterator();
+        }
+    }
+
+    /**
      * All registered colormaps
      */
     static final Map<String, Class<Colormap>> colorMaps = new HashMap<>();

@@ -16,4 +16,5 @@ public enum ColorType {
      * Color from the Tableau package
      */
     TABLEAU
+
 }

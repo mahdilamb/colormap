@@ -14,425 +14,433 @@ public interface Colormap extends Iterable<Double>, Cloneable {
     The following tags are to add a basic class structure to ease finding colormaps. Do not remove!
      */
     //{START}//
-	/**
-	 * Create cyclic colormaps 
-	 */
-	final class Cyclic {
-		private Cyclic (){}
-		/**
-		 * @return a new Twilight colormap
-		 */
-		public static Colormap Twilight(){
-			return Colormap.get("Cyclic.Twilight");
-		}
 
-		/**
-		 * @return a new TwilightShifted colormap
-		 */
-		public static Colormap TwilightShifted(){
-			return Colormap.get("Cyclic.TwilightShifted");
-		}
+    /**
+     * Create cyclic colormaps
+     */
+    final class Cyclic {
+        private Cyclic() {
+        }
+        /**
+         * @return a new Twilight colormap
+         */
+        public static Colormap Twilight() {
+            return Colormap.get("Cyclic.Twilight");
+        }
 
-	}
+        /**
+         * @return a new TwilightShifted colormap
+         */
+        public static Colormap TwilightShifted() {
+            return Colormap.get("Cyclic.TwilightShifted");
+        }
 
-	/**
-	 * Create diverging colormaps 
-	 */
-	final class Diverging {
-		private Diverging (){}
-		/**
-		 * @return a new BentCoolWarm colormap
-		 */
-		public static Colormap BentCoolWarm(){
-			return Colormap.get("Diverging.BentCoolWarm");
-		}
+    }
 
-		/**
-		 * @return a new BrBG colormap
-		 */
-		public static Colormap BrBG(){
-			return Colormap.get("Diverging.BrBG");
-		}
+    /**
+     * Create diverging colormaps
+     */
+    final class Diverging {
+        private Diverging() {
+        }
 
-		/**
-		 * @return a new PRGn colormap
-		 */
-		public static Colormap PRGn(){
-			return Colormap.get("Diverging.PRGn");
-		}
+        /**
+         * @return a new BentCoolWarm colormap
+         */
+        public static Colormap BentCoolWarm() {
+            return Colormap.get("Diverging.BentCoolWarm");
+        }
 
-		/**
-		 * @return a new PiYG colormap
-		 */
-		public static Colormap PiYG(){
-			return Colormap.get("Diverging.PiYG");
-		}
+        /**
+         * @return a new BrBG colormap
+         */
+        public static Colormap BrBG() {
+            return Colormap.get("Diverging.BrBG");
+        }
 
-		/**
-		 * @return a new PuOr colormap
-		 */
-		public static Colormap PuOr(){
-			return Colormap.get("Diverging.PuOr");
-		}
+        /**
+         * @return a new PRGn colormap
+         */
+        public static Colormap PRGn() {
+            return Colormap.get("Diverging.PRGn");
+        }
 
-		/**
-		 * @return a new RdBu colormap
-		 */
-		public static Colormap RdBu(){
-			return Colormap.get("Diverging.RdBu");
-		}
+        /**
+         * @return a new PiYG colormap
+         */
+        public static Colormap PiYG() {
+            return Colormap.get("Diverging.PiYG");
+        }
 
-		/**
-		 * @return a new RdGy colormap
-		 */
-		public static Colormap RdGy(){
-			return Colormap.get("Diverging.RdGy");
-		}
+        /**
+         * @return a new PuOr colormap
+         */
+        public static Colormap PuOr() {
+            return Colormap.get("Diverging.PuOr");
+        }
 
-		/**
-		 * @return a new RdYlBu colormap
-		 */
-		public static Colormap RdYlBu(){
-			return Colormap.get("Diverging.RdYlBu");
-		}
+        /**
+         * @return a new RdBu colormap
+         */
+        public static Colormap RdBu() {
+            return Colormap.get("Diverging.RdBu");
+        }
 
-		/**
-		 * @return a new RdYlGn colormap
-		 */
-		public static Colormap RdYlGn(){
-			return Colormap.get("Diverging.RdYlGn");
-		}
+        /**
+         * @return a new RdGy colormap
+         */
+        public static Colormap RdGy() {
+            return Colormap.get("Diverging.RdGy");
+        }
 
-		/**
-		 * @return a new SmoothCoolWarm colormap
-		 */
-		public static Colormap SmoothCoolWarm(){
-			return Colormap.get("Diverging.SmoothCoolWarm");
-		}
+        /**
+         * @return a new RdYlBu colormap
+         */
+        public static Colormap RdYlBu() {
+            return Colormap.get("Diverging.RdYlBu");
+        }
 
-		/**
-		 * @return a new Spectral colormap
-		 */
-		public static Colormap Spectral(){
-			return Colormap.get("Diverging.Spectral");
-		}
+        /**
+         * @return a new RdYlGn colormap
+         */
+        public static Colormap RdYlGn() {
+            return Colormap.get("Diverging.RdYlGn");
+        }
 
-	}
+        /**
+         * @return a new SmoothCoolWarm colormap
+         */
+        public static Colormap SmoothCoolWarm() {
+            return Colormap.get("Diverging.SmoothCoolWarm");
+        }
 
-	/**
-	 * Create qualitative colormaps 
-	 */
-	final class Qualitative {
-		private Qualitative (){}
-		/**
-		 * @return a new Accent colormap
-		 */
-		public static Colormap Accent(){
-			return Colormap.get("Qualitative.Accent");
-		}
+        /**
+         * @return a new Spectral colormap
+         */
+        public static Colormap Spectral() {
+            return Colormap.get("Diverging.Spectral");
+        }
 
-		/**
-		 * @return a new Dark2 colormap
-		 */
-		public static Colormap Dark2(){
-			return Colormap.get("Qualitative.Dark2");
-		}
+    }
 
-		/**
-		 * @return a new Paired colormap
-		 */
-		public static Colormap Paired(){
-			return Colormap.get("Qualitative.Paired");
-		}
+    /**
+     * Create qualitative colormaps
+     */
+    final class Qualitative {
+        private Qualitative() {
+        }
 
-		/**
-		 * @return a new Pastel1 colormap
-		 */
-		public static Colormap Pastel1(){
-			return Colormap.get("Qualitative.Pastel1");
-		}
+        /**
+         * @return a new Accent colormap
+         */
+        public static Colormap Accent() {
+            return Colormap.get("Qualitative.Accent");
+        }
 
-		/**
-		 * @return a new Pastel2 colormap
-		 */
-		public static Colormap Pastel2(){
-			return Colormap.get("Qualitative.Pastel2");
-		}
+        /**
+         * @return a new Dark2 colormap
+         */
+        public static Colormap Dark2() {
+            return Colormap.get("Qualitative.Dark2");
+        }
 
-		/**
-		 * @return a new Set1 colormap
-		 */
-		public static Colormap Set1(){
-			return Colormap.get("Qualitative.Set1");
-		}
+        /**
+         * @return a new Paired colormap
+         */
+        public static Colormap Paired() {
+            return Colormap.get("Qualitative.Paired");
+        }
 
-		/**
-		 * @return a new Set2 colormap
-		 */
-		public static Colormap Set2(){
-			return Colormap.get("Qualitative.Set2");
-		}
+        /**
+         * @return a new Pastel1 colormap
+         */
+        public static Colormap Pastel1() {
+            return Colormap.get("Qualitative.Pastel1");
+        }
 
-		/**
-		 * @return a new Set3 colormap
-		 */
-		public static Colormap Set3(){
-			return Colormap.get("Qualitative.Set3");
-		}
+        /**
+         * @return a new Pastel2 colormap
+         */
+        public static Colormap Pastel2() {
+            return Colormap.get("Qualitative.Pastel2");
+        }
 
-		/**
-		 * @return a new Tab10 colormap
-		 */
-		public static Colormap Tab10(){
-			return Colormap.get("Qualitative.Tab10");
-		}
+        /**
+         * @return a new Set1 colormap
+         */
+        public static Colormap Set1() {
+            return Colormap.get("Qualitative.Set1");
+        }
 
-		/**
-		 * @return a new Tab20 colormap
-		 */
-		public static Colormap Tab20(){
-			return Colormap.get("Qualitative.Tab20");
-		}
+        /**
+         * @return a new Set2 colormap
+         */
+        public static Colormap Set2() {
+            return Colormap.get("Qualitative.Set2");
+        }
 
-		/**
-		 * @return a new Tab20b colormap
-		 */
-		public static Colormap Tab20b(){
-			return Colormap.get("Qualitative.Tab20b");
-		}
+        /**
+         * @return a new Set3 colormap
+         */
+        public static Colormap Set3() {
+            return Colormap.get("Qualitative.Set3");
+        }
 
-		/**
-		 * @return a new Tab20c colormap
-		 */
-		public static Colormap Tab20c(){
-			return Colormap.get("Qualitative.Tab20c");
-		}
+        /**
+         * @return a new Tab10 colormap
+         */
+        public static Colormap Tab10() {
+            return Colormap.get("Qualitative.Tab10");
+        }
 
-	}
+        /**
+         * @return a new Tab20 colormap
+         */
+        public static Colormap Tab20() {
+            return Colormap.get("Qualitative.Tab20");
+        }
 
-	/**
-	 * Create sequential colormaps 
-	 */
-	final class Sequential {
-		private Sequential (){}
-		/**
-		 * @return a new BlackBody colormap
-		 */
-		public static Colormap BlackBody(){
-			return Colormap.get("Sequential.BlackBody");
-		}
+        /**
+         * @return a new Tab20b colormap
+         */
+        public static Colormap Tab20b() {
+            return Colormap.get("Qualitative.Tab20b");
+        }
 
-		/**
-		 * @return a new Blues colormap
-		 */
-		public static Colormap Blues(){
-			return Colormap.get("Sequential.Blues");
-		}
+        /**
+         * @return a new Tab20c colormap
+         */
+        public static Colormap Tab20c() {
+            return Colormap.get("Qualitative.Tab20c");
+        }
 
-		/**
-		 * @return a new BuGn colormap
-		 */
-		public static Colormap BuGn(){
-			return Colormap.get("Sequential.BuGn");
-		}
+    }
 
-		/**
-		 * @return a new BuPu colormap
-		 */
-		public static Colormap BuPu(){
-			return Colormap.get("Sequential.BuPu");
-		}
+    /**
+     * Create sequential colormaps
+     */
+    final class Sequential {
+        private Sequential() {
+        }
 
-		/**
-		 * @return a new Cividis colormap
-		 */
-		public static Colormap Cividis(){
-			return Colormap.get("Sequential.Cividis");
-		}
+        /**
+         * @return a new BlackBody colormap
+         */
+        public static Colormap BlackBody() {
+            return Colormap.get("Sequential.BlackBody");
+        }
 
-		/**
-		 * @return a new GnBu colormap
-		 */
-		public static Colormap GnBu(){
-			return Colormap.get("Sequential.GnBu");
-		}
+        /**
+         * @return a new Blues colormap
+         */
+        public static Colormap Blues() {
+            return Colormap.get("Sequential.Blues");
+        }
 
-		/**
-		 * @return a new Greens colormap
-		 */
-		public static Colormap Greens(){
-			return Colormap.get("Sequential.Greens");
-		}
+        /**
+         * @return a new BuGn colormap
+         */
+        public static Colormap BuGn() {
+            return Colormap.get("Sequential.BuGn");
+        }
 
-		/**
-		 * @return a new Greys colormap
-		 */
-		public static Colormap Greys(){
-			return Colormap.get("Sequential.Greys");
-		}
+        /**
+         * @return a new BuPu colormap
+         */
+        public static Colormap BuPu() {
+            return Colormap.get("Sequential.BuPu");
+        }
 
-		/**
-		 * @return a new Hesperia colormap
-		 */
-		public static Colormap Hesperia(){
-			return Colormap.get("Sequential.Hesperia");
-		}
+        /**
+         * @return a new Cividis colormap
+         */
+        public static Colormap Cividis() {
+            return Colormap.get("Sequential.Cividis");
+        }
 
-		/**
-		 * @return a new Inferno colormap
-		 */
-		public static Colormap Inferno(){
-			return Colormap.get("Sequential.Inferno");
-		}
+        /**
+         * @return a new GnBu colormap
+         */
+        public static Colormap GnBu() {
+            return Colormap.get("Sequential.GnBu");
+        }
 
-		/**
-		 * @return a new Kindlmann colormap
-		 */
-		public static Colormap Kindlmann(){
-			return Colormap.get("Sequential.Kindlmann");
-		}
+        /**
+         * @return a new Greens colormap
+         */
+        public static Colormap Greens() {
+            return Colormap.get("Sequential.Greens");
+        }
 
-		/**
-		 * @return a new KindlmannExtended colormap
-		 */
-		public static Colormap KindlmannExtended(){
-			return Colormap.get("Sequential.KindlmannExtended");
-		}
+        /**
+         * @return a new Greys colormap
+         */
+        public static Colormap Greys() {
+            return Colormap.get("Sequential.Greys");
+        }
 
-		/**
-		 * @return a new Lacerta colormap
-		 */
-		public static Colormap Lacerta(){
-			return Colormap.get("Sequential.Lacerta");
-		}
+        /**
+         * @return a new Hesperia colormap
+         */
+        public static Colormap Hesperia() {
+            return Colormap.get("Sequential.Hesperia");
+        }
 
-		/**
-		 * @return a new Laguna colormap
-		 */
-		public static Colormap Laguna(){
-			return Colormap.get("Sequential.Laguna");
-		}
+        /**
+         * @return a new Inferno colormap
+         */
+        public static Colormap Inferno() {
+            return Colormap.get("Sequential.Inferno");
+        }
 
-		/**
-		 * @return a new Magma colormap
-		 */
-		public static Colormap Magma(){
-			return Colormap.get("Sequential.Magma");
-		}
+        /**
+         * @return a new Kindlmann colormap
+         */
+        public static Colormap Kindlmann() {
+            return Colormap.get("Sequential.Kindlmann");
+        }
 
-		/**
-		 * @return a new ModifiedPlasma colormap
-		 */
-		public static Colormap ModifiedPlasma(){
-			return Colormap.get("Sequential.ModifiedPlasma");
-		}
+        /**
+         * @return a new KindlmannExtended colormap
+         */
+        public static Colormap KindlmannExtended() {
+            return Colormap.get("Sequential.KindlmannExtended");
+        }
 
-		/**
-		 * @return a new OrRd colormap
-		 */
-		public static Colormap OrRd(){
-			return Colormap.get("Sequential.OrRd");
-		}
+        /**
+         * @return a new Lacerta colormap
+         */
+        public static Colormap Lacerta() {
+            return Colormap.get("Sequential.Lacerta");
+        }
 
-		/**
-		 * @return a new Oranges colormap
-		 */
-		public static Colormap Oranges(){
-			return Colormap.get("Sequential.Oranges");
-		}
+        /**
+         * @return a new Laguna colormap
+         */
+        public static Colormap Laguna() {
+            return Colormap.get("Sequential.Laguna");
+        }
 
-		/**
-		 * @return a new Plasma colormap
-		 */
-		public static Colormap Plasma(){
-			return Colormap.get("Sequential.Plasma");
-		}
+        /**
+         * @return a new Magma colormap
+         */
+        public static Colormap Magma() {
+            return Colormap.get("Sequential.Magma");
+        }
 
-		/**
-		 * @return a new PuBu colormap
-		 */
-		public static Colormap PuBu(){
-			return Colormap.get("Sequential.PuBu");
-		}
+        /**
+         * @return a new ModifiedPlasma colormap
+         */
+        public static Colormap ModifiedPlasma() {
+            return Colormap.get("Sequential.ModifiedPlasma");
+        }
 
-		/**
-		 * @return a new PuBuGn colormap
-		 */
-		public static Colormap PuBuGn(){
-			return Colormap.get("Sequential.PuBuGn");
-		}
+        /**
+         * @return a new OrRd colormap
+         */
+        public static Colormap OrRd() {
+            return Colormap.get("Sequential.OrRd");
+        }
 
-		/**
-		 * @return a new PuRd colormap
-		 */
-		public static Colormap PuRd(){
-			return Colormap.get("Sequential.PuRd");
-		}
+        /**
+         * @return a new Oranges colormap
+         */
+        public static Colormap Oranges() {
+            return Colormap.get("Sequential.Oranges");
+        }
 
-		/**
-		 * @return a new Purples colormap
-		 */
-		public static Colormap Purples(){
-			return Colormap.get("Sequential.Purples");
-		}
+        /**
+         * @return a new Plasma colormap
+         */
+        public static Colormap Plasma() {
+            return Colormap.get("Sequential.Plasma");
+        }
 
-		/**
-		 * @return a new RdPu colormap
-		 */
-		public static Colormap RdPu(){
-			return Colormap.get("Sequential.RdPu");
-		}
+        /**
+         * @return a new PuBu colormap
+         */
+        public static Colormap PuBu() {
+            return Colormap.get("Sequential.PuBu");
+        }
 
-		/**
-		 * @return a new Reds colormap
-		 */
-		public static Colormap Reds(){
-			return Colormap.get("Sequential.Reds");
-		}
+        /**
+         * @return a new PuBuGn colormap
+         */
+        public static Colormap PuBuGn() {
+            return Colormap.get("Sequential.PuBuGn");
+        }
 
-		/**
-		 * @return a new Turbo colormap
-		 */
-		public static Colormap Turbo(){
-			return Colormap.get("Sequential.Turbo");
-		}
+        /**
+         * @return a new PuRd colormap
+         */
+        public static Colormap PuRd() {
+            return Colormap.get("Sequential.PuRd");
+        }
 
-		/**
-		 * @return a new Viridis colormap
-		 */
-		public static Colormap Viridis(){
-			return Colormap.get("Sequential.Viridis");
-		}
+        /**
+         * @return a new Purples colormap
+         */
+        public static Colormap Purples() {
+            return Colormap.get("Sequential.Purples");
+        }
 
-		/**
-		 * @return a new YlGn colormap
-		 */
-		public static Colormap YlGn(){
-			return Colormap.get("Sequential.YlGn");
-		}
+        /**
+         * @return a new RdPu colormap
+         */
+        public static Colormap RdPu() {
+            return Colormap.get("Sequential.RdPu");
+        }
 
-		/**
-		 * @return a new YlGnBu colormap
-		 */
-		public static Colormap YlGnBu(){
-			return Colormap.get("Sequential.YlGnBu");
-		}
+        /**
+         * @return a new Reds colormap
+         */
+        public static Colormap Reds() {
+            return Colormap.get("Sequential.Reds");
+        }
 
-		/**
-		 * @return a new YlOrBr colormap
-		 */
-		public static Colormap YlOrBr(){
-			return Colormap.get("Sequential.YlOrBr");
-		}
+        /**
+         * @return a new Turbo colormap
+         */
+        public static Colormap Turbo() {
+            return Colormap.get("Sequential.Turbo");
+        }
 
-		/**
-		 * @return a new YlOrRd colormap
-		 */
-		public static Colormap YlOrRd(){
-			return Colormap.get("Sequential.YlOrRd");
-		}
+        /**
+         * @return a new Viridis colormap
+         */
+        public static Colormap Viridis() {
+            return Colormap.get("Sequential.Viridis");
+        }
 
-	}
+        /**
+         * @return a new YlGn colormap
+         */
+        public static Colormap YlGn() {
+            return Colormap.get("Sequential.YlGn");
+        }
+
+        /**
+         * @return a new YlGnBu colormap
+         */
+        public static Colormap YlGnBu() {
+            return Colormap.get("Sequential.YlGnBu");
+        }
+
+        /**
+         * @return a new YlOrBr colormap
+         */
+        public static Colormap YlOrBr() {
+            return Colormap.get("Sequential.YlOrBr");
+        }
+
+        /**
+         * @return a new YlOrRd colormap
+         */
+        public static Colormap YlOrRd() {
+            return Colormap.get("Sequential.YlOrRd");
+        }
+
+    }
 
     //{END}//
 
@@ -549,6 +557,16 @@ public interface Colormap extends Iterable<Double>, Cloneable {
     }
 
     /**
+     * Create an unmodifiable version of a colormap
+     *
+     * @param source the colormap to get an unmodifiable version of
+     * @return an unmodifiable version of the source colormap
+     */
+    static Colormap asUnmodifiable(final Colormap source) {
+        return new AbstractColormap.UnmodifiableColormap(source);
+    }
+
+    /**
      * Get the Color at a specified value. Does not add the value to the color map. Primary way to show a graphical representation of this color map.
      *
      * @param value Value to get the associated Color from
@@ -654,6 +672,7 @@ public interface Colormap extends Iterable<Double>, Cloneable {
      * @param highColor The Color to provide if a value is higher than {@link AbstractColormap#getHighValue()}
      */
     void setHighColor(final Color highColor);
+
 
     /**
      * Get the Color at a specified value. Does not add the value to the color map. Considers whether the color map is
