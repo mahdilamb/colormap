@@ -6,7 +6,7 @@ This is a Java-based package that enables the easy creation of linear and catego
 
 There are many default colormaps, including many from [Matplotlib](https://matplotlib.org/)
 , [Tableau](https://www.tableau.com/) and other sources (see [credits](#credits)). For ease, most colormaps can be
-obtained by using the `Colormap.get()`. Alternatively, colormaps can be created by using inner classes in colormaps
+obtained by using the `Colormap.get(...)`. Alternatively, colormaps can be created by using inner classes in colormaps
 (e.g. `Colormap.Sequential.Viridis()`). 
 
 The colormaps are autoranging so, in the example below, the color will change depending on the bounds of the color map.
@@ -33,7 +33,7 @@ public class Test {
 ```
 
 The getColormap method is case insensitive and can also be used to obtain the colormap reversed (
-e.g. `Viridis.reversed`). The `Colormap.listDefaultColormaps()` will provide a list of all the default colormaps
+e.g. `Viridis.reversed`). The `Colormap.listDefaults()` will provide a list of all the default colormaps
 available.
 
 ## Color

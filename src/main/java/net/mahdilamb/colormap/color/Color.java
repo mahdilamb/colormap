@@ -941,6 +941,7 @@ public interface Color extends Cloneable {
      * @param g Green
      * @param b Blue
      * @param a Alpha
+     * @return Color from floating point input
      */
     static Color create(final double r, final double g, final double b, final double a) {
         return new ColorImpl((float) r, (float) g, (float) b, (float) a);
@@ -954,6 +955,7 @@ public interface Color extends Cloneable {
      * @param g Green (0-255)
      * @param b BLue (0-255)
      * @param a Alpha (0-255)
+     * @return Color from integer inputs
      */
     static Color create(final int r, final int g, final int b, final int a) {
         return new ColorImpl(r / 255f, g / 255f, b / 255f, a / 255f);
@@ -966,6 +968,7 @@ public interface Color extends Cloneable {
      * @param r Red (0.0-1.0)
      * @param g Green (0.0-1.0)
      * @param b Blue (0.0-1.0)
+     * @return Color from RGB floating point input
      */
     static Color create(final double r, final double g, final double b) {
         return new ColorImpl(r, g, b, 1.);
@@ -977,6 +980,7 @@ public interface Color extends Cloneable {
      * @param r Red (0-255)
      * @param g Green (0-255)
      * @param b Blue (0-255)
+     * @return Color from RGB interger input
      */
     static Color create(final int r, final int g, final int b) {
         return new ColorImpl(r / 255f, g / 255f, b / 255f, 1.);
