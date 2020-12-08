@@ -3,7 +3,7 @@ package net.mahdilamb.colormap.color;
 import static net.mahdilamb.colormap.color.ColorUtils.*;
 
 /**
- * Main interface for color
+ * Main interface for color. Colors are either generated using the {@link #get} or {@link #create} methods
  */
 public interface Color extends Cloneable {
 
