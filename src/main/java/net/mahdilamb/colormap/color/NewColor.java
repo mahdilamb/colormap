@@ -13,13 +13,11 @@ import static java.lang.annotation.ElementType.FIELD;
 @Target(FIELD)
 public @interface NewColor {
     /**
-     *
      * @return Category of the Color
      */
     ColorType type();
 
     /**
-     *
      * @return Name of the color
      */
     String name();

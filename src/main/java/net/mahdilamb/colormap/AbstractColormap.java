@@ -14,7 +14,7 @@ import java.util.zip.ZipInputStream;
 /**
  * Abstract color map that allows or the definition of a color map that is evenly spaced, or spaced at defined locations apart.
  */
-public abstract class AbstractColormap implements Colormap {
+abstract class AbstractColormap implements Colormap {
     /**
      * All registered colormaps
      */
@@ -59,7 +59,7 @@ public abstract class AbstractColormap implements Colormap {
     /**
      * Color for {@code null} values
      */
-    Color NaNColor = Color.from(Color.black);
+    Color NaNColor = Color.create(Color.black);
     /**
      * Color for values lower than or equal to {@link AbstractColormap#lowValue}
      */
@@ -93,6 +93,89 @@ public abstract class AbstractColormap implements Colormap {
 
         definedColorNodes.putAll(other.getFixedColors());
         colorMapColors.addAll(other.getSparseColors());
+
+    }
+
+    static void cacheDefaultColorMaps() throws IOException, ClassNotFoundException {
+        if (AbstractColormap.defaultColorMaps.size() == 0) {
+            final String packagePath = Colormap.class.getPackageName().replace(".", "/");
+            final File packageName = new File(packagePath);
+            final URL codeSource = Colormap.class.getProtectionDomain().getCodeSource().getLocation();
+            if (new File(codeSource.getPath()).isDirectory()) {
+
+                final Enumeration<URL> resources = Thread.currentThread().getContextClassLoader().getResources(packagePath);
+                final Stack<File> directories = new Stack<>();
+                while (resources.hasMoreElements()) {
+                    try {
+                        final File file = new File(URLDecoder.decode(resources.nextElement().getPath(), "UTF-8"));
+                        if (!file.isFile()) {
+                            directories.push(file);
+                        } else {
+                            addColorMapClass(packageName, file);
+                        }
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
+                while (!directories.empty()) {
+                    final File dir = directories.pop();
+                    if (dir == null) {
+                        continue;
+                    }
+                    final File[] files = dir.listFiles();
+                    if (files == null) {
+                        continue;
+                    }
+                    for (final File file : files) {
+                        if (!file.isFile()) {
+                            directories.push(file);
+                        } else {
+                            addColorMapClass(packageName, file);
+                        }
+                    }
+                }
+            } else {
+                try (final ZipInputStream jar = new JarInputStream(codeSource.openStream())) {
+                    ZipEntry ze;
+                    while ((ze = jar.getNextEntry()) != null) {
+                        final File file = new File(ze.toString());
+                        if (!file.toString().endsWith(".class") || file.toString().length() < packagePath.length() || !file.toString().contains(packageName.toString())) {
+                            continue;
+                        }
+
+                        addColorMapClass(packageName, file);
+                    }
+                }
+            }
+
+
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    static void addColorMapClass(final File packageName, final File file) throws ClassNotFoundException {
+
+        final Class<?> colorMap = Class.forName(
+                file
+                        .toString()
+                        .substring(file.toString().indexOf(packageName.toString()))
+                        .replace(File.separator, ".")
+                        .replace(".class", "")
+        );
+        final NewColormap annotation = colorMap.getDeclaredAnnotation(NewColormap.class);
+        if (annotation == null) {
+            return;
+        }
+        final String name = annotation.name().toLowerCase();
+        final String type = annotation.type().name().toLowerCase();
+        final String withWildCard = String.format("*.%s", name);
+        final String withoutWildCard = String.format("%s.%s", type, name);
+
+        if (Colormap.class.isAssignableFrom(colorMap)) {
+            defaultColorMaps.add(String.format("%s.%s", annotation.type(), annotation.name()));
+            Colormap.registerColorMap(withWildCard, (Class<Colormap>) colorMap);
+            Colormap.registerColorMap(withoutWildCard, (Class<Colormap>) colorMap);
+        }
 
     }
 
@@ -219,13 +302,37 @@ public abstract class AbstractColormap implements Colormap {
     }
 
     @Override
+    public final void setNaNColor(final Color NaNColor) {
+        if (!this.NaNColor.equals(NaNColor)) {
+            this.NaNColor = NaNColor;
+            recalculateNodes();
+        }
+    }
+
+    @Override
     public Color getLowColor() {
         return lowColor;
     }
 
     @Override
+    public final void setLowColor(final Color lowColor) {
+        if (!this.lowColor.equals(lowColor)) {
+            this.lowColor = lowColor;
+            recalculateNodes();
+        }
+    }
+
+    @Override
     public Color getHighColor() {
         return highColor;
+    }
+
+    @Override
+    public final void setHighColor(final Color highColor) {
+        if (!this.highColor.equals(highColor)) {
+            this.highColor = highColor;
+            recalculateNodes();
+        }
     }
 
     /**
@@ -270,14 +377,6 @@ public abstract class AbstractColormap implements Colormap {
         return lowColor == null ? getColorAt(0d) : lowColor;
     }
 
-    @Override
-    public final void setLowColor(final Color lowColor) {
-        if (!this.lowColor.equals(lowColor)) {
-            this.lowColor = lowColor;
-            recalculateNodes();
-        }
-    }
-
     /**
      * @return The color of a value if it is higher than {@link AbstractColormap#highValue}
      */
@@ -285,27 +384,11 @@ public abstract class AbstractColormap implements Colormap {
         return highColor == null ? getColorAt(1d) : highColor;
     }
 
-    @Override
-    public final void setHighColor(final Color highColor) {
-        if (!this.highColor.equals(highColor)) {
-            this.highColor = highColor;
-            recalculateNodes();
-        }
-    }
-
     /**
      * @return The color of a value if it is null
      */
     protected final Color NaNColor() {
         return NaNColor;
-    }
-
-    @Override
-    public final void setNaNColor(final Color NaNColor) {
-        if (!this.NaNColor.equals(NaNColor)) {
-            this.NaNColor = NaNColor;
-            recalculateNodes();
-        }
     }
 
     /**
@@ -393,90 +476,6 @@ public abstract class AbstractColormap implements Colormap {
             this.currentMinValue = currentMinValue;
             recalculateNodes();
         }
-    }
-
-
-    static void cacheDefaultColorMaps() throws IOException, ClassNotFoundException {
-        if (AbstractColormap.defaultColorMaps.size() == 0) {
-            final String packagePath = Colormap.class.getPackageName().replace(".", "/");
-            final File packageName = new File(packagePath);
-            final URL codeSource = Colormap.class.getProtectionDomain().getCodeSource().getLocation();
-            if (new File(codeSource.getPath()).isDirectory()) {
-
-                final Enumeration<URL> resources = Thread.currentThread().getContextClassLoader().getResources(packagePath);
-                final Stack<File> directories = new Stack<>();
-                while (resources.hasMoreElements()) {
-                    try {
-                        final File file = new File(URLDecoder.decode(resources.nextElement().getPath(), "UTF-8"));
-                        if (!file.isFile()) {
-                            directories.push(file);
-                        } else {
-                            addColorMapClass(packageName, file);
-                        }
-                    } catch (ClassNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                }
-                while (!directories.empty()) {
-                    final File dir = directories.pop();
-                    if (dir == null) {
-                        continue;
-                    }
-                    final File[] files = dir.listFiles();
-                    if (files == null) {
-                        continue;
-                    }
-                    for (final File file : files) {
-                        if (!file.isFile()) {
-                            directories.push(file);
-                        } else {
-                            addColorMapClass(packageName, file);
-                        }
-                    }
-                }
-            } else {
-                try (final ZipInputStream jar = new JarInputStream(codeSource.openStream())) {
-                    ZipEntry ze;
-                    while ((ze = jar.getNextEntry()) != null) {
-                        final File file = new File(ze.toString());
-                        if (!file.toString().endsWith(".class") || file.toString().length() < packagePath.length() || !file.toString().contains(packageName.toString())) {
-                            continue;
-                        }
-
-                        addColorMapClass(packageName, file);
-                    }
-                }
-            }
-
-
-        }
-    }
-
-    @SuppressWarnings("unchecked")
-    static void addColorMapClass(final File packageName, final File file) throws ClassNotFoundException {
-
-        final Class<?> colorMap = Class.forName(
-                file
-                        .toString()
-                        .substring(file.toString().indexOf(packageName.toString()))
-                        .replace(File.separator, ".")
-                        .replace(".class", "")
-        );
-        final NewColormap annotation = colorMap.getDeclaredAnnotation(NewColormap.class);
-        if (annotation == null) {
-            return;
-        }
-        final String name = annotation.name().toLowerCase();
-        final String type = annotation.type().name().toLowerCase();
-        final String withWildCard = String.format("*.%s", name);
-        final String withoutWildCard = String.format("%s.%s", type, name);
-
-        if (Colormap.class.isAssignableFrom(colorMap)) {
-            defaultColorMaps.add(String.format("%s.%s", annotation.type(), annotation.name()));
-            Colormap.registerColorMap(withWildCard, (Class<Colormap>) colorMap);
-            Colormap.registerColorMap(withoutWildCard, (Class<Colormap>) colorMap);
-        }
-
     }
 
     /**

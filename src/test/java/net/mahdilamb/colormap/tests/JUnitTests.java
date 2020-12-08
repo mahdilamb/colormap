@@ -148,7 +148,7 @@ public class JUnitTests {
 
     @Test
     public void ensureDefaultColorMapsLoadTest() {
-        assertFalse(Colormap.listDefaultColorMaps().isEmpty());
+        assertFalse(Colormap.listDefaults().isEmpty());
     }
 
     @Test(expected = UnsupportedOperationException.class)

@@ -15,26 +15,26 @@ public final class Tab20c extends CategoricalColormap {
      */
     public Tab20c() {
         super(
-                Color.from("#3182BD"),
-                Color.from("#6BAED6"),
-                Color.from("#9ECAE1"),
-                Color.from("#C6DBEF"),
-                Color.from("#E6550D"),
-                Color.from("#FD8D3C"),
-                Color.from("#FDAE6B"),
-                Color.from("#FDD0A2"),
-                Color.from("#31A354"),
-                Color.from("#74C476"),
-                Color.from("#A1D99B"),
-                Color.from("#C7E9C0"),
-                Color.from("#756BB1"),
-                Color.from("#9E9AC8"),
-                Color.from("#BCBDDC"),
-                Color.from("#DADAEB"),
-                Color.from("#636363"),
-                Color.from("#969696"),
-                Color.from("#BDBDBD"),
-                Color.from("#D9D9D9"));
+                Color.create("#3182BD"),
+                Color.create("#6BAED6"),
+                Color.create("#9ECAE1"),
+                Color.create("#C6DBEF"),
+                Color.create("#E6550D"),
+                Color.create("#FD8D3C"),
+                Color.create("#FDAE6B"),
+                Color.create("#FDD0A2"),
+                Color.create("#31A354"),
+                Color.create("#74C476"),
+                Color.create("#A1D99B"),
+                Color.create("#C7E9C0"),
+                Color.create("#756BB1"),
+                Color.create("#9E9AC8"),
+                Color.create("#BCBDDC"),
+                Color.create("#DADAEB"),
+                Color.create("#636363"),
+                Color.create("#969696"),
+                Color.create("#BDBDBD"),
+                Color.create("#D9D9D9"));
     }
 
 

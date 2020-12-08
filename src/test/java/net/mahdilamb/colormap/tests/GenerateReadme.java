@@ -29,7 +29,7 @@ public final class GenerateReadme {
         } else {
             Files.createDirectory(out.toPath());
         }
-        Colormap.listDefaultColorMaps().forEach(cmapName -> {
+        Colormap.listDefaults().forEach(cmapName -> {
             final Colormap cmap = Colormap.get(cmapName);
             final BufferedImage image = new BufferedImage(192, 20, BufferedImage.TYPE_INT_ARGB);
             for (int x = 0; x < image.getWidth(); ++x) {
@@ -52,7 +52,7 @@ public final class GenerateReadme {
         Files.write(new File("README.md").toPath(), readme.toString().getBytes());
     }
 
-    private static String toTitleCase(final String text) {
+    public static String toTitleCase(final String text) {
         return text.length() <= 1 ?
                 text.toUpperCase() :
                 Arrays.stream(text.split(" ")).map(w -> String.valueOf(w.charAt(0)).toUpperCase() + w.substring(1).toLowerCase()).collect(Collectors.joining(" "));

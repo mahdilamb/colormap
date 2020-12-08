@@ -3,29 +3,30 @@ package net.mahdilamb.colormap.diverging.colorbrewer;
 import net.mahdilamb.colormap.ColormapType;
 import net.mahdilamb.colormap.LinearColormap;
 import net.mahdilamb.colormap.NewColormap;
-import net.mahdilamb.colormap.color.ColorImpl;
+import net.mahdilamb.colormap.color.Color;
 
 /**
  * Colorbrewer 2.0 colormap PuOr.
  */
 @NewColormap(type = ColormapType.DIVERGING, name = "PuOr")
 public final class PuOr extends LinearColormap {
+
     /**
      * Create a colormap based on Colorbrewer 2.0 colormap PuOr.
      */
     public PuOr() {
         super(
-                new ColorImpl(127, 59, 8),
-                new ColorImpl(179, 88, 6),
-                new ColorImpl(224, 130, 20),
-                new ColorImpl(253, 184, 99),
-                new ColorImpl(254, 224, 182),
-                new ColorImpl(247, 247, 247),
-                new ColorImpl(216, 218, 235),
-                new ColorImpl(178, 171, 210),
-                new ColorImpl(128, 115, 172),
-                new ColorImpl(84, 39, 136),
-                new ColorImpl(45, 0, 75));
+                Color.create(127, 59, 8),
+                Color.create(179, 88, 6),
+                Color.create(224, 130, 20),
+                Color.create(253, 184, 99),
+                Color.create(254, 224, 182),
+                Color.create(247, 247, 247),
+                Color.create(216, 218, 235),
+                Color.create(178, 171, 210),
+                Color.create(128, 115, 172),
+                Color.create(84, 39, 136),
+                Color.create(45, 0, 75));
 
 
     }

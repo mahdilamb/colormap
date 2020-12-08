@@ -3,97 +3,13 @@ package net.mahdilamb.colormap.color;
 import java.lang.reflect.Field;
 import java.util.*;
 
-import static net.mahdilamb.colormap.color.ColorUtils.*;
-
 /**
  * The Color class is a framework independent holder of color. The primary motivation of this class is to hold a 4-component float representation o
  * of an RGBA color that is mutable, and for those changes to be listenable.
  * <p>
  * In addition, there contain string constants that represent generally used colors from AWT, CSS4 and Tableau.
  */
-public class ColorImpl implements Color {
-    /**
-     * An unmodifiable version of a color
-     */
-    static final class UnmodifiableColor implements Color {
-
-        private final Color color;
-
-        /**
-         * @param color the color to create an unmodifiable version of
-         */
-        UnmodifiableColor(final Color color) {
-            this.color = color;
-        }
-
-        @Override
-        public Color red(final double red) throws UnsupportedOperationException {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public Color green(final double green) throws UnsupportedOperationException {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public Color blue(final double blue) throws UnsupportedOperationException {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public Color alpha(final double alpha) throws UnsupportedOperationException {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public float red() {
-            return color.red();
-        }
-
-        @Override
-        public float green() {
-            return color.green();
-        }
-
-        @Override
-        public float blue() {
-            return color.blue();
-        }
-
-        @Override
-        public float alpha() {
-            return color.alpha();
-        }
-
-        @Override
-        public void set(Color newColor) {
-            throw new UnsupportedOperationException();
-
-        }
-
-        @Override
-        public void addListener(ColorListener listener) {
-            color.addListener(listener);
-        }
-
-        @Override
-        public boolean removeListener(ColorListener listener) {
-            return color.removeListener(listener);
-        }
-
-        @Override
-        public void removeListeners() {
-            color.removeListeners();
-        }
-
-        @Override
-        public Color clone() {
-            return new UnmodifiableColor(color.clone());
-        }
-    }
-
-
+class ColorImpl implements Color {
     final static Map<String, Color> css4Colors = new HashMap<>();
     final static Map<String, Color> awtColors = new HashMap<>();
     final static Map<String, Color> tableauColors = new HashMap<>();
@@ -111,7 +27,7 @@ public class ColorImpl implements Color {
      * @param b Blue
      * @param a Alpha
      */
-    public ColorImpl(final double r, final double g, final double b, final double a) {
+    ColorImpl(final double r, final double g, final double b, final double a) {
         rgba = new float[]{(float) r, (float) g, (float) b, (float) a};
 
     }
@@ -124,27 +40,13 @@ public class ColorImpl implements Color {
      * @param b BLue (0-255)
      * @param a Alpha (0-255)
      */
-    public ColorImpl(final int r, final int g, final int b, final int a) {
+    ColorImpl(final int r, final int g, final int b, final int a) {
         this(r / 255f, g / 255f, b / 255f, a / 255f);
 
     }
 
-    ColorImpl(final int[] rgb) {
-        this(rgb[0], rgb[1], rgb[2], rgb.length == 4 ? rgb[3] : 255);
-    }
-
-    ColorImpl(final float[] rgb) {
+    private ColorImpl(final float[] rgb) {
         this(rgb[0], rgb[1], rgb[2], rgb.length == 4 ? rgb[3] : 1f);
-    }
-
-    /**
-     * Construct a color based on a decimal representation of its color
-     *
-     * @param rgba The decimal representation of the color
-     */
-    public ColorImpl(final int rgba) {
-        this(decimalToRBGA(rgba));
-
     }
 
     /**
@@ -154,7 +56,7 @@ public class ColorImpl implements Color {
      * @param g Green (0.0-1.0)
      * @param b Blue (0.0-1.0)
      */
-    public ColorImpl(final double r, final double g, final double b) {
+    ColorImpl(final double r, final double g, final double b) {
         this(r, g, b, 1.);
     }
 
@@ -165,7 +67,7 @@ public class ColorImpl implements Color {
      * @param g Green (0-255)
      * @param b Blue (0-255)
      */
-    public ColorImpl(final int r, final int g, final int b) {
+    ColorImpl(final int r, final int g, final int b) {
         this(r / 255f, g / 255f, b / 255f, 1.);
     }
 
@@ -174,10 +76,35 @@ public class ColorImpl implements Color {
      *
      * @param original the original color
      */
-    public ColorImpl(final ColorImpl original) {
+    ColorImpl(final ColorImpl original) {
         this(original.rgba.clone());
     }
 
+    static Color getColorWithReflection(final String colorName, final ColorType type, final Map<String, Color> cache) {
+        final Color cached = cache.get(colorName);
+        if (cached != null) {
+            return cached.clone();
+        }
+        for (final Field field : Color.class.getDeclaredFields()) {
+            if (field.isAnnotationPresent(NewColor.class) && field.getType() == String.class) {
+                try {
+
+                    final String cName = field.getDeclaredAnnotationsByType(NewColor.class)[0].name();
+                    final ColorType cType = field.getDeclaredAnnotationsByType(NewColor.class)[0].type();
+                    if (cName.compareTo(colorName) == 0 && cType == type) {
+                        cache.put(cName, Color.create((String) field.get(null)));
+                        return cache.get(cName).clone();
+                    }
+
+                } catch (final IllegalArgumentException | IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+        System.out.printf("Color {%s, %s} could not be found%n", colorName, type);
+        return null;
+    }
 
     @Override
     public void addListener(final ColorListener listener) {
@@ -290,30 +217,85 @@ public class ColorImpl implements Color {
         return Arrays.hashCode(rgba);
     }
 
-    static Color getColorWithReflection(final String colorName, final ColorType type, final Map<String, Color> cache) {
-        final Color cached = cache.get(colorName);
-        if (cached != null) {
-            return cached.clone();
+    /**
+     * An unmodifiable version of a color
+     */
+    static final class UnmodifiableColor implements Color {
+
+        private final Color color;
+
+        /**
+         * @param color the color to create an unmodifiable version of
+         */
+        UnmodifiableColor(final Color color) {
+            this.color = color;
         }
-        for (final Field field : Color.class.getDeclaredFields()) {
-            if (field.isAnnotationPresent(NewColor.class) && field.getType() == String.class) {
-                try {
 
-                    final String cName = field.getDeclaredAnnotationsByType(NewColor.class)[0].name();
-                    final ColorType cType = field.getDeclaredAnnotationsByType(NewColor.class)[0].type();
-                    if (cName.compareTo(colorName) == 0 && cType == type) {
-                        cache.put(cName, Color.from((String) field.get(null)));
-                        return cache.get(cName).clone();
-                    }
+        @Override
+        public Color red(final double red) throws UnsupportedOperationException {
+            throw new UnsupportedOperationException();
+        }
 
-                } catch (final IllegalArgumentException | IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-            }
+        @Override
+        public Color green(final double green) throws UnsupportedOperationException {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public Color blue(final double blue) throws UnsupportedOperationException {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public Color alpha(final double alpha) throws UnsupportedOperationException {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public float red() {
+            return color.red();
+        }
+
+        @Override
+        public float green() {
+            return color.green();
+        }
+
+        @Override
+        public float blue() {
+            return color.blue();
+        }
+
+        @Override
+        public float alpha() {
+            return color.alpha();
+        }
+
+        @Override
+        public void set(Color newColor) {
+            throw new UnsupportedOperationException();
 
         }
-        System.out.printf("Color {%s, %s} could not be found%n", colorName, type);
-        return null;
+
+        @Override
+        public void addListener(ColorListener listener) {
+            color.addListener(listener);
+        }
+
+        @Override
+        public boolean removeListener(ColorListener listener) {
+            return color.removeListener(listener);
+        }
+
+        @Override
+        public void removeListeners() {
+            color.removeListeners();
+        }
+
+        @Override
+        public Color clone() {
+            return new UnmodifiableColor(color.clone());
+        }
     }
 
 

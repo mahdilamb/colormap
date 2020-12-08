@@ -3,7 +3,7 @@ package net.mahdilamb.colormap.sequential.colorbrewer;
 import net.mahdilamb.colormap.ColormapType;
 import net.mahdilamb.colormap.LinearColormap;
 import net.mahdilamb.colormap.NewColormap;
-import net.mahdilamb.colormap.color.ColorImpl;
+import net.mahdilamb.colormap.color.Color;
 
 /**
  * Sequential ColorBrewer colormap going through Purples.
@@ -15,15 +15,15 @@ public final class Purples extends LinearColormap {
      */
     public Purples() {
         super(
-                new ColorImpl(252, 251, 253),
-                new ColorImpl(239, 237, 245),
-                new ColorImpl(218, 218, 235),
-                new ColorImpl(188, 189, 220),
-                new ColorImpl(158, 154, 200),
-                new ColorImpl(128, 125, 186),
-                new ColorImpl(106, 81, 163),
-                new ColorImpl(84, 39, 143),
-                new ColorImpl(63, 0, 125));
+                Color.create(252, 251, 253),
+                Color.create(239, 237, 245),
+                Color.create(218, 218, 235),
+                Color.create(188, 189, 220),
+                Color.create(158, 154, 200),
+                Color.create(128, 125, 186),
+                Color.create(106, 81, 163),
+                Color.create(84, 39, 143),
+                Color.create(63, 0, 125));
 
     }
 

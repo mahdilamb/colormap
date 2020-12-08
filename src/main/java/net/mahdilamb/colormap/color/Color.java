@@ -8,256 +8,6 @@ import static net.mahdilamb.colormap.color.ColorUtils.*;
 public interface Color extends Cloneable {
 
     /**
-     * @return The float representation of the red component
-     */
-    float red();
-
-    /**
-     * @return The float representation of the green component
-     */
-    float green();
-
-    /**
-     * @return a float representing the blue component of the color
-     */
-    float blue();
-
-    /**
-     * @return a float representing the alpha component of the color
-     */
-    float alpha();
-
-    /**
-     * @return 8-bit representation of the red component.
-     */
-    default int getRed() {
-        return Math.round(red() * 255);
-    }
-
-    /**
-     * @return 8-bit representation of the green component.
-     */
-    default int getGreen() {
-        return Math.round(green() * 255);
-    }
-
-    /**
-     * @return 8-bit representation of the blue component.
-     */
-    default int getBlue() {
-        return Math.round(blue() * 255);
-    }
-
-    /**
-     * @return 8-bit representation of the alpha component.
-     */
-    default int getAlpha() {
-        return Math.round(alpha() * 255);
-    }
-
-    /**
-     * Replace the value of this color with that supplied
-     *
-     * @param newColor the new color
-     */
-    void set(Color newColor);
-
-    /**
-     * @param red The new red component, as an integer number;
-     * @return this color
-     */
-    default Color setRed(final int red) {
-        return red(red / 255f);
-    }
-
-    /**
-     * @param red The new red component, as a floating point number.
-     * @return this color
-     */
-    Color red(final double red);
-
-    /**
-     * @param green The new green component, as an integer number;
-     * @return this color
-     */
-    default Color setGreen(final int green) {
-        return green(green / 255f);
-    }
-
-    /**
-     * @param green The floating-point representation of the green component.
-     * @return this color
-     */
-    Color green(final double green);
-
-    /**
-     * @param blue The floating-point representation of the blue component.
-     * @return this color
-     */
-    Color blue(final double blue);
-
-    /**
-     * @param blue The integer representation of the blue component.
-     * @return this color
-     */
-    default Color setBlue(final int blue) {
-        return blue(blue / 255f);
-    }
-
-    /**
-     * @param alpha The floating-point representation of the alpha component.
-     * @return this color
-     */
-    Color alpha(final double alpha);
-
-    /**
-     * @param alpha The 8-bit representation of the alpha component.
-     * @return this color
-     */
-    default Color setAlpha(final int alpha) {
-        return alpha(alpha / 255f);
-    }
-
-    /**
-     * Add a listener
-     *
-     * @param listener Listener to add to this Color.
-     */
-    void addListener(final ColorListener listener);
-
-    /**
-     * Remove a listener
-     *
-     * @param listener Listener to remove, if already listening, to this Color.
-     * @return if the listener was removed
-     */
-    boolean removeListener(final ColorListener listener);
-
-    /**
-     * Remove all listeners
-     */
-    void removeListeners();
-
-    /**
-     * Clone the color
-     *
-     * @return a clone of the color
-     */
-    Color clone();
-
-    /**
-     * @return A 3-component array containing the 8-bit representation of the red, green and blue components of this color.
-     */
-    default int[] asRGB() {
-        return new int[]{getRed(), getGreen(), getBlue()};
-    }
-
-    /**
-     * @return A 4-component array containing the 8-bit representation of the red, green, blue and alpha components of this color.
-     */
-    default int[] asRGBA() {
-        return new int[]{
-                getRed(),
-                getGreen(),
-                getBlue(),
-                getAlpha()
-        };
-    }
-
-    /**
-     * @return This color represented in L*ab space. See {@link ColorUtils#RGBToLab(float[])} for more details.
-     */
-    default float[] asLab() {
-        return RGBToLab(asRGB());
-    }
-
-    /**
-     * @return This color represented as a decimal value;
-     */
-    default int asDecimal() {
-        return RGBAToDecimal(red(), green(), blue(), alpha());
-    }
-
-    /**
-     * @return A string representation of this color in hexadecimal (includes the alpha component);
-     */
-    default String asHexadecimal() {
-        return RGBtoHexadecimal(asRGBA());
-    }
-
-    /**
-     * Get an unmodifiable version of a color
-     *
-     * @param color the color to wrap
-     * @return an unmodifiable version of the color
-     */
-    static Color asUnmodifiable(final Color color) {
-        return new ColorImpl.UnmodifiableColor(color);
-    }
-
-    /**
-     * Create a color from a hex string
-     *
-     * @param hexString hexString
-     * @return a color from the hex string
-     */
-    static Color from(String hexString) {
-        final int[] fromHex = hexadecimalToRGB(hexString);
-        return new ColorImpl(fromHex[0], fromHex[1], fromHex[2]);
-    }
-
-    /**
-     * Get a CSS4 color by name.
-     *
-     * @param colorName The name of the CSS4 color.
-     * @return A color of the CSS4 color requested or {@code null} if color cannot be found.
-     */
-    static Color getCSS(final String colorName) {
-        return ColorImpl.getColorWithReflection(colorName, ColorType.CSS, ColorImpl.css4Colors);
-    }
-
-    /**
-     * Get a AWT color by name.
-     *
-     * @param colorName The name of the AWT color.
-     * @return A color of the AWT color requested or {@code null} if color cannot be found.
-     */
-    static Color getAWT(final String colorName) {
-        return ColorImpl.getColorWithReflection(colorName, ColorType.AWT, ColorImpl.awtColors);
-    }
-
-    /**
-     * Get a Tableau color by name.
-     *
-     * @param colorName The name of the Tableau color.
-     * @return A color of the Tableau color requested or {@code null} if color cannot be found.
-     */
-    static Color getTableau(final String colorName) {
-        return ColorImpl.getColorWithReflection(colorName, ColorType.TABLEAU, ColorImpl.tableauColors);
-    }
-
-    /**
-     * Get any of the colors by name using prefixes such as "css:", "awt:", "tableau". Color search is not case-sensitive.
-     *
-     * @param colorName The name of the color to search for
-     * @return The requested color or {@code null} if none can be found.
-     */
-    static Color get(final String colorName) {
-        if (colorName.toLowerCase().startsWith("css:")) {
-            return getCSS(colorName.toLowerCase().split(":")[1]);
-        } else if (colorName.toLowerCase().startsWith("awt:")) {
-            return getAWT(colorName.toLowerCase().split(":")[1]);
-        } else if (colorName.toLowerCase().startsWith("tab:") || colorName.toLowerCase().startsWith("tableau:")) {
-            return getTableau(colorName.toLowerCase().split(":")[1]);
-        } else if (!colorName.contains(":")) {
-            return getCSS(colorName.toLowerCase());
-        } else {
-            System.out.printf("Color %s could not be found%n", colorName);
-            return null;
-        }
-    }
-
-    /**
      * Hexadecimal representation of AWT color "red".
      */
     @NewColor(type = ColorType.AWT, name = "red")
@@ -322,7 +72,6 @@ public interface Color extends Cloneable {
      */
     @NewColor(type = ColorType.AWT, name = "gray")
     String GRAY = "#808080";
-
     /**
      * Hexadecimal representation of CSS color "aliceblue".
      */
@@ -1063,7 +812,6 @@ public interface Color extends Cloneable {
      */
     @NewColor(type = ColorType.CSS, name = "yellowgreen")
     String yellowgreen = "#9ACD32";
-
     /**
      * Hexadecimal representation of TABLEAU color "blue".
      */
@@ -1164,5 +912,303 @@ public interface Color extends Cloneable {
      */
     @NewColor(type = ColorType.TABLEAU, name = "lightaqua")
     String tab_lightaqua = "#9edae5";
+
+    /**
+     * Get an unmodifiable version of a color
+     *
+     * @param color the color to wrap
+     * @return an unmodifiable version of the color
+     */
+    static Color asUnmodifiable(final Color color) {
+        return new ColorImpl.UnmodifiableColor(color);
+    }
+
+    /**
+     * Create a color from a hex string
+     *
+     * @param hexString hexString
+     * @return a color from the hex string
+     */
+    static Color create(String hexString) {
+        final int[] fromHex = hexadecimalToRGB(hexString);
+        return new ColorImpl(fromHex[0], fromHex[1], fromHex[2]);
+    }
+
+    /**
+     * Primary constructor based on float representations of each component
+     *
+     * @param r Red
+     * @param g Green
+     * @param b Blue
+     * @param a Alpha
+     */
+    static Color create(final double r, final double g, final double b, final double a) {
+        return new ColorImpl((float) r, (float) g, (float) b, (float) a);
+
+    }
+
+    /**
+     * Construct color based on 8-bit representation of each component
+     *
+     * @param r Red (0-255)
+     * @param g Green (0-255)
+     * @param b BLue (0-255)
+     * @param a Alpha (0-255)
+     */
+    static Color create(final int r, final int g, final int b, final int a) {
+        return new ColorImpl(r / 255f, g / 255f, b / 255f, a / 255f);
+
+    }
+
+    /**
+     * Construct a Color with full alpha
+     *
+     * @param r Red (0.0-1.0)
+     * @param g Green (0.0-1.0)
+     * @param b Blue (0.0-1.0)
+     */
+    static Color create(final double r, final double g, final double b) {
+        return new ColorImpl(r, g, b, 1.);
+    }
+
+    /**
+     * Construct a Color with full alpha
+     *
+     * @param r Red (0-255)
+     * @param g Green (0-255)
+     * @param b Blue (0-255)
+     */
+    static Color create(final int r, final int g, final int b) {
+        return new ColorImpl(r / 255f, g / 255f, b / 255f, 1.);
+    }
+
+    /**
+     * Get a CSS4 color by name.
+     *
+     * @param colorName The name of the CSS4 color.
+     * @return A color of the CSS4 color requested or {@code null} if color cannot be found.
+     */
+    static Color getCSS(final String colorName) {
+        return ColorImpl.getColorWithReflection(colorName, ColorType.CSS, ColorImpl.css4Colors);
+    }
+
+    /**
+     * Get a AWT color by name.
+     *
+     * @param colorName The name of the AWT color.
+     * @return A color of the AWT color requested or {@code null} if color cannot be found.
+     */
+    static Color getAWT(final String colorName) {
+        return ColorImpl.getColorWithReflection(colorName, ColorType.AWT, ColorImpl.awtColors);
+    }
+
+    /**
+     * Get a Tableau color by name.
+     *
+     * @param colorName The name of the Tableau color.
+     * @return A color of the Tableau color requested or {@code null} if color cannot be found.
+     */
+    static Color getTableau(final String colorName) {
+        return ColorImpl.getColorWithReflection(colorName, ColorType.TABLEAU, ColorImpl.tableauColors);
+    }
+
+    /**
+     * Get any of the colors by name using prefixes such as "css:", "awt:", "tableau". Color search is not case-sensitive.
+     *
+     * @param colorName The name of the color to search for
+     * @return The requested color or {@code null} if none can be found.
+     */
+    static Color get(final String colorName) {
+        if (colorName.toLowerCase().startsWith("css:")) {
+            return getCSS(colorName.toLowerCase().split(":")[1]);
+        } else if (colorName.toLowerCase().startsWith("awt:")) {
+            return getAWT(colorName.toLowerCase().split(":")[1]);
+        } else if (colorName.toLowerCase().startsWith("tab:") || colorName.toLowerCase().startsWith("tableau:")) {
+            return getTableau(colorName.toLowerCase().split(":")[1]);
+        } else if (!colorName.contains(":")) {
+            return getCSS(colorName.toLowerCase());
+        } else {
+            System.out.printf("Color %s could not be found%n", colorName);
+            return null;
+        }
+    }
+
+    /**
+     * @return The float representation of the red component
+     */
+    float red();
+
+    /**
+     * @return The float representation of the green component
+     */
+    float green();
+
+    /**
+     * @return a float representing the blue component of the color
+     */
+    float blue();
+
+    /**
+     * @return a float representing the alpha component of the color
+     */
+    float alpha();
+
+    /**
+     * @return 8-bit representation of the red component.
+     */
+    default int getRed() {
+        return Math.round(red() * 255);
+    }
+
+    /**
+     * @param red The new red component, as an integer number;
+     * @return this color
+     */
+    default Color setRed(final int red) {
+        return red(red / 255f);
+    }
+
+    /**
+     * @return 8-bit representation of the green component.
+     */
+    default int getGreen() {
+        return Math.round(green() * 255);
+    }
+
+    /**
+     * @param green The new green component, as an integer number;
+     * @return this color
+     */
+    default Color setGreen(final int green) {
+        return green(green / 255f);
+    }
+
+    /**
+     * @return 8-bit representation of the blue component.
+     */
+    default int getBlue() {
+        return Math.round(blue() * 255);
+    }
+
+    /**
+     * @param blue The integer representation of the blue component.
+     * @return this color
+     */
+    default Color setBlue(final int blue) {
+        return blue(blue / 255f);
+    }
+
+    /**
+     * @return 8-bit representation of the alpha component.
+     */
+    default int getAlpha() {
+        return Math.round(alpha() * 255);
+    }
+
+    /**
+     * @param alpha The 8-bit representation of the alpha component.
+     * @return this color
+     */
+    default Color setAlpha(final int alpha) {
+        return alpha(alpha / 255f);
+    }
+
+    /**
+     * Replace the value of this color with that supplied
+     *
+     * @param newColor the new color
+     */
+    void set(Color newColor);
+
+    /**
+     * @param red The new red component, as a floating point number.
+     * @return this color
+     */
+    Color red(final double red);
+
+    /**
+     * @param green The floating-point representation of the green component.
+     * @return this color
+     */
+    Color green(final double green);
+
+    /**
+     * @param blue The floating-point representation of the blue component.
+     * @return this color
+     */
+    Color blue(final double blue);
+
+    /**
+     * @param alpha The floating-point representation of the alpha component.
+     * @return this color
+     */
+    Color alpha(final double alpha);
+
+    /**
+     * Add a listener
+     *
+     * @param listener Listener to add to this Color.
+     */
+    void addListener(final ColorListener listener);
+
+    /**
+     * Remove a listener
+     *
+     * @param listener Listener to remove, if already listening, to this Color.
+     * @return if the listener was removed
+     */
+    boolean removeListener(final ColorListener listener);
+
+    /**
+     * Remove all listeners
+     */
+    void removeListeners();
+
+    /**
+     * Clone the color
+     *
+     * @return a clone of the color
+     */
+    Color clone();
+
+    /**
+     * @return A 3-component array containing the 8-bit representation of the red, green and blue components of this color.
+     */
+    default int[] asRGB() {
+        return new int[]{getRed(), getGreen(), getBlue()};
+    }
+
+    /**
+     * @return A 4-component array containing the 8-bit representation of the red, green, blue and alpha components of this color.
+     */
+    default int[] asRGBA() {
+        return new int[]{
+                getRed(),
+                getGreen(),
+                getBlue(),
+                getAlpha()
+        };
+    }
+
+    /**
+     * @return This color represented in L*ab space. See {@link ColorUtils#RGBToLab(float[])} for more details.
+     */
+    default float[] asLab() {
+        return RGBToLab(asRGB());
+    }
+
+    /**
+     * @return This color represented as a decimal value;
+     */
+    default int asDecimal() {
+        return RGBAToDecimal(red(), green(), blue(), alpha());
+    }
+
+    /**
+     * @return A string representation of this color in hexadecimal (includes the alpha component);
+     */
+    default String asHexadecimal() {
+        return RGBtoHexadecimal(asRGBA());
+    }
 
 }

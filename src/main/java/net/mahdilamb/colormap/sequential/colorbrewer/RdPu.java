@@ -3,7 +3,7 @@ package net.mahdilamb.colormap.sequential.colorbrewer;
 import net.mahdilamb.colormap.ColormapType;
 import net.mahdilamb.colormap.LinearColormap;
 import net.mahdilamb.colormap.NewColormap;
-import net.mahdilamb.colormap.color.ColorImpl;
+import net.mahdilamb.colormap.color.Color;
 
 /**
  * Colorbrewer 2.0 RdPu.
@@ -15,15 +15,15 @@ public final class RdPu extends LinearColormap {
      */
     public RdPu() {
         super(
-                new ColorImpl(255, 247, 243),
-                new ColorImpl(253, 224, 221),
-                new ColorImpl(252, 197, 192),
-                new ColorImpl(250, 159, 181),
-                new ColorImpl(247, 104, 161),
-                new ColorImpl(221, 52, 151),
-                new ColorImpl(174, 1, 126),
-                new ColorImpl(122, 1, 119),
-                new ColorImpl(73, 0, 106));
+                Color.create(255, 247, 243),
+                Color.create(253, 224, 221),
+                Color.create(252, 197, 192),
+                Color.create(250, 159, 181),
+                Color.create(247, 104, 161),
+                Color.create(221, 52, 151),
+                Color.create(174, 1, 126),
+                Color.create(122, 1, 119),
+                Color.create(73, 0, 106));
 
 
     }

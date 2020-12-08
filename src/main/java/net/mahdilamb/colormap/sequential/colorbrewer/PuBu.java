@@ -3,7 +3,7 @@ package net.mahdilamb.colormap.sequential.colorbrewer;
 import net.mahdilamb.colormap.ColormapType;
 import net.mahdilamb.colormap.LinearColormap;
 import net.mahdilamb.colormap.NewColormap;
-import net.mahdilamb.colormap.color.ColorImpl;
+import net.mahdilamb.colormap.color.Color;
 
 /**
  * Sequential ColorBrewer colormap from Purple to Blue.
@@ -15,15 +15,15 @@ public final class PuBu extends LinearColormap {
      */
     public PuBu() {
         super(
-                new ColorImpl(255, 247, 251),
-                new ColorImpl(236, 231, 242),
-                new ColorImpl(208, 209, 230),
-                new ColorImpl(166, 189, 219),
-                new ColorImpl(116, 169, 207),
-                new ColorImpl(54, 144, 192),
-                new ColorImpl(5, 112, 176),
-                new ColorImpl(4, 90, 141),
-                new ColorImpl(2, 56, 88));
+                Color.create(255, 247, 251),
+                Color.create(236, 231, 242),
+                Color.create(208, 209, 230),
+                Color.create(166, 189, 219),
+                Color.create(116, 169, 207),
+                Color.create(54, 144, 192),
+                Color.create(5, 112, 176),
+                Color.create(4, 90, 141),
+                Color.create(2, 56, 88));
 
 
     }

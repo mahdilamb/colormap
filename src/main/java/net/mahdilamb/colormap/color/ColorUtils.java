@@ -4,15 +4,15 @@ package net.mahdilamb.colormap.color;
  * A series of static methods for working with Colors.
  */
 public final class ColorUtils {
-    private ColorUtils() {
-    }
-
     /**
      * D65 illuminant factors
      */
     private static final float[] D65 = new float[]{
             95.04f, 100, 108.884f
     };
+
+    private ColorUtils() {
+    }
 
     /**
      * Convert a 3-component float representation of an sRGB color into XYZ space.

@@ -3,29 +3,29 @@ package net.mahdilamb.colormap.diverging.colorbrewer;
 import net.mahdilamb.colormap.ColormapType;
 import net.mahdilamb.colormap.LinearColormap;
 import net.mahdilamb.colormap.NewColormap;
-import net.mahdilamb.colormap.color.ColorImpl;
+import net.mahdilamb.colormap.color.Color;
 
 /**
  * Colorbrewer 2.0 Spectral
  */
 @NewColormap(type = ColormapType.DIVERGING, name = "Spectral")
 public final class Spectral extends LinearColormap {
+
     /**
      * Create a colormap based on Colorbrewer 2.0 Spectral
      */
     public Spectral() {
-        super(
-                new ColorImpl(158, 1, 66),
-                new ColorImpl(213, 62, 79),
-                new ColorImpl(244, 109, 67),
-                new ColorImpl(253, 174, 97),
-                new ColorImpl(254, 224, 139),
-                new ColorImpl(255, 255, 191),
-                new ColorImpl(230, 245, 152),
-                new ColorImpl(171, 221, 164),
-                new ColorImpl(102, 194, 165),
-                new ColorImpl(50, 136, 189),
-                new ColorImpl(94, 79, 162));
+        super(Color.create(158, 1, 66),
+                Color.create(213, 62, 79),
+                Color.create(244, 109, 67),
+                Color.create(253, 174, 97),
+                Color.create(254, 224, 139),
+                Color.create(255, 255, 191),
+                Color.create(230, 245, 152),
+                Color.create(171, 221, 164),
+                Color.create(102, 194, 165),
+                Color.create(50, 136, 189),
+                Color.create(94, 79, 162));
 
     }
 

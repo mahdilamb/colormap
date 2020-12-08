@@ -38,7 +38,7 @@ public class LinearColormap extends AbstractColormap {
             final Color upper = currentColors.get(upperVal);
 
             final Color outColor = lerp(upper, lower, (value - lowerVal) / (upperVal - lowerVal));
-            outColor.alpha((float) lerp(upper.alpha() , lower.alpha() , value));
+            outColor.alpha((float) lerp(upper.alpha(), lower.alpha(), value));
             return outColor;
 
         }

@@ -3,7 +3,7 @@ package net.mahdilamb.colormap.sequential.colorbrewer;
 import net.mahdilamb.colormap.ColormapType;
 import net.mahdilamb.colormap.LinearColormap;
 import net.mahdilamb.colormap.NewColormap;
-import net.mahdilamb.colormap.color.ColorImpl;
+import net.mahdilamb.colormap.color.Color;
 
 /**
  * Sequential ColorBrewer colormap from Orange to Red.
@@ -15,15 +15,15 @@ public final class OrRd extends LinearColormap {
      */
     public OrRd() {
         super(
-                new ColorImpl(255, 247, 236),
-                new ColorImpl(254, 232, 200),
-                new ColorImpl(253, 212, 158),
-                new ColorImpl(253, 187, 132),
-                new ColorImpl(252, 141, 89),
-                new ColorImpl(239, 101, 72),
-                new ColorImpl(215, 48, 31),
-                new ColorImpl(179, 0, 0),
-                new ColorImpl(127, 0, 0));
+                Color.create(255, 247, 236),
+                Color.create(254, 232, 200),
+                Color.create(253, 212, 158),
+                Color.create(253, 187, 132),
+                Color.create(252, 141, 89),
+                Color.create(239, 101, 72),
+                Color.create(215, 48, 31),
+                Color.create(179, 0, 0),
+                Color.create(127, 0, 0));
 
 
     }

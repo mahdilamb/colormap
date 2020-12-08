@@ -116,7 +116,7 @@ public class ColormapTest {
         cb.setRenderer(new ColorMapCellRenderer());
 
         colorTools.add(cb);
-        Colormap.listDefaultColorMaps().forEach(cmapName -> {
+        Colormap.listDefaults().forEach(cmapName -> {
             cbModel.addElement(Colormap.get(cmapName));
             if (cmapName.compareTo("SEQUENTIAL.Viridis") == 0) {
                 cb.setSelectedIndex(cbModel.getSize() - 1);

@@ -23,27 +23,6 @@ public final class ColormapNode {
         color.set(newColor);
     }
 
-    /**
-     * Set the value of this node
-     *
-     * @param value Value to set this node to.
-     */
-    public void setValue(final Double value) {
-        if (Objects.equals(value, this.value)) {
-            return;
-        }
-        final Double oldValue = this.value;
-        this.value = value;
-        recalculate();
-
-        if (value <= colorMap.currentMinValue || oldValue != null && oldValue <= colorMap.currentMinValue) {
-            colorMap.recalculateMinValue();
-        }
-        if (value >= colorMap.currentMaxValue || oldValue != null && oldValue >= colorMap.currentMaxValue) {
-            colorMap.recalculateMaxValue();
-        }
-    }
-
     @Override
     public String toString() {
         return String.format("%s at %.3f", color.toString(), value);
@@ -74,6 +53,27 @@ public final class ColormapNode {
      */
     public final Double getValue() {
         return value;
+    }
+
+    /**
+     * Set the value of this node
+     *
+     * @param value Value to set this node to.
+     */
+    public void setValue(final Double value) {
+        if (Objects.equals(value, this.value)) {
+            return;
+        }
+        final Double oldValue = this.value;
+        this.value = value;
+        recalculate();
+
+        if (value <= colorMap.currentMinValue || oldValue != null && oldValue <= colorMap.currentMinValue) {
+            colorMap.recalculateMinValue();
+        }
+        if (value >= colorMap.currentMaxValue || oldValue != null && oldValue >= colorMap.currentMaxValue) {
+            colorMap.recalculateMaxValue();
+        }
     }
 
     @Override

@@ -32,7 +32,7 @@ repositories {
     mavenCentral()
 }
 
-version = "0.9.29"
+version = "0.9.30"
 group = "net.mahdilamb"
 
 dependencies {
@@ -42,12 +42,23 @@ task swingDemo(type: JavaExec, dependsOn: ["testClasses"]) {
     classpath = sourceSets["test"].runtimeClasspath
     main = "net.mahdilamb.colormap.tests.ColormapTest"
 }
-
+/**
+ * Uncomment and run to insert colormap swatches into README.md
+ */
+/*
 task generateReadme(type: JavaExec, dependsOn: ["testClasses"]) {
     classpath = sourceSets["test"].runtimeClasspath
     main = "net.mahdilamb.colormap.tests.GenerateReadme"
-}
+}*/
 
+/**
+ * Uncomment and run to insert annotated colormaps into net.mahdilamb.colormap.Colormap
+ */
+/*
+task insertColormaps(type: JavaExec, dependsOn: ["testClasses"]) {
+    classpath = sourceSets["test"].runtimeClasspath
+    main = "net.mahdilamb.colormap.tests.InsertColormaps"
+}*/
 
 modifyPom {
 
