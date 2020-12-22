@@ -2,43 +2,59 @@
 
 # Colormap
 
-This is a Java-based package that enables the easy creation of linear and categorical colormaps.
+Colormap is a Java package for creating and using colormaps. It includes many "reference" colormaps, including those from [Matplotlib](https://matplotlib.org/)
+, [Tableau](https://www.tableau.com/) and other sources (see [credits](#credits)). 
 
-There are many default colormaps, including many from [Matplotlib](https://matplotlib.org/)
-, [Tableau](https://www.tableau.com/) and other sources (see [credits](#credits)). For ease, most colormaps can be
-obtained by using the `Colormap.get(...)`. Alternatively, colormaps can be created by using inner classes in colormaps
-(e.g. `Colormap.Sequential.Viridis()`). 
+## Overview
 
-The colormaps are autoranging so, in the example below, the color will change depending on the bounds of the color map.
-The color will originally be the middle color in the color map, but once a lower value is requested, the color will
-change and an event will be fired. An event is triggered both when a listener is added and when a change is made so that
-only a single function needs to be defined. Upper and lower bounds can be set to a color map using
-the `Colormap.setLowValue(...)`  and `Colormap.setHighValue(...)` methods.
+- The main access to the colormaps is through ```net.mahdilamb.colormap.Colormaps```. This includes a lot of wrapper classes and the ability to list the reference colormaps ```Colormaps.named()```. 
+- The wrapper classes include a reversed colormap (```Colormaps.reversedColormap()```), as well as a "fluid" colormap ```Colormaps.fluidColormap()```. A fluid colormap is not, unlike the reference colormaps, limited to the range 0-1. Instead, a fluid colormap can autoscale, or be clamped between a min and max value (see ```net.mahdilamb.colormap.api.FluidColormap``` for more information). Fluid colormaps can also have the backing colormap changed. 
 
-```
-import net.mahdilamb.colormap.Colormap;
+## Using reference colormaps
+
+Reference colormaps can either be accessed through ```Colormaps.get(String)```, which can take a String such as ```"sequential.viridis"```, ```"viridis"``` or ```"sequential.viridis.reversed"```. Alternatively, they can be accessed using a class path embedded in the Colormaps class e.g. ```Colormaps.Sequential.Viridis()``` (and then, for exampled made fluid ```Colormaps.fluidColormap(Colormaps.Sequential.Viridis())```). 
+
+## Creating colormaps
+
+Colormaps can be created in two ways either using a builder ```Colormaps.buildSequential()``` and ```Colormaps.buildQualitative()```, or by extending ```net.mahdilamb.colormap.api.SequentialColormap``` and ```net.mahdilamb.colormap.api.QualitativeColormap```. Reference colormaps are created by the latter approach. 
+
+## Fluid colormaps example
+
+As the fluid colormaps are autoranging, they fire an even when the color is changed. The below example shows how this might be done using a lambda expression. The original value is ```0```, but this changes when a new color is requested from the colormap, and the range is changed, and a new event is triggered.
+
+```java
+import net.mahdilamb.colormap.Colormaps;
+import net.mahdilamb.colormap.api.FluidColormap;
 
 public class Test {
     public static void main(final String[] args) {
-        final Colormap viridis = Colormap.get("Viridis");
-        viridis.getColorFromValue(0).getColor().addListener(color -> {
-            System.out.println(color);
+        final FluidColormap viridis = Colormaps.fluidColormap(Colormaps.get("Viridis"));
+        viridis.get(0f, (newColor, oldColor, node) -> {
+            System.out.println(newColor);
         });
 
-        viridis.getColorFromValue(-1);
+        viridis.get(-1);
     }
 }
 
-
 ```
-
-The getColormap method is case insensitive and can also be used to obtain the colormap reversed (
-e.g. `Viridis.reversed`). The `Colormap.listDefaults()` will provide a list of all the default colormaps
-available.
 
 ## Color
 
-The Color class is provided as a framework-agnostic way of generating colors. It includes String constants that
-represent CSS4, AWT and [Tableau](https://www.tableau.com/) colors.
+The colormap package includes a Color class ```net.mahdilamb.colormap.Color```. It holds constants for the colors specified in CSS4, AWT and [Tableau](https://www.tableau.com/). 
+
+##### Developer note
+
+It is possible to also include the xkcd colors. The addition of the colors is done automatically from text files in ```src\test\java\net\mahdilamb\colormap\reflect\InsertColors.java```. Uncomment the line referring to the xkcd file parsing and add an extra method in the Color class.
+
+```java
+public static RGBA getXKCD(String name) {
+    return get(ColorType.XKCD, name);
+}
+```
+
+## Maven
+
+The package can be imported from [maven](https://search.maven.org/artifact/net.mahdilamb/colormap).
 
 ## Default colormaps
