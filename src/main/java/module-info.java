@@ -3,14 +3,11 @@
  */
 module net.mahdilamb.colormap {
     exports net.mahdilamb.colormap;
-    exports net.mahdilamb.colormap.color;
-    exports net.mahdilamb.colormap.diverging.colorbrewer;
-    exports net.mahdilamb.colormap.diverging;
-    exports net.mahdilamb.colormap.qualitative.colorbrewer;
-    exports net.mahdilamb.colormap.qualitative.tableau;
-    //exports net.mahdilamb.colormap.qualitative;
-    exports net.mahdilamb.colormap.cyclic;
-    exports net.mahdilamb.colormap.sequential.colorbrewer;
-    exports net.mahdilamb.colormap.sequential.perceptuallyuniform;
-    exports net.mahdilamb.colormap.sequential;
+    exports net.mahdilamb.colormap.api;
+    exports net.mahdilamb.colormap.reference;
+    exports net.mahdilamb.colormap.reference.cyclic;
+    exports net.mahdilamb.colormap.reference.diverging;
+    exports net.mahdilamb.colormap.reference.qualitative;
+    exports net.mahdilamb.colormap.reference.sequential;
+
 }

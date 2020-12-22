@@ -50,7 +50,14 @@ task generateReadme(type: JavaExec, dependsOn: ["testClasses"]) {
     classpath = sourceSets["test"].runtimeClasspath
     main = "net.mahdilamb.colormap.tests.GenerateReadme"
 }*/
+/**
+ * Uncomment and run to insert colors
+ */
 
+task insertColors(type: JavaExec, dependsOn: ["testClasses"]) {
+    classpath = sourceSets["test"].runtimeClasspath
+    main = "net.mahdilamb.colormap.reflect.InsertColors"
+}
 /**
  * Uncomment and run to insert annotated colormaps into net.mahdilamb.colormap.Colormap
  */

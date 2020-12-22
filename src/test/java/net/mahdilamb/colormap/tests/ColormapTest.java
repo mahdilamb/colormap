@@ -1,9 +1,11 @@
 package net.mahdilamb.colormap.tests;
 
-import net.mahdilamb.colormap.Colormap;
-import net.mahdilamb.colormap.ColormapNode;
-import net.mahdilamb.colormap.DynamicColormap;
-import net.mahdilamb.colormap.sequential.perceptuallyuniform.Viridis;
+
+import net.mahdilamb.colormap.Colormaps;
+import net.mahdilamb.colormap.api.Colormap;
+import net.mahdilamb.colormap.api.ColormapNode;
+import net.mahdilamb.colormap.api.FluidColormap;
+import net.mahdilamb.colormap.reference.sequential.Viridis;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -11,9 +13,9 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-@SuppressWarnings("unchecked")
+
 public class ColormapTest {
-    static class ColorMapCellRenderer implements ListCellRenderer<Colormap> {
+    static final class ColorMapCellRenderer implements ListCellRenderer<Colormap> {
         private final DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
 
         @Override
@@ -36,8 +38,8 @@ public class ColormapTest {
             @Override
             public void paintIcon(Component c, Graphics g, int x, int y) {
                 for (int i = 0; i < getIconWidth(); i++) {
-                    final double j = ((double) i) / getIconWidth();
-                    g.setColor(new java.awt.Color(colorMap.colorAt(j).asDecimal()));
+                    final float j = ((float) i) / getIconWidth();
+                    g.setColor(new java.awt.Color(colorMap.get(j).toDecimal()));
                     g.drawLine(i, 1, i, getIconHeight() - 1);
                 }
             }
@@ -55,32 +57,31 @@ public class ColormapTest {
 
     }
 
-    static class ColorLabel extends JLabel {
+    static final class ColorLabel extends JLabel {
 
-        private static final long serialVersionUID = -5090637998127930769L;
         final ColormapNode color;
 
-        ColorLabel(Double value, Colormap cmap) {
+        ColorLabel(Float value, FluidColormap cmap) {
             setText(String.format("%.2f", value));
             setAlignmentX(SwingConstants.LEFT);
-            color = cmap.getColorFromValue(value);
+            color = cmap.getNode(value);
 
-            color.getColor().addListener((net.mahdilamb.colormap.color.Color color) -> SwingUtilities.invokeLater(() -> {
+            color.addListener((color, old, v) -> SwingUtilities.invokeLater(() -> {
                 final Border border = BorderFactory.createCompoundBorder(
-                        BorderFactory.createLineBorder(new java.awt.Color(color.asDecimal()), 0),
+                        BorderFactory.createLineBorder(new java.awt.Color(color.toDecimal()), 0),
                         BorderFactory.createCompoundBorder(
                                 BorderFactory.createLineBorder(UIManager.getColor("Panel.background"), 1),
-                                BorderFactory.createLineBorder(new java.awt.Color(color.asDecimal()), 2)));
+                                BorderFactory.createLineBorder(new java.awt.Color(color.toDecimal()), 2)));
                 ColorLabel.this.setBorder(border);
             }));
 
         }
     }
-
+@SuppressWarnings("unchecked")
     public static void main(String... args) {
         final JFrame frame = new JFrame();
 
-        final DynamicColormap cmap = new DynamicColormap(new Viridis());
+        final FluidColormap cmap = Colormaps.fluidColormap(new Viridis());
         frame.getContentPane().setLayout(new GridBagLayout());
         final JPanel colors = new JPanel(new GridLayout(10, 10));
         colors.addMouseListener(new MouseAdapter() {
@@ -96,8 +97,8 @@ public class ColormapTest {
                 } else if (e.getButton() == 1 && e.getClickCount() == 2) {
                     String inputValue = JOptionPane.showInputDialog("Please input a value");
                     try {
-                        final Double newValue = Double.parseDouble(inputValue);
-                        selected.color.setValue(newValue);
+                        final Float newValue = Float.parseFloat(inputValue);
+                        selected.color.update(newValue);
                         selected.setText(String.format("%.2f", newValue));
                     } catch (Exception exception) {
                         exception.printStackTrace();
@@ -116,14 +117,15 @@ public class ColormapTest {
         cb.setRenderer(new ColorMapCellRenderer());
 
         colorTools.add(cb);
-        Colormap.listDefaults().forEach(cmapName -> {
-            cbModel.addElement(Colormap.get(cmapName));
-            if (cmapName.compareTo("SEQUENTIAL.Viridis") == 0) {
+        Colormaps.named().forEach(cmapName -> {
+            cbModel.addElement(Colormaps.get(cmapName));
+
+            if (((Comparable<CharSequence>)cmapName).compareTo("sequential.viridis") == 0) {
                 cb.setSelectedIndex(cbModel.getSize() - 1);
             }
         });
 
-        for (double i = 0; i <= 1; i += 0.005) {
+        for (float i = 0; i <= 1; i += 0.005) {
             colors.add(new ColorLabel(i, cmap));
         }
         //FormInput<Double> valInput = new DoubleVariable(0).factory();
@@ -153,7 +155,8 @@ public class ColormapTest {
 				});*/
 
         cb.addActionListener(e -> {
-            cmap.setColorMap((Colormap) ((JComboBox<Colormap>) e.getSource()).getSelectedItem());
+            @SuppressWarnings("unchecked") final JComboBox<FluidColormap> source = (JComboBox<FluidColormap>) e.getSource();
+            cmap.setColormap((Colormap) source.getSelectedItem());
             cmap.setReversed(reversed.isSelected());
         });
         frame.pack();

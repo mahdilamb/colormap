@@ -2,104 +2,120 @@
 
 # Colormap
 
-This is a Java-based package that enables the easy creation of linear and categorical colormaps.
+Colormap is a Java package for creating and using colormaps. It includes many "reference" colormaps, including those from [Matplotlib](https://matplotlib.org/)
+, [Tableau](https://www.tableau.com/) and other sources (see [credits](#credits)). 
 
-There are many default colormaps, including many from [Matplotlib](https://matplotlib.org/)
-, [Tableau](https://www.tableau.com/) and other sources (see [credits](#credits)). For ease, most colormaps can be
-obtained by using the `Colormap.get(...)`. Alternatively, colormaps can be created by using inner classes in colormaps
-(e.g. `Colormap.Sequential.Viridis()`). 
+## Overview
 
-The colormaps are autoranging so, in the example below, the color will change depending on the bounds of the color map.
-The color will originally be the middle color in the color map, but once a lower value is requested, the color will
-change and an event will be fired. An event is triggered both when a listener is added and when a change is made so that
-only a single function needs to be defined. Upper and lower bounds can be set to a color map using
-the `Colormap.setLowValue(...)`  and `Colormap.setHighValue(...)` methods.
+- The main access to the colormaps is through ```net.mahdilamb.colormap.Colormaps```. This includes a lot of wrapper classes and the ability to list the reference colormaps ```Colormaps.named()```. 
+- The wrapper classes include a reversed colormap (```Colormaps.reversedColormap()```), as well as a "fluid" colormap ```Colormaps.fluidColormap()```. A fluid colormap is not, unlike the reference colormaps, limited to the range 0-1. Instead, a fluid colormap can autoscale, or be clamped between a min and max value (see ```net.mahdilamb.colormap.api.FluidColormap``` for more information). Fluid colormaps can also have the backing colormap changed. 
 
-```
-import net.mahdilamb.colormap.Colormap;
+## Using reference colormaps
+
+Reference colormaps can either be accessed through ```Colormaps.get(String)```, which can take a String such as ```"sequential.viridis"```, ```"viridis"``` or ```"sequential.viridis.reversed"```. Alternatively, they can be accessed using a class path embedded in the Colormaps class e.g. ```Colormaps.Sequential.Viridis()``` (and then, for exampled made fluid ```Colormaps.fluidColormap(Colormaps.Sequential.Viridis())```). 
+
+## Creating colormaps
+
+Colormaps can be created in two ways either using a builder ```Colormaps.buildSequential()``` and ```Colormaps.buildQualitative()```, or by extending ```net.mahdilamb.colormap.api.SequentialColormap``` and ```net.mahdilamb.colormap.api.QualitativeColormap```. Reference colormaps are created by the latter approach. 
+
+## Fluid colormaps example
+
+As the fluid colormaps are autoranging, they fire an even when the color is changed. The below example shows how this might be done using a lambda expression. The original value is ```0```, but this changes when a new color is requested from the colormap, and the range is changed, and a new event is triggered.
+
+```java
+import net.mahdilamb.colormap.Colormaps;
+import net.mahdilamb.colormap.api.FluidColormap;
 
 public class Test {
     public static void main(final String[] args) {
-        final Colormap viridis = Colormap.get("Viridis");
-        viridis.getColorFromValue(0).getColor().addListener(color -> {
-            System.out.println(color);
+        final FluidColormap viridis = Colormaps.fluidColormap(Colormaps.get("Viridis"));
+        viridis.get(0f, (newColor, oldColor, node) -> {
+            System.out.println(newColor);
         });
 
-        viridis.getColorFromValue(-1);
+        viridis.get(-1);
     }
 }
 
-
 ```
-
-The getColormap method is case insensitive and can also be used to obtain the colormap reversed (
-e.g. `Viridis.reversed`). The `Colormap.listDefaults()` will provide a list of all the default colormaps
-available.
 
 ## Color
 
-The Color class is provided as a framework-agnostic way of generating colors. It includes String constants that
-represent CSS4, AWT and [Tableau](https://www.tableau.com/) colors.
+The colormap package includes a Color class ```net.mahdilamb.colormap.Color```. It holds constants for the colors specified in CSS4, AWT and [Tableau](https://www.tableau.com/). 
+
+##### Developer note
+
+It is possible to also include the xkcd colors. The addition of the colors is done automatically from text files in ```src\test\java\net\mahdilamb\colormap\reflect\InsertColors.java```. Uncomment the line referring to the xkcd file parsing and add an extra method in the Color class.
+
+```java
+public static RGBA getXKCD(String name) {
+    return get(ColorType.XKCD, name);
+}
+```
+
+## Maven
+
+The package can be imported from [maven](https://search.maven.org/artifact/net.mahdilamb/colormap).
 
 ## Default colormaps
 |Category|ColorMap|Sample|
 |---|---|---|
-|Cyclic|Twilight|![Twilight](swatches/CYCLIC.Twilight.png)|
-|Cyclic|TwilightShifted|![TwilightShifted](swatches/CYCLIC.TwilightShifted.png)|
-|Diverging|BentCoolWarm|![BentCoolWarm](swatches/DIVERGING.BentCoolWarm.png)|
-|Diverging|BrBG|![BrBG](swatches/DIVERGING.BrBG.png)|
-|Diverging|PRGn|![PRGn](swatches/DIVERGING.PRGn.png)|
-|Diverging|PiYG|![PiYG](swatches/DIVERGING.PiYG.png)|
-|Diverging|PuOr|![PuOr](swatches/DIVERGING.PuOr.png)|
-|Diverging|RdBu|![RdBu](swatches/DIVERGING.RdBu.png)|
-|Diverging|RdGy|![RdGy](swatches/DIVERGING.RdGy.png)|
-|Diverging|RdYlBu|![RdYlBu](swatches/DIVERGING.RdYlBu.png)|
-|Diverging|RdYlGn|![RdYlGn](swatches/DIVERGING.RdYlGn.png)|
-|Diverging|SmoothCoolWarm|![SmoothCoolWarm](swatches/DIVERGING.SmoothCoolWarm.png)|
-|Diverging|Spectral|![Spectral](swatches/DIVERGING.Spectral.png)|
-|Qualitative|Accent|![Accent](swatches/QUALITATIVE.Accent.png)|
-|Qualitative|Dark2|![Dark2](swatches/QUALITATIVE.Dark2.png)|
-|Qualitative|Paired|![Paired](swatches/QUALITATIVE.Paired.png)|
-|Qualitative|Pastel1|![Pastel1](swatches/QUALITATIVE.Pastel1.png)|
-|Qualitative|Pastel2|![Pastel2](swatches/QUALITATIVE.Pastel2.png)|
-|Qualitative|Set1|![Set1](swatches/QUALITATIVE.Set1.png)|
-|Qualitative|Set2|![Set2](swatches/QUALITATIVE.Set2.png)|
-|Qualitative|Set3|![Set3](swatches/QUALITATIVE.Set3.png)|
-|Qualitative|Tab10|![Tab10](swatches/QUALITATIVE.Tab10.png)|
-|Qualitative|Tab20|![Tab20](swatches/QUALITATIVE.Tab20.png)|
-|Qualitative|Tab20b|![Tab20b](swatches/QUALITATIVE.Tab20b.png)|
-|Qualitative|Tab20c|![Tab20c](swatches/QUALITATIVE.Tab20c.png)|
-|Sequential|BlackBody|![BlackBody](swatches/SEQUENTIAL.BlackBody.png)|
-|Sequential|Blues|![Blues](swatches/SEQUENTIAL.Blues.png)|
-|Sequential|BuGn|![BuGn](swatches/SEQUENTIAL.BuGn.png)|
-|Sequential|BuPu|![BuPu](swatches/SEQUENTIAL.BuPu.png)|
-|Sequential|Cividis|![Cividis](swatches/SEQUENTIAL.Cividis.png)|
-|Sequential|GnBu|![GnBu](swatches/SEQUENTIAL.GnBu.png)|
-|Sequential|Greens|![Greens](swatches/SEQUENTIAL.Greens.png)|
-|Sequential|Greys|![Greys](swatches/SEQUENTIAL.Greys.png)|
-|Sequential|Hesperia|![Hesperia](swatches/SEQUENTIAL.Hesperia.png)|
-|Sequential|Inferno|![Inferno](swatches/SEQUENTIAL.Inferno.png)|
-|Sequential|Kindlmann|![Kindlmann](swatches/SEQUENTIAL.Kindlmann.png)|
-|Sequential|KindlmannExtended|![KindlmannExtended](swatches/SEQUENTIAL.KindlmannExtended.png)|
-|Sequential|Lacerta|![Lacerta](swatches/SEQUENTIAL.Lacerta.png)|
-|Sequential|Laguna|![Laguna](swatches/SEQUENTIAL.Laguna.png)|
-|Sequential|Magma|![Magma](swatches/SEQUENTIAL.Magma.png)|
-|Sequential|ModifiedPlasma|![ModifiedPlasma](swatches/SEQUENTIAL.ModifiedPlasma.png)|
-|Sequential|OrRd|![OrRd](swatches/SEQUENTIAL.OrRd.png)|
-|Sequential|Oranges|![Oranges](swatches/SEQUENTIAL.Oranges.png)|
-|Sequential|Plasma|![Plasma](swatches/SEQUENTIAL.Plasma.png)|
-|Sequential|PuBu|![PuBu](swatches/SEQUENTIAL.PuBu.png)|
-|Sequential|PuBuGn|![PuBuGn](swatches/SEQUENTIAL.PuBuGn.png)|
-|Sequential|PuRd|![PuRd](swatches/SEQUENTIAL.PuRd.png)|
-|Sequential|Purples|![Purples](swatches/SEQUENTIAL.Purples.png)|
-|Sequential|RdPu|![RdPu](swatches/SEQUENTIAL.RdPu.png)|
-|Sequential|Reds|![Reds](swatches/SEQUENTIAL.Reds.png)|
-|Sequential|Turbo|![Turbo](swatches/SEQUENTIAL.Turbo.png)|
-|Sequential|Viridis|![Viridis](swatches/SEQUENTIAL.Viridis.png)|
-|Sequential|YlGn|![YlGn](swatches/SEQUENTIAL.YlGn.png)|
-|Sequential|YlGnBu|![YlGnBu](swatches/SEQUENTIAL.YlGnBu.png)|
-|Sequential|YlOrBr|![YlOrBr](swatches/SEQUENTIAL.YlOrBr.png)|
-|Sequential|YlOrRd|![YlOrRd](swatches/SEQUENTIAL.YlOrRd.png)|
+|Diverging|rdylgn|![rdylgn](swatches/diverging.rdylgn.png)|
+|Sequential|greys|![greys](swatches/sequential.greys.png)|
+|Qualitative|accent|![accent](swatches/qualitative.accent.png)|
+|Diverging|piyg|![piyg](swatches/diverging.piyg.png)|
+|Sequential|hesperia|![hesperia](swatches/sequential.hesperia.png)|
+|Sequential|greens|![greens](swatches/sequential.greens.png)|
+|Sequential|orrd|![orrd](swatches/sequential.orrd.png)|
+|Cyclic|twilightshifted|![twilightshifted](swatches/cyclic.twilightshifted.png)|
+|Sequential|oranges|![oranges](swatches/sequential.oranges.png)|
+|Sequential|magma|![magma](swatches/sequential.magma.png)|
+|Sequential|bupu|![bupu](swatches/sequential.bupu.png)|
+|Sequential|viridis|![viridis](swatches/sequential.viridis.png)|
+|Sequential|plasma|![plasma](swatches/sequential.plasma.png)|
+|Sequential|modifiedplasma|![modifiedplasma](swatches/sequential.modifiedplasma.png)|
+|Diverging|prgn|![prgn](swatches/diverging.prgn.png)|
+|Diverging|brbg|![brbg](swatches/diverging.brbg.png)|
+|Sequential|purples|![purples](swatches/sequential.purples.png)|
+|Qualitative|tab20b|![tab20b](swatches/qualitative.tab20b.png)|
+|Qualitative|tab20c|![tab20c](swatches/qualitative.tab20c.png)|
+|Sequential|ylorrd|![ylorrd](swatches/sequential.ylorrd.png)|
+|Diverging|rdylbu|![rdylbu](swatches/diverging.rdylbu.png)|
+|Cyclic|twilight|![twilight](swatches/cyclic.twilight.png)|
+|Sequential|blues|![blues](swatches/sequential.blues.png)|
+|Qualitative|paired|![paired](swatches/qualitative.paired.png)|
+|Sequential|purd|![purd](swatches/sequential.purd.png)|
+|Diverging|smoothcoolwarm|![smoothcoolwarm](swatches/diverging.smoothcoolwarm.png)|
+|Sequential|kindlmann|![kindlmann](swatches/sequential.kindlmann.png)|
+|Sequential|inferno|![inferno](swatches/sequential.inferno.png)|
+|Sequential|reds|![reds](swatches/sequential.reds.png)|
+|Sequential|ylorbr|![ylorbr](swatches/sequential.ylorbr.png)|
+|Sequential|gnbu|![gnbu](swatches/sequential.gnbu.png)|
+|Diverging|rdbu|![rdbu](swatches/diverging.rdbu.png)|
+|Sequential|bugn|![bugn](swatches/sequential.bugn.png)|
+|Sequential|kindlmannextended|![kindlmannextended](swatches/sequential.kindlmannextended.png)|
+|Sequential|ylgnbu|![ylgnbu](swatches/sequential.ylgnbu.png)|
+|Diverging|spectral|![spectral](swatches/diverging.spectral.png)|
+|Qualitative|set3|![set3](swatches/qualitative.set3.png)|
+|Qualitative|set2|![set2](swatches/qualitative.set2.png)|
+|Qualitative|pastel2|![pastel2](swatches/qualitative.pastel2.png)|
+|Qualitative|set1|![set1](swatches/qualitative.set1.png)|
+|Diverging|bentcoolwarm|![bentcoolwarm](swatches/diverging.bentcoolwarm.png)|
+|Qualitative|tab10|![tab10](swatches/qualitative.tab10.png)|
+|Sequential|pubu|![pubu](swatches/sequential.pubu.png)|
+|Qualitative|pastel1|![pastel1](swatches/qualitative.pastel1.png)|
+|Sequential|pubugn|![pubugn](swatches/sequential.pubugn.png)|
+|Diverging|rdgy|![rdgy](swatches/diverging.rdgy.png)|
+|Diverging|puor|![puor](swatches/diverging.puor.png)|
+|Sequential|lacerta|![lacerta](swatches/sequential.lacerta.png)|
+|Sequential|laguna|![laguna](swatches/sequential.laguna.png)|
+|Sequential|cividis|![cividis](swatches/sequential.cividis.png)|
+|Sequential|turbo|![turbo](swatches/sequential.turbo.png)|
+|Qualitative|tab20|![tab20](swatches/qualitative.tab20.png)|
+|Qualitative|dark2|![dark2](swatches/qualitative.dark2.png)|
+|Sequential|blackbody|![blackbody](swatches/sequential.blackbody.png)|
+|Sequential|rdpu|![rdpu](swatches/sequential.rdpu.png)|
+|Sequential|ylgn|![ylgn](swatches/sequential.ylgn.png)|
 
 ## Credits
 * Default colormaps include all [ColorBrewer 2.0](https://colorbrewer2.org/) color maps;

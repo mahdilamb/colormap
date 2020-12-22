@@ -1,9 +1,11 @@
 package net.mahdilamb.colormap.tests;
 
-import net.mahdilamb.colormap.Colormap;
-import net.mahdilamb.colormap.ColormapNode;
-import net.mahdilamb.colormap.LinearColormap;
-import net.mahdilamb.colormap.color.Color;
+
+import net.mahdilamb.colormap.Color;
+import net.mahdilamb.colormap.Colormaps;
+import net.mahdilamb.colormap.api.ColormapNode;
+import net.mahdilamb.colormap.api.FluidColormap;
+import net.mahdilamb.colormap.api.RGBA;
 import org.junit.Test;
 
 import java.util.Map;
@@ -14,16 +16,16 @@ import static org.junit.Assert.*;
 
 
 public class JUnitTests {
-    static final LinearColormap grays = new LinearColormap(
+    static final FluidColormap grays = Colormaps.fluidColormap(Colormaps.buildSequential().addColor(
             Color.get("black"),
             Color.get("white")
-    );
+    ).build());
     static final Map<Integer, ColormapNode> colors = new TreeMap<>();
     static final int maxRange = 255;
 
     static {
         for (int i = 0; i <= maxRange; i++) {
-            colors.put(i, grays.getColorFromValue(((float) i) / maxRange));
+            colors.put(i, grays.getNode(((float) i) / maxRange));
         }
     }
 
@@ -37,12 +39,6 @@ public class JUnitTests {
         assertEquals(colors.get(maxRange).getColor(), Color.get("white"));
     }
 
-    @Test
-    public void cloningShouldReturnSameColorTest() {
-        final int color = 10;
-        final Color clone = colors.get(color).getColor().clone();
-        assertEquals(colors.get(color).getColor(), clone);
-    }
 
     @Test
     public void deletingLastColorShouldChangeAllColorsTest() {
@@ -54,7 +50,7 @@ public class JUnitTests {
         final int[] sampleI = new int[samples];
         for (int i = 0; i < samples; i++) {
             final int r = Math.round(Math.abs(random.nextFloat()) * (maxRange - 1));
-            originals[i] = colors.get(r).getColor().clone();
+            originals[i] = new Color(colors.get(r).getColor());
             sampleI[i] = r;
         }
         //remove last value
@@ -80,7 +76,7 @@ public class JUnitTests {
         final int[] sampleI = new int[samples];
         for (int i = 0; i < samples; i++) {
             final int r = Math.round(Math.abs(random.nextFloat()) * (maxRange - 1));
-            originals[i] = colors.get(r).getColor().clone();
+            originals[i] = new Color(colors.get(r).getColor());
             sampleI[i] = r;
         }
         //remove first value
@@ -107,7 +103,7 @@ public class JUnitTests {
         final int[] sampleI = new int[samples];
         for (int i = 0; i < samples; i++) {
             final int r = Math.round(Math.abs(random.nextFloat()) * (maxRange - 1));
-            originals[i] = colors.get(r).getColor().clone();
+            originals[i] = new Color(colors.get(r).getColor());
             sampleI[i] = r;
         }
         //remove random value
@@ -129,33 +125,22 @@ public class JUnitTests {
     @Test
     public void testRGBToLabIsCorrectTest() {
         final double precision = 5e-2;
-        final Color red = Color.get("red");
-        final float[] redLab = red.asLab();
+        final RGBA red = Color.get("red");
+        final float[] redLab = red.toLab();
         assertEquals(53.241, redLab[0], precision);
         assertEquals(80.092, redLab[1], precision);
         assertEquals(67.203, redLab[2], precision);
-        final Color green = Color.get("lime");
-        final float[] greenLab = green.asLab();
+        final RGBA green = Color.get("lime");
+        final float[] greenLab = green.toLab();
         assertEquals(87.735, greenLab[0], precision);
         assertEquals(-86.183, greenLab[1], precision);
         assertEquals(83.179, greenLab[2], precision);
-        final Color blue = Color.get("blue");
-        final float[] blueLab = blue.asLab();
+        final RGBA blue = Color.get("blue");
+        final float[] blueLab = blue.toLab();
         assertEquals(32.297, blueLab[0], precision);
         assertEquals(79.188, blueLab[1], precision);
         assertEquals(-107.860, blueLab[2], precision);
     }
 
-    @Test
-    public void ensureDefaultColorMapsLoadTest() {
-        assertFalse(Colormap.listDefaults().isEmpty());
-    }
 
-    @Test(expected = UnsupportedOperationException.class)
-    public void UnmodifiableColorKeepsContractTest() {
-
-        Color.asUnmodifiable(Color.getAWT("blue"))
-                .setBlue(200);
-
-    }
 }
