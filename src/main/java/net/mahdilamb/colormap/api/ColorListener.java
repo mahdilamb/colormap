@@ -1,16 +1,16 @@
 package net.mahdilamb.colormap.api;
 
-/**
- * Functional interface to be used to monitor changes in color values
- */
 @FunctionalInterface
-public interface ColorListener {
+public interface ColorListener extends ColormapNodeListener {
     /**
      * Called when a color has changed
      *
-     * @param newColor the new color
-     * @param oldColor the old color
-     * @param state    the node
+     * @param color the new color
      */
-    void colorChanged(RGBA newColor, RGBA oldColor, ColormapNode state);
+    void colorChanged(RGBA color);
+
+    @Override
+    default void colorChanged(RGBA newColor, RGBA oldColor, ColormapNode state) {
+        colorChanged(newColor);
+    }
 }

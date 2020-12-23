@@ -45,11 +45,11 @@ task swingDemo(type: JavaExec, dependsOn: ["testClasses"]) {
 /**
  * Uncomment and run to insert colormap swatches into README.md
  */
-/*
+
 task generateReadme(type: JavaExec, dependsOn: ["testClasses"]) {
     classpath = sourceSets["test"].runtimeClasspath
     main = "net.mahdilamb.colormap.reflect.GenerateReadme"
-}*/
+}
 /**
  * Uncomment and run to insert colors
  */

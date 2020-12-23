@@ -14,7 +14,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 
-public class ColormapTest {
+public class InteractiveTest {
     static final class ColorMapCellRenderer implements ListCellRenderer<Colormap> {
         private final DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
 
@@ -66,7 +66,7 @@ public class ColormapTest {
             setAlignmentX(SwingConstants.LEFT);
             color = cmap.getNode(value);
 
-            color.addListener((color, old, v) -> SwingUtilities.invokeLater(() -> {
+            color.addListener(color -> SwingUtilities.invokeLater(() -> {
                 final Border border = BorderFactory.createCompoundBorder(
                         BorderFactory.createLineBorder(new java.awt.Color(color.toDecimal()), 0),
                         BorderFactory.createCompoundBorder(
@@ -77,7 +77,8 @@ public class ColormapTest {
 
         }
     }
-@SuppressWarnings("unchecked")
+
+    @SuppressWarnings("unchecked")
     public static void main(String... args) {
         final JFrame frame = new JFrame();
 
@@ -101,7 +102,8 @@ public class ColormapTest {
                         selected.color.update(newValue);
                         selected.setText(String.format("%.2f", newValue));
                     } catch (Exception exception) {
-                        exception.printStackTrace();
+                        selected.color.update(null);
+                        selected.setText("NaN");
                     }
                 }
             }
@@ -117,10 +119,10 @@ public class ColormapTest {
         cb.setRenderer(new ColorMapCellRenderer());
 
         colorTools.add(cb);
-        Colormaps.named().forEach(cmapName -> {
+        Colormaps.named().stream().sorted().forEach(cmapName -> {
             cbModel.addElement(Colormaps.get(cmapName));
 
-            if (((Comparable<CharSequence>)cmapName).compareTo("sequential.viridis") == 0) {
+            if (cmapName.compareTo("sequential.viridis") == 0) {
                 cb.setSelectedIndex(cbModel.getSize() - 1);
             }
         });

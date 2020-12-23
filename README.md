@@ -16,7 +16,7 @@ Reference colormaps can either be accessed through ```Colormaps.get(String)```, 
 
 ## Creating colormaps
 
-Colormaps can be created in two ways either using a builder ```Colormaps.buildSequential()``` and ```Colormaps.buildQualitative()```, or by extending ```net.mahdilamb.colormap.api.SequentialColormap``` and ```net.mahdilamb.colormap.api.QualitativeColormap```. Reference colormaps are created by the latter approach. 
+Colormaps can be created in two ways either using a builder ```Colormaps.buildSequential()``` and ```Colormaps.buildQualitative()```, or by extending ```net.mahdilamb.colormap.SequentialColormap``` and ```net.mahdilamb.colormap.QualitativeColormap```. Reference colormaps are created by the latter approach. 
 
 ## Fluid colormaps example
 
@@ -29,8 +29,8 @@ import net.mahdilamb.colormap.api.FluidColormap;
 public class Test {
     public static void main(final String[] args) {
         final FluidColormap viridis = Colormaps.fluidColormap(Colormaps.get("Viridis"));
-        viridis.get(0f, (newColor, oldColor, node) -> {
-            System.out.println(newColor);
+        viridis.get(0f, color -> {
+            System.out.println(color);
         });
 
         viridis.get(-1);

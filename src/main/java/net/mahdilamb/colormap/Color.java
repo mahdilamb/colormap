@@ -1160,7 +1160,7 @@ public final class Color implements RGBA {
      * @return the color, if exist or {@code null} if not
      */
     public static RGBA get(String name) {
-        final Matcher matcher = Pattern.compile("([A-z ]*)[:\\.]([A-z ]*)").matcher(name);
+        final Matcher matcher = Pattern.compile("([A-z ]*)[:.]([A-z ]*)").matcher(name);
         if (matcher.matches()) {
             return get(ColorType.from(matcher.group(1).toLowerCase()), matcher.group(2));
         } else {

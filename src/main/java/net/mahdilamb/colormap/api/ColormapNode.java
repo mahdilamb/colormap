@@ -22,14 +22,32 @@ public interface ColormapNode extends RGBA {
      *
      * @param listener the listener to add
      */
-    void addListener(ColorListener listener);
+    void addListener(ColormapNodeListener listener);
+
+    /**
+     * Add a listener to this color value. Adding a listener triggers an event to be fired
+     *
+     * @param listener the listener to add
+     */
+    default void addListener(ColorListener listener) {
+        addListener((ColormapNodeListener) listener);
+    }
 
     /**
      * Remove a listener from this color value, if listening.
      *
      * @param listener the listener to remove
      */
-    void removeListener(ColorListener listener);
+    void removeListener(ColormapNodeListener listener);
+
+    /**
+     * Remove a listener from this color value, if listening.
+     *
+     * @param listener the listener to remove
+     */
+    default void removeListener(ColorListener listener) {
+        removeListener((ColormapNodeListener) listener);
+    }
 
     /**
      * Remove all listeners from this color value
