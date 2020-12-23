@@ -52,7 +52,7 @@ public class InsertColormaps {
 
                 last[0] = cmapSplit[0];
             }
-            insert.append(String.format("\t\t/**\n\t\t * @return a new %s colormap\n\t\t */\n\t\tpublic static Colormap %s(){\n\t\t\treturn Colormaps.get(\"%s.%s\");\n\t\t}\n\n", cmapSplit[1], cmapSplit[1], toTitleCase(cmapSplit[0]), cmapSplit[1]));
+            insert.append(String.format("\t\t/**\n\t\t * @return the %s colormap\n\t\t */\n\t\tpublic static Colormap %s(){\n\t\t\treturn Colormaps.get(\"%s.%s\");\n\t\t}\n\n", cmapSplit[1], cmapSplit[1], toTitleCase(cmapSplit[0]), cmapSplit[1]));
         });
         insert.append("\t}\n\n");
         insert.append(tail);
