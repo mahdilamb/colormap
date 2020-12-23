@@ -57,4 +57,4 @@ public static RGBA getXKCD(String name) {
 
 The package can be imported from [maven](https://search.maven.org/artifact/net.mahdilamb/colormap).
 
-## Default colormaps
+## Reference colormaps

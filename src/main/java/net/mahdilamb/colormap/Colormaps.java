@@ -256,7 +256,6 @@ public final class Colormaps {
             boolean needsUpdated = isNaN(value) && !isNaN(node.getValue());
             ((ColorValueImpl) node).value = value;
             if (value != null) {
-
                 if (currentMin != null && value.compareTo(currentMin) <= 0) {
                     currentMin = value;
                     needsUpdated = true;
@@ -265,7 +264,6 @@ public final class Colormaps {
                     currentMax = value;
                     needsUpdated = true;
                 }
-
             }
             if (needsUpdated) {
                 recalculateRange();
@@ -387,7 +385,6 @@ public final class Colormaps {
         @Override
         public Float getMinValue() {
             return minClip;
-
         }
 
         @Override

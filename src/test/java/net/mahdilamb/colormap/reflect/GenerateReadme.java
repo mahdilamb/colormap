@@ -2,6 +2,7 @@ package net.mahdilamb.colormap.reflect;
 
 import net.mahdilamb.colormap.Colormaps;
 import net.mahdilamb.colormap.api.Colormap;
+import net.mahdilamb.colormap.reference.ReferenceColormap;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -31,7 +32,7 @@ public final class GenerateReadme {
         } else {
             Files.createDirectory(out.toPath());
         }
-        Colormaps.named().forEach(cmapName -> {
+        Colormaps.named().stream().sorted().forEach(cmapName -> {
             final Colormap cmap = Colormaps.get(cmapName);
             final BufferedImage image = new BufferedImage(192, 20, BufferedImage.TYPE_INT_ARGB);
             for (int x = 0; x < image.getWidth(); ++x) {
@@ -44,7 +45,9 @@ public final class GenerateReadme {
                 final File path = new File(String.format("swatches/%s.png", cmapName));
                 ImageIO.write(image, "png", path);
                 final String[] cmapSplit = cmapName.toString().split("\\.");
-                readme.append(String.format("|%s|%s|![%s](%s)|\n", toTitleCase(cmapSplit[0]), cmapSplit[1], cmapSplit[1], path.toString().replace("\\", "/")));
+                final ReferenceColormap annotation = cmap.getClass().getAnnotation(ReferenceColormap.class);
+
+                readme.append(String.format("|%s|%s|![%s](%s)|\n", toTitleCase(annotation.type().name()), annotation.name(), cmapSplit[1], path.toString().replace("\\", "/")));
             } catch (IOException e) {
                 e.printStackTrace();
             }
