@@ -1,6 +1,6 @@
 package net.mahdilamb.colormap.reference.qualitative;
 
-import net.mahdilamb.colormap.api.QualitativeColormap;
+import net.mahdilamb.colormap.QualitativeColormap;
 import net.mahdilamb.colormap.reference.ColormapType;
 import net.mahdilamb.colormap.reference.ReferenceColormap;
 import net.mahdilamb.colormap.Color;

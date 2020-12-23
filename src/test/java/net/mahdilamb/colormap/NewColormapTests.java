@@ -1,9 +1,6 @@
 package net.mahdilamb.colormap;
 
-import net.mahdilamb.colormap.api.Colormap;
-import net.mahdilamb.colormap.api.ColormapBuilder;
-import net.mahdilamb.colormap.api.ColormapNode;
-import net.mahdilamb.colormap.api.FluidColormap;
+import net.mahdilamb.colormap.api.*;
 import org.junit.Test;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -178,7 +175,7 @@ public class NewColormapTests {
     public void NodesDoNotUpdateIfNewMinIsNullTest() {
         final FluidColormap fluidMonotone = Colormaps.fluidColormap(monotone, 0f, 1f, false);
         final AtomicInteger count = new AtomicInteger();
-        fluidMonotone.get(0f, (n, c, s) -> count.incrementAndGet());
+        fluidMonotone.get(0f, color -> count.incrementAndGet());
         fluidMonotone.setMinValue(null);
         assertEquals(1, count.get());
     }
@@ -187,7 +184,7 @@ public class NewColormapTests {
     public void UpdatingNodeFiresChangeTest() {
         final FluidColormap fluidMonotone = Colormaps.fluidColormap(monotone, null, null, false);
         final AtomicInteger count = new AtomicInteger();
-        final ColormapNode a = fluidMonotone.get(1f, (n, o, s) -> count.incrementAndGet());
+        final ColormapNode a = fluidMonotone.get(1f, color -> count.incrementAndGet());
         fluidMonotone.get(0f);
         a.update(0f);
         assertEquals(3, count.get());
@@ -204,7 +201,7 @@ public class NewColormapTests {
 
     @Test
     public void ReferenceColormapsFoundTest() {
-        assertNotEquals(0, Colormaps.named());
+        assertNotEquals(0, Colormaps.named().size());
 
     }
 

@@ -26,6 +26,7 @@ public final class GenerateReadme {
                 "|---|---|---|\n"
         );
         if (out.exists()) {
+            //noinspection ResultOfMethodCallIgnored
             Arrays.stream(Objects.requireNonNull(out.listFiles())).iterator().forEachRemaining(File::delete);
         } else {
             Files.createDirectory(out.toPath());

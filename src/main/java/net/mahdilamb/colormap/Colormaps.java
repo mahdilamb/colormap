@@ -98,7 +98,7 @@ public final class Colormaps {
         private FluidColormapImpl colormap;
         private RGBA color;
         private Float value;
-        private final Set<ColorListener> listeners = new HashSet<>();
+        private final Set<ColormapNodeListener> listeners = new HashSet<>();
 
         ColorValueImpl(FluidColormapImpl colormap, Float value, RGBA color) {
             this.colormap = colormap;
@@ -117,13 +117,13 @@ public final class Colormaps {
         }
 
         @Override
-        public void addListener(ColorListener listener) {
+        public void addListener(ColormapNodeListener listener) {
             listeners.add(listener);
             fireColorChanged(null);
         }
 
         @Override
-        public void removeListener(ColorListener listener) {
+        public void removeListener(ColormapNodeListener listener) {
             listeners.remove(listener);
         }
 
@@ -152,7 +152,7 @@ public final class Colormaps {
                 return;
             }
 
-            for (final ColorListener listener : listeners) {
+            for (final ColormapNodeListener listener : listeners) {
                 listener.colorChanged(newColor == null ? color : newColor, color, this);
             }
             if (newColor == null) {
@@ -275,6 +275,7 @@ public final class Colormaps {
 
         @Override
         public void remove(ColormapNode colorValue) {
+            //noinspection SuspiciousMethodCalls
             if (nodes.remove(colorValue) && hasValues) {
                 if (colorValue.getValue().compareTo(currentMin) >= 0 || colorValue.getValue().compareTo(currentMax) <= 0) {
                     recalculateRange();
@@ -330,7 +331,7 @@ public final class Colormaps {
          * @return the color at the position (relative to min, max and reversed of the colormap)
          */
         private RGBA getColorProportionate(Float value) {
-            return colormap.get(scale(value));
+            return value == null || !Float.isFinite(value) ? getNaNColor() : colormap.get(scale(value));
         }
 
         @Override
@@ -996,9 +997,11 @@ public final class Colormaps {
     /**
      * Get a collection of the names of the reference colormaps
      *
+     * @param <C> the type of the elements in the output set
      * @return the collection of reference colormap names
      */
-    public static Set<CharSequence> named() {
+    @SuppressWarnings("unchecked")//the set has both features
+    public static <C extends CharSequence & Comparable<CharSequence>> Set<C> named() {
         if (referenceColormaps.size() == 0) {
             try {
                 cacheColormaps();
@@ -1006,7 +1009,7 @@ public final class Colormaps {
                 e.printStackTrace();
             }
         }
-        return Collections.unmodifiableSet(referenceColormaps.keySet());
+        return (Set<C>) Collections.unmodifiableSet(((Map<?, ?>) referenceColormaps).keySet());
     }
 
     /**
@@ -1104,7 +1107,7 @@ public final class Colormaps {
      *
      * @return the build for the qualitative colormap
      */
-    public static ColormapBuilder.QualitativeColormapBuilder buildQualitative() {
+    public static ColormapBuilder.Qualitative buildQualitative() {
         return ColormapBuilder.buildQualitative();
     }
 
@@ -1113,7 +1116,7 @@ public final class Colormaps {
      *
      * @return the build for the sequential colormap
      */
-    public static ColormapBuilder.SequentialColormapBuilder buildSequential() {
+    public static ColormapBuilder.Sequential buildSequential() {
         return ColormapBuilder.buildSequential();
     }
 

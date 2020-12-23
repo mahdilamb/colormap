@@ -57,9 +57,6 @@ public class JUnitTests {
         colors.get(maxRange).remove();
         //check all samples
         for (int i = 0; i < samples; i++) {
-            if (i == maxRange) {
-                continue;
-            }
             isSame &= originals[i].equals(colors.get(sampleI[i]).getColor());
         }
         assertFalse(isSame);
@@ -122,6 +119,7 @@ public class JUnitTests {
 
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Test
     public void testRGBToLabIsCorrectTest() {
         final double precision = 5e-2;

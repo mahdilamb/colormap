@@ -19,7 +19,7 @@ public interface FluidColormap extends Colormap {
     ColormapNode getNode(Float value);
 
     @Override
-    default ColormapNode get(Float value) {
+    default RGBA get(Float value) {
         return getNode(value);
     }
 
@@ -120,8 +120,22 @@ public interface FluidColormap extends Colormap {
      * @param listener the listener to add to the value
      * @return the newly generated colormap node
      */
+    default ColormapNode get(Float value, ColormapNodeListener listener) {
+        final ColormapNode v = getNode(value);
+        v.addListener(listener);
+        return v;
+    }
+
+    /**
+     * Get a color from the colormap and add a listener (which fires an event when first added
+     * and each time the color changes).
+     *
+     * @param value    the value add to the colormap
+     * @param listener the listener to add to the value
+     * @return the newly generated colormap node
+     */
     default ColormapNode get(Float value, ColorListener listener) {
-        final ColormapNode v = get(value);
+        final ColormapNode v = getNode(value);
         v.addListener(listener);
         return v;
     }
