@@ -202,7 +202,6 @@ public class NewColormapTests {
     @Test
     public void ReferenceColormapsFoundTest() {
         assertNotEquals(0, Colormaps.named().size());
-
     }
 
 }

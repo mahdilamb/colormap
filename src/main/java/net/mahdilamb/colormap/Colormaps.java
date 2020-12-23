@@ -253,9 +253,10 @@ public final class Colormaps {
 
         @Override
         public void update(ColormapNode node, Float value) {
+            boolean needsUpdated = isNaN(value) && !isNaN(node.getValue());
             ((ColorValueImpl) node).value = value;
             if (value != null) {
-                boolean needsUpdated = false;
+
                 if (currentMin != null && value.compareTo(currentMin) <= 0) {
                     currentMin = value;
                     needsUpdated = true;
@@ -265,10 +266,10 @@ public final class Colormaps {
                     needsUpdated = true;
                 }
 
-                if (needsUpdated) {
-                    recalculateRange();
-                    recalculateNodes();
-                }
+            }
+            if (needsUpdated) {
+                recalculateRange();
+                recalculateNodes();
             }
             ((ColorValueImpl) node).fireColorChanged(getColorProportionate(value));
         }
@@ -324,6 +325,10 @@ public final class Colormaps {
             return isReversed() ? 1 - v : v;
         }
 
+        private static boolean isNaN(Float value) {
+            return value == null || !Float.isFinite(value);
+        }
+
         /**
          * Get the color from the colormap in the proportional position
          *
@@ -331,7 +336,7 @@ public final class Colormaps {
          * @return the color at the position (relative to min, max and reversed of the colormap)
          */
         private RGBA getColorProportionate(Float value) {
-            return value == null || !Float.isFinite(value) ? getNaNColor() : colormap.get(scale(value));
+            return isNaN(value) ? getNaNColor() : colormap.get(scale(value));
         }
 
         @Override
