@@ -90,6 +90,7 @@ The package can be imported from [maven](https://search.maven.org/artifact/net.m
 |Sequential|BuGn|![bugn](swatches/sequential.bugn.png)|
 |Sequential|BuPu|![bupu](swatches/sequential.bupu.png)|
 |Sequential|Cividis|![cividis](swatches/sequential.cividis.png)|
+|Sequential|CubeYF|![cubeyf](swatches/sequential.cubeyf.png)|
 |Sequential|GnBu|![gnbu](swatches/sequential.gnbu.png)|
 |Sequential|Greens|![greens](swatches/sequential.greens.png)|
 |Sequential|Greys|![greys](swatches/sequential.greys.png)|
@@ -97,6 +98,8 @@ The package can be imported from [maven](https://search.maven.org/artifact/net.m
 |Sequential|Inferno|![inferno](swatches/sequential.inferno.png)|
 |Sequential|Kindlmann|![kindlmann](swatches/sequential.kindlmann.png)|
 |Sequential|KindlmannExtended|![kindlmannextended](swatches/sequential.kindlmannextended.png)|
+|Sequential|KovesiBGYW|![kovesibgyw](swatches/sequential.kovesibgyw.png)|
+|Sequential|KovesiKRYW|![kovesikryw](swatches/sequential.kovesikryw.png)|
 |Sequential|Lacerta|![lacerta](swatches/sequential.lacerta.png)|
 |Sequential|Laguna|![laguna](swatches/sequential.laguna.png)|
 |Sequential|Magma|![magma](swatches/sequential.magma.png)|
