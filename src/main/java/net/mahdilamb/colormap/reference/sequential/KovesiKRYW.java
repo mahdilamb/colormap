@@ -6,10 +6,13 @@ import net.mahdilamb.colormap.reference.ColormapType;
 import net.mahdilamb.colormap.reference.ReferenceColormap;
 
 /**
- * KRYW colormap desiegned by Peter Kovesi
+ * KRYW colormap designed by Peter Kovesi
  */
 @ReferenceColormap(name = "KovesiKRYW", type = ColormapType.SEQUENTIAL)
 public class KovesiKRYW extends SequentialColormap {
+    /**
+     * Create a KRYW colormap
+     */
     public KovesiKRYW() {
         super(
                 new Color(0.066001, 0.066024, 0.066019),
