@@ -103,10 +103,10 @@ The package can be imported from [maven](https://search.maven.org/artifact/net.m
 |Sequential|Lacerta|![lacerta](swatches/sequential.lacerta.png)|
 |Sequential|Laguna|![laguna](swatches/sequential.laguna.png)|
 |Sequential|Magma|![magma](swatches/sequential.magma.png)|
-|Sequential|ModifiedPlasma|![modifiedplasma](swatches/sequential.modifiedplasma.png)|
 |Sequential|Oranges|![oranges](swatches/sequential.oranges.png)|
 |Sequential|OrRd|![orrd](swatches/sequential.orrd.png)|
 |Sequential|Plasma|![plasma](swatches/sequential.plasma.png)|
+|Sequential|PlasmaModified|![plasmamodified](swatches/sequential.plasmamodified.png)|
 |Sequential|PuBu|![pubu](swatches/sequential.pubu.png)|
 |Sequential|PuBuGn|![pubugn](swatches/sequential.pubugn.png)|
 |Sequential|PuRd|![purd](swatches/sequential.purd.png)|
