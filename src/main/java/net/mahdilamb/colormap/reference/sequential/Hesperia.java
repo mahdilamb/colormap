@@ -15,7 +15,7 @@ public final class Hesperia extends SequentialColormap {
      */
     public Hesperia() {
         super(
-                new Color(0f, 0f, 0f),
+                Color.BLACK,
                 new Color(0.00868039904247769f, 0.000131163051981201f, 0.0499894378955346f),
                 new Color(0.0156888063524926f, 0.000457427004985309f, 0.086853393096286f),
                 new Color(0.0215086514347111f, 0.000908853796683583f, 0.114627519318966f),
@@ -270,7 +270,7 @@ public final class Hesperia extends SequentialColormap {
                 new Color(0.999992148744034f, 0.987855677272055f, 0.932994241085229f),
                 new Color(0.999997652879396f, 0.992010284109248f, 0.954691418579787f),
                 new Color(0.999999704012626f, 0.99606017126661f, 0.97702474968637f),
-                new Color(1f, 1f, 1f)
+                Color.WHITE
         );
 
     }

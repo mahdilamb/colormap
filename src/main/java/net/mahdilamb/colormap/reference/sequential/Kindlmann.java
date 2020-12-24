@@ -269,7 +269,7 @@ public final class Kindlmann extends SequentialColormap {
                 new Color(0.998809261864f, 0.983468565536f, 0.979026563766f),
                 new Color(0.999205022643f, 0.988981842757f, 0.986032578677f),
                 new Color(0.999545232406f, 0.994508167954f, 0.993042540059f),
-                new Color(1f, 1f, 1f));
+                Color.WHITE);
 
 
     }

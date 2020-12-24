@@ -733,13 +733,6 @@ public final class Colormaps {
 		}
 
 		/**
-		 * @return the ModifiedPlasma colormap
-		 */
-		public static Colormap ModifiedPlasma(){
-			return Colormaps.get("Sequential.ModifiedPlasma");
-		}
-
-		/**
 		 * @return the Oranges colormap
 		 */
 		public static Colormap Oranges(){
@@ -758,6 +751,13 @@ public final class Colormaps {
 		 */
 		public static Colormap Plasma(){
 			return Colormaps.get("Sequential.Plasma");
+		}
+
+		/**
+		 * @return the PlasmaModified colormap
+		 */
+		public static Colormap PlasmaModified(){
+			return Colormaps.get("Sequential.PlasmaModified");
 		}
 
 		/**

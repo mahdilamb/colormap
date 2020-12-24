@@ -16,7 +16,7 @@ public final class Lacerta extends SequentialColormap {
      */
     public Lacerta() {
         super(
-                new Color(0f, 0f, 0f),
+                Color.BLACK,
                 new Color(0.0106800027858887f, 0.000336853776647296f, 0.0428855412549295f),
                 new Color(0.019010352975483f, 0.00120549836908178f, 0.0766233766318336f),
                 new Color(0.0253319407053869f, 0.00242196316942438f, 0.102475952768534f),
@@ -271,7 +271,7 @@ public final class Lacerta extends SequentialColormap {
                 new Color(0.998747986475828f, 0.986904865954588f, 0.947025916666152f),
                 new Color(0.999443165018352f, 0.991218876921181f, 0.964606690797033f),
                 new Color(0.99986071847071f, 0.995584056869886f, 0.98226778446761f),
-                new Color(1f, 1f, 1f));
+                Color.WHITE);
 
 
     }

@@ -8,14 +8,14 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Colormap from Peter Karpov @see <a href="http://inversed.ru/index.htm">Peter Karpov</a>. Modifed Plasma
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "ModifiedPlasma")
-public final class ModifiedPlasma extends SequentialColormap {
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "PlasmaModified")
+public final class PlasmaModified extends SequentialColormap {
     /**
      * Create a colormap based on Modified Plasma.
      */
-    public ModifiedPlasma() {
+    public PlasmaModified() {
         super(
-                new Color(0f, 0f, 0f),
+                Color.BLACK,
                 new Color(0.0049277731503758f, 0.00220467048209427f, 0.041348172917105f),
                 new Color(0.0106171701346941f, 0.00383334725532445f, 0.0758045798971295f),
                 new Color(0.0163773744328647f, 0.00496236645565048f, 0.10307495796699f),
@@ -270,7 +270,8 @@ public final class ModifiedPlasma extends SequentialColormap {
                 new Color(0.992932811386107f, 0.994069378769566f, 0.887545918530507f),
                 new Color(0.994924141597402f, 0.996538718907553f, 0.922461075997394f),
                 new Color(0.997286260458279f, 0.998532988437932f, 0.959878363715275f),
-                new Color(1f, 1f, 1f));
+                Color.WHITE
+        );
 
 
     }

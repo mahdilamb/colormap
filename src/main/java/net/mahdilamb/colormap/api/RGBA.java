@@ -135,7 +135,7 @@ public interface RGBA {
     }
 
     /**
-     * Convert a 8-bit color to a decimal representation of that color
+     * Convert a 8-bit color to a decimal (packed int) representation of that color
      *
      * @param r the red component (0-255)
      * @param g the green component (0-255)

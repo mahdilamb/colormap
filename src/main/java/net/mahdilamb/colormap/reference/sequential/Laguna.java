@@ -15,7 +15,7 @@ public final class Laguna extends SequentialColormap {
      */
     public Laguna() {
         super(
-                new Color(0f, 0f, 0f),
+                Color.BLACK,
                 new Color(0.0120523458472091f, 0.00302976375346293f, 0.0121816260969515f),
                 new Color(0.0240095399463226f, 0.0060712599355588f, 0.0245273871238326f),
                 new Color(0.0358664407301142f, 0.00912644306195601f, 0.0370330661844431f),
@@ -270,7 +270,7 @@ public final class Laguna extends SequentialColormap {
                 new Color(0.970744323492596f, 0.992790219838831f, 0.971665943558489f),
                 new Color(0.980584768357684f, 0.995194151035556f, 0.980994682502062f),
                 new Color(0.990337714089507f, 0.997596836137128f, 0.990440257274271f),
-                new Color(1f, 1f, 1f));
+                Color.WHITE);
 
     }
 

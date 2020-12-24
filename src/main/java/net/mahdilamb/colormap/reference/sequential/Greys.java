@@ -22,7 +22,7 @@ public final class Greys extends SequentialColormap {
                 new Color(115, 115, 115),
                 new Color(82, 82, 82),
                 new Color(37, 37, 37),
-                new Color(0, 0, 0));
+                Color.BLACK);
 
     }
 

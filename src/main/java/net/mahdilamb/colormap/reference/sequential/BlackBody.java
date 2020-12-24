@@ -269,7 +269,8 @@ public final class BlackBody extends SequentialColormap {
                 new Color(0.998529694871f, 0.986750969284f, 0.939916089534f),
                 new Color(0.999155028965f, 0.991155227389f, 0.959923188443f),
                 new Color(0.999648471753f, 0.995570479665f, 0.979951006929f),
-                new Color(1f, 1f, 1f));
+                Color.WHITE
+        );
 
 
     }
