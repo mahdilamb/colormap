@@ -26,9 +26,9 @@ public interface RGBA {
             out[i] *= 100f;
         }
         return new float[]{
-                (out[0] * 0.4124564f + out[1] * 0.3575761f + out[2] * 0.1804375f),
-                (out[0] * 0.2126729f + out[1] * 0.7151522f + out[2] * 0.0721750f),
-                (out[0] * 0.0193339f + out[1] * 0.1191920f + out[2] * 0.9503041f)
+                out[0] * 0.4124564f + out[1] * 0.3575761f + out[2] * 0.1804375f,
+                out[0] * 0.2126729f + out[1] * 0.7151522f + out[2] * 0.0721750f,
+                out[0] * 0.0193339f + out[1] * 0.1191920f + out[2] * 0.9503041f
         };
     }
 
@@ -450,7 +450,7 @@ public interface RGBA {
     }
 
     /**
-     * Convert this color to a packed int format
+     * Convert this color to a packed int format. Can then be used with java.awt.Color
      *
      * @return the packed int format of this color
      */
