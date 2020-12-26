@@ -39,7 +39,7 @@ public class InteractiveTest {
             public void paintIcon(Component c, Graphics g, int x, int y) {
                 for (int i = 0; i < getIconWidth(); i++) {
                     final float j = ((float) i) / getIconWidth();
-                    g.setColor(new java.awt.Color(colorMap.get(j).toDecimal()));
+                    g.setColor(new java.awt.Color(colorMap.get(j).toInteger()));
                     g.drawLine(i, 1, i, getIconHeight() - 1);
                 }
             }
@@ -68,10 +68,10 @@ public class InteractiveTest {
 
             color.addListener(color -> SwingUtilities.invokeLater(() -> {
                 final Border border = BorderFactory.createCompoundBorder(
-                        BorderFactory.createLineBorder(new java.awt.Color(color.toDecimal()), 0),
+                        BorderFactory.createLineBorder(new java.awt.Color(color.toInteger()), 0),
                         BorderFactory.createCompoundBorder(
                                 BorderFactory.createLineBorder(UIManager.getColor("Panel.background"), 1),
-                                BorderFactory.createLineBorder(new java.awt.Color(color.toDecimal()), 2)));
+                                BorderFactory.createLineBorder(new java.awt.Color(color.toInteger()), 2)));
                 ColorLabel.this.setBorder(border);
             }));
 

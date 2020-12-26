@@ -133,15 +133,15 @@ public interface RGBA {
     }
 
     /**
-     * Convert a 8-bit color to a decimal (packed int) representation of that color
+     * Convert a 8-bit color to a packed int representation of that color
      *
      * @param r the red component (0-255)
      * @param g the green component (0-255)
      * @param b the blue component (0-255)
      * @param a the alpha component (0-255)
-     * @return the color as a decimal representation
+     * @return the color as a packed int representation
      */
-    static int RGBAToDecimal(int r, int g, int b, int a) {
+    static int RGBAToInteger(int r, int g, int b, int a) {
         return ((a & 0xFF) << 24) |
                 ((r & 0xFF) << 16) |
                 ((g & 0xFF) << 8) |
@@ -149,31 +149,30 @@ public interface RGBA {
     }
 
     /**
-     * Convert a float rgba color to its decimal representation (out of bound components are clipped)
+     * Convert a float rgba color to its packed int representation (out of bound components are clipped)
      *
      * @param r the red component (0-1)
      * @param g the green component (0-1)
      * @param b the blue component (0-1)
      * @param a the alpha component (0-1)
-     * @return the color as a decimal representation
+     * @return the color as a packed int
      */
-    static int RGBAToDecimal(float r, float g, float b, float a) {
-        return RGBAToDecimal(floatTo8Bit(r), floatTo8Bit(g), floatTo8Bit(b), floatTo8Bit(a));
+    static int RGBAToInteger(float r, float g, float b, float a) {
+        return RGBAToInteger(floatTo8Bit(r), floatTo8Bit(g), floatTo8Bit(b), floatTo8Bit(a));
     }
 
     /**
      * Convert a decimal to a float rgba
      *
-     * @param dec the decimal color
+     * @param dec the color as a packed integer
      * @return a four component float array containing the rgba components
      */
-    static float[] decimalToRGBA(int dec) {
+    static float[] integerToRGBA(int dec) {
         return new float[]{
                 ((dec >> 16) & 0xff) / 255f,
                 ((dec >> 8) & 0xff) / 255f,
                 ((dec) & 0xff) / 255f,
                 ((dec >> 24) & 0xff) / 255f
-
         };
     }
 
@@ -451,12 +450,12 @@ public interface RGBA {
     }
 
     /**
-     * Convert this color to a decimal format
+     * Convert this color to a packed int format
      *
-     * @return the decimal format of this color
+     * @return the packed int format of this color
      */
-    default int toDecimal() {
-        return RGBAToDecimal(getRed(), getGreen(), getBlue(), getAlpha());
+    default int toInteger() {
+        return RGBAToInteger(getRed(), getGreen(), getBlue(), getAlpha());
     }
 }
 

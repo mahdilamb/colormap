@@ -36,7 +36,7 @@ public final class GenerateReadme {
             final Colormap cmap = Colormaps.get(cmapName);
             final BufferedImage image = new BufferedImage(192, 20, BufferedImage.TYPE_INT_ARGB);
             for (int x = 0; x < image.getWidth(); ++x) {
-                final int rgb = cmap.get(((double) x) / image.getWidth()).toDecimal();
+                final int rgb = cmap.get(((double) x) / image.getWidth()).toInteger();
                 for (int y = 0; y < image.getHeight(); ++y) {
                     image.setRGB(x, y, rgb);
                 }

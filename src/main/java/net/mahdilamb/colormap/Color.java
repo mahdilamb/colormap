@@ -1425,7 +1425,7 @@ public final class Color implements RGBA {
      * @param decimal the decimal representation of the color
      */
     public Color(int decimal) {
-        this(RGBA.decimalToRGBA(decimal));
+        this(RGBA.integerToRGBA(decimal));
     }
 
     /**
