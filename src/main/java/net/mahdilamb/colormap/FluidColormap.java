@@ -1,7 +1,4 @@
-package net.mahdilamb.colormap.api;
-
-
-import net.mahdilamb.colormap.Colormaps;
+package net.mahdilamb.colormap;
 
 import java.util.Collection;
 
@@ -18,30 +15,27 @@ public interface FluidColormap extends Colormap {
      */
     ColormapNode getNode(Float value);
 
-    @Override
-    default RGBA get(Float value) {
-        return getNode(value);
+    /**
+     * Get a color from the colormap and add a listener (which fires an event when first added
+     * and each time the color changes).
+     *
+     * @param value    the value add to the colormap
+     * @param listener the listener to add to the value
+     * @return the newly generated colormap node
+     */
+    default ColormapNode get(Float value, ColormapNodeListener listener) {
+        final ColormapNode v = getNode(value);
+        v.addListener(listener);
+        return v;
     }
 
-    @Override
-    default RGBA getNaNColor() {
-        return getColormap().getNaNColor();
-    }
-
-    @Override
-    default RGBA getLowColor() {
-        return getColormap().getLowColor();
-    }
-
-    @Override
-    default RGBA getHighColor() {
-        return getColormap().getHighColor();
-    }
-
-    @Override
-    default Collection<Float> getDefinedPositions() {
-        return getColormap().getDefinedPositions();
-    }
+    /**
+     * Update the colormap node
+     *
+     * @param node  the node to update
+     * @param value the value to set to
+     */
+    void update(ColormapNode node, Float value);
 
     /**
      * Remove this color value from the colormap
@@ -90,6 +84,20 @@ public interface FluidColormap extends Colormap {
     FluidColormap setMaxValue(Float maxValue);
 
     /**
+     * Change the colormap
+     *
+     * @param colormap the colormap to set. Must not be {@code null}.
+     */
+    void setColormap(Colormap colormap);
+
+    /**
+     * Get the current colormap
+     *
+     * @return the current colormap used in this fluid colormap
+     */
+    Colormap getColormap();
+
+    /**
      * Change the associated settings
      *
      * @param minValue the minimum value to set in the fluid colormap (minimum clip)
@@ -105,28 +113,6 @@ public interface FluidColormap extends Colormap {
     }
 
     /**
-     * Update the colormap node
-     *
-     * @param node  the node to update
-     * @param value the value to set to
-     */
-    void update(ColormapNode node, Float value);
-
-    /**
-     * Get a color from the colormap and add a listener (which fires an event when first added
-     * and each time the color changes).
-     *
-     * @param value    the value add to the colormap
-     * @param listener the listener to add to the value
-     * @return the newly generated colormap node
-     */
-    default ColormapNode get(Float value, ColormapNodeListener listener) {
-        final ColormapNode v = getNode(value);
-        v.addListener(listener);
-        return v;
-    }
-
-    /**
      * Get a color from the colormap and add a listener (which fires an event when first added
      * and each time the color changes).
      *
@@ -135,17 +121,8 @@ public interface FluidColormap extends Colormap {
      * @return the newly generated colormap node
      */
     default ColormapNode get(Float value, ColorListener listener) {
-        final ColormapNode v = getNode(value);
-        v.addListener(listener);
-        return v;
+        return get(value, (ColormapNodeListener) listener);
     }
-
-    /**
-     * Change the colormap
-     *
-     * @param colormap the colormap to set. Must not be {@code null}.
-     */
-    void setColormap(Colormap colormap);
 
     /**
      * Change the colormap based on the name of the colormap
@@ -156,11 +133,29 @@ public interface FluidColormap extends Colormap {
         setColormap(Colormaps.get(name));
     }
 
-    /**
-     * Get the current colormap
-     *
-     * @return the current colormap used in this fluid colormap
-     */
-    Colormap getColormap();
+    @Override
+    default RGBA get(Float value) {
+        return getNode(value);
+    }
+
+    @Override
+    default RGBA getNaNColor() {
+        return getColormap().getNaNColor();
+    }
+
+    @Override
+    default RGBA getLowColor() {
+        return getColormap().getLowColor();
+    }
+
+    @Override
+    default RGBA getHighColor() {
+        return getColormap().getHighColor();
+    }
+
+    @Override
+    default Collection<Float> getDefinedPositions() {
+        return getColormap().getDefinedPositions();
+    }
 
 }

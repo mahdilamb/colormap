@@ -1,9 +1,5 @@
 package net.mahdilamb.colormap;
 
-import net.mahdilamb.colormap.Color;
-import net.mahdilamb.colormap.api.Colormap;
-import net.mahdilamb.colormap.api.RGBA;
-
 import java.util.Collection;
 import java.util.Collections;
 import java.util.NavigableMap;

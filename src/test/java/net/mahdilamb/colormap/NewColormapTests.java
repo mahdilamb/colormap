@@ -1,6 +1,5 @@
 package net.mahdilamb.colormap;
 
-import net.mahdilamb.colormap.api.*;
 import org.junit.Test;
 
 import java.util.concurrent.atomic.AtomicInteger;

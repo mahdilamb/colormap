@@ -3,9 +3,9 @@ package net.mahdilamb.colormap.tests;
 
 import net.mahdilamb.colormap.Color;
 import net.mahdilamb.colormap.Colormaps;
-import net.mahdilamb.colormap.api.ColormapNode;
-import net.mahdilamb.colormap.api.FluidColormap;
-import net.mahdilamb.colormap.api.RGBA;
+import net.mahdilamb.colormap.ColormapNode;
+import net.mahdilamb.colormap.FluidColormap;
+import net.mahdilamb.colormap.RGBA;
 import org.junit.Test;
 
 import java.util.Map;

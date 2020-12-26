@@ -1,7 +1,7 @@
 package net.mahdilamb.colormap.reflect;
 
 import net.mahdilamb.colormap.Colormaps;
-import net.mahdilamb.colormap.api.Colormap;
+import net.mahdilamb.colormap.Colormap;
 import net.mahdilamb.colormap.reference.ReferenceColormap;
 
 import javax.imageio.ImageIO;

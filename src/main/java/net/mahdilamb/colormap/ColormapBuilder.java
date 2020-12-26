@@ -1,6 +1,4 @@
-package net.mahdilamb.colormap.api;
-
-import net.mahdilamb.colormap.Colormaps;
+package net.mahdilamb.colormap;
 
 /**
  * API for a colormap builder.

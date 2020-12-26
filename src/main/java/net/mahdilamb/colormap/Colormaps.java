@@ -1,6 +1,5 @@
 package net.mahdilamb.colormap;
 
-import net.mahdilamb.colormap.api.*;
 import net.mahdilamb.colormap.reference.ReferenceColormap;
 
 import java.io.File;
@@ -119,7 +118,7 @@ public final class Colormaps {
         @Override
         public void addListener(ColormapNodeListener listener) {
             listeners.add(listener);
-            fireColorChanged(null);
+            listener.colorChanged(color,null,this);
         }
 
         @Override

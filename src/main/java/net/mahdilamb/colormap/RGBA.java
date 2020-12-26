@@ -1,6 +1,4 @@
-package net.mahdilamb.colormap.api;
-
-import net.mahdilamb.colormap.Color;
+package net.mahdilamb.colormap;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

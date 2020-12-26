@@ -8,7 +8,7 @@ Colormap is a Java package for creating and using colormaps. It includes many "r
 ## Overview
 
 - The main access to the colormaps is through ```net.mahdilamb.colormap.Colormaps```. This includes a lot of wrapper classes and the ability to list the reference colormaps ```Colormaps.named()```. 
-- The wrapper classes include a reversed colormap (```Colormaps.reversedColormap()```), as well as a "fluid" colormap ```Colormaps.fluidColormap()```. A fluid colormap is not, unlike the reference colormaps, limited to the range 0-1. Instead, a fluid colormap can autoscale, or be clamped between a min and max value (see ```net.mahdilamb.colormap.api.FluidColormap``` for more information). Fluid colormaps can also have the backing colormap changed. 
+- The wrapper classes include a reversed colormap (```Colormaps.reversedColormap()```), as well as a "fluid" colormap ```Colormaps.fluidColormap()```. A fluid colormap is not, unlike the reference colormaps, limited to the range 0-1. Instead, a fluid colormap can autoscale, or be clamped between a min and max value (see ```net.mahdilamb.colormap.FluidColormap``` for more information). Fluid colormaps can also have the backing colormap changed. 
 
 ## Using reference colormaps
 
@@ -24,7 +24,7 @@ As the fluid colormaps are autoranging, they fire an even when the color is chan
 
 ```java
 import net.mahdilamb.colormap.Colormaps;
-import net.mahdilamb.colormap.api.FluidColormap;
+import net.mahdilamb.colormap.FluidColormap;
 
 public class Test {
     public static void main(final String[] args) {

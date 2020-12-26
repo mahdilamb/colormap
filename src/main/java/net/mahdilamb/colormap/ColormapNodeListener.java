@@ -1,4 +1,4 @@
-package net.mahdilamb.colormap.api;
+package net.mahdilamb.colormap;
 
 /**
  * Functional interface to be used to monitor changes in color values

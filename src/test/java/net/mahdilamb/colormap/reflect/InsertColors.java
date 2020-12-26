@@ -1,7 +1,7 @@
 package net.mahdilamb.colormap.reflect;
 
 import net.mahdilamb.colormap.Color;
-import net.mahdilamb.colormap.api.RGBA;
+import net.mahdilamb.colormap.RGBA;
 import net.mahdilamb.colormap.reference.ColorType;
 
 import java.io.File;

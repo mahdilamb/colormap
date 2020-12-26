@@ -1,6 +1,5 @@
 package net.mahdilamb.colormap;
 
-import net.mahdilamb.colormap.api.RGBA;
 import net.mahdilamb.colormap.reference.ColorType;
 import net.mahdilamb.colormap.reference.ReferenceColor;
 

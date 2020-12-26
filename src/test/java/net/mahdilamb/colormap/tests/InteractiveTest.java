@@ -2,9 +2,9 @@ package net.mahdilamb.colormap.tests;
 
 
 import net.mahdilamb.colormap.Colormaps;
-import net.mahdilamb.colormap.api.Colormap;
-import net.mahdilamb.colormap.api.ColormapNode;
-import net.mahdilamb.colormap.api.FluidColormap;
+import net.mahdilamb.colormap.Colormap;
+import net.mahdilamb.colormap.ColormapNode;
+import net.mahdilamb.colormap.FluidColormap;
 import net.mahdilamb.colormap.reference.sequential.Viridis;
 
 import javax.swing.*;

@@ -1,4 +1,4 @@
-package net.mahdilamb.colormap.api;
+package net.mahdilamb.colormap;
 
 /**
  * API for a node in a fluid colormap.
