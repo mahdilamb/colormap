@@ -98,7 +98,7 @@ public final class Colormaps {
         private RGBA color;
         private Float value;
         private ColormapNodeListener listener = null;
-        private Set<ColormapNodeListener> listeners = new HashSet<>();
+        private List<ColormapNodeListener> listeners;
 
         ColorValueImpl(FluidColormapImpl colormap, Float value, RGBA color) {
             this.colormap = colormap;
@@ -127,9 +127,12 @@ public final class Colormaps {
                     listener.colorChanged(color, null, this);
                     return;
                 }
-                listeners = new HashSet<>();
+                listeners = new ArrayList<>();
                 listeners.add(this.listener);
                 this.listener = null;
+            }
+            if (listeners.contains(listener)){
+                return;
             }
             listeners.add(listener);
             listener.colorChanged(color, null, this);
