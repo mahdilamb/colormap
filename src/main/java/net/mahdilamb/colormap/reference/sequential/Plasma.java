@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.Color;
 /**
  * MPL Plasma
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Plasma")
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Plasma",source = "Matplotlib")
 public final class Plasma extends SequentialColormap {
     /**
      * Create a colormap based on MPL Plasma.

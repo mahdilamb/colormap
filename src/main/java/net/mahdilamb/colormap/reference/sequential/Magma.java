@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * MPL Magma
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Magma")
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Magma",source = "Matplotlib")
 public final class Magma extends SequentialColormap {
     /**
      * Create a colormap based on MPL Magna

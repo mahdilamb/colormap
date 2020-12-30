@@ -8,12 +8,12 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Darkmint sequential colormap.
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Darkmint")
-public final class Darkmint extends SequentialColormap {
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "DarkMint",source = "CARTO")
+public final class DarkMint extends SequentialColormap {
     /**
      * Create a colormap based on Darkmint from Plotly
      */
-    public Darkmint() {
+    public DarkMint() {
         super(
                 new Color(210, 251, 212),
                 new Color(165, 219, 194),
@@ -22,7 +22,6 @@ public final class Darkmint extends SequentialColormap {
                 new Color(58, 124, 137),
                 new Color(35, 93, 114),
                 new Color(18, 63, 90)
-
         );
 
 

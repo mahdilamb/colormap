@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Thermal sequential colormap.
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Thermal")
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Thermal",source = "Ocean")
 public final class Thermal extends SequentialColormap {
     /**
      * Create a colormap based on Thermal from Plotly

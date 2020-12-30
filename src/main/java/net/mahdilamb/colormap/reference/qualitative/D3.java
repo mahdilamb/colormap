@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * D3 qualitative colormap
  */
-@ReferenceColormap(type = ColormapType.QUALITATIVE, name = "D3")
+@ReferenceColormap(type = ColormapType.QUALITATIVE, name = "D3", source = "D3")
 public final class D3 extends QualitativeColormap {
 
     /**

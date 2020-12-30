@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.Color;
 /**
  * MPL Inferno
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Inferno")
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Inferno",source = "Matplotlib")
 public final class Inferno extends SequentialColormap {
     /**
      * Create a colormap based on MPL Inferno

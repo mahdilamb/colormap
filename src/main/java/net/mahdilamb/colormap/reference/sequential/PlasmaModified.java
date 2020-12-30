@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Colormap from Peter Karpov @see <a href="http://inversed.ru/index.htm">Peter Karpov</a>. Modifed Plasma
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "PlasmaModified")
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "PlasmaModified", source = "Peter Karpov")
 public final class PlasmaModified extends SequentialColormap {
     /**
      * Create a colormap based on Modified Plasma.

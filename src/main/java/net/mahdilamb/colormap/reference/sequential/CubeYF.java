@@ -6,9 +6,9 @@ import net.mahdilamb.colormap.reference.ColormapType;
 import net.mahdilamb.colormap.reference.ReferenceColormap;
 
 /**
- * CubeYF colormap from MyCarta
+ * CubeYF colormap from <a href="https://mycarta.wordpress.com/2013/02/21/perceptual-rainbow-palette-the-method/">MyCarta</a>
  */
-@ReferenceColormap(name = "CubeYF",type = ColormapType.SEQUENTIAL)
+@ReferenceColormap(name = "CubeYF", type = ColormapType.SEQUENTIAL, source = "MyCarta")
 public final class CubeYF extends SequentialColormap {
     /**
      * Create the CubeYF colormap

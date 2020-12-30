@@ -8,12 +8,12 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Pinkyl sequential colormap.
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Pinkyl")
-public final class Pinkyl extends SequentialColormap {
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "PinkYl",source = "CARTO")
+public final class PinkYl extends SequentialColormap {
     /**
      * Create a colormap based on Pinkyl from Plotly
      */
-    public Pinkyl() {
+    public PinkYl() {
         super(
                 new Color(254, 246, 181),
                 new Color(255, 221, 154),
@@ -22,7 +22,6 @@ public final class Pinkyl extends SequentialColormap {
                 new Color(250, 138, 118),
                 new Color(241, 109, 122),
                 new Color(225, 83, 131)
-
         );
 
 

@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Colorbrewer 2.0 Accent
  */
-@ReferenceColormap(type = ColormapType.QUALITATIVE, name = "Accent")
+@ReferenceColormap(type = ColormapType.QUALITATIVE, name = "Accent", source = "ColorBrewer")
 public final class Accent extends QualitativeColormap {
 
     /**

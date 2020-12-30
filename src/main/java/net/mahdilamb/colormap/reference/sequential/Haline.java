@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Haline sequential colormap.
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Haline")
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Haline",source = "Ocean")
 public final class Haline extends SequentialColormap {
     /**
      * Create a colormap based on Haline from Plotly

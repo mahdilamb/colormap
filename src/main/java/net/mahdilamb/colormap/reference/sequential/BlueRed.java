@@ -11,7 +11,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 @ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "BlueRed")
 public final class BlueRed extends SequentialColormap {
     /**
-     * Create a colormap based onBlueRed
+     * Create a colormap based on BlueRed
      */
     public BlueRed() {
         super(

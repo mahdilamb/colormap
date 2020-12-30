@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Colorbrewer 2.0 colormap PiYG.
  */
-@ReferenceColormap(type = ColormapType.DIVERGING, name = "PiYG")
+@ReferenceColormap(type = ColormapType.DIVERGING, name = "PiYG", source = "ColorBrewer")
 public final class PiYG extends SequentialColormap {
 
     /**

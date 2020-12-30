@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Burg sequential colormap.
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Burg")
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Burg", source = "CARTO")
 public final class Burg extends SequentialColormap {
     /**
      * Create a colormap based on Burg from Plotly
@@ -22,7 +22,6 @@ public final class Burg extends SequentialColormap {
                 new Color(173, 70, 108),
                 new Color(139, 48, 88),
                 new Color(103, 32, 68)
-
         );
 
 

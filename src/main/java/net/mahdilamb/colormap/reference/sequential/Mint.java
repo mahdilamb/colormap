@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Mint sequential colormap.
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Mint")
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Mint",source = "CARTO")
 public final class Mint extends SequentialColormap {
     /**
      * Create a colormap based on Mint from Plotly

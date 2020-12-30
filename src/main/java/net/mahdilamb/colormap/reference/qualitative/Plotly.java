@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Plotly colormap
  */
-@ReferenceColormap(type = ColormapType.QUALITATIVE, name = "Plotly")
+@ReferenceColormap(type = ColormapType.QUALITATIVE, name = "Plotly",source = "Plotly")
 public final class Plotly extends QualitativeColormap {
 
     /**

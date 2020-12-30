@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Peach sequential colormap.
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Peach")
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Peach",source = "CARTO")
 public final class Peach extends SequentialColormap {
     /**
      * Create a colormap based on Peach from Plotly
@@ -22,7 +22,6 @@ public final class Peach extends SequentialColormap {
                 new Color(242, 133, 93),
                 new Color(239, 106, 76),
                 new Color(235, 74, 64)
-
         );
 
 

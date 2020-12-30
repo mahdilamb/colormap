@@ -8,12 +8,12 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Blugrn sequential colormap.
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Blugrn")
-public final class Blugrn extends SequentialColormap {
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "BluGrn",source = "CARTO")
+public final class BluGrn extends SequentialColormap {
     /**
      * Create a colormap based on Blugrn from Plotly
      */
-    public Blugrn() {
+    public BluGrn() {
         super(
                 new Color(196, 230, 195),
                 new Color(150, 210, 164),

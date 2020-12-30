@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Kenneth Moreland's SmoothCoolWarm colormap.
  */
-@ReferenceColormap(type = ColormapType.DIVERGING, name = "SmoothCoolWarm")
+@ReferenceColormap(type = ColormapType.DIVERGING, name = "SmoothCoolWarm", source = "Kenneth Moreland")
 public final class SmoothCoolWarm extends SequentialColormap {
 
 

@@ -8,12 +8,12 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Aggrnyl sequential colormap.
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Aggrnyl")
-public final class Aggrnyl extends SequentialColormap {
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "AgGrnYl",source = "Plotly")
+public final class AgGrnYl extends SequentialColormap {
     /**
      * Create a colormap based on Aggrnyl from Plotly
      */
-    public Aggrnyl() {
+    public AgGrnYl() {
         super(
                 new Color(36, 86, 104),
                 new Color(15, 114, 121),

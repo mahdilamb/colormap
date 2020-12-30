@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Colorbrewer 2.0 BuPu
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "BuPu")
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "BuPu", source = "ColorBrewer")
 public final class BuPu extends SequentialColormap {
     /**
      * Create a colormap based on Colorbrewer 2.0 BuPu.

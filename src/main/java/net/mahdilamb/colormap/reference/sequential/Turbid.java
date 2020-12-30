@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Turbid sequential colormap.
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Turbid")
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Turbid",source = "Ocean")
 public final class Turbid extends SequentialColormap {
     /**
      * Create a colormap based on Turbid from Plotly

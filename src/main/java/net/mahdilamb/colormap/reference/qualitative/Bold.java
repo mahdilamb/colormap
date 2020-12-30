@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Bold qualitative colormap
  */
-@ReferenceColormap(type = ColormapType.QUALITATIVE, name = "Bold")
+@ReferenceColormap(type = ColormapType.QUALITATIVE, name = "Bold",source = "CARTO")
 public final class Bold extends QualitativeColormap {
 
     /**
@@ -26,7 +26,9 @@ public final class Bold extends QualitativeColormap {
                 new Color(0, 134, 149),
                 new Color(207, 28, 144),
                 new Color(249, 123, 114),
+                new Color(75, 75, 143),
                 new Color(165, 170, 153)
+
         );
 
     }

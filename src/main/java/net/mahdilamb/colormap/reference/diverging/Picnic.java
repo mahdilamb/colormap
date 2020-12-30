@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Plotly's Picnic
  */
-@ReferenceColormap(type = ColormapType.DIVERGING, name = "Picnic")
+@ReferenceColormap(type = ColormapType.DIVERGING, name = "Picnic",source = "Plotly")
 public final class Picnic extends SequentialColormap {
 
     /**
@@ -21,7 +21,7 @@ public final class Picnic extends SequentialColormap {
                 new Color(102, 204, 255),
                 new Color(153, 204, 255),
                 new Color(204, 204, 255),
-                new Color(255, 255, 255),
+                Color.WHITE,
                 new Color(255, 204, 255),
                 new Color(255, 153, 255),
                 new Color(255, 102, 204),

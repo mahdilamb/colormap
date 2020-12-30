@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Deep sequential colormap.
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Deep")
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Deep",source = "Ocean")
 public final class Deep extends SequentialColormap {
     /**
      * Create a colormap based on Deep from Plotly

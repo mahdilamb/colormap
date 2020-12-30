@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.Color;
 /**
  * MPL colormap Cividis
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Cividis")
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Cividis",source = "Matplotlib")
 public final class Cividis extends SequentialColormap {
     /**
      * Create a colormap based on MPL Cividis

@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.Color;
 /**
  * Colorbrewer 2.0 Pastel1
  */
-@ReferenceColormap(type = ColormapType.QUALITATIVE, name = "Pastel1")
+@ReferenceColormap(type = ColormapType.QUALITATIVE, name = "Pastel1", source = "ColorBrewer")
 public final class Pastel1 extends QualitativeColormap {
 
 

@@ -8,12 +8,12 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Tealgrn sequential colormap.
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Tealgrn")
-public final class Tealgrn extends SequentialColormap {
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "TealGrn",source = "CARTO")
+public final class TealGrn extends SequentialColormap {
     /**
      * Create a colormap based on Tealgrn from Plotly
      */
-    public Tealgrn() {
+    public TealGrn() {
         super(
                 new Color(176, 242, 188),
                 new Color(137, 232, 172),
@@ -22,6 +22,7 @@ public final class Tealgrn extends SequentialColormap {
                 new Color(56, 178, 163),
                 new Color(44, 152, 160),
                 new Color(37, 125, 152)
+
 
         );
 

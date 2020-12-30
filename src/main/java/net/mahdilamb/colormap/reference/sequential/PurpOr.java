@@ -8,12 +8,12 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Purpor sequential colormap.
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Purpor")
-public final class Purpor extends SequentialColormap {
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "PurpOr",source = "CARTO")
+public final class PurpOr extends SequentialColormap {
     /**
      * Create a colormap based on Purpor from Plotly
      */
-    public Purpor() {
+    public PurpOr() {
         super(
                 new Color(249, 221, 218),
                 new Color(242, 185, 196),

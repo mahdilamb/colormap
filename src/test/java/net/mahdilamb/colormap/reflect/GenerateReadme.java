@@ -1,7 +1,7 @@
 package net.mahdilamb.colormap.reflect;
 
-import net.mahdilamb.colormap.Colormaps;
 import net.mahdilamb.colormap.Colormap;
+import net.mahdilamb.colormap.Colormaps;
 import net.mahdilamb.colormap.reference.ReferenceColormap;
 
 import javax.imageio.ImageIO;
@@ -23,8 +23,8 @@ public final class GenerateReadme {
 
 
         readme.append('\n');
-        readme.append("|Category|ColorMap|Sample|\n" +
-                "|---|---|---|\n"
+        readme.append("|Category|ColorMap|Sample|Source|\n" +
+                "|---|---|---|---|\n"
         );
         if (out.exists()) {
             //noinspection ResultOfMethodCallIgnored
@@ -46,8 +46,55 @@ public final class GenerateReadme {
                 ImageIO.write(image, "png", path);
                 final String[] cmapSplit = cmapName.toString().split("\\.");
                 final ReferenceColormap annotation = cmap.getClass().getAnnotation(ReferenceColormap.class);
-
-                readme.append(String.format("|%s|%s|![%s](%s)|\n", toTitleCase(annotation.type().name()), annotation.name(), cmapSplit[1], path.toString().replace("\\", "/")));
+                String source = annotation.source();
+                switch (source.toLowerCase()) {
+                    case "ocean":
+                        source = "[Ocean](https://matplotlib.org/cmocean/)";
+                        break;
+                    case "colorbrewer":
+                        source = "[ColorBrewer 2.0](https://colorbrewer2.org/)";
+                        break;
+                    case "kenneth moreland":
+                        source = "[\"Why We Use Bad Color Maps and What You Can Do About It.\"](https://doi.org/10.2352/ISSN.2470-1173.2016.16.HVEI-133)";
+                        break;
+                    case "google ai":
+                        source = "[https://ai.googleblog.com/2019/08/turbo-improved-rainbow-colormap-for.html](Google AI)";
+                        break;
+                    case "peter karpov":
+                        source = "[Peter Karpov](http://inversed.ru/Blog_2.htm)";
+                        break;
+                    case "tableau":
+                        source = "[Tableau](https://www.tableau.com/)";
+                        break;
+                    case "kindlmann et al":
+                        source = "[Kindlmann et al.](https://www.kennethmoreland.com/color-advice/)";
+                        break;
+                    case "carto":
+                        source = "[CARTO](https://carto.com/carto-colors/)";
+                        break;
+                    case "matplotlib":
+                        source = "[matplotlib](https://matplotlib.org/3.1.1/gallery/color/colormap_reference.html)";
+                        break;
+                    case "kovesi":
+                        source = "[Kovesi](https://peterkovesi.com/)";
+                        break;
+                    case "plotly":
+                        source = "[Plotly](https://plotly.com/python/colorscales/)";
+                        break;
+                    case "mycarta":
+                        source = "[MyCarta](https://mycarta.wordpress.com/2013/02/21/perceptual-rainbow-palette-the-method/)";
+                        break;
+                    case "polychrome":
+                        source = "[Polychrome](https://cran.r-project.org/web/packages/Polychrome/index.html)";
+                        break;
+                    case "d3":
+                        source = "[d3.js](https://github.com/d3/d3-scale-chromatic/blob/master/README.md#schemeCategory10)";
+                        break;
+                    case "paraview":
+                        source = "[Paraview](https://www.paraview.org/)";
+                        break;
+                }
+                readme.append(String.format("|%s|%s|![%s](%s)|%s|\n", toTitleCase(annotation.type().name()), annotation.name(), cmapSplit[1], path.toString().replace("\\", "/"), source));
             } catch (IOException e) {
                 e.printStackTrace();
             }

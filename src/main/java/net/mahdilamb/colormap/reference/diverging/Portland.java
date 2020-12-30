@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Plotly's Portland
  */
-@ReferenceColormap(type = ColormapType.DIVERGING, name = "Portland")
+@ReferenceColormap(type = ColormapType.DIVERGING, name = "Portland",source = "Plotly")
 public final class Portland extends SequentialColormap {
 
     /**

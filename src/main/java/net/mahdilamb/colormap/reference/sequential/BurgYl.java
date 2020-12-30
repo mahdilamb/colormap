@@ -8,12 +8,12 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Burgyl sequential colormap.
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Burgyl")
-public final class Burgyl extends SequentialColormap {
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "BurgYl",source = "CARTO")
+public final class BurgYl extends SequentialColormap {
     /**
      * Create a colormap based on Burgyl from Plotly
      */
-    public Burgyl() {
+    public BurgYl() {
         super(
                 new Color(251, 230, 197),
                 new Color(245, 186, 152),
@@ -22,7 +22,6 @@ public final class Burgyl extends SequentialColormap {
                 new Color(200, 88, 108),
                 new Color(156, 63, 93),
                 new Color(112, 40, 74)
-
         );
 
 

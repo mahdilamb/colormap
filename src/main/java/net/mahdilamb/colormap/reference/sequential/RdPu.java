@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.Color;
 /**
  * Colorbrewer 2.0 RdPu.
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "RdPu")
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "RdPu", source = "ColorBrewer")
 public final class RdPu extends SequentialColormap {
     /**
      * Create a colormap based on Colorbrewer 2.0 RdPu.

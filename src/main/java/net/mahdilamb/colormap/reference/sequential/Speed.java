@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Speed sequential colormap.
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Speed")
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Speed",source = "Ocean")
 public final class Speed extends SequentialColormap {
     /**
      * Create a colormap based on Speed from Plotly

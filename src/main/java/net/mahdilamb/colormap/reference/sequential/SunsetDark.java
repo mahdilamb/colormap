@@ -8,12 +8,12 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Sunsetdark sequential colormap.
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Sunsetdark")
-public final class Sunsetdark extends SequentialColormap {
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "SunsetDark",source = "CARTO")
+public final class SunsetDark extends SequentialColormap {
     /**
      * Create a colormap based on Sunsetdark from Plotly
      */
-    public Sunsetdark() {
+    public SunsetDark() {
         super(
                 new Color(252, 222, 156),
                 new Color(250, 164, 118),
@@ -22,6 +22,7 @@ public final class Sunsetdark extends SequentialColormap {
                 new Color(220, 57, 119),
                 new Color(185, 37, 122),
                 new Color(124, 29, 111)
+
 
         );
 

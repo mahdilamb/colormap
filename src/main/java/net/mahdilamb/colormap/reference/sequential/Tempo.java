@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Tempo sequential colormap.
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Tempo")
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Tempo",source = "Ocean")
 public final class Tempo extends SequentialColormap {
     /**
      * Create a colormap based on Tempo from Plotly

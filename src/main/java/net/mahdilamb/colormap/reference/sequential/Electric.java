@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Electric sequential colormap.
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Electric")
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Electric",source = "Plotly")
 public final class Electric extends SequentialColormap {
     /**
      * Create a colormap based on Electric from Plotly

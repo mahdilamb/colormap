@@ -15,10 +15,10 @@ public final class BlackbodyAlt extends SequentialColormap {
      */
     public BlackbodyAlt() {
         super(
-                new Color(0, 0, 0),
+                Color.BLACK,
                 new Color(230, 0, 0),
                 new Color(230, 210, 0),
-                new Color(255, 255, 255),
+                Color.WHITE,
                 new Color(160, 200, 255)
 
         );

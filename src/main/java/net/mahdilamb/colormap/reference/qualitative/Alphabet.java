@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Alphabet qualitative colormap
  */
-@ReferenceColormap(type = ColormapType.QUALITATIVE, name = "Alphabet")
+@ReferenceColormap(type = ColormapType.QUALITATIVE, name = "Alphabet",source = "Polychrome")
 public final class Alphabet extends QualitativeColormap {
 
     /**

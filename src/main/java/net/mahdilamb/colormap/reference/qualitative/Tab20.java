@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Tableau Tab20c
  */
-@ReferenceColormap(type = ColormapType.QUALITATIVE, name = "Tab20")
+@ReferenceColormap(type = ColormapType.QUALITATIVE, name = "Tab20",source = "Tableau")
 public final class Tab20 extends QualitativeColormap {
     /**
      * Create a colormap based on Tableau Tab20

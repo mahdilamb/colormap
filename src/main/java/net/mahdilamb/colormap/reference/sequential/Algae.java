@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Algae sequential colormap.
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Algae")
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Algae",source = "Ocean")
 public final class Algae extends SequentialColormap {
     /**
      * Create a colormap based on Algae from Plotly

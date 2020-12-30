@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Plotly's Fall
  */
-@ReferenceColormap(type = ColormapType.DIVERGING, name = "Fall")
+@ReferenceColormap(type = ColormapType.DIVERGING, name = "Fall", source = "CARTO")
 public final class Fall extends SequentialColormap {
 
     /**

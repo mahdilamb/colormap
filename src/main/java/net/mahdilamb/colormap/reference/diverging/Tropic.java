@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Plotly's Tropic
  */
-@ReferenceColormap(type = ColormapType.DIVERGING, name = "Tropic")
+@ReferenceColormap(type = ColormapType.DIVERGING, name = "Tropic",source = "CARTO")
 public final class Tropic extends SequentialColormap {
 
     /**
@@ -23,6 +23,7 @@ public final class Tropic extends SequentialColormap {
                 new Color(228, 193, 217),
                 new Color(214, 145, 193),
                 new Color(199, 93, 171)
+
 
         );
 

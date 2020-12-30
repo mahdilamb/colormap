@@ -22,5 +22,10 @@ public @interface ReferenceColormap {
      */
     String name();
 
+    /**
+     * @return the source of the colormap
+     */
+    String source() default "";
+
 
 }

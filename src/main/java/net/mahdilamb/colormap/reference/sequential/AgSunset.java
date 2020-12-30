@@ -8,12 +8,12 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Agsunset sequential colormap.
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Agsunset")
-public final class Agsunset extends SequentialColormap {
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "AgSunset",source = "Plotly")
+public final class AgSunset extends SequentialColormap {
     /**
      * Create a colormap based on Agsunset from Plotly
      */
-    public Agsunset() {
+    public AgSunset() {
         super(
                 new Color(75, 41, 145),
                 new Color(135, 44, 162),

@@ -58,144 +58,147 @@ public static RGBA getXKCD(String name) {
 The package can be imported from [maven](https://search.maven.org/artifact/net.mahdilamb/colormap).
 
 ## Reference colormaps
-|Category|ColorMap|Sample|
-|---|---|---|
-|Cyclic|Edge|![edge](swatches/cyclic.edge.png)|
-|Cyclic|HSV|![hsv](swatches/cyclic.hsv.png)|
-|Cyclic|IceFire|![icefire](swatches/cyclic.icefire.png)|
-|Cyclic|Mrybm|![mrybm](swatches/cyclic.mrybm.png)|
-|Cyclic|Mygbm|![mygbm](swatches/cyclic.mygbm.png)|
-|Cyclic|Phase|![phase](swatches/cyclic.phase.png)|
-|Cyclic|Twilight|![twilight](swatches/cyclic.twilight.png)|
-|Cyclic|TwilightShifted|![twilightshifted](swatches/cyclic.twilightshifted.png)|
-|Diverging|Armyrose|![armyrose](swatches/diverging.armyrose.png)|
-|Diverging|Balance|![balance](swatches/diverging.balance.png)|
-|Diverging|BentCoolWarm|![bentcoolwarm](swatches/diverging.bentcoolwarm.png)|
-|Diverging|BrBG|![brbg](swatches/diverging.brbg.png)|
-|Diverging|Curl|![curl](swatches/diverging.curl.png)|
-|Diverging|Delta|![delta](swatches/diverging.delta.png)|
-|Diverging|Earth|![earth](swatches/diverging.earth.png)|
-|Diverging|Fall|![fall](swatches/diverging.fall.png)|
-|Diverging|Geyser|![geyser](swatches/diverging.geyser.png)|
-|Diverging|Oxy|![oxy](swatches/diverging.oxy.png)|
-|Diverging|Picnic|![picnic](swatches/diverging.picnic.png)|
-|Diverging|PiYG|![piyg](swatches/diverging.piyg.png)|
-|Diverging|Portland|![portland](swatches/diverging.portland.png)|
-|Diverging|PRGn|![prgn](swatches/diverging.prgn.png)|
-|Diverging|PuOr|![puor](swatches/diverging.puor.png)|
-|Diverging|RdBu|![rdbu](swatches/diverging.rdbu.png)|
-|Diverging|RdGy|![rdgy](swatches/diverging.rdgy.png)|
-|Diverging|RdYlBu|![rdylbu](swatches/diverging.rdylbu.png)|
-|Diverging|RdYlGn|![rdylgn](swatches/diverging.rdylgn.png)|
-|Diverging|SmoothCoolWarm|![smoothcoolwarm](swatches/diverging.smoothcoolwarm.png)|
-|Diverging|Spectral|![spectral](swatches/diverging.spectral.png)|
-|Diverging|Tealrose|![tealrose](swatches/diverging.tealrose.png)|
-|Diverging|Temps|![temps](swatches/diverging.temps.png)|
-|Diverging|Tropic|![tropic](swatches/diverging.tropic.png)|
-|Qualitative|Accent|![accent](swatches/qualitative.accent.png)|
-|Qualitative|Alphabet|![alphabet](swatches/qualitative.alphabet.png)|
-|Qualitative|Antique|![antique](swatches/qualitative.antique.png)|
-|Qualitative|Bold|![bold](swatches/qualitative.bold.png)|
-|Qualitative|D3|![d3](swatches/qualitative.d3.png)|
-|Qualitative|Dark2|![dark2](swatches/qualitative.dark2.png)|
-|Qualitative|Dark24|![dark24](swatches/qualitative.dark24.png)|
-|Qualitative|G10|![g10](swatches/qualitative.g10.png)|
-|Qualitative|Light24|![light24](swatches/qualitative.light24.png)|
-|Qualitative|Paired|![paired](swatches/qualitative.paired.png)|
-|Qualitative|Pastel|![pastel](swatches/qualitative.pastel.png)|
-|Qualitative|Pastel1|![pastel1](swatches/qualitative.pastel1.png)|
-|Qualitative|Pastel2|![pastel2](swatches/qualitative.pastel2.png)|
-|Qualitative|Plotly|![plotly](swatches/qualitative.plotly.png)|
-|Qualitative|Prism|![prism](swatches/qualitative.prism.png)|
-|Qualitative|Safe|![safe](swatches/qualitative.safe.png)|
-|Qualitative|Set1|![set1](swatches/qualitative.set1.png)|
-|Qualitative|Set2|![set2](swatches/qualitative.set2.png)|
-|Qualitative|Set3|![set3](swatches/qualitative.set3.png)|
-|Qualitative|T10|![t10](swatches/qualitative.t10.png)|
-|Qualitative|Tab10|![tab10](swatches/qualitative.tab10.png)|
-|Qualitative|Tab20|![tab20](swatches/qualitative.tab20.png)|
-|Qualitative|Tab20b|![tab20b](swatches/qualitative.tab20b.png)|
-|Qualitative|Tab20c|![tab20c](swatches/qualitative.tab20c.png)|
-|Qualitative|Vivid|![vivid](swatches/qualitative.vivid.png)|
-|Sequential|Aggrnyl|![aggrnyl](swatches/sequential.aggrnyl.png)|
-|Sequential|Agsunset|![agsunset](swatches/sequential.agsunset.png)|
-|Sequential|Algae|![algae](swatches/sequential.algae.png)|
-|Sequential|Amp|![amp](swatches/sequential.amp.png)|
-|Sequential|BlackBody|![blackbody](swatches/sequential.blackbody.png)|
-|Sequential|BlackbodyAlt|![blackbodyalt](swatches/sequential.blackbodyalt.png)|
-|Sequential|BlueRed|![bluered](swatches/sequential.bluered.png)|
-|Sequential|Blues|![blues](swatches/sequential.blues.png)|
-|Sequential|Blugrn|![blugrn](swatches/sequential.blugrn.png)|
-|Sequential|Bluyl|![bluyl](swatches/sequential.bluyl.png)|
-|Sequential|Brwnyl|![brwnyl](swatches/sequential.brwnyl.png)|
-|Sequential|BuGn|![bugn](swatches/sequential.bugn.png)|
-|Sequential|BuPu|![bupu](swatches/sequential.bupu.png)|
-|Sequential|Burg|![burg](swatches/sequential.burg.png)|
-|Sequential|Burgyl|![burgyl](swatches/sequential.burgyl.png)|
-|Sequential|Cividis|![cividis](swatches/sequential.cividis.png)|
-|Sequential|CubeYF|![cubeyf](swatches/sequential.cubeyf.png)|
-|Sequential|Darkmint|![darkmint](swatches/sequential.darkmint.png)|
-|Sequential|Deep|![deep](swatches/sequential.deep.png)|
-|Sequential|Dense|![dense](swatches/sequential.dense.png)|
-|Sequential|Electric|![electric](swatches/sequential.electric.png)|
-|Sequential|Emrld|![emrld](swatches/sequential.emrld.png)|
-|Sequential|GnBu|![gnbu](swatches/sequential.gnbu.png)|
-|Sequential|Gray|![gray](swatches/sequential.gray.png)|
-|Sequential|Greens|![greens](swatches/sequential.greens.png)|
-|Sequential|Greys|![greys](swatches/sequential.greys.png)|
-|Sequential|Haline|![haline](swatches/sequential.haline.png)|
-|Sequential|Hesperia|![hesperia](swatches/sequential.hesperia.png)|
-|Sequential|Hot|![hot](swatches/sequential.hot.png)|
-|Sequential|Ice|![ice](swatches/sequential.ice.png)|
-|Sequential|Inferno|![inferno](swatches/sequential.inferno.png)|
-|Sequential|Jet|![jet](swatches/sequential.jet.png)|
-|Sequential|Kindlmann|![kindlmann](swatches/sequential.kindlmann.png)|
-|Sequential|KindlmannExtended|![kindlmannextended](swatches/sequential.kindlmannextended.png)|
-|Sequential|KovesiBGYW|![kovesibgyw](swatches/sequential.kovesibgyw.png)|
-|Sequential|KovesiKRYW|![kovesikryw](swatches/sequential.kovesikryw.png)|
-|Sequential|Lacerta|![lacerta](swatches/sequential.lacerta.png)|
-|Sequential|Laguna|![laguna](swatches/sequential.laguna.png)|
-|Sequential|Magenta|![magenta](swatches/sequential.magenta.png)|
-|Sequential|Magma|![magma](swatches/sequential.magma.png)|
-|Sequential|Matter|![matter](swatches/sequential.matter.png)|
-|Sequential|Mint|![mint](swatches/sequential.mint.png)|
-|Sequential|Oranges|![oranges](swatches/sequential.oranges.png)|
-|Sequential|OrRd|![orrd](swatches/sequential.orrd.png)|
-|Sequential|Oryel|![oryel](swatches/sequential.oryel.png)|
-|Sequential|Peach|![peach](swatches/sequential.peach.png)|
-|Sequential|Pinkyl|![pinkyl](swatches/sequential.pinkyl.png)|
-|Sequential|Plasma|![plasma](swatches/sequential.plasma.png)|
-|Sequential|PlasmaModified|![plasmamodified](swatches/sequential.plasmamodified.png)|
-|Sequential|Plotly3|![plotly3](swatches/sequential.plotly3.png)|
-|Sequential|PuBu|![pubu](swatches/sequential.pubu.png)|
-|Sequential|PuBuGn|![pubugn](swatches/sequential.pubugn.png)|
-|Sequential|PuRd|![purd](swatches/sequential.purd.png)|
-|Sequential|Purp|![purp](swatches/sequential.purp.png)|
-|Sequential|Purples|![purples](swatches/sequential.purples.png)|
-|Sequential|Purpor|![purpor](swatches/sequential.purpor.png)|
-|Sequential|RdPu|![rdpu](swatches/sequential.rdpu.png)|
-|Sequential|Redor|![redor](swatches/sequential.redor.png)|
-|Sequential|Reds|![reds](swatches/sequential.reds.png)|
-|Sequential|Solar|![solar](swatches/sequential.solar.png)|
-|Sequential|Speed|![speed](swatches/sequential.speed.png)|
-|Sequential|Sunset|![sunset](swatches/sequential.sunset.png)|
-|Sequential|Sunsetdark|![sunsetdark](swatches/sequential.sunsetdark.png)|
-|Sequential|Teal|![teal](swatches/sequential.teal.png)|
-|Sequential|Tealgrn|![tealgrn](swatches/sequential.tealgrn.png)|
-|Sequential|Tempo|![tempo](swatches/sequential.tempo.png)|
-|Sequential|Thermal|![thermal](swatches/sequential.thermal.png)|
-|Sequential|Turbid|![turbid](swatches/sequential.turbid.png)|
-|Sequential|Turbo|![turbo](swatches/sequential.turbo.png)|
-|Sequential|Viridis|![viridis](swatches/sequential.viridis.png)|
-|Sequential|YlGn|![ylgn](swatches/sequential.ylgn.png)|
-|Sequential|YlGnBu|![ylgnbu](swatches/sequential.ylgnbu.png)|
-|Sequential|YlOrBr|![ylorbr](swatches/sequential.ylorbr.png)|
-|Sequential|YlOrRd|![ylorrd](swatches/sequential.ylorrd.png)|
-
+|Category|ColorMap|Sample|Source|
+|---|---|---|---|
+|Cyclic|Edge|![edge](swatches/cyclic.edge.png)|[Paraview](https://www.paraview.org/)|
+|Cyclic|HSV|![hsv](swatches/cyclic.hsv.png)||
+|Cyclic|IceFire|![icefire](swatches/cyclic.icefire.png)|[Paraview](https://www.paraview.org/)|
+|Cyclic|Mrybm|![mrybm](swatches/cyclic.mrybm.png)|[Kovesi](https://peterkovesi.com/)|
+|Cyclic|Mygbm|![mygbm](swatches/cyclic.mygbm.png)|[Kovesi](https://peterkovesi.com/)|
+|Cyclic|Phase|![phase](swatches/cyclic.phase.png)|[Ocean](https://matplotlib.org/cmocean/)|
+|Cyclic|Twilight|![twilight](swatches/cyclic.twilight.png)|[matplotlib](https://matplotlib.org/3.1.1/gallery/color/colormap_reference.html)|
+|Cyclic|TwilightShifted|![twilightshifted](swatches/cyclic.twilightshifted.png)|[matplotlib](https://matplotlib.org/3.1.1/gallery/color/colormap_reference.html)|
+|Diverging|ArmyRose|![armyrose](swatches/diverging.armyrose.png)|[CARTO](https://carto.com/carto-colors/)|
+|Diverging|Balance|![balance](swatches/diverging.balance.png)|[Ocean](https://matplotlib.org/cmocean/)|
+|Diverging|BentCoolWarm|![bentcoolwarm](swatches/diverging.bentcoolwarm.png)|["Why We Use Bad Color Maps and What You Can Do About It."](https://doi.org/10.2352/ISSN.2470-1173.2016.16.HVEI-133)|
+|Diverging|BrBG|![brbg](swatches/diverging.brbg.png)|[ColorBrewer 2.0](https://colorbrewer2.org/)|
+|Diverging|Curl|![curl](swatches/diverging.curl.png)|[Ocean](https://matplotlib.org/cmocean/)|
+|Diverging|Delta|![delta](swatches/diverging.delta.png)|[Ocean](https://matplotlib.org/cmocean/)|
+|Diverging|Earth|![earth](swatches/diverging.earth.png)|[CARTO](https://carto.com/carto-colors/)|
+|Diverging|Fall|![fall](swatches/diverging.fall.png)|[CARTO](https://carto.com/carto-colors/)|
+|Diverging|Geyser|![geyser](swatches/diverging.geyser.png)|[CARTO](https://carto.com/carto-colors/)|
+|Diverging|Oxy|![oxy](swatches/diverging.oxy.png)|[Ocean](https://matplotlib.org/cmocean/)|
+|Diverging|Picnic|![picnic](swatches/diverging.picnic.png)|[Plotly](https://plotly.com/python/colorscales/)|
+|Diverging|PiYG|![piyg](swatches/diverging.piyg.png)|[ColorBrewer 2.0](https://colorbrewer2.org/)|
+|Diverging|Portland|![portland](swatches/diverging.portland.png)|[Plotly](https://plotly.com/python/colorscales/)|
+|Diverging|PRGn|![prgn](swatches/diverging.prgn.png)|[ColorBrewer 2.0](https://colorbrewer2.org/)|
+|Diverging|PuOr|![puor](swatches/diverging.puor.png)|[ColorBrewer 2.0](https://colorbrewer2.org/)|
+|Diverging|RdBu|![rdbu](swatches/diverging.rdbu.png)|[ColorBrewer 2.0](https://colorbrewer2.org/)|
+|Diverging|RdGy|![rdgy](swatches/diverging.rdgy.png)|[ColorBrewer 2.0](https://colorbrewer2.org/)|
+|Diverging|RdYlBu|![rdylbu](swatches/diverging.rdylbu.png)|[ColorBrewer 2.0](https://colorbrewer2.org/)|
+|Diverging|RdYlGn|![rdylgn](swatches/diverging.rdylgn.png)|[ColorBrewer 2.0](https://colorbrewer2.org/)|
+|Diverging|SmoothCoolWarm|![smoothcoolwarm](swatches/diverging.smoothcoolwarm.png)|["Why We Use Bad Color Maps and What You Can Do About It."](https://doi.org/10.2352/ISSN.2470-1173.2016.16.HVEI-133)|
+|Diverging|Spectral|![spectral](swatches/diverging.spectral.png)|[ColorBrewer 2.0](https://colorbrewer2.org/)|
+|Diverging|TealRose|![tealrose](swatches/diverging.tealrose.png)|[CARTO](https://carto.com/carto-colors/)|
+|Diverging|Temps|![temps](swatches/diverging.temps.png)|[CARTO](https://carto.com/carto-colors/)|
+|Diverging|Tropic|![tropic](swatches/diverging.tropic.png)|[CARTO](https://carto.com/carto-colors/)|
+|Qualitative|Accent|![accent](swatches/qualitative.accent.png)|[ColorBrewer 2.0](https://colorbrewer2.org/)|
+|Qualitative|Alphabet|![alphabet](swatches/qualitative.alphabet.png)|[Polychrome](https://cran.r-project.org/web/packages/Polychrome/index.html)|
+|Qualitative|Antique|![antique](swatches/qualitative.antique.png)|[CARTO](https://carto.com/carto-colors/)|
+|Qualitative|Bold|![bold](swatches/qualitative.bold.png)|[CARTO](https://carto.com/carto-colors/)|
+|Qualitative|D3|![d3](swatches/qualitative.d3.png)|[d3.js](https://github.com/d3/d3-scale-chromatic/blob/master/README.md#schemeCategory10)|
+|Qualitative|Dark2|![dark2](swatches/qualitative.dark2.png)|[ColorBrewer 2.0](https://colorbrewer2.org/)|
+|Qualitative|Dark24|![dark24](swatches/qualitative.dark24.png)|[Polychrome](https://cran.r-project.org/web/packages/Polychrome/index.html)|
+|Qualitative|G10|![g10](swatches/qualitative.g10.png)|[Plotly](https://plotly.com/python/colorscales/)|
+|Qualitative|Light24|![light24](swatches/qualitative.light24.png)|[Polychrome](https://cran.r-project.org/web/packages/Polychrome/index.html)|
+|Qualitative|Paired|![paired](swatches/qualitative.paired.png)|[ColorBrewer 2.0](https://colorbrewer2.org/)|
+|Qualitative|Pastel|![pastel](swatches/qualitative.pastel.png)|[CARTO](https://carto.com/carto-colors/)|
+|Qualitative|Pastel1|![pastel1](swatches/qualitative.pastel1.png)|[ColorBrewer 2.0](https://colorbrewer2.org/)|
+|Qualitative|Pastel2|![pastel2](swatches/qualitative.pastel2.png)|[ColorBrewer 2.0](https://colorbrewer2.org/)|
+|Qualitative|Plotly|![plotly](swatches/qualitative.plotly.png)|[Plotly](https://plotly.com/python/colorscales/)|
+|Qualitative|Prism|![prism](swatches/qualitative.prism.png)|[CARTO](https://carto.com/carto-colors/)|
+|Qualitative|Safe|![safe](swatches/qualitative.safe.png)|[CARTO](https://carto.com/carto-colors/)|
+|Qualitative|Set1|![set1](swatches/qualitative.set1.png)|[ColorBrewer 2.0](https://colorbrewer2.org/)|
+|Qualitative|Set2|![set2](swatches/qualitative.set2.png)|[ColorBrewer 2.0](https://colorbrewer2.org/)|
+|Qualitative|Set3|![set3](swatches/qualitative.set3.png)|[ColorBrewer 2.0](https://colorbrewer2.org/)|
+|Qualitative|T10|![t10](swatches/qualitative.t10.png)|[Plotly](https://plotly.com/python/colorscales/)|
+|Qualitative|Tab10|![tab10](swatches/qualitative.tab10.png)|[Tableau](https://www.tableau.com/)|
+|Qualitative|Tab20|![tab20](swatches/qualitative.tab20.png)|[Tableau](https://www.tableau.com/)|
+|Qualitative|Tab20b|![tab20b](swatches/qualitative.tab20b.png)|[Tableau](https://www.tableau.com/)|
+|Qualitative|Tab20c|![tab20c](swatches/qualitative.tab20c.png)|[Tableau](https://www.tableau.com/)|
+|Qualitative|Vivid|![vivid](swatches/qualitative.vivid.png)|[CARTO](https://carto.com/carto-colors/)|
+|Sequential|AgGrnYl|![aggrnyl](swatches/sequential.aggrnyl.png)|[Plotly](https://plotly.com/python/colorscales/)|
+|Sequential|AgSunset|![agsunset](swatches/sequential.agsunset.png)|[Plotly](https://plotly.com/python/colorscales/)|
+|Sequential|Algae|![algae](swatches/sequential.algae.png)|[Ocean](https://matplotlib.org/cmocean/)|
+|Sequential|Amp|![amp](swatches/sequential.amp.png)|[Ocean](https://matplotlib.org/cmocean/)|
+|Sequential|BlackBody|![blackbody](swatches/sequential.blackbody.png)|["Why We Use Bad Color Maps and What You Can Do About It."](https://doi.org/10.2352/ISSN.2470-1173.2016.16.HVEI-133)|
+|Sequential|BlackbodyAlt|![blackbodyalt](swatches/sequential.blackbodyalt.png)||
+|Sequential|BlueRed|![bluered](swatches/sequential.bluered.png)||
+|Sequential|Blues|![blues](swatches/sequential.blues.png)|[ColorBrewer 2.0](https://colorbrewer2.org/)|
+|Sequential|BluGrn|![blugrn](swatches/sequential.blugrn.png)|[CARTO](https://carto.com/carto-colors/)|
+|Sequential|BluYl|![bluyl](swatches/sequential.bluyl.png)|[CARTO](https://carto.com/carto-colors/)|
+|Sequential|BrwnYl|![brwnyl](swatches/sequential.brwnyl.png)|[CARTO](https://carto.com/carto-colors/)|
+|Sequential|BuGn|![bugn](swatches/sequential.bugn.png)|[ColorBrewer 2.0](https://colorbrewer2.org/)|
+|Sequential|BuPu|![bupu](swatches/sequential.bupu.png)|[ColorBrewer 2.0](https://colorbrewer2.org/)|
+|Sequential|Burg|![burg](swatches/sequential.burg.png)|[CARTO](https://carto.com/carto-colors/)|
+|Sequential|BurgYl|![burgyl](swatches/sequential.burgyl.png)|[CARTO](https://carto.com/carto-colors/)|
+|Sequential|Cividis|![cividis](swatches/sequential.cividis.png)|[matplotlib](https://matplotlib.org/3.1.1/gallery/color/colormap_reference.html)|
+|Sequential|CubeYF|![cubeyf](swatches/sequential.cubeyf.png)|[MyCarta](https://mycarta.wordpress.com/2013/02/21/perceptual-rainbow-palette-the-method/)|
+|Sequential|DarkMint|![darkmint](swatches/sequential.darkmint.png)|[CARTO](https://carto.com/carto-colors/)|
+|Sequential|Deep|![deep](swatches/sequential.deep.png)|[Ocean](https://matplotlib.org/cmocean/)|
+|Sequential|Dense|![dense](swatches/sequential.dense.png)|[Ocean](https://matplotlib.org/cmocean/)|
+|Sequential|Electric|![electric](swatches/sequential.electric.png)|[Plotly](https://plotly.com/python/colorscales/)|
+|Sequential|Emrld|![emrld](swatches/sequential.emrld.png)|[CARTO](https://carto.com/carto-colors/)|
+|Sequential|GnBu|![gnbu](swatches/sequential.gnbu.png)|[ColorBrewer 2.0](https://colorbrewer2.org/)|
+|Sequential|Gray|![gray](swatches/sequential.gray.png)|[Ocean](https://matplotlib.org/cmocean/)|
+|Sequential|Greens|![greens](swatches/sequential.greens.png)|[ColorBrewer 2.0](https://colorbrewer2.org/)|
+|Sequential|Greys|![greys](swatches/sequential.greys.png)||
+|Sequential|Haline|![haline](swatches/sequential.haline.png)|[Ocean](https://matplotlib.org/cmocean/)|
+|Sequential|Hesperia|![hesperia](swatches/sequential.hesperia.png)|[Peter Karpov](http://inversed.ru/Blog_2.htm)|
+|Sequential|Hot|![hot](swatches/sequential.hot.png)|[Plotly](https://plotly.com/python/colorscales/)|
+|Sequential|Ice|![ice](swatches/sequential.ice.png)|[Ocean](https://matplotlib.org/cmocean/)|
+|Sequential|Inferno|![inferno](swatches/sequential.inferno.png)|[matplotlib](https://matplotlib.org/3.1.1/gallery/color/colormap_reference.html)|
+|Sequential|Jet|![jet](swatches/sequential.jet.png)||
+|Sequential|Kindlmann|![kindlmann](swatches/sequential.kindlmann.png)|[Kindlmann et al.](https://www.kennethmoreland.com/color-advice/)|
+|Sequential|KindlmannExtended|![kindlmannextended](swatches/sequential.kindlmannextended.png)|[Kindlmann et al.](https://www.kennethmoreland.com/color-advice/)|
+|Sequential|KovesiBGYW|![kovesibgyw](swatches/sequential.kovesibgyw.png)|[Kovesi](https://peterkovesi.com/)|
+|Sequential|KovesiKRYW|![kovesikryw](swatches/sequential.kovesikryw.png)|[Kovesi](https://peterkovesi.com/)|
+|Sequential|Lacerta|![lacerta](swatches/sequential.lacerta.png)|[Peter Karpov](http://inversed.ru/Blog_2.htm)|
+|Sequential|Laguna|![laguna](swatches/sequential.laguna.png)|[Peter Karpov](http://inversed.ru/Blog_2.htm)|
+|Sequential|Magenta|![magenta](swatches/sequential.magenta.png)|[CARTO](https://carto.com/carto-colors/)|
+|Sequential|Magma|![magma](swatches/sequential.magma.png)|[matplotlib](https://matplotlib.org/3.1.1/gallery/color/colormap_reference.html)|
+|Sequential|Matter|![matter](swatches/sequential.matter.png)|[Ocean](https://matplotlib.org/cmocean/)|
+|Sequential|Mint|![mint](swatches/sequential.mint.png)|[CARTO](https://carto.com/carto-colors/)|
+|Sequential|Oranges|![oranges](swatches/sequential.oranges.png)|[ColorBrewer 2.0](https://colorbrewer2.org/)|
+|Sequential|OrRd|![orrd](swatches/sequential.orrd.png)|[ColorBrewer 2.0](https://colorbrewer2.org/)|
+|Sequential|OrYel|![oryel](swatches/sequential.oryel.png)|[CARTO](https://carto.com/carto-colors/)|
+|Sequential|Peach|![peach](swatches/sequential.peach.png)|[CARTO](https://carto.com/carto-colors/)|
+|Sequential|PinkYl|![pinkyl](swatches/sequential.pinkyl.png)|[CARTO](https://carto.com/carto-colors/)|
+|Sequential|Plasma|![plasma](swatches/sequential.plasma.png)|[matplotlib](https://matplotlib.org/3.1.1/gallery/color/colormap_reference.html)|
+|Sequential|PlasmaModified|![plasmamodified](swatches/sequential.plasmamodified.png)|[Peter Karpov](http://inversed.ru/Blog_2.htm)|
+|Sequential|Plotly3|![plotly3](swatches/sequential.plotly3.png)|[Plotly](https://plotly.com/python/colorscales/)|
+|Sequential|PuBu|![pubu](swatches/sequential.pubu.png)|[ColorBrewer 2.0](https://colorbrewer2.org/)|
+|Sequential|PuBuGn|![pubugn](swatches/sequential.pubugn.png)|[ColorBrewer 2.0](https://colorbrewer2.org/)|
+|Sequential|PuRd|![purd](swatches/sequential.purd.png)|[ColorBrewer 2.0](https://colorbrewer2.org/)|
+|Sequential|Purp|![purp](swatches/sequential.purp.png)|[CARTO](https://carto.com/carto-colors/)|
+|Sequential|Purples|![purples](swatches/sequential.purples.png)|[ColorBrewer 2.0](https://colorbrewer2.org/)|
+|Sequential|PurpOr|![purpor](swatches/sequential.purpor.png)|[CARTO](https://carto.com/carto-colors/)|
+|Sequential|RdPu|![rdpu](swatches/sequential.rdpu.png)|[ColorBrewer 2.0](https://colorbrewer2.org/)|
+|Sequential|RedOr|![redor](swatches/sequential.redor.png)|[CARTO](https://carto.com/carto-colors/)|
+|Sequential|Reds|![reds](swatches/sequential.reds.png)|[ColorBrewer 2.0](https://colorbrewer2.org/)|
+|Sequential|Solar|![solar](swatches/sequential.solar.png)|[Ocean](https://matplotlib.org/cmocean/)|
+|Sequential|Speed|![speed](swatches/sequential.speed.png)|[Ocean](https://matplotlib.org/cmocean/)|
+|Sequential|Sunset|![sunset](swatches/sequential.sunset.png)|[CARTO](https://carto.com/carto-colors/)|
+|Sequential|SunsetDark|![sunsetdark](swatches/sequential.sunsetdark.png)|[CARTO](https://carto.com/carto-colors/)|
+|Sequential|Teal|![teal](swatches/sequential.teal.png)|[CARTO](https://carto.com/carto-colors/)|
+|Sequential|TealGrn|![tealgrn](swatches/sequential.tealgrn.png)|[CARTO](https://carto.com/carto-colors/)|
+|Sequential|Tempo|![tempo](swatches/sequential.tempo.png)|[Ocean](https://matplotlib.org/cmocean/)|
+|Sequential|Thermal|![thermal](swatches/sequential.thermal.png)|[Ocean](https://matplotlib.org/cmocean/)|
+|Sequential|Turbid|![turbid](swatches/sequential.turbid.png)|[Ocean](https://matplotlib.org/cmocean/)|
+|Sequential|Turbo|![turbo](swatches/sequential.turbo.png)|[https://ai.googleblog.com/2019/08/turbo-improved-rainbow-colormap-for.html](Google AI)|
+|Sequential|Viridis|![viridis](swatches/sequential.viridis.png)|[matplotlib](https://matplotlib.org/3.1.1/gallery/color/colormap_reference.html)|
+|Sequential|YlGn|![ylgn](swatches/sequential.ylgn.png)|[ColorBrewer 2.0](https://colorbrewer2.org/)|
+|Sequential|YlGnBu|![ylgnbu](swatches/sequential.ylgnbu.png)|[ColorBrewer 2.0](https://colorbrewer2.org/)|
+|Sequential|YlOrBr|![ylorbr](swatches/sequential.ylorbr.png)|[ColorBrewer 2.0](https://colorbrewer2.org/)|
+|Sequential|YlOrRd|![ylorrd](swatches/sequential.ylorrd.png)|[ColorBrewer 2.0](https://colorbrewer2.org/)|
 ## Credits
+
 * Default colormaps include all [ColorBrewer 2.0](https://colorbrewer2.org/) color maps;
-* Smooth Cool Warm, Bent Cool Warm, Black Body, Kindlmann, Extended Kindlmann (https://www.kennethmoreland.com/color-advice/)
+* Smooth Cool Warm, Bent Cool Warm, Black Body, Kindlmann, Extended
+  Kindlmann (https://www.kennethmoreland.com/color-advice/)
 * [Tableau](https://www.tableau.com/) colour maps
 * Colormaps from [Peter Karpov](http://inversed.ru/Blog_2.htm).
 * Turbo from https://ai.googleblog.com/2019/08/turbo-improved-rainbow-colormap-for.html
-* ["Why We Use Bad Color Maps and What You Can Do About It."](https://doi.org/10.2352/ISSN.2470-1173.2016.16.HVEI-133) Kenneth Moreland. 
+* ["Why We Use Bad Color Maps and What You Can Do About It."](https://doi.org/10.2352/ISSN.2470-1173.2016.16.HVEI-133)
+  Kenneth Moreland.
+* ["Beautiful colormaps for oceanography](https://matplotlib.org/cmocean/)

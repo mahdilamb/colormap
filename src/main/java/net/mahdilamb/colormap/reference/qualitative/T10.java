@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * T10 qualitative colormap
  */
-@ReferenceColormap(type = ColormapType.QUALITATIVE, name = "T10")
+@ReferenceColormap(type = ColormapType.QUALITATIVE, name = "T10",source = "Plotly")
 public final class T10 extends QualitativeColormap {
     /**
      * Create a colormap based on T10 colormap

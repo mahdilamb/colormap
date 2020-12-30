@@ -14,7 +14,7 @@ public final class Greys extends SequentialColormap {
      * Create a colormap based on ColorBrewer Greys.
      */
     public Greys() {
-        super(new Color(255, 255, 255),
+        super(Color.WHITE,
                 new Color(240, 240, 240),
                 new Color(217, 217, 217),
                 new Color(189, 189, 189),

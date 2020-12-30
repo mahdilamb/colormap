@@ -8,13 +8,13 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Plotly's Tealrose
  */
-@ReferenceColormap(type = ColormapType.DIVERGING, name = "Tealrose")
-public final class Tealrose extends SequentialColormap {
+@ReferenceColormap(type = ColormapType.DIVERGING, name = "TealRose",source = "CARTO")
+public final class TealRose extends SequentialColormap {
 
     /**
      * Create a colormap based on Plotly's Tealrose
      */
-    public Tealrose() {
+    public TealRose() {
         super(
                 new Color(0, 147, 146),
                 new Color(114, 170, 161),

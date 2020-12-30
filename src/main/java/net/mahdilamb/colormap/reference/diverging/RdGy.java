@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.Color;
 /**
  * Colorbrewer 2.0 RdGy.
  */
-@ReferenceColormap(type = ColormapType.DIVERGING, name = "RdGy")
+@ReferenceColormap(type = ColormapType.DIVERGING, name = "RdGy", source = "ColorBrewer")
 public final class RdGy extends SequentialColormap {
 
     /**
@@ -20,7 +20,7 @@ public final class RdGy extends SequentialColormap {
                 new Color(214, 96, 77),
                 new Color(244, 165, 130),
                 new Color(253, 219, 199),
-                new Color(255, 255, 255),
+                Color.WHITE,
                 new Color(224, 224, 224),
                 new Color(186, 186, 186),
                 new Color(135, 135, 135),

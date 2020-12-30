@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Plotly's cyclic colormap IceFire
  */
-@ReferenceColormap(type = ColormapType.CYCLIC, name = "IceFire")
+@ReferenceColormap(type = ColormapType.CYCLIC, name = "IceFire", source = "ParaView")
 public final class IceFire extends SequentialColormap {
 
     /**

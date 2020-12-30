@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Magenta sequential colormap.
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Magenta")
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Magenta",source = "CARTO")
 public final class Magenta extends SequentialColormap {
     /**
      * Create a colormap based on Magenta from Plotly
@@ -22,6 +22,7 @@ public final class Magenta extends SequentialColormap {
                 new Color(177, 77, 142),
                 new Color(145, 53, 125),
                 new Color(108, 33, 103)
+
 
         );
 

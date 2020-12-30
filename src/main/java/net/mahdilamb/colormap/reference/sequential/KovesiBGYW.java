@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * BGYW colormap designed by Peter Kovesi
  */
-@ReferenceColormap(name = "KovesiBGYW", type = ColormapType.SEQUENTIAL)
+@ReferenceColormap(name = "KovesiBGYW", type = ColormapType.SEQUENTIAL,source = "Kovesi")
 public class KovesiBGYW extends SequentialColormap {
     /**
      * Create a BGYW colormap

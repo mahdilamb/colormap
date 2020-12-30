@@ -1,14 +1,14 @@
 package net.mahdilamb.colormap.reference.diverging;
 
+import net.mahdilamb.colormap.Color;
 import net.mahdilamb.colormap.SequentialColormap;
 import net.mahdilamb.colormap.reference.ColormapType;
 import net.mahdilamb.colormap.reference.ReferenceColormap;
-import net.mahdilamb.colormap.Color;
 
 /**
  * Kenneth Moreland's BentCoolWarm colormap.
  */
-@ReferenceColormap(type = ColormapType.DIVERGING, name = "BentCoolWarm")
+@ReferenceColormap(type = ColormapType.DIVERGING, name = "BentCoolWarm", source = "Kenneth Moreland")
 public final class BentCoolWarm extends SequentialColormap {
 
 

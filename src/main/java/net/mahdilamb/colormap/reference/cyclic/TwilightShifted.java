@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.Color;
 /**
  * Matplotlib cyclic colormap Twilight shifted.
  */
-@ReferenceColormap(type = ColormapType.CYCLIC, name = "TwilightShifted")
+@ReferenceColormap(type = ColormapType.CYCLIC, name = "TwilightShifted", source = "Matplotlib")
 public final class TwilightShifted extends SequentialColormap {
     //data from https://github.com/matplotlib/matplotlib/blob/f2116d82dfd6b82fe178230766d95ea9ac2b0c8c/lib/matplotlib/_cm_listed.py#L1288
 

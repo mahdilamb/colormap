@@ -6,9 +6,9 @@ import net.mahdilamb.colormap.reference.ColormapType;
 import net.mahdilamb.colormap.reference.ReferenceColormap;
 
 /**
- * Google AI's Turbo
+ * <a href="https://ai.googleblog.com/2019/08/turbo-improved-rainbow-colormap-for.html">Google AI's Turbo</a>
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Turbo")
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Turbo", source = "Google AI")
 public final class Turbo extends SequentialColormap {
     /**
      * Create a colormap based on Google AI's Turbo.

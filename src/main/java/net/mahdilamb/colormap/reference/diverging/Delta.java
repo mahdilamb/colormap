@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Plotly's Delta
  */
-@ReferenceColormap(type = ColormapType.DIVERGING, name = "Delta")
+@ReferenceColormap(type = ColormapType.DIVERGING, name = "Delta",source = "Ocean")
 public final class Delta extends SequentialColormap {
 
     /**

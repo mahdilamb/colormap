@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Plotly's Earth
  */
-@ReferenceColormap(type = ColormapType.DIVERGING, name = "Earth")
+@ReferenceColormap(type = ColormapType.DIVERGING, name = "Earth",source = "CARTO")
 public final class Earth extends SequentialColormap {
 
     /**

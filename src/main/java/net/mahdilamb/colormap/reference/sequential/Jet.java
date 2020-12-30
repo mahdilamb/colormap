@@ -18,7 +18,7 @@ public final class Jet extends SequentialColormap {
                 new Color(0, 0, 131),
                 new Color(0, 60, 170),
                 new Color(5, 255, 255),
-                new Color(255, 255, 0),
+                Color.YELLOW,
                 new Color(250, 0, 0),
                 new Color(128, 0, 0)
         );

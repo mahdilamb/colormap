@@ -1,14 +1,14 @@
 package net.mahdilamb.colormap.reference.diverging;
 
+import net.mahdilamb.colormap.Color;
 import net.mahdilamb.colormap.SequentialColormap;
 import net.mahdilamb.colormap.reference.ColormapType;
 import net.mahdilamb.colormap.reference.ReferenceColormap;
-import net.mahdilamb.colormap.Color;
 
 /**
  * Colorbrewer 2.0 colormap BrBG.
  */
-@ReferenceColormap(type = ColormapType.DIVERGING, name = "BrBG")
+@ReferenceColormap(type = ColormapType.DIVERGING, name = "BrBG", source = "ColorBrewer")
 public final class BrBG extends SequentialColormap {
 
     /**

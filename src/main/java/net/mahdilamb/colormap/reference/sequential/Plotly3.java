@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Sequential colormap Plotly3.
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Plotly3")
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Plotly3", source = "Plotly")
 public final class Plotly3 extends SequentialColormap {
     /**
      * Create a colormap based on Plotly3.

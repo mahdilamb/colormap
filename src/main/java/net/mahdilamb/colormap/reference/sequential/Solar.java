@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Solar sequential colormap.
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Solar")
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Solar",source = "Ocean")
 public final class Solar extends SequentialColormap {
     /**
      * Create a colormap based on Solar from Plotly

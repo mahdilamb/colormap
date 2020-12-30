@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Light24 qualitative colormap
  */
-@ReferenceColormap(type = ColormapType.QUALITATIVE, name = "Light24")
+@ReferenceColormap(type = ColormapType.QUALITATIVE, name = "Light24", source = "Polychrome")
 public final class Light24 extends QualitativeColormap {
 
     /**

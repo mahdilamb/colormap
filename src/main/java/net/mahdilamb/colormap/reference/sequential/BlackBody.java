@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Kenneth Moreland's Blackbody colormap.
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "BlackBody")
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "BlackBody",source = "Kenneth Moreland")
 public final class BlackBody extends SequentialColormap {
     /**
      * Create a colormap based on Kenneth Moreland's Blackbody colormap.

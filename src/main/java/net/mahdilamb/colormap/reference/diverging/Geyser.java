@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Plotly's Geyser
  */
-@ReferenceColormap(type = ColormapType.DIVERGING, name = "Geyser")
+@ReferenceColormap(type = ColormapType.DIVERGING, name = "Geyser",source = "CARTO")
 public final class Geyser extends SequentialColormap {
 
     /**

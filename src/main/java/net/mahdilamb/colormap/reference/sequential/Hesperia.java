@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.Color;
 /**
  * Colormap from Peter Karpov @see <a href="http://inversed.ru/index.htm">Peter Karpov</a>. Hesperia
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Hesperia")
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Hesperia",source = "Peter Karpov")
 public final class Hesperia extends SequentialColormap {
     /**
      * Create a colormap based on Hesperia

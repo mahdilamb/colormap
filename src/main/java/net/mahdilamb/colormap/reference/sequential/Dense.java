@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Dense sequential colormap.
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Dense")
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Dense",source = "Ocean")
 public final class Dense extends SequentialColormap {
     /**
      * Create a colormap based on Dense from Plotly

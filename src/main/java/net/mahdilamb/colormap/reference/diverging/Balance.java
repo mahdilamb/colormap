@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Plotly's Balance
  */
-@ReferenceColormap(type = ColormapType.DIVERGING, name = "Balance")
+@ReferenceColormap(type = ColormapType.DIVERGING, name = "Balance",source = "Ocean")
 public final class Balance extends SequentialColormap {
 
     /**

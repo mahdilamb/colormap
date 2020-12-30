@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Plotly's cyclic colormap Edge
  */
-@ReferenceColormap(type = ColormapType.CYCLIC, name = "Edge")
+@ReferenceColormap(type = ColormapType.CYCLIC, name = "Edge", source = "ParaView")
 public final class Edge extends SequentialColormap {
 
     /**

@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Colorbrewer 2.0 colormap PuOr.
  */
-@ReferenceColormap(type = ColormapType.DIVERGING, name = "PuOr")
+@ReferenceColormap(type = ColormapType.DIVERGING, name = "PuOr", source = "ColorBrewer")
 public final class PuOr extends SequentialColormap {
 
     /**

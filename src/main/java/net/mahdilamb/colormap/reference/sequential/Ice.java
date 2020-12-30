@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Ice sequential colormap.
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Ice")
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Ice",source = "Ocean")
 public final class Ice extends SequentialColormap {
     /**
      * Create a colormap based on Ice from Plotly

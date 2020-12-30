@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Colormap from 10.1109/VISUAL.2002.1183788
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Kindlmann")
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Kindlmann", source = "Kindlmann et al")
 public final class Kindlmann extends SequentialColormap {
     /**
      * Create a colormap based on Kindlmann, et al.

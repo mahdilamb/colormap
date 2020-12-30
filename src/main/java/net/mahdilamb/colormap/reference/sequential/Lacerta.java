@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.Color;
 /**
  * Colormap from Peter Karpov @see <a href="http://inversed.ru/index.htm">Peter Karpov</a>. Lacerta
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Lacerta")
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Lacerta",source = "Peter Karpov")
 public final class Lacerta extends SequentialColormap {
 
     /**

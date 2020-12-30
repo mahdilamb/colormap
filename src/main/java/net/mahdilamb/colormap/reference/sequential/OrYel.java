@@ -8,12 +8,12 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Oryel sequential colormap.
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Oryel")
-public final class Oryel extends SequentialColormap {
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "OrYel",source = "CARTO")
+public final class OrYel extends SequentialColormap {
     /**
      * Create a colormap based on Oryel from Plotly
      */
-    public Oryel() {
+    public OrYel() {
         super(
                 new Color(236, 218, 154),
                 new Color(239, 196, 126),
@@ -22,7 +22,6 @@ public final class Oryel extends SequentialColormap {
                 new Color(249, 123, 87),
                 new Color(246, 99, 86),
                 new Color(238, 77, 90)
-
         );
 
 

@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Plotly's Curl
  */
-@ReferenceColormap(type = ColormapType.DIVERGING, name = "Curl")
+@ReferenceColormap(type = ColormapType.DIVERGING, name = "Curl",source = "Ocean")
 public final class Curl extends SequentialColormap {
 
     /**

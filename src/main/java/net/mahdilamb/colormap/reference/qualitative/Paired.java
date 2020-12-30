@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.Color;
 /**
  * Colorbrewer 2.0 Paired
  */
-@ReferenceColormap(type = ColormapType.QUALITATIVE, name = "Paired")
+@ReferenceColormap(type = ColormapType.QUALITATIVE, name = "Paired",source = "ColorBrewer")
 public final class Paired extends QualitativeColormap {
 
 

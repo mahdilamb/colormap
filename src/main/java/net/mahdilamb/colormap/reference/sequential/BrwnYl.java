@@ -8,12 +8,12 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Brwnyl sequential colormap.
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Brwnyl")
-public final class Brwnyl extends SequentialColormap {
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "BrwnYl", source = "CARTO")
+public final class BrwnYl extends SequentialColormap {
     /**
      * Create a colormap based on Brwnyl from Plotly
      */
-    public Brwnyl() {
+    public BrwnYl() {
         super(
                 new Color(237, 229, 207),
                 new Color(224, 194, 162),

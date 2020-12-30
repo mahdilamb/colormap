@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Sunset sequential colormap.
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Sunset")
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Sunset",source = "CARTO")
 public final class Sunset extends SequentialColormap {
     /**
      * Create a colormap based on Sunset from Plotly

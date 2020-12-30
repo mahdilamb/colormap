@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * An extended version of the colormap presented in Kindlmann
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "KindlmannExtended")
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "KindlmannExtended", source = "Kindlmann et al")
 public final class KindlmannExtended extends SequentialColormap {
     /**
      * Create a colormap based on the derived colormap from Kindlmann, et al.

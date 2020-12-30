@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Plotly's Oxy
  */
-@ReferenceColormap(type = ColormapType.DIVERGING, name = "Oxy")
+@ReferenceColormap(type = ColormapType.DIVERGING, name = "Oxy",source = "Ocean")
 public final class Oxy extends SequentialColormap {
 
     /**

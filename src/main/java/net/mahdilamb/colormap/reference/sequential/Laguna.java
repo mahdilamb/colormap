@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.Color;
 /**
  * Colormap from Peter Karpov @see <a href="http://inversed.ru/index.htm">Peter Karpov</a>. Laguna
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Laguna")
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Laguna",source = "Peter Karpov")
 public final class Laguna extends SequentialColormap {
     /**
      * Create a colormap based on Laguna

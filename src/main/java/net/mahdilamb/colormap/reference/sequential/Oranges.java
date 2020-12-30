@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.Color;
 /**
  * Sequential ColorBrewer colormap going through Oranges.
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Oranges")
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Oranges", source = "ColorBrewer")
 public final class Oranges extends SequentialColormap {
 
     /**

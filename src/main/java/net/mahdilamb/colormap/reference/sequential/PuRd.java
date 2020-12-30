@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Colorbrewer 2.0 PuRd.
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "PuRd")
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "PuRd", source = "ColorBrewer")
 public final class PuRd extends SequentialColormap {
     /**
      * Create a colormap based on Colorbrewer 2.0 PuRd.

@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Plotly's cyclic colormap Phase
  */
-@ReferenceColormap(type = ColormapType.CYCLIC, name = "Phase")
+@ReferenceColormap(type = ColormapType.CYCLIC, name = "Phase",source = "Ocean")
 public final class Phase extends SequentialColormap {
 
     /**

@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Matter sequential colormap.
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Matter")
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Matter",source = "Ocean")
 public final class Matter extends SequentialColormap {
     /**
      * Create a colormap based on Matter from Plotly
