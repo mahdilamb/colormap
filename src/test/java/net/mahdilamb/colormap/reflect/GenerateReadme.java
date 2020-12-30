@@ -55,7 +55,7 @@ public final class GenerateReadme {
                         source = "[ColorBrewer 2.0](https://colorbrewer2.org/)";
                         break;
                     case "kenneth moreland":
-                        source = "[\"Why We Use Bad Color Maps and What You Can Do About It.\"](https://doi.org/10.2352/ISSN.2470-1173.2016.16.HVEI-133)";
+                        source = "[Kenneth Moreland](https://doi.org/10.2352/ISSN.2470-1173.2016.16.HVEI-133)";
                         break;
                     case "google ai":
                         source = "[Google AI](https://ai.googleblog.com/2019/08/turbo-improved-rainbow-colormap-for.html)";

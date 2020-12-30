@@ -70,7 +70,7 @@ The package can be imported from [maven](https://search.maven.org/artifact/net.m
 |Cyclic|TwilightShifted|![twilightshifted](swatches/cyclic.twilightshifted.png)|[matplotlib](https://matplotlib.org/3.1.1/gallery/color/colormap_reference.html)|
 |Diverging|ArmyRose|![armyrose](swatches/diverging.armyrose.png)|[CARTO](https://carto.com/carto-colors/)|
 |Diverging|Balance|![balance](swatches/diverging.balance.png)|[Ocean](https://matplotlib.org/cmocean/)|
-|Diverging|BentCoolWarm|![bentcoolwarm](swatches/diverging.bentcoolwarm.png)|["Why We Use Bad Color Maps and What You Can Do About It."](https://doi.org/10.2352/ISSN.2470-1173.2016.16.HVEI-133)|
+|Diverging|BentCoolWarm|![bentcoolwarm](swatches/diverging.bentcoolwarm.png)|[Kenneth Moreland](https://doi.org/10.2352/ISSN.2470-1173.2016.16.HVEI-133)|
 |Diverging|BrBG|![brbg](swatches/diverging.brbg.png)|[ColorBrewer 2.0](https://colorbrewer2.org/)|
 |Diverging|Curl|![curl](swatches/diverging.curl.png)|[Ocean](https://matplotlib.org/cmocean/)|
 |Diverging|Delta|![delta](swatches/diverging.delta.png)|[Ocean](https://matplotlib.org/cmocean/)|
@@ -87,7 +87,7 @@ The package can be imported from [maven](https://search.maven.org/artifact/net.m
 |Diverging|RdGy|![rdgy](swatches/diverging.rdgy.png)|[ColorBrewer 2.0](https://colorbrewer2.org/)|
 |Diverging|RdYlBu|![rdylbu](swatches/diverging.rdylbu.png)|[ColorBrewer 2.0](https://colorbrewer2.org/)|
 |Diverging|RdYlGn|![rdylgn](swatches/diverging.rdylgn.png)|[ColorBrewer 2.0](https://colorbrewer2.org/)|
-|Diverging|SmoothCoolWarm|![smoothcoolwarm](swatches/diverging.smoothcoolwarm.png)|["Why We Use Bad Color Maps and What You Can Do About It."](https://doi.org/10.2352/ISSN.2470-1173.2016.16.HVEI-133)|
+|Diverging|SmoothCoolWarm|![smoothcoolwarm](swatches/diverging.smoothcoolwarm.png)|[Kenneth Moreland](https://doi.org/10.2352/ISSN.2470-1173.2016.16.HVEI-133)|
 |Diverging|Spectral|![spectral](swatches/diverging.spectral.png)|[ColorBrewer 2.0](https://colorbrewer2.org/)|
 |Diverging|TealRose|![tealrose](swatches/diverging.tealrose.png)|[CARTO](https://carto.com/carto-colors/)|
 |Diverging|Temps|![temps](swatches/diverging.temps.png)|[CARTO](https://carto.com/carto-colors/)|
@@ -121,7 +121,7 @@ The package can be imported from [maven](https://search.maven.org/artifact/net.m
 |Sequential|AgSunset|![agsunset](swatches/sequential.agsunset.png)|[Plotly](https://plotly.com/python/colorscales/)|
 |Sequential|Algae|![algae](swatches/sequential.algae.png)|[Ocean](https://matplotlib.org/cmocean/)|
 |Sequential|Amp|![amp](swatches/sequential.amp.png)|[Ocean](https://matplotlib.org/cmocean/)|
-|Sequential|BlackBody|![blackbody](swatches/sequential.blackbody.png)|["Why We Use Bad Color Maps and What You Can Do About It."](https://doi.org/10.2352/ISSN.2470-1173.2016.16.HVEI-133)|
+|Sequential|BlackBody|![blackbody](swatches/sequential.blackbody.png)|[Kenneth Moreland](https://doi.org/10.2352/ISSN.2470-1173.2016.16.HVEI-133)|
 |Sequential|BlackbodyAlt|![blackbodyalt](swatches/sequential.blackbodyalt.png)||
 |Sequential|BlueRed|![bluered](swatches/sequential.bluered.png)||
 |Sequential|Blues|![blues](swatches/sequential.blues.png)|[ColorBrewer 2.0](https://colorbrewer2.org/)|
