@@ -15,17 +15,25 @@ public final class Dense extends SequentialColormap {
      */
     public Dense() {
         super(
-                new Color(230, 240, 240),
-                new Color(191, 221, 229),
-                new Color(156, 201, 226),
-                new Color(129, 180, 227),
-                new Color(115, 154, 228),
-                new Color(117, 127, 221),
-                new Color(120, 100, 202),
-                new Color(119, 74, 175),
-                new Color(113, 50, 141),
-                new Color(100, 31, 104),
-                new Color(80, 20, 66),
+                new Color(230, 241, 241),
+                new Color(208, 230, 233),
+                new Color(185, 218, 228),
+                new Color(165, 207, 226),
+                new Color(146, 195, 226),
+                new Color(131, 182, 227),
+                new Color(120, 168, 228),
+                new Color(116, 154, 228),
+                new Color(116, 138, 226),
+                new Color(118, 121, 218),
+                new Color(120, 106, 208),
+                new Color(121, 90, 193),
+                new Color(120, 76, 177),
+                new Color(117, 62, 159),
+                new Color(112, 49, 138),
+                new Color(106, 38, 117),
+                new Color(96, 28, 94),
+                new Color(85, 22, 73),
+                new Color(70, 18, 52),
                 new Color(54, 14, 36)
 
         );

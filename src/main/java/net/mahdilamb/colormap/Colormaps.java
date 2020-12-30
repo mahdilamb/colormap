@@ -471,17 +471,17 @@ public final class Colormaps {
 		}
 
 		/**
-		 * @return the Mrybm colormap
+		 * @return the MRYBM colormap
 		 */
-		public static Colormap Mrybm(){
-			return Colormaps.get("Cyclic.Mrybm");
+		public static Colormap MRYBM(){
+			return Colormaps.get("Cyclic.MRYBM");
 		}
 
 		/**
-		 * @return the Mygbm colormap
+		 * @return the MYGBM colormap
 		 */
-		public static Colormap Mygbm(){
-			return Colormaps.get("Cyclic.Mygbm");
+		public static Colormap MYGBM(){
+			return Colormaps.get("Cyclic.MYGBM");
 		}
 
 		/**
@@ -552,6 +552,13 @@ public final class Colormaps {
 		 */
 		public static Colormap Delta(){
 			return Colormaps.get("Diverging.Delta");
+		}
+
+		/**
+		 * @return the Diff colormap
+		 */
+		public static Colormap Diff(){
+			return Colormaps.get("Diverging.Diff");
 		}
 
 		/**
@@ -671,6 +678,13 @@ public final class Colormaps {
 		 */
 		public static Colormap Temps(){
 			return Colormaps.get("Diverging.Temps");
+		}
+
+		/**
+		 * @return the Topo colormap
+		 */
+		public static Colormap Topo(){
+			return Colormaps.get("Diverging.Topo");
 		}
 
 		/**
@@ -912,10 +926,10 @@ public final class Colormaps {
 		}
 
 		/**
-		 * @return the BlueRed colormap
+		 * @return the BlackBodyExtended colormap
 		 */
-		public static Colormap BlueRed(){
-			return Colormaps.get("Sequential.BlueRed");
+		public static Colormap BlackBodyExtended(){
+			return Colormaps.get("Sequential.BlackBodyExtended");
 		}
 
 		/**
@@ -1262,6 +1276,13 @@ public final class Colormaps {
 		}
 
 		/**
+		 * @return the Rain colormap
+		 */
+		public static Colormap Rain(){
+			return Colormaps.get("Sequential.Rain");
+		}
+
+		/**
 		 * @return the RdPu colormap
 		 */
 		public static Colormap RdPu(){
@@ -1308,6 +1329,13 @@ public final class Colormaps {
 		 */
 		public static Colormap SunsetDark(){
 			return Colormaps.get("Sequential.SunsetDark");
+		}
+
+		/**
+		 * @return the Tarn colormap
+		 */
+		public static Colormap Tarn(){
+			return Colormaps.get("Sequential.Tarn");
 		}
 
 		/**

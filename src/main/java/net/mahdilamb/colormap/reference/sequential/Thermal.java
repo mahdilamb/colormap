@@ -15,20 +15,26 @@ public final class Thermal extends SequentialColormap {
      */
     public Thermal() {
         super(
-                new Color(3, 35, 51),
-                new Color(13, 48, 100),
-                new Color(53, 50, 155),
-                new Color(93, 62, 153),
-                new Color(126, 77, 143),
-                new Color(158, 89, 135),
-                new Color(193, 100, 121),
-                new Color(225, 113, 97),
-                new Color(246, 139, 69),
-                new Color(251, 173, 60),
-                new Color(246, 211, 70),
-                new Color(231, 250, 90)
-
-
+                new Color(4, 35, 51),
+                new Color(7, 44, 77),
+                new Color(18, 50, 111),
+                new Color(39, 52, 145),
+                new Color(70, 53, 160),
+                new Color(91, 61, 155),
+                new Color(110, 71, 148),
+                new Color(128, 78, 143),
+                new Color(146, 85, 139),
+                new Color(166, 92, 134),
+                new Color(186, 98, 126),
+                new Color(206, 105, 113),
+                new Color(224, 113, 99),
+                new Color(238, 125, 83),
+                new Color(248, 142, 68),
+                new Color(251, 161, 61),
+                new Color(251, 183, 61),
+                new Color(248, 205, 68),
+                new Color(241, 228, 79),
+                new Color(232, 250, 91)
         );
 
 

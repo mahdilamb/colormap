@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Sequential colormap Blackbody (from Plotly).
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "BlackbodyAlt")
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "BlackbodyAlt", source = "Plotly")
 public final class BlackbodyAlt extends SequentialColormap {
     /**
      * Create a colormap based on Blackbody from Plotly.

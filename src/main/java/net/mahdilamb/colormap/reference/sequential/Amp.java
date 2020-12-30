@@ -15,19 +15,26 @@ public final class Amp extends SequentialColormap {
      */
     public Amp() {
         super(
-                new Color(241, 236, 236),
-                new Color(230, 209, 203),
-                new Color(221, 182, 170),
-                new Color(213, 156, 137),
-                new Color(205, 129, 103),
-                new Color(196, 102, 73),
-                new Color(186, 74, 47),
-                new Color(172, 44, 36),
-                new Color(149, 19, 39),
-                new Color(120, 14, 40),
-                new Color(89, 13, 31),
-                new Color(60, 9, 17)
-
+                new Color(241, 237, 236),
+                new Color(234, 221, 218),
+                new Color(228, 205, 198),
+                new Color(223, 190, 179),
+                new Color(219, 174, 159),
+                new Color(214, 159, 140),
+                new Color(209, 143, 120),
+                new Color(205, 128, 102),
+                new Color(200, 113, 85),
+                new Color(195, 97, 67),
+                new Color(189, 81, 52),
+                new Color(182, 63, 41),
+                new Color(174, 45, 36),
+                new Color(162, 30, 37),
+                new Color(147, 18, 40),
+                new Color(131, 14, 41),
+                new Color(112, 14, 39),
+                new Color(95, 14, 33),
+                new Color(77, 12, 26),
+                new Color(60, 9, 18)
         );
 
 

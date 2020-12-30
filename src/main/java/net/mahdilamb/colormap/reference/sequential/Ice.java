@@ -8,27 +8,33 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Ice sequential colormap.
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Ice",source = "Ocean")
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Ice", source = "Ocean")
 public final class Ice extends SequentialColormap {
     /**
      * Create a colormap based on Ice from Plotly
      */
     public Ice() {
         super(
-                new Color(3, 5, 18),
-                new Color(25, 25, 51),
-                new Color(44, 42, 87),
-                new Color(58, 60, 125),
-                new Color(62, 83, 160),
-                new Color(62, 109, 178),
-                new Color(72, 134, 187),
-                new Color(89, 159, 196),
-                new Color(114, 184, 205),
-                new Color(149, 207, 216),
-                new Color(192, 229, 232),
-                new Color(234, 252, 253)
-
-
+                new Color(4, 6, 19),
+                new Color(16, 17, 37),
+                new Color(29, 28, 58),
+                new Color(40, 38, 78),
+                new Color(50, 49, 100),
+                new Color(58, 59, 122),
+                new Color(62, 72, 144),
+                new Color(63, 85, 161),
+                new Color(62, 99, 173),
+                new Color(64, 115, 180),
+                new Color(69, 129, 186),
+                new Color(78, 144, 191),
+                new Color(89, 158, 196),
+                new Color(101, 172, 201),
+                new Color(117, 187, 207),
+                new Color(136, 200, 212),
+                new Color(160, 214, 220),
+                new Color(185, 226, 229),
+                new Color(211, 239, 241),
+                new Color(234, 253, 253)
         );
 
 

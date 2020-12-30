@@ -15,20 +15,26 @@ public final class Tempo extends SequentialColormap {
      */
     public Tempo() {
         super(
-                new Color(254, 245, 244),
-                new Color(222, 224, 210),
-                new Color(189, 206, 181),
-                new Color(153, 189, 156),
-                new Color(110, 173, 138),
-                new Color(65, 157, 129),
-                new Color(25, 137, 125),
-                new Color(18, 116, 117),
-                new Color(25, 94, 106),
-                new Color(28, 72, 93),
-                new Color(25, 51, 80),
-                new Color(20, 29, 67)
-
-
+                new Color(255, 246, 244),
+                new Color(237, 234, 225),
+                new Color(217, 221, 205),
+                new Color(198, 211, 188),
+                new Color(177, 200, 172),
+                new Color(156, 191, 159),
+                new Color(133, 181, 147),
+                new Color(109, 173, 138),
+                new Color(84, 164, 132),
+                new Color(56, 153, 129),
+                new Color(33, 142, 126),
+                new Color(18, 130, 123),
+                new Color(18, 118, 118),
+                new Color(22, 105, 113),
+                new Color(26, 92, 106),
+                new Color(28, 80, 98),
+                new Color(28, 67, 90),
+                new Color(26, 55, 83),
+                new Color(24, 42, 75),
+                new Color(21, 29, 68)
         );
 
 

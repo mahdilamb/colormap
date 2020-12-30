@@ -16,18 +16,26 @@ public final class Balance extends SequentialColormap {
      */
     public Balance() {
         super(
-                new Color(23, 28, 66),
-                new Color(41, 58, 143),
-                new Color(11, 102, 189),
-                new Color(69, 144, 185),
-                new Color(142, 181, 194),
-                new Color(210, 216, 219),
-                new Color(230, 210, 204),
-                new Color(213, 157, 137),
-                new Color(196, 101, 72),
-                new Color(172, 43, 36),
-                new Color(120, 14, 40),
-                new Color(60, 9, 17)
+                new Color(24, 28, 67),
+                new Color(36, 46, 108),
+                new Color(41, 64, 158),
+                new Color(16, 89, 190),
+                new Color(30, 118, 187),
+                new Color(64, 141, 186),
+                new Color(104, 164, 188),
+                new Color(145, 183, 195),
+                new Color(185, 202, 208),
+                new Color(225, 225, 227),
+                new Color(235, 222, 219),
+                new Color(223, 189, 178),
+                new Color(214, 159, 141),
+                new Color(205, 130, 104),
+                new Color(195, 97, 67),
+                new Color(183, 64, 41),
+                new Color(161, 29, 37),
+                new Color(131, 14, 41),
+                new Color(94, 14, 33),
+                new Color(60, 9, 18)
 
         );
 

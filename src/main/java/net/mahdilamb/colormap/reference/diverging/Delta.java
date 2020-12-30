@@ -8,7 +8,7 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Plotly's Delta
  */
-@ReferenceColormap(type = ColormapType.DIVERGING, name = "Delta",source = "Ocean")
+@ReferenceColormap(type = ColormapType.DIVERGING, name = "Delta", source = "Ocean")
 public final class Delta extends SequentialColormap {
 
     /**
@@ -16,19 +16,26 @@ public final class Delta extends SequentialColormap {
      */
     public Delta() {
         super(
-                new Color(16, 31, 63),
-                new Color(38, 62, 144),
-                new Color(30, 110, 161),
-                new Color(60, 154, 171),
-                new Color(140, 193, 186),
-                new Color(217, 229, 218),
-                new Color(239, 226, 156),
-                new Color(195, 182, 59),
-                new Color(115, 152, 5),
-                new Color(34, 120, 36),
-                new Color(18, 78, 43),
-                new Color(23, 35, 18)
-
+                new Color(17, 32, 64),
+                new Color(33, 49, 109),
+                new Color(33, 70, 154),
+                new Color(27, 99, 159),
+                new Color(38, 126, 165),
+                new Color(56, 150, 171),
+                new Color(91, 174, 177),
+                new Color(143, 194, 187),
+                new Color(190, 215, 205),
+                new Color(233, 238, 224),
+                new Color(246, 237, 177),
+                new Color(227, 207, 119),
+                new Color(197, 184, 63),
+                new Color(155, 166, 20),
+                new Color(108, 150, 7),
+                new Color(61, 133, 27),
+                new Color(19, 111, 41),
+                new Color(15, 86, 44),
+                new Color(25, 61, 36),
+                new Color(23, 35, 19)
         );
 
     }

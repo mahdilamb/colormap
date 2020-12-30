@@ -8,26 +8,33 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Algae sequential colormap.
  */
-@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Algae",source = "Ocean")
+@ReferenceColormap(type = ColormapType.SEQUENTIAL, name = "Algae", source = "Ocean")
 public final class Algae extends SequentialColormap {
     /**
      * Create a colormap based on Algae from Plotly
      */
     public Algae() {
         super(
-                new Color(214, 249, 207),
-                new Color(186, 228, 174),
-                new Color(156, 209, 143),
-                new Color(124, 191, 115),
-                new Color(85, 174, 91),
-                new Color(37, 157, 81),
-                new Color(7, 138, 78),
-                new Color(13, 117, 71),
-                new Color(23, 95, 61),
-                new Color(25, 75, 49),
-                new Color(23, 55, 35),
-                new Color(17, 36, 20)
-
+                new Color(215, 249, 208),
+                new Color(199, 237, 189),
+                new Color(181, 225, 169),
+                new Color(164, 214, 152),
+                new Color(146, 203, 134),
+                new Color(128, 193, 118),
+                new Color(107, 183, 103),
+                new Color(84, 174, 91),
+                new Color(57, 165, 83),
+                new Color(28, 154, 81),
+                new Color(11, 143, 79),
+                new Color(7, 130, 76),
+                new Color(13, 118, 72),
+                new Color(19, 106, 67),
+                new Color(24, 94, 61),
+                new Color(26, 83, 54),
+                new Color(26, 71, 46),
+                new Color(24, 59, 38),
+                new Color(22, 47, 29),
+                new Color(18, 36, 20)
         );
 
 

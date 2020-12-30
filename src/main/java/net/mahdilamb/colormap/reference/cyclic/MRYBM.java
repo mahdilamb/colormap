@@ -8,13 +8,13 @@ import net.mahdilamb.colormap.reference.ReferenceColormap;
 /**
  * Plotly's cyclic colormap Mrybm
  */
-@ReferenceColormap(type = ColormapType.CYCLIC, name = "Mrybm",source = "Kovesi")
-public final class Mrybm extends SequentialColormap {
+@ReferenceColormap(type = ColormapType.CYCLIC, name = "MRYBM",source = "CET")
+public final class MRYBM extends SequentialColormap {
 
     /**
      * Create a colormap based on the Plotly's colormap Mrybm.
      */
-    public Mrybm() {
+    public MRYBM() {
         super(
                 new Color(248, 132, 247),
                 new Color(249, 104, 196),

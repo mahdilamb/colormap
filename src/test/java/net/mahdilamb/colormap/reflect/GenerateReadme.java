@@ -49,13 +49,13 @@ public final class GenerateReadme {
                 String source = annotation.source();
                 switch (source.toLowerCase()) {
                     case "ocean":
-                        source = "[Ocean](https://matplotlib.org/cmocean/)";
+                        source = "[CMOcean](https://matplotlib.org/cmocean/)";
                         break;
                     case "colorbrewer":
-                        source = "[ColorBrewer 2.0](https://colorbrewer2.org/)";
+                        source = "[ColorBrewer](https://colorbrewer2.org/)";
                         break;
                     case "kenneth moreland":
-                        source = "[Kenneth Moreland](https://doi.org/10.2352/ISSN.2470-1173.2016.16.HVEI-133)";
+                        source = "[Kenneth Moreland](https://www.kennethmoreland.com/color-advice/)";
                         break;
                     case "google ai":
                         source = "[Google AI](https://ai.googleblog.com/2019/08/turbo-improved-rainbow-colormap-for.html)";
@@ -75,8 +75,8 @@ public final class GenerateReadme {
                     case "matplotlib":
                         source = "[matplotlib](https://matplotlib.org/3.1.1/gallery/color/colormap_reference.html)";
                         break;
-                    case "kovesi":
-                        source = "[Kovesi](https://peterkovesi.com/)";
+                    case "cet":
+                        source = "[CET](https://colorcet.com/)";
                         break;
                     case "plotly":
                         source = "[Plotly](https://plotly.com/python/colorscales/)";
