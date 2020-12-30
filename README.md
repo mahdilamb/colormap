@@ -144,7 +144,7 @@ The package can be imported from [maven](https://search.maven.org/artifact/net.m
 |Sequential|GnBu|![gnbu](swatches/sequential.gnbu.png)|[ColorBrewer](https://colorbrewer2.org/)|
 |Sequential|Gray|![gray](swatches/sequential.gray.png)|[CMOcean](https://matplotlib.org/cmocean/)|
 |Sequential|Greens|![greens](swatches/sequential.greens.png)|[ColorBrewer](https://colorbrewer2.org/)|
-|Sequential|Greys|![greys](swatches/sequential.greys.png)||
+|Sequential|Greys|![greys](swatches/sequential.greys.png)|[ColorBrewer](https://colorbrewer2.org/)|
 |Sequential|Haline|![haline](swatches/sequential.haline.png)|[CMOcean](https://matplotlib.org/cmocean/)|
 |Sequential|Hesperia|![hesperia](swatches/sequential.hesperia.png)|[Peter Karpov](http://inversed.ru/Blog_2.htm)|
 |Sequential|Hot|![hot](swatches/sequential.hot.png)|[Plotly](https://plotly.com/python/colorscales/)|
