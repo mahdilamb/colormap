@@ -185,7 +185,7 @@ The package can be imported from [maven](https://search.maven.org/artifact/net.m
 |Sequential|Tempo|![tempo](swatches/sequential.tempo.png)|[Ocean](https://matplotlib.org/cmocean/)|
 |Sequential|Thermal|![thermal](swatches/sequential.thermal.png)|[Ocean](https://matplotlib.org/cmocean/)|
 |Sequential|Turbid|![turbid](swatches/sequential.turbid.png)|[Ocean](https://matplotlib.org/cmocean/)|
-|Sequential|Turbo|![turbo](swatches/sequential.turbo.png)|[https://ai.googleblog.com/2019/08/turbo-improved-rainbow-colormap-for.html](Google AI)|
+|Sequential|Turbo|![turbo](swatches/sequential.turbo.png)|[Google AI](https://ai.googleblog.com/2019/08/turbo-improved-rainbow-colormap-for.html)|
 |Sequential|Viridis|![viridis](swatches/sequential.viridis.png)|[matplotlib](https://matplotlib.org/3.1.1/gallery/color/colormap_reference.html)|
 |Sequential|YlGn|![ylgn](swatches/sequential.ylgn.png)|[ColorBrewer 2.0](https://colorbrewer2.org/)|
 |Sequential|YlGnBu|![ylgnbu](swatches/sequential.ylgnbu.png)|[ColorBrewer 2.0](https://colorbrewer2.org/)|
