@@ -3,10 +3,14 @@ package net.mahdilamb.colormap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Utility class for working with colors
+ */
 public final class Colors {
-    private Colors(){
+    private Colors() {
 
     }
+
     /**
      * Convert a color from sRGB space into XYZ space. Based on EasyRGB.com and http://www.brucelindbloom.com/index.html?Eqn_RGB_XYZ_Matrix.html
      *
@@ -16,20 +20,18 @@ public final class Colors {
      * @return a three component float representing the color in XYZ space
      */
     public static float[] RGBToXYZ(float r, float g, float b) {
-        final float[] out = {r, g, b};
-        for (int i = 0; i < 3; ++i) {
-            if (out[i] > 0.04045) {
-                out[i] = (float) Math.pow((out[i] + 0.055f) / 1.055f, 2.4f);
-            } else {
-                out[i] /= 12.92f;
-            }
-            out[i] *= 100f;
-        }
-        return new float[]{
-                out[0] * 0.4124564f + out[1] * 0.3575761f + out[2] * 0.1804375f,
-                out[0] * 0.2126729f + out[1] * 0.7151522f + out[2] * 0.0721750f,
-                out[0] * 0.0193339f + out[1] * 0.1191920f + out[2] * 0.9503041f
-        };
+        return RGBToXYZ(new float[3], r, g, b);
+    }
+
+    static float[] RGBToXYZ(float[] out, float r, float g, float b) {
+        final float R = (r > 0.04045 ? (float) Math.pow((r + 0.055f) / 1.055f, 2.4f) : r / 12.92f) * 100;
+        final float G = (g > 0.04045 ? (float) Math.pow((g + 0.055f) / 1.055f, 2.4f) : g / 12.92f) * 100;
+        final float B = (b > 0.04045 ? (float) Math.pow((b + 0.055f) / 1.055f, 2.4f) : b / 12.92f) * 100;
+
+        out[0] = R * 0.4124564f + G * 0.3575761f + B * 0.1804375f;
+        out[1] = R * 0.2126729f + G * 0.7151522f + B * 0.0721750f;
+        out[2] = R * 0.0193339f + G * 0.1191920f + B * 0.9503041f;
+        return out;
     }
 
     /**
@@ -41,17 +43,20 @@ public final class Colors {
      * @return a three-component float array with the color in L*ab space
      */
     public static float[] XYZToLab(float x, float y, float z) {
-        final float[] temp = {x / 95.047f, y / 100f, z / 108.883f};
-        final float j = 16f / 116f;
-        for (int i = 0; i < 3; i++) {
-            temp[i] = temp[i] > 0.008856 ? (float) Math.cbrt(temp[i]) : (7.787f * temp[i] + j);
+        return XYZToLab(new float[3], x, y, z);
+    }
 
-        }
-        return new float[]{
-                (116f * temp[1]) - 16f,
-                500f * (temp[0] - temp[1]),
-                200f * (temp[1] - temp[2])
-        };
+    static float[] XYZToLab(float[] out, float x, float y, float z) {
+        float a = x / 95.047f, b = y * .01f, c = z / 108.883f;
+        final float j = 16f / 116f;
+        a = a > 0.008856 ? (float) Math.cbrt(a) : (7.787f * a + j);
+        b = b > 0.008856 ? (float) Math.cbrt(b) : (7.787f * b + j);
+        c = c > 0.008856 ? (float) Math.cbrt(c) : (7.787f * c + j);
+
+        out[0] = (116f * b) - 16f;
+        out[1] = 500f * (a - b);
+        out[2] = 200f * (b - c);
+        return out;
     }
 
     /**
@@ -63,23 +68,25 @@ public final class Colors {
      * @return the color in xyz space
      */
     public static float[] LabToXYZ(float L, float a, float b) {
-        final float[] temp = {L, a, b};
+        return LabToXYZ(new float[3], L, a, b);
+    }
 
-        temp[1] = (L + 16f) / 116f;
-        temp[0] = (a / 500f) + temp[1];
-        temp[2] = temp[1] - b / 200f;
+    static float[] LabToXYZ(float[] out, float L, float a, float b) {
+        out[1] = (L + 16f) / 116f;
+        out[0] = (a / 500f) + out[1];
+        out[2] = out[1] - b / 200f;
         for (int i = 0; i < 3; i++) {
-            if (temp[i] > 0.20689303442f) {
-                temp[i] *= temp[i] * temp[i];
+            if (out[i] > 0.20689303442f) {
+                out[i] *= out[i] * out[i];
             } else {
-                temp[i] = (temp[i] - 16f / 116f) / 7.787f;
+                out[i] = (out[i] - 16f / 116f) / 7.787f;
             }
         }
 
-        temp[0] *= 95.047f;
-        temp[1] *= 100f;
-        temp[2] *= 108.883f;
-        return temp;
+        out[0] *= 95.047f;
+        out[1] *= 100f;
+        out[2] *= 108.883f;
+        return out;
     }
 
     /**
@@ -91,19 +98,24 @@ public final class Colors {
      * @return a 3-component float array containing the rgb color (0-1)
      */
     public static float[] XYZToRGB(float x, float y, float z) {
-        final float[] orig = {x / 100, y / 100, z / 100};
-        final float[] rgb = orig.clone();
-        rgb[0] = orig[0] * 3.2404542f + orig[1] * -1.5371385f + orig[2] * -0.4985314f;
-        rgb[1] = orig[0] * -0.9692660f + orig[1] * 1.8760108f + orig[2] * 0.0415560f;
-        rgb[2] = orig[0] * 0.0556434f + orig[1] * -0.2040259f + orig[2] * 1.0572252f;
+        return XYZToRGB(new float[3], x, y, z);
+    }
+
+    static float[] XYZToRGB(float[] out, float x, float y, float z) {
+        final float X = x / 100;
+        final float Y = y / 100;
+        final float Z = z / 100;
+        out[0] = X * 3.2404542f + Y * -1.5371385f + Z * -0.4985314f;
+        out[1] = X * -0.9692660f + Y * 1.8760108f + Z * 0.0415560f;
+        out[2] = X * 0.0556434f + Y * -0.2040259f + Z * 1.0572252f;
         for (int i = 0; i < 3; i++) {
-            if (rgb[i] > 0.0031308) {
-                rgb[i] = 1.055f * ((float) Math.pow(rgb[i], (1 / 2.4))) - 0.055f;
+            if (out[i] > 0.0031308) {
+                out[i] = 1.055f * ((float) Math.pow(out[i], (1 / 2.4))) - 0.055f;
             } else {
-                rgb[i] = 12.92f * rgb[i];
+                out[i] = 12.92f * out[i];
             }
         }
-        return rgb;
+        return out;
     }
 
     /**
@@ -115,8 +127,8 @@ public final class Colors {
      * @return a 3-component float array containing the color in rgb space
      */
     public static float[] LabToRGB(float L, float a, float b) {
-        final float[] xyz = LabToXYZ(L, a, b);
-        return XYZToRGB(xyz[0], xyz[1], xyz[2]);
+        final float[] out = new float[3];
+        return XYZToRGB(LabToXYZ(out, L, a, b), out[0], out[1], out[2]);
     }
 
     /**
@@ -128,8 +140,8 @@ public final class Colors {
      * @return a 3-component float array with the color in L*ab space
      */
     public static float[] RGBToLab(float r, float g, float b) {
-        final float[] xyz = RGBToXYZ(r, g, b);
-        return XYZToLab(xyz[0], xyz[1], xyz[2]);
+        final float[] out = new float[3];
+        return XYZToLab(RGBToXYZ(out, r, g, b), out[0], out[1], out[2]);
     }
 
     /**
@@ -241,7 +253,6 @@ public final class Colors {
         final Matcher m = Pattern.compile("\\s*[#]?([0-9A-Fa-f]{6}).*").matcher(hex);
         if (!m.matches()) {
             throw new UnsupportedOperationException("Unable to sanitize color");
-
         }
         return "#" + m.group(1);
     }
