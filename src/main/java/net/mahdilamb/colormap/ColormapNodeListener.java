@@ -12,5 +12,5 @@ public interface ColormapNodeListener {
      * @param oldColor the old color
      * @param state    the node
      */
-    void colorChanged(RGBA newColor, RGBA oldColor, ColormapNode state);
+    void colorChanged(Color newColor, Color oldColor, ColormapNode state);
 }

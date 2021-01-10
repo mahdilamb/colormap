@@ -10,10 +10,10 @@ public interface ColorListener extends ColormapNodeListener {
      *
      * @param color the new color
      */
-    void colorChanged(RGBA color);
+    void colorChanged(Color color);
 
     @Override
-    default void colorChanged(RGBA newColor, RGBA oldColor, ColormapNode state) {
+    default void colorChanged(Color newColor, Color oldColor, ColormapNode state) {
         colorChanged(newColor);
     }
 }

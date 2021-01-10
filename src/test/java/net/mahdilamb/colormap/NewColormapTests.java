@@ -96,7 +96,7 @@ public class NewColormapTests {
         final FluidColormap fluidMonotone = Colormaps.fluidColormap(monotone, min, null, false);
         for (int i = 0; i < 20; ++i) {
             final float r = (float) ((Math.random() * 20) - 10);
-            final ColormapNode x = (ColormapNode) fluidMonotone.get(r);
+            final ColormapNode x = fluidMonotone.getNode(r);
             if (r <= min) {
                 assertEquals(fluidMonotone.getColormap().getLowColor(), x.getColor());
             }
@@ -128,7 +128,7 @@ public class NewColormapTests {
         final FluidColormap fluidMonotone = Colormaps.fluidColormap(monotone, min, max, false);
         for (int i = 0; i < 20; ++i) {
             final float r = (float) ((Math.random() * 20) - 10);
-            final ColormapNode node = (ColormapNode) fluidMonotone.get(r);
+            final ColormapNode node = fluidMonotone.getNode(r);
 
             if (r >= max) {
                 assertEquals(fluidMonotone.getColormap().getHighColor(), node.getColor());

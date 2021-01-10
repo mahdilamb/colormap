@@ -5,7 +5,6 @@ import net.mahdilamb.colormap.Color;
 import net.mahdilamb.colormap.Colormaps;
 import net.mahdilamb.colormap.ColormapNode;
 import net.mahdilamb.colormap.FluidColormap;
-import net.mahdilamb.colormap.RGBA;
 import org.junit.Test;
 
 import java.util.Map;
@@ -123,17 +122,17 @@ public class JUnitTests {
     @Test
     public void testRGBToLabIsCorrectTest() {
         final double precision = 5e-2;
-        final RGBA red = Color.get("red");
+        final Color red = Color.get("red");
         final float[] redLab = red.toLab();
         assertEquals(53.241, redLab[0], precision);
         assertEquals(80.092, redLab[1], precision);
         assertEquals(67.203, redLab[2], precision);
-        final RGBA green = Color.get("lime");
+        final Color green = Color.get("lime");
         final float[] greenLab = green.toLab();
         assertEquals(87.735, greenLab[0], precision);
         assertEquals(-86.183, greenLab[1], precision);
         assertEquals(83.179, greenLab[2], precision);
-        final RGBA blue = Color.get("blue");
+        final Color blue = Color.get("blue");
         final float[] blueLab = blue.toLab();
         assertEquals(32.297, blueLab[0], precision);
         assertEquals(79.188, blueLab[1], precision);

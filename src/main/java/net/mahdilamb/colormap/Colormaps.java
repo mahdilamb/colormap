@@ -29,7 +29,7 @@ public final class Colormaps {
         }
 
         @Override
-        public RGBA get(Float position) {
+        public Color get(Float position) {
             if (position == null || !Float.isFinite(position)) {
                 return getNaNColor();
             }
@@ -48,17 +48,17 @@ public final class Colormaps {
         }
 
         @Override
-        public RGBA getNaNColor() {
+        public Color getNaNColor() {
             return colormap.getNaNColor();
         }
 
         @Override
-        public RGBA getLowColor() {
+        public Color getLowColor() {
             return colormap.getHighColor();
         }
 
         @Override
-        public RGBA getHighColor() {
+        public Color getHighColor() {
             return colormap.getLowColor();
         }
 
@@ -91,16 +91,16 @@ public final class Colormaps {
     }
 
     /**
-     * Default implementation of a color value (which is a union between {@link RGBA} and a number
+     * Default implementation of a color value (which is a union between {@link Color} and a number
      */
     static final class ColorValueImpl implements ColormapNode {
         private FluidColormapImpl colormap;
-        private RGBA color;
+        private Color color;
         private Float value;
         private ColormapNodeListener listener = null;
         private List<ColormapNodeListener> listeners;
 
-        ColorValueImpl(FluidColormapImpl colormap, Float value, RGBA color) {
+        ColorValueImpl(FluidColormapImpl colormap, Float value, Color color) {
             this.colormap = colormap;
             this.value = value;
             this.color = color;
@@ -112,7 +112,7 @@ public final class Colormaps {
         }
 
         @Override
-        public synchronized RGBA getColor() {
+        public synchronized Color getColor() {
             return color;
         }
 
@@ -176,7 +176,7 @@ public final class Colormaps {
             colormap = null;
         }
 
-        void fireColorChanged(final RGBA newColor) {
+        void fireColorChanged(final Color newColor) {
             if (color.equals(newColor)) {
                 return;
             }
@@ -372,7 +372,7 @@ public final class Colormaps {
          * @param value the value to get the color at
          * @return the color at the position (relative to min, max and reversed of the colormap)
          */
-        private RGBA getColorProportionate(Float value) {
+        private Color getColorProportionate(Float value) {
             return isNaN(value) ? getNaNColor() : colormap.get(scale(value));
         }
 

@@ -134,22 +134,22 @@ public interface FluidColormap extends Colormap {
     }
 
     @Override
-    default RGBA get(Float value) {
-        return getNode(value);
+    default Color get(Float value) {
+        return getNode(value).getColor();
     }
 
     @Override
-    default RGBA getNaNColor() {
+    default Color getNaNColor() {
         return getColormap().getNaNColor();
     }
 
     @Override
-    default RGBA getLowColor() {
+    default Color getLowColor() {
         return getColormap().getLowColor();
     }
 
     @Override
-    default RGBA getHighColor() {
+    default Color getHighColor() {
         return getColormap().getHighColor();
     }
 

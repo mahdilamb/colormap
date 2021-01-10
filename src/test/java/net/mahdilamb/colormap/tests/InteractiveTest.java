@@ -21,6 +21,7 @@ public class InteractiveTest {
         @Override
         public Component getListCellRendererComponent(JList<? extends Colormap> list, Colormap value, int index,
                                                       boolean isSelected, boolean cellHasFocus) {
+
             final JLabel renderer = (JLabel) defaultRenderer.getListCellRendererComponent(list, value.toString().split("\\.").length == 3 ? value.toString().replace(".Reversed", "") : value.toString(), index, isSelected, cellHasFocus);
             renderer.setIcon(new ColorBar(list, value));
             return renderer;

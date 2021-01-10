@@ -12,6 +12,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -32,7 +33,11 @@ public final class GenerateReadme {
         } else {
             Files.createDirectory(out.toPath());
         }
-        Colormaps.named().stream().sorted().forEach(cmapName -> {
+        Colormaps.named().stream().sorted(/*(Comparator<CharSequence>) (o1, o2) -> {
+            final ReferenceColormap cmap1 = Colormaps.get(o1).getClass().getAnnotation(ReferenceColormap.class);
+            final ReferenceColormap cmap2 = Colormaps.get(o2).getClass().getAnnotation(ReferenceColormap.class);
+            return 31 * cmap1.source().compareTo(cmap2.source()) +  cmap1.name().compareTo(cmap2.name());
+        }*/).forEach(cmapName -> {
             final Colormap cmap = Colormaps.get(cmapName);
             final BufferedImage image = new BufferedImage(192, 20, BufferedImage.TYPE_INT_ARGB);
             for (int x = 0; x < image.getWidth(); ++x) {

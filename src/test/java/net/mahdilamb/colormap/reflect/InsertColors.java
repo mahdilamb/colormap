@@ -1,7 +1,7 @@
 package net.mahdilamb.colormap.reflect;
 
 import net.mahdilamb.colormap.Color;
-import net.mahdilamb.colormap.RGBA;
+import net.mahdilamb.colormap.Colors;
 import net.mahdilamb.colormap.reference.ColorType;
 
 import java.io.File;
@@ -36,7 +36,7 @@ public class InsertColors {
                 if (column >= cols.length) {
                     continue;
                 }
-                if (!RGBA.isValidRGB(cols[column])) {
+                if (!Colors.isValidRGB(cols[column])) {
                     continue;
                 }
                 final String name = cols[0].replace(" ", "").replace("/", "_").replace("'", "_");
@@ -44,7 +44,7 @@ public class InsertColors {
                     continue;
                 }
                 vars.add(name);
-                final int[] rgba = RGBA.hexadecimalToRGB8Bit(cols[column]);
+                final int[] rgba = Colors.hexadecimalToRGB8Bit(cols[column]);
                 output.append(String.format("\t/**\n\t * %s (%s)\n\t * <div style=\"border:1px solid black;width:40px;height:20px;background-color:%s;float:right;margin: 0 10px 0 0\"></div>\n\t */\n\t@ReferenceColor(type = %s.%s, name = \"%s\")\n\tpublic static final RGBA %s%s = new Color(%d, %d, %d);\n\n", String.format(format, cols[0]), cols[column], cols[column], type.getClass().getSimpleName(), type.name(), name, var_prefix, name, rgba[0], rgba[1], rgba[2]));
             }
         } catch (FileNotFoundException e) {

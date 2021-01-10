@@ -5,7 +5,7 @@ package net.mahdilamb.colormap;
  *
  * @see FluidColormap
  */
-public interface ColormapNode extends RGBA {
+public interface ColormapNode {
     /**
      * @return the value of this node
      */
@@ -15,7 +15,7 @@ public interface ColormapNode extends RGBA {
     /**
      * @return the color of this value. Will not be {@code null}
      */
-    RGBA getColor();
+    Color getColor();
 
     /**
      * Add a listener to this color value. Adding a listener triggers an event to be fired
@@ -79,26 +79,5 @@ public interface ColormapNode extends RGBA {
             return;
         }
         getColormap().remove(this);
-    }
-
-
-    @Override
-    default float red() {
-        return getColor().red();
-    }
-
-    @Override
-    default float green() {
-        return getColor().green();
-    }
-
-    @Override
-    default float blue() {
-        return getColor().blue();
-    }
-
-    @Override
-    default float alpha() {
-        return getColor().alpha();
     }
 }

@@ -7,10 +7,10 @@ import java.util.*;
  * reference colormaps. Also enables making a colormap without using the builder
  */
 public class SequentialColormap implements Colormap {
-    private final NavigableMap<Float, RGBA> colors = new TreeMap<>();
-    private final RGBA NaNColor;
-    private final RGBA lowColor;
-    private final RGBA highColor;
+    private final NavigableMap<Float, Color> colors = new TreeMap<>();
+    private final Color NaNColor;
+    private final Color lowColor;
+    private final Color highColor;
     private final float precision;
 
     /**
@@ -22,7 +22,7 @@ public class SequentialColormap implements Colormap {
      * @param highColor the color to use if the value is greater than 1
      * @param precision the precision of the sampling
      */
-    protected SequentialColormap(RGBA[] colors, RGBA NaNColor, RGBA lowColor, RGBA highColor, float precision) {
+    protected SequentialColormap(Color[] colors, Color NaNColor, Color lowColor, Color highColor, float precision) {
         for (int i = 0; i < colors.length; i++) {
             this.colors.put((float) i / (colors.length - 1), colors[i]);
         }
@@ -40,7 +40,7 @@ public class SequentialColormap implements Colormap {
      * @param lowColor  the color to use if the value is less than 0
      * @param highColor the color to use if the value is greater than 1
      */
-    protected SequentialColormap(RGBA[] colors, RGBA NaNColor, RGBA lowColor, RGBA highColor) {
+    protected SequentialColormap(Color[] colors, Color NaNColor, Color lowColor, Color highColor) {
         this(colors, NaNColor, lowColor, highColor, Float.POSITIVE_INFINITY);
     }
 
@@ -49,12 +49,12 @@ public class SequentialColormap implements Colormap {
      *
      * @param colors the list of colors to use
      */
-    protected SequentialColormap(RGBA... colors) {
+    protected SequentialColormap(Color... colors) {
         this(colors, null, null, null);
     }
 
     @Override
-    public RGBA get(Float position) {
+    public Color get(Float position) {
         if (position == null || !Float.isFinite(position)) {
             return NaNColor;
         }
@@ -66,32 +66,32 @@ public class SequentialColormap implements Colormap {
             if (colors.size() <= 1) {
                 return colors.firstEntry().getValue();
             } else {
-                final Map.Entry<Float, RGBA> lowKey = colors.floorEntry(position);
+                final Map.Entry<Float, Color> lowKey = colors.floorEntry(position);
                 if (lowKey.getKey().compareTo(position) == 0) {
                     return lowKey.getValue();
                 }
-                final Map.Entry<Float, RGBA> highKey = colors.higherEntry(lowKey.getKey());
+                final Map.Entry<Float, Color> highKey = colors.higherEntry(lowKey.getKey());
                 if (highKey.getKey().compareTo(position) == 0) {
                     return highKey.getValue();
                 }
                 final float p = (position - lowKey.getKey()) / (highKey.getKey() - lowKey.getKey());
-                return RGBA.lerp(lowKey.getValue(), highKey.getValue(), Float.isFinite(precision) ? ((float) Math.floor((p + precision / 2) / precision) * precision) : p);
+                return Colors.lerp(lowKey.getValue(), highKey.getValue(), Float.isFinite(precision) ? ((float) Math.floor((p + precision / 2) / precision) * precision) : p);
             }
         }
     }
 
     @Override
-    public RGBA getNaNColor() {
+    public Color getNaNColor() {
         return NaNColor;
     }
 
     @Override
-    public RGBA getLowColor() {
+    public Color getLowColor() {
         return lowColor;
     }
 
     @Override
-    public RGBA getHighColor() {
+    public Color getHighColor() {
         return highColor;
     }
 

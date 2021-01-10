@@ -52,21 +52,21 @@ abstract class ColormapBuilderImpl<B extends ColormapBuilder<B, Colormap>> imple
             for (int i = 0; i < sparseColors.size(); i++) {
                 colors.put((float) i / (sparseColors.size() - 1), sparseColors.get(i));
             }
-            setSampler(requested -> Float.isFinite(precision) ? ((float) Math.floor((requested + precision / 2) / precision) * precision) : requested, RGBA::lerp);
+            setSampler(requested -> Float.isFinite(precision) ? ((float) Math.floor((requested + precision / 2) / precision) * precision) : requested, Colors::lerp);
         }
     }
 
     /**
      * The final position to color map
      */
-    protected final NavigableMap<Float, RGBA> colors = new TreeMap<>();
+    protected final NavigableMap<Float, Color> colors = new TreeMap<>();
     /**
      * The colors that are being added without positions, whose positions need to be calculated by {@link #prepare()}.
      */
-    protected final List<RGBA> sparseColors = new ArrayList<>();
-    private RGBA NaNColor = Color.BLACK;
-    private RGBA lowColor;
-    private RGBA highColor;
+    protected final List<Color> sparseColors = new ArrayList<>();
+    private Color NaNColor = Color.BLACK;
+    private Color lowColor;
+    private Color highColor;
     private boolean isBuilt = false;
     private ColormapImpl.ColorSampler cSampler;
     private ColormapImpl.ValueSampler vSampler;
@@ -90,7 +90,7 @@ abstract class ColormapBuilderImpl<B extends ColormapBuilder<B, Colormap>> imple
      * @return the builder
      */
     @SuppressWarnings("unchecked")
-    public final B setNaNColor(RGBA color) {
+    public final B setNaNColor(Color color) {
         if (isBuilt) {
             throw new UnsupportedOperationException("Color map already built - cannot be set");
         }
@@ -105,7 +105,7 @@ abstract class ColormapBuilderImpl<B extends ColormapBuilder<B, Colormap>> imple
      * @return the builder
      */
     @SuppressWarnings("unchecked")
-    public final B setLowColor(RGBA color) {
+    public final B setLowColor(Color color) {
         if (isBuilt) {
             throw new UnsupportedOperationException("Color map already built - cannot be set");
         }
@@ -120,7 +120,7 @@ abstract class ColormapBuilderImpl<B extends ColormapBuilder<B, Colormap>> imple
      * @return the builder
      */
     @SuppressWarnings("unchecked")
-    public final B setHighColor(RGBA color) {
+    public final B setHighColor(Color color) {
         if (isBuilt) {
             throw new UnsupportedOperationException("Color map already built - cannot be set");
         }
@@ -153,7 +153,7 @@ abstract class ColormapBuilderImpl<B extends ColormapBuilder<B, Colormap>> imple
      * @return this builder
      */
     @SuppressWarnings("unchecked")
-    public final B addColor(float position, RGBA color) {
+    public final B addColor(float position, Color color) {
         if (isBuilt) {
             throw new UnsupportedOperationException("Color map already built - cannot be set");
         }
@@ -172,7 +172,7 @@ abstract class ColormapBuilderImpl<B extends ColormapBuilder<B, Colormap>> imple
      * @return this builder
      */
     @SuppressWarnings("unchecked")
-    public final B addColor(RGBA color) {
+    public final B addColor(Color color) {
         if (isBuilt) {
             throw new UnsupportedOperationException("Color map already built - cannot be set");
         }
@@ -187,11 +187,11 @@ abstract class ColormapBuilderImpl<B extends ColormapBuilder<B, Colormap>> imple
      * @return this builder
      */
     @SuppressWarnings("unchecked")
-    public final B addColor(RGBA... colors) {
+    public final B addColor(Color... colors) {
         if (isBuilt) {
             throw new UnsupportedOperationException("Color map already built - cannot be set");
         }
-        for (final RGBA color : colors) {
+        for (final Color color : colors) {
             sparseColors.add(color);
         }
         return (B) this;
@@ -204,8 +204,8 @@ abstract class ColormapBuilderImpl<B extends ColormapBuilder<B, Colormap>> imple
      */
     public final Colormap build() {
         prepare();
-        final Map.Entry<Float, RGBA> firstEntry = colors.firstEntry();
-        final Map.Entry<Float, RGBA> lastEntry = colors.lastEntry();
+        final Map.Entry<Float, Color> firstEntry = colors.firstEntry();
+        final Map.Entry<Float, Color> lastEntry = colors.lastEntry();
         if (firstEntry.getKey() != 0) {
             colors.put(0f, firstEntry.getValue());
         }
@@ -244,7 +244,7 @@ abstract class ColormapBuilderImpl<B extends ColormapBuilder<B, Colormap>> imple
              * @param amount     the amount to sample between the two
              * @return a sampled color
              */
-            RGBA sample(RGBA floorColor, RGBA ceilColor, float amount);
+            Color sample(Color floorColor, Color ceilColor, float amount);
         }
 
         /**
@@ -263,10 +263,10 @@ abstract class ColormapBuilderImpl<B extends ColormapBuilder<B, Colormap>> imple
 
         private final ColorSampler cSampler;
         private final ValueSampler vSampler;
-        private final NavigableMap<Float, RGBA> colors;
-        private final RGBA NaNColor;
-        private final RGBA lowColor;
-        private final RGBA highColor;
+        private final NavigableMap<Float, Color> colors;
+        private final Color NaNColor;
+        private final Color lowColor;
+        private final Color highColor;
         private final Collection<Float> originalKeys;
         private final String colormapLabel;
 
@@ -280,7 +280,7 @@ abstract class ColormapBuilderImpl<B extends ColormapBuilder<B, Colormap>> imple
          * @param lowColor  the color to use if the value is below 0
          * @param highColor the color to use if the value is greater than 0
          */
-        ColormapImpl(ValueSampler vSampler, ColorSampler cSampler, NavigableMap<Float, RGBA> colors, RGBA NaNColor, RGBA lowColor, RGBA highColor) {
+        ColormapImpl(ValueSampler vSampler, ColorSampler cSampler, NavigableMap<Float, Color> colors, Color NaNColor, Color lowColor, Color highColor) {
             this.colors = Objects.requireNonNull(colors);
             this.NaNColor = Objects.requireNonNull(NaNColor);
             this.lowColor = Objects.requireNonNull(lowColor);
@@ -292,7 +292,7 @@ abstract class ColormapBuilderImpl<B extends ColormapBuilder<B, Colormap>> imple
         }
 
         @Override
-        public final RGBA get(Float position) {
+        public final Color get(Float position) {
             if (position == null || !Float.isFinite(position)) {
                 return NaNColor;
             }
@@ -305,15 +305,15 @@ abstract class ColormapBuilderImpl<B extends ColormapBuilder<B, Colormap>> imple
                     return colors.firstEntry().getValue();
                 } else {
                     final float pos = vSampler.sample(position);
-                    final Map.Entry<Float, RGBA> lowKey = colors.floorEntry(pos);
+                    final Map.Entry<Float, Color> lowKey = colors.floorEntry(pos);
                     if (lowKey.getKey().compareTo(pos) == 0) {
                         return lowKey.getValue();
                     }
-                    final Map.Entry<Float, RGBA> highKey = colors.higherEntry(lowKey.getKey());
+                    final Map.Entry<Float, Color> highKey = colors.higherEntry(lowKey.getKey());
                     if (highKey.getKey().compareTo(pos) == 0) {
                         return highKey.getValue();
                     }
-                    final RGBA color = cSampler.sample(lowKey.getValue(), highKey.getValue(), (pos - lowKey.getKey()) / (highKey.getKey() - lowKey.getKey()));
+                    final Color color = cSampler.sample(lowKey.getValue(), highKey.getValue(), (pos - lowKey.getKey()) / (highKey.getKey() - lowKey.getKey()));
                     colors.put(pos, color);
                     return color;
                 }
@@ -321,17 +321,17 @@ abstract class ColormapBuilderImpl<B extends ColormapBuilder<B, Colormap>> imple
         }
 
         @Override
-        public RGBA getNaNColor() {
+        public Color getNaNColor() {
             return NaNColor;
         }
 
         @Override
-        public RGBA getLowColor() {
+        public Color getLowColor() {
             return lowColor;
         }
 
         @Override
-        public RGBA getHighColor() {
+        public Color getHighColor() {
             return highColor;
         }
 

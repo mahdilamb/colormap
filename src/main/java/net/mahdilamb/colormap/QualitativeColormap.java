@@ -10,10 +10,10 @@ import java.util.TreeMap;
  * through extension.
  */
 public class QualitativeColormap implements Colormap {
-    private final NavigableMap<Float, RGBA> colors = new TreeMap<>();
-    private final RGBA NaNColor;
-    private final RGBA lowColor;
-    private final RGBA highColor;
+    private final NavigableMap<Float, Color> colors = new TreeMap<>();
+    private final Color NaNColor;
+    private final Color lowColor;
+    private final Color highColor;
 
     /**
      * Create a new qualitative colormap
@@ -23,7 +23,7 @@ public class QualitativeColormap implements Colormap {
      * @param lowColor  the color to use if the value is below 0
      * @param highColor the color to use if the value is above 1
      */
-    protected QualitativeColormap(RGBA[] colors, RGBA NaNColor, RGBA lowColor, RGBA highColor) {
+    protected QualitativeColormap(Color[] colors, Color NaNColor, Color lowColor, Color highColor) {
         for (int i = 0; i < colors.length; i++) {
             this.colors.put((float) i / (colors.length), colors[i]);
         }
@@ -39,12 +39,12 @@ public class QualitativeColormap implements Colormap {
      *
      * @param colors the colors in the color map
      */
-    protected QualitativeColormap(RGBA... colors) {
+    protected QualitativeColormap(Color... colors) {
         this(colors, null, null, null);
     }
 
     @Override
-    public RGBA get(Float position) {
+    public Color get(Float position) {
         if (position == null || !Float.isFinite(position)) {
             return NaNColor;
         }
@@ -62,17 +62,17 @@ public class QualitativeColormap implements Colormap {
     }
 
     @Override
-    public RGBA getNaNColor() {
+    public Color getNaNColor() {
         return NaNColor;
     }
 
     @Override
-    public RGBA getLowColor() {
+    public Color getLowColor() {
         return lowColor;
     }
 
     @Override
-    public RGBA getHighColor() {
+    public Color getHighColor() {
         return highColor;
     }
 

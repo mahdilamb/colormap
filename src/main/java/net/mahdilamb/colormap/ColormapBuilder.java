@@ -13,7 +13,7 @@ public interface ColormapBuilder<B extends ColormapBuilder<B, C>, C extends Colo
      * @param color the color to set which is returned when the value is {@code NaN}
      * @return this builder
      */
-    B setNaNColor(RGBA color);
+    B setNaNColor(Color color);
 
     /**
      * Set the low color for the colormap
@@ -21,7 +21,7 @@ public interface ColormapBuilder<B extends ColormapBuilder<B, C>, C extends Colo
      * @param color the color to set which is returned when the value is below 0
      * @return this builder
      */
-    B setLowColor(RGBA color);
+    B setLowColor(Color color);
 
     /**
      * Set the high color for the colormap
@@ -29,7 +29,7 @@ public interface ColormapBuilder<B extends ColormapBuilder<B, C>, C extends Colo
      * @param color the color to set which is returned when the value is greater than 1
      * @return the builder
      */
-    B setHighColor(RGBA color);
+    B setHighColor(Color color);
 
     /**
      * Add a color to a sparse position
@@ -37,7 +37,7 @@ public interface ColormapBuilder<B extends ColormapBuilder<B, C>, C extends Colo
      * @param color the color to add
      * @return this builder
      */
-    B addColor(RGBA color);
+    B addColor(Color color);
 
     /**
      * Add colors to sparse positions
@@ -45,7 +45,7 @@ public interface ColormapBuilder<B extends ColormapBuilder<B, C>, C extends Colo
      * @param colors the colors to add
      * @return this builder
      */
-    B addColor(RGBA... colors);
+    B addColor(Color... colors);
 
     /**
      * Add a color to a fixed position
@@ -54,7 +54,7 @@ public interface ColormapBuilder<B extends ColormapBuilder<B, C>, C extends Colo
      * @param color    the color to add to that position
      * @return this builder
      */
-    B addColor(float position, RGBA color);
+    B addColor(float position, Color color);
 
     /**
      * Build the colormap
