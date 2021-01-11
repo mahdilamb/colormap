@@ -45,7 +45,7 @@ public class InsertColors {
                 }
                 vars.add(name);
                 final int[] rgba = Colors.hexadecimalToRGB8Bit(cols[column]);
-                output.append(String.format("\t/**\n\t * %s (%s)\n\t * <div style=\"border:1px solid black;width:40px;height:20px;background-color:%s;float:right;margin: 0 10px 0 0\"></div>\n\t */\n\t@ReferenceColor(type = %s.%s, name = \"%s\")\n\tpublic static final RGBA %s%s = new Color(%d, %d, %d);\n\n", String.format(format, cols[0]), cols[column], cols[column], type.getClass().getSimpleName(), type.name(), name, var_prefix, name, rgba[0], rgba[1], rgba[2]));
+                output.append(String.format("\t/**\n\t * %s (%s)\n\t * <div style=\"border:1px solid black;width:40px;height:20px;background-color:%s;float:right;margin: 0 10px 0 0\"></div>\n\t */\n\t@ReferenceColor(type = %s.%s, name = \"%s\")\n\tpublic static final Color %s%s = new Color(%d, %d, %d);\n\n", String.format(format, cols[0]), cols[column], cols[column], type.getClass().getSimpleName(), type.name(), name, var_prefix, name, rgba[0], rgba[1], rgba[2]));
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();

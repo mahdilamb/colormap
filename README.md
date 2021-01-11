@@ -48,7 +48,7 @@ The colormap package includes a Color class ```net.mahdilamb.colormap.Color```. 
 It is possible to also include the xkcd colors. The addition of the colors is done automatically from text files in ```src\test\java\net\mahdilamb\colormap\reflect\InsertColors.java```. Uncomment the line referring to the xkcd file parsing and add an extra method in the Color class.
 
 ```java
-public static RGBA getXKCD(String name) {
+public static Color getXKCD(String name) {
     return get(ColorType.XKCD, name);
 }
 ```
