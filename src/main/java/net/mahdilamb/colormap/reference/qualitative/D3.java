@@ -26,7 +26,7 @@ public final class D3 extends QualitativeColormap {
                 new Color(127, 127, 127),
                 new Color(188, 189, 34),
                 new Color(23, 190, 207)
-                );
+        );
 
     }
 

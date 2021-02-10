@@ -23,7 +23,8 @@ public final class YlGn extends SequentialColormap {
                 new Color(65, 171, 93),
                 new Color(35, 132, 67),
                 new Color(0, 104, 55),
-                new Color(0, 69, 41));
+                new Color(0, 69, 41)
+        );
 
     }
 

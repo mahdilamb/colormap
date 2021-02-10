@@ -11,7 +11,7 @@ abstract class ColormapBuilderImpl<B extends ColormapBuilder<B, Colormap>> imple
     /**
      * Create a Qualitative colormap builder
      */
-    static final class QualitativeColormapBuilderImpl extends ColormapBuilderImpl<Qualitative>implements Qualitative {
+    static final class QualitativeColormapBuilderImpl extends ColormapBuilderImpl<Qualitative> implements Qualitative {
 
         QualitativeColormapBuilderImpl() {
             setSampler(requested -> requested, (floorColor, ceilColor, amount) -> floorColor);
@@ -338,6 +338,23 @@ abstract class ColormapBuilderImpl<B extends ColormapBuilder<B, Colormap>> imple
         @Override
         public Collection<Float> getDefinedPositions() {
             return Collections.unmodifiableCollection(originalKeys);
+        }
+
+        @Override
+        public Iterable<Color> colors() {
+            return ()->new Iterator<>() {
+                private final Iterator<Map.Entry<Float, Color>> source = colors.entrySet().iterator();
+
+                @Override
+                public boolean hasNext() {
+                    return source.hasNext();
+                }
+
+                @Override
+                public Color next() {
+                    return source.next().getValue();
+                }
+            };
         }
 
         @Override

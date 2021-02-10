@@ -1,17 +1,20 @@
 package net.mahdilamb.colormap;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Create a sequential colormap. Designed to be extended to create
  * reference colormaps. Also enables making a colormap without using the builder
  */
 public class SequentialColormap implements Colormap {
-    private final NavigableMap<Float, Color> colors = new TreeMap<>();
+    private final Color[] colors;
     private final Color NaNColor;
     private final Color lowColor;
     private final Color highColor;
     private final float precision;
+    private Collection<Float> positions;
 
     /**
      * Create a sequential colormap with the given colors
@@ -23,12 +26,11 @@ public class SequentialColormap implements Colormap {
      * @param precision the precision of the sampling
      */
     protected SequentialColormap(Color[] colors, Color NaNColor, Color lowColor, Color highColor, float precision) {
-        for (int i = 0; i < colors.length; i++) {
-            this.colors.put((float) i / (colors.length - 1), colors[i]);
-        }
+        this.colors = colors.clone();
+
         this.NaNColor = NaNColor == null ? Color.BLACK : NaNColor;
-        this.lowColor = lowColor == null ? this.colors.firstEntry().getValue() : lowColor;
-        this.highColor = highColor == null ? this.colors.lastEntry().getValue() : highColor;
+        this.lowColor = lowColor == null ? this.colors[0] : lowColor;
+        this.highColor = highColor == null ? this.colors[colors.length - 1] : highColor;
         this.precision = precision;
     }
 
@@ -63,19 +65,21 @@ public class SequentialColormap implements Colormap {
         } else if (position > 1) {
             return highColor;
         } else {
-            if (colors.size() <= 1) {
-                return colors.firstEntry().getValue();
+            if (colors.length <= 1) {
+                return colors[0];
             } else {
-                final Map.Entry<Float, Color> lowKey = colors.floorEntry(position);
-                if (lowKey.getKey().compareTo(position) == 0) {
-                    return lowKey.getValue();
+                float pos = position * (colors.length - 1);
+                int floor = (int) pos;
+
+                if (pos == floor) {
+                    return colors[floor];
                 }
-                final Map.Entry<Float, Color> highKey = colors.higherEntry(lowKey.getKey());
-                if (highKey.getKey().compareTo(position) == 0) {
-                    return highKey.getValue();
+                if (pos == floor + 1) {
+                    return colors[floor + 1];
                 }
-                final float p = (position - lowKey.getKey()) / (highKey.getKey() - lowKey.getKey());
-                return Colors.lerp(lowKey.getValue(), highKey.getValue(), Float.isFinite(precision) ? ((float) Math.floor((p + precision / 2) / precision) * precision) : p);
+
+                final float p = (pos - floor);
+                return Colors.lerp(colors[floor], colors[floor + 1], Float.isFinite(precision) ? ((float) Math.floor((p + precision / 2) / precision) * precision) : p);
             }
         }
     }
@@ -97,7 +101,32 @@ public class SequentialColormap implements Colormap {
 
     @Override
     public Collection<Float> getDefinedPositions() {
-        return Collections.unmodifiableCollection(colors.keySet());
+        if (positions == null) {
+            final Float[] vals = new Float[colors.length];
+            double t = 1d / (colors.length - 1);
+            for (int i = 0; i < colors.length; ++i) {
+                vals[i] = (float) t * i;
+            }
+            positions = List.of(vals);
+        }
+        return positions;
+    }
+
+    @Override
+    public Iterable<Color> colors() {
+        return () -> new Iterator<>() {
+            private int i = 0;
+
+            @Override
+            public boolean hasNext() {
+                return i < colors.length;
+            }
+
+            @Override
+            public Color next() {
+                return colors[i++];
+            }
+        };
     }
 
 

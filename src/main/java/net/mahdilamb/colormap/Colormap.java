@@ -71,4 +71,23 @@ public interface Colormap extends Iterable<Float> {
     default Iterator<Float> iterator() {
         return getDefinedPositions().iterator();
     }
+
+    /**
+     * @return an iterable over the colors
+     */
+    default Iterable<Color> colors() {
+        return () -> new Iterator<>() {
+            private final Iterator<Float> source = getDefinedPositions().iterator();
+
+            @Override
+            public boolean hasNext() {
+                return source.hasNext();
+            }
+
+            @Override
+            public Color next() {
+                return get(source.next());
+            }
+        };
+    }
 }

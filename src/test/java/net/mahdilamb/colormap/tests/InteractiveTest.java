@@ -39,7 +39,7 @@ public class InteractiveTest {
             @Override
             public void paintIcon(Component c, Graphics g, int x, int y) {
                 for (int i = 0; i < getIconWidth(); i++) {
-                    final float j = ((float) i) / getIconWidth();
+                    final float j = ((float) i) / (getIconWidth());
                     g.setColor(new java.awt.Color(colorMap.get(j).toInteger()));
                     g.drawLine(i, 1, i, getIconHeight() - 1);
                 }
@@ -131,9 +131,11 @@ public class InteractiveTest {
                 cb.setSelectedIndex(cbModel.getSize() - 1);
             }
         });
-
-        for (float i = 0; i <= 1; i += 0.005) {
+        for (float i = 0; ; i += 0.005) {
             colors.add(new ColorLabel(i, cmap));
+            if (i > 1) {
+                break;
+            }
         }
         //FormInput<Double> valInput = new DoubleVariable(0).factory();
 

@@ -1,19 +1,20 @@
 package net.mahdilamb.colormap;
 
+import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.NavigableMap;
-import java.util.TreeMap;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * A basic qualitative colormap that is primarily used by reference colormaps
  * through extension.
  */
 public class QualitativeColormap implements Colormap {
-    private final NavigableMap<Float, Color> colors = new TreeMap<>();
+    private final Color[] colors;
     private final Color NaNColor;
     private final Color lowColor;
     private final Color highColor;
+    private Collection<Float> positions;
 
     /**
      * Create a new qualitative colormap
@@ -24,14 +25,12 @@ public class QualitativeColormap implements Colormap {
      * @param highColor the color to use if the value is above 1
      */
     protected QualitativeColormap(Color[] colors, Color NaNColor, Color lowColor, Color highColor) {
-        for (int i = 0; i < colors.length; i++) {
-            this.colors.put((float) i / (colors.length), colors[i]);
-        }
-        this.colors.put(1f, colors[colors.length - 1]);
+        this.colors = Arrays.copyOf(colors, colors.length + 1);
+        this.colors[colors.length] = colors[colors.length - 1];
 
         this.NaNColor = NaNColor == null ? Color.BLACK : NaNColor;
-        this.lowColor = lowColor == null ? this.colors.firstEntry().getValue() : lowColor;
-        this.highColor = highColor == null ? this.colors.lastEntry().getValue() : highColor;
+        this.lowColor = lowColor == null ? this.colors[0] : lowColor;
+        this.highColor = highColor == null ? this.colors[colors.length] : highColor;
     }
 
     /**
@@ -53,10 +52,10 @@ public class QualitativeColormap implements Colormap {
         } else if (position > 1) {
             return highColor;
         } else {
-            if (colors.size() <= 1) {
-                return colors.firstEntry().getValue();
+            if (colors.length <= 1) {
+                return colors[0];
             } else {
-                return colors.floorEntry(position).getValue();
+                return colors[(int) Math.floor(position * (colors.length - 1))];
             }
         }
     }
@@ -78,7 +77,32 @@ public class QualitativeColormap implements Colormap {
 
     @Override
     public Collection<Float> getDefinedPositions() {
-        return Collections.unmodifiableCollection(colors.keySet());
+        if (positions == null) {
+            final Float[] vals = new Float[colors.length - 1];
+            double t = 1d / (vals.length);
+            for (int i = 0; i < vals.length; ++i) {
+                vals[i] = (float) t * i;
+            }
+            positions = List.of(vals);
+        }
+        return positions;
+    }
+
+    @Override
+    public Iterable<Color> colors() {
+        return () -> new Iterator<>() {
+            private int i = 0;
+
+            @Override
+            public boolean hasNext() {
+                return i < colors.length - 1;
+            }
+
+            @Override
+            public Color next() {
+                return colors[i++];
+            }
+        };
     }
 
     @Override
