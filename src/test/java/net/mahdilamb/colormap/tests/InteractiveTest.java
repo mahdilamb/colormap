@@ -1,9 +1,9 @@
 package net.mahdilamb.colormap.tests;
 
 
-import net.mahdilamb.colormap.Colormaps;
 import net.mahdilamb.colormap.Colormap;
 import net.mahdilamb.colormap.ColormapNode;
+import net.mahdilamb.colormap.Colormaps;
 import net.mahdilamb.colormap.FluidColormap;
 import net.mahdilamb.colormap.reference.sequential.Viridis;
 
@@ -65,14 +65,18 @@ public class InteractiveTest {
         ColorLabel(Float value, FluidColormap cmap) {
             setText(String.format("%.2f", value));
             setAlignmentX(SwingConstants.LEFT);
+            setOpaque(true);
+
             color = cmap.getNode(value);
 
             color.addListener(color -> SwingUtilities.invokeLater(() -> {
+                ColorLabel.this.setForeground(color.calculateLuminance() > 0.179 ? Color.BLACK : Color.WHITE);
+                ColorLabel.this.setBackground(new java.awt.Color(color.toInteger()));
                 final Border border = BorderFactory.createCompoundBorder(
-                        BorderFactory.createLineBorder(new java.awt.Color(color.toInteger()), 0),
+                        BorderFactory.createLineBorder(getBackground(), 0),
                         BorderFactory.createCompoundBorder(
                                 BorderFactory.createLineBorder(UIManager.getColor("Panel.background"), 1),
-                                BorderFactory.createLineBorder(new java.awt.Color(color.toInteger()), 2)));
+                                BorderFactory.createLineBorder(getBackground(), 2)));
                 ColorLabel.this.setBorder(border);
             }));
 

@@ -39,7 +39,7 @@ public class QualitativeColormap implements Colormap {
      *
      * @param colors the colors in the color map
      */
-    protected QualitativeColormap(Color... colors) {
+    public QualitativeColormap(Color... colors) {
         this(colors, null, null, null);
     }
 

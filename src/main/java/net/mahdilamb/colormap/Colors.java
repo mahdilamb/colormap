@@ -374,4 +374,19 @@ public final class Colors {
         return new Color(rgb[0], rgb[1], rgb[2], lerp(upper.alpha(), lower.alpha(), amount));
     }
 
+    /**
+     * Calculate the luminance of a color based on the W3C recommendations
+     *
+     * @param red   the amount of red (0-1)
+     * @param green the amount of green (0-1)
+     * @param blue  the amount of blue (0-1)
+     * @return the luminance
+     */
+    public static double calculateLuminance(float red, float green, float blue) {
+        final double r = red <= 0.03928 ? (red / 12.92) : Math.pow((red + 0.055) / 1.055, 2.4);
+        final double g = green <= 0.03928 ? (green / 12.92) : Math.pow((green + 0.055) / 1.055, 2.4);
+        final double b = blue <= 0.03928 ? (blue / 12.92) : Math.pow((blue + 0.055) / 1.055, 2.4);
+        return (float) (0.2126 * r + 0.7152 * g + 0.0722 * b);
+    }
+
 }

@@ -49,7 +49,7 @@ public class SequentialColormap implements Colormap {
      *
      * @param colors the list of colors to use
      */
-    protected SequentialColormap(Color... colors) {
+    public SequentialColormap(Color... colors) {
         this(colors, null, null, null);
     }
 

@@ -32,15 +32,15 @@ repositories {
     mavenCentral()
 }
 
-version = "0.9.44"
+version = "0.9.47-SNAPSHOT"
 group = "net.mahdilamb"
 
 dependencies {
-    testImplementation("junit:junit:4.13")
+    testCompile("junit:junit:4.13")
 }
 task swingDemo(type: JavaExec, dependsOn: ["testClasses"]) {
     classpath = sourceSets["test"].runtimeClasspath
-    main = "net.mahdilamb.colormap.tests.ColormapTest"
+    main = "net.mahdilamb.colormap.tests.InteractiveTest"
 }
 /**
  * Uncomment and run to insert colormap swatches into README.md
