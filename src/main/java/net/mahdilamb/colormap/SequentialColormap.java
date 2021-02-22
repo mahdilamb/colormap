@@ -1,8 +1,6 @@
 package net.mahdilamb.colormap;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Create a sequential colormap. Designed to be extended to create
@@ -15,6 +13,7 @@ public class SequentialColormap implements Colormap {
     private final Color highColor;
     private final float precision;
     private Collection<Float> positions;
+    private Map<Float, Color> cached;
 
     /**
      * Create a sequential colormap with the given colors
@@ -69,17 +68,28 @@ public class SequentialColormap implements Colormap {
                 return colors[0];
             } else {
                 float pos = position * (colors.length - 1);
-                int floor = (int) pos;
+                if (this.cached != null) {
+                    final Color lerped = this.cached.get(pos);
+                    if (lerped != null) {
+                        return lerped;
+                    }
+                }
 
+                int floor = (int) pos;
                 if (pos == floor) {
                     return colors[floor];
                 }
                 if (pos == floor + 1) {
                     return colors[floor + 1];
                 }
-
                 final float p = (pos - floor);
-                return Colors.lerp(colors[floor], colors[floor + 1], Float.isFinite(precision) ? ((float) Math.floor((p + precision / 2) / precision) * precision) : p);
+                final float t = Float.isFinite(precision) ? ((float) Math.floor((p + precision / 2) / precision) * precision) : p;
+                final Color l = Colors.lerp(colors[floor], colors[floor + 1], t);
+                if (this.cached == null) {
+                    this.cached = new HashMap<>();
+                }
+                this.cached.put(pos, l);
+                return l;
             }
         }
     }
@@ -129,9 +139,9 @@ public class SequentialColormap implements Colormap {
         };
     }
 
-
     @Override
     public final String toString() {
         return String.format("Colormap {%s}", getClass().getSimpleName());
     }
+
 }

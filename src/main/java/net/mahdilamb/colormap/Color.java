@@ -1293,7 +1293,6 @@ public final class Color {
         }
     }
 
-
     private static Color get(ColorType type, final String name) {
         return referenceColors.get(String.format("%s:%s", type.prefix(), name.toLowerCase()));
     }

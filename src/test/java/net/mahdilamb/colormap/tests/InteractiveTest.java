@@ -68,14 +68,13 @@ public class InteractiveTest {
             setOpaque(true);
 
             color = cmap.getNode(value);
-
             color.addListener(color -> SwingUtilities.invokeLater(() -> {
-                ColorLabel.this.setForeground(color.calculateLuminance() > 0.179 ? Color.BLACK : Color.WHITE);
+                ColorLabel.this.setForeground(color.calculateLuminance() > 0.1791 ? Color.BLACK : Color.WHITE);
                 ColorLabel.this.setBackground(new java.awt.Color(color.toInteger()));
                 final Border border = BorderFactory.createCompoundBorder(
                         BorderFactory.createLineBorder(getBackground(), 0),
                         BorderFactory.createCompoundBorder(
-                                BorderFactory.createLineBorder(UIManager.getColor("Panel.background"), 1),
+                                BorderFactory.createLineBorder(Color.BLACK, 1),
                                 BorderFactory.createLineBorder(getBackground(), 2)));
                 ColorLabel.this.setBorder(border);
             }));
