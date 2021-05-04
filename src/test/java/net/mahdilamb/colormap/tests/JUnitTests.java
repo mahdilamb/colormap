@@ -5,13 +5,13 @@ import net.mahdilamb.colormap.Color;
 import net.mahdilamb.colormap.Colormaps;
 import net.mahdilamb.colormap.ColormapNode;
 import net.mahdilamb.colormap.FluidColormap;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class JUnitTests {

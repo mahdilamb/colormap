@@ -2,10 +2,10 @@ package net.mahdilamb.colormap.tests;
 
 import net.mahdilamb.colormap.Color;
 import net.mahdilamb.colormap.Colors;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 public class ColorTests {
     /**
@@ -81,17 +81,18 @@ public class ColorTests {
         }
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void HexSanitizationAltTest() {
-
-        Colors.sanitizeRGBA("#00ff0");
-        Colors.sanitizeRGBA("#00f00ff");
-        Colors.sanitizeRGBA("00f00");
-        Colors.sanitizeRGBA("f00ff");
-        Colors.sanitizeRGB("#0ff00");
-        Colors.sanitizeRGB("#0f0ff");
-        Colors.sanitizeRGB("0ff00");
-        Colors.sanitizeRGB("f00ff");
+        assertThrows(UnsupportedOperationException.class,() -> {
+            Colors.sanitizeRGBA("#00ff0");
+            Colors.sanitizeRGBA("#00f00ff");
+            Colors.sanitizeRGBA("00f00");
+            Colors.sanitizeRGBA("f00ff");
+            Colors.sanitizeRGB("#0ff00");
+            Colors.sanitizeRGB("#0f0ff");
+            Colors.sanitizeRGB("0ff00");
+            Colors.sanitizeRGB("f00ff");
+        });
 
 
     }

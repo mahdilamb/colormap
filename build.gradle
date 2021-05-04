@@ -1,6 +1,5 @@
 buildscript {
     repositories {
-        jcenter()
         mavenCentral()
 
     }
@@ -25,18 +24,18 @@ compileJava {
 }
 
 test {
-    useJUnit()
+    useJUnitPlatform()
 }
 repositories {
-    jcenter()
     mavenCentral()
 }
 
-version = "0.9.49-SNAPSHOT"
-group = "net.mahdilamb"
+version "0.9.50"
+group  "net.mahdilamb"
 
 dependencies {
-    testCompile("junit:junit:4.13")
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
 }
 task swingDemo(type: JavaExec, dependsOn: ["testClasses"]) {
     classpath = sourceSets["test"].runtimeClasspath
