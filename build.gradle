@@ -16,7 +16,9 @@ plugins {
 
 }
 apply plugin: "com.bmuschko.nexus"
-
+java {
+    modularity.inferModulePath = true
+}
 compileJava {
     sourceCompatibility = JavaVersion.VERSION_11
 //will work with Java 1.8, but this is required as there is a module-info.java
@@ -30,8 +32,9 @@ repositories {
     mavenCentral()
 }
 
-version "0.9.51"
-group  "net.mahdilamb"
+version "0.9.511"
+group "net.mahdilamb"
+ext.moduleName = 'net.mahdilamb.colormap'
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'

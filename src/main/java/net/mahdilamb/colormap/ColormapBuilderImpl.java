@@ -193,9 +193,7 @@ abstract class ColormapBuilderImpl<B extends ColormapBuilder<B, Colormap>> imple
         if (isBuilt) {
             throw new UnsupportedOperationException("Color map already built - cannot be set");
         }
-        for (final Color color : colors) {
-            sparseColors.add(color);
-        }
+        sparseColors.addAll(Arrays.asList(colors));
         return (B) this;
     }
 
