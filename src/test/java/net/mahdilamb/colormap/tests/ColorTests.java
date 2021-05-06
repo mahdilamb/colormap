@@ -1,8 +1,9 @@
 package net.mahdilamb.colormap.tests;
 
-import net.mahdilamb.colormap.Color;
 import net.mahdilamb.colormap.Colors;
 import org.junit.jupiter.api.Test;
+
+import java.awt.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -40,14 +41,14 @@ public class ColorTests {
 
     @Test
     public void RGBToLabIsCalculatedCorrectlyTest() {
-        assertArrayEquals(new float[]{0, 0, 0}, new Color(0, 0, 0).toLab(), 0.01f);
-        assertArrayEquals(new float[]{53.241f, 80.092f, 67.203f}, new Color(1., 0, 0).toLab(), 0.01f);
-        assertArrayEquals(new float[]{87.735f, -86.183f, 83.179f}, new Color(0, 1., 0).toLab(), 0.01f);
-        assertArrayEquals(new float[]{32.297f, 79.188f, -107.860f}, new Color(0, 0, 1.).toLab(), 0.01f);
-        assertArrayEquals(new float[]{91.113f, -48.088f, -14.131f}, new Color(0, 1, 1.).toLab(), 0.01f);
-        assertArrayEquals(new float[]{60.324f, 98.234f, -60.825f}, new Color(1, 0, 1.).toLab(), 0.01f);
-        assertArrayEquals(new float[]{97.139f, -21.554f, 94.478f}, new Color(1, 1, 0.).toLab(), 0.01f);
-        assertArrayEquals(new float[]{100.000f, 0.000f, -0.000f}, new Color(1, 1, 1.).toLab(), 0.01f);
+        assertArrayEquals(new float[]{0, 0, 0}, Colors.RGBToLab(0,0,0), 0.01f);
+        assertArrayEquals(new float[]{53.241f, 80.092f, 67.203f}, Colors.RGBToLab(1.f, 0, 0), 0.01f);
+        assertArrayEquals(new float[]{87.735f, -86.183f, 83.179f}, Colors.RGBToLab(0, 1.f, 0), 0.01f);
+        assertArrayEquals(new float[]{32.297f, 79.188f, -107.860f}, Colors.RGBToLab(0, 0, 1.f), 0.01f);
+        assertArrayEquals(new float[]{91.113f, -48.088f, -14.131f}, Colors.RGBToLab(0, 1, 1.f), 0.01f);
+        assertArrayEquals(new float[]{60.324f, 98.234f, -60.825f}, Colors.RGBToLab(1, 0, 1.f), 0.01f);
+        assertArrayEquals(new float[]{97.139f, -21.554f, 94.478f}, Colors.RGBToLab(1, 1, 0.f), 0.01f);
+        assertArrayEquals(new float[]{100.000f, 0.000f, -0.000f}, Colors.RGBToLab(1, 1, 1.f), 0.01f);
 
     }
 

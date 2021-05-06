@@ -41,7 +41,7 @@ public class Test {
 
 ## Color
 
-The colormap package includes a Color class ```net.mahdilamb.colormap.Color```. It holds constants for the colors specified in CSS4, AWT and [Tableau](https://www.tableau.com/). 
+The colormap package includes a Colors utility class ```net.mahdilamb.colormap.Colors```. It holds constants for the colors specified in CSS4, AWT and [Tableau](https://www.tableau.com/). 
 
 ##### Developer note
 

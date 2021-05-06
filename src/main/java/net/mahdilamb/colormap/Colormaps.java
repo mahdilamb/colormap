@@ -2,12 +2,14 @@ package net.mahdilamb.colormap;
 
 import net.mahdilamb.colormap.reference.ReferenceColormap;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.util.*;
+import java.util.List;
 import java.util.jar.JarInputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;

@@ -41,7 +41,7 @@ public class Test {
 
 ## Color
 
-The colormap package includes a Color class ```net.mahdilamb.colormap.Color```. It holds constants for the colors specified in CSS4, AWT and [Tableau](https://www.tableau.com/). 
+The colormap package includes a Colors utility class ```net.mahdilamb.colormap.Colors```. It holds constants for the colors specified in CSS4, AWT and [Tableau](https://www.tableau.com/). 
 
 ##### Developer note
 
@@ -195,7 +195,7 @@ The package can be imported from [maven](https://search.maven.org/artifact/net.m
 |Sequential|YlGnBu|![ylgnbu](swatches/sequential.ylgnbu.png)|[ColorBrewer](https://colorbrewer2.org/)|
 |Sequential|YlOrBr|![ylorbr](swatches/sequential.ylorbr.png)|[ColorBrewer](https://colorbrewer2.org/)|
 |Sequential|YlOrRd|![ylorrd](swatches/sequential.ylorrd.png)|[ColorBrewer](https://colorbrewer2.org/)|
-## Credits
+## Colormap credits
 
 * Default colormaps include all [ColorBrewer 2.0](https://colorbrewer2.org/) color maps;
 * Smooth Cool Warm, Bent Cool Warm, Black Body, Kindlmann, Extended

@@ -1,12 +1,13 @@
 package net.mahdilamb.colormap.tests;
 
 
-import net.mahdilamb.colormap.Color;
 import net.mahdilamb.colormap.Colormaps;
 import net.mahdilamb.colormap.ColormapNode;
+import net.mahdilamb.colormap.Colors;
 import net.mahdilamb.colormap.FluidColormap;
 import org.junit.jupiter.api.Test;
 
+import java.awt.*;
 import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
@@ -16,8 +17,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class JUnitTests {
     static final FluidColormap grays = Colormaps.fluidColormap(Colormaps.buildSequential().addColor(
-            Color.get("black"),
-            Color.get("white")
+            Colors.get("black"),
+            Colors.get("white")
     ).build());
     static final Map<Integer, ColormapNode> colors = new TreeMap<>();
     static final int maxRange = 255;
@@ -30,12 +31,12 @@ public class JUnitTests {
 
     @Test
     public void greyColorMapShouldStartAtBlackTest() {
-        assertEquals(colors.get(0).getColor(), Color.get("black"));
+        assertEquals(colors.get(0).getColor(), Colors.get("black"));
     }
 
     @Test
     public void greyColorMapShouldEndAtWhiteTest() {
-        assertEquals(colors.get(maxRange).getColor(), Color.get("white"));
+        assertEquals(colors.get(maxRange).getColor(), Colors.get("white"));
     }
 
 
@@ -49,7 +50,7 @@ public class JUnitTests {
         final int[] sampleI = new int[samples];
         for (int i = 0; i < samples; i++) {
             final int r = Math.round(Math.abs(random.nextFloat()) * (maxRange - 1));
-            originals[i] = new Color(colors.get(r).getColor());
+            originals[i] = colors.get(r).getColor();
             sampleI[i] = r;
         }
         //remove last value
@@ -72,7 +73,7 @@ public class JUnitTests {
         final int[] sampleI = new int[samples];
         for (int i = 0; i < samples; i++) {
             final int r = Math.round(Math.abs(random.nextFloat()) * (maxRange - 1));
-            originals[i] = new Color(colors.get(r).getColor());
+            originals[i] = colors.get(r).getColor();
             sampleI[i] = r;
         }
         //remove first value
@@ -99,7 +100,7 @@ public class JUnitTests {
         final int[] sampleI = new int[samples];
         for (int i = 0; i < samples; i++) {
             final int r = Math.round(Math.abs(random.nextFloat()) * (maxRange - 1));
-            originals[i] = new Color(colors.get(r).getColor());
+            originals[i] = colors.get(r).getColor();
             sampleI[i] = r;
         }
         //remove random value
@@ -122,18 +123,18 @@ public class JUnitTests {
     @Test
     public void testRGBToLabIsCorrectTest() {
         final double precision = 5e-2;
-        final Color red = Color.get("red");
-        final float[] redLab = red.toLab();
+        final Color red = Colors.get("red");
+        final float[] redLab = Colors.toLab(red);
         assertEquals(53.241, redLab[0], precision);
         assertEquals(80.092, redLab[1], precision);
         assertEquals(67.203, redLab[2], precision);
-        final Color green = Color.get("lime");
-        final float[] greenLab = green.toLab();
+        final Color green = Colors.get("lime");
+        final float[] greenLab = Colors.toLab(green);
         assertEquals(87.735, greenLab[0], precision);
         assertEquals(-86.183, greenLab[1], precision);
         assertEquals(83.179, greenLab[2], precision);
-        final Color blue = Color.get("blue");
-        final float[] blueLab = blue.toLab();
+        final Color blue = Colors.get("blue");
+        final float[] blueLab = Colors.toLab(blue);
         assertEquals(32.297, blueLab[0], precision);
         assertEquals(79.188, blueLab[1], precision);
         assertEquals(-107.860, blueLab[2], precision);

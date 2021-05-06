@@ -18,9 +18,9 @@ plugins {
 apply plugin: "com.bmuschko.nexus"
 
 compileJava {
-    sourceCompatibility = JavaVersion.VERSION_1_9
+    sourceCompatibility = JavaVersion.VERSION_11
 //will work with Java 1.8, but this is required as there is a module-info.java
-    targetCompatibility = JavaVersion.VERSION_1_9
+    targetCompatibility = JavaVersion.VERSION_11
 }
 
 test {
@@ -30,7 +30,7 @@ repositories {
     mavenCentral()
 }
 
-version "0.9.50"
+version "0.9.51"
 group  "net.mahdilamb"
 
 dependencies {

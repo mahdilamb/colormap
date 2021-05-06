@@ -1,6 +1,6 @@
 package net.mahdilamb.colormap.reference.qualitative;
 
-import net.mahdilamb.colormap.Color;
+import net.mahdilamb.colormap.Colors;
 import net.mahdilamb.colormap.QualitativeColormap;
 import net.mahdilamb.colormap.reference.ColormapType;
 import net.mahdilamb.colormap.reference.ReferenceColormap;
@@ -15,26 +15,26 @@ public final class Tab20c extends QualitativeColormap {
      */
     public Tab20c() {
         super(
-                new Color("#3182BD"),
-                new Color("#6BAED6"),
-                new Color("#9ECAE1"),
-                new Color("#C6DBEF"),
-                new Color("#E6550D"),
-                new Color("#FD8D3C"),
-                new Color("#FDAE6B"),
-                new Color("#FDD0A2"),
-                new Color("#31A354"),
-                new Color("#74C476"),
-                new Color("#A1D99B"),
-                new Color("#C7E9C0"),
-                new Color("#756BB1"),
-                new Color("#9E9AC8"),
-                new Color("#BCBDDC"),
-                new Color("#DADAEB"),
-                new Color("#636363"),
-                new Color("#969696"),
-                new Color("#BDBDBD"),
-                new Color("#D9D9D9"));
+                Colors.fromHexadecimal("#3182BD"),
+                Colors.fromHexadecimal("#6BAED6"),
+                Colors.fromHexadecimal("#9ECAE1"),
+                Colors.fromHexadecimal("#C6DBEF"),
+                Colors.fromHexadecimal("#E6550D"),
+                Colors.fromHexadecimal("#FD8D3C"),
+                Colors.fromHexadecimal("#FDAE6B"),
+                Colors.fromHexadecimal("#FDD0A2"),
+                Colors.fromHexadecimal("#31A354"),
+                Colors.fromHexadecimal("#74C476"),
+                Colors.fromHexadecimal("#A1D99B"),
+                Colors.fromHexadecimal("#C7E9C0"),
+                Colors.fromHexadecimal("#756BB1"),
+                Colors.fromHexadecimal("#9E9AC8"),
+                Colors.fromHexadecimal("#BCBDDC"),
+                Colors.fromHexadecimal("#DADAEB"),
+                Colors.fromHexadecimal("#636363"),
+                Colors.fromHexadecimal("#969696"),
+                Colors.fromHexadecimal("#BDBDBD"),
+                Colors.fromHexadecimal("#D9D9D9"));
     }
 
 

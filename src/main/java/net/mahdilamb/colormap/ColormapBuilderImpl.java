@@ -1,6 +1,8 @@
 package net.mahdilamb.colormap;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 /**
  * Abstract Colormap builder. To be used to create custom colormaps

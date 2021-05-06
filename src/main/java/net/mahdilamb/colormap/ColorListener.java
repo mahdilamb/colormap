@@ -1,5 +1,7 @@
 package net.mahdilamb.colormap;
 
+import java.awt.*;
+
 /**
  * A one-parameter colormap node listener
  */

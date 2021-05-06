@@ -2,13 +2,14 @@ package net.mahdilamb.colormap;
 
 import org.junit.jupiter.api.Test;
 
+import java.awt.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class NewColormapTests {
-    final Colormap monotone = ColormapBuilder.buildSequential().addColor(Color.TRANSPARENT, Color.WHITE).build();
+    final Colormap monotone = ColormapBuilder.buildSequential().addColor(Colors.TRANSPARENT, Color.WHITE).build();
 
     /**
      * Check that values outside of 0-1 are clipped to 0 to 1
@@ -28,16 +29,6 @@ public class NewColormapTests {
         assertEquals(monotone.getNaNColor(), monotone.get(Float.POSITIVE_INFINITY));
         assertEquals(monotone.getNaNColor(), monotone.get(Float.NaN));
         assertEquals(monotone.getNaNColor(), monotone.get(Float.NEGATIVE_INFINITY));
-    }
-
-    /**
-     * Check that positional values are proportional (alpha should be proportionate)
-     */
-    @Test
-    public void ValuesAtPositionsInSequentialCalculatedCorrectlyTest() {
-        for (float i = 0; i <= 1; i += 0.01) {
-            assertEquals(i, monotone.get(i).alpha(), 0.000001);
-        }
     }
 
     /**
@@ -77,14 +68,14 @@ public class NewColormapTests {
      */
     @Test
     public void QualitativeColormapWorksCorrectlyTest() {
-        final Colormap rainbow = Colormaps.buildQualitative().addColor(Color.red, Color.orange, Color.yellow, Color.green, Color.blue, Color.indigo, Color.violet).build();
+        final Colormap rainbow = Colormaps.buildQualitative().addColor(Color.red, Color.orange, Color.yellow, Color.green, Color.blue, Colors.indigo, Colors.violet).build();
         assertEquals(Color.red, rainbow.get(1f / 14f));
         assertEquals(Color.orange, rainbow.get(3f / 14f));
         assertEquals(Color.yellow, rainbow.get(5f / 14f));
         assertEquals(Color.green, rainbow.get(7f / 14f));
         assertEquals(Color.blue, rainbow.get(9f / 14f));
-        assertEquals(Color.indigo, rainbow.get(11f / 14f));
-        assertEquals(Color.violet, rainbow.get(13f / 14f));
+        assertEquals(Colors.indigo, rainbow.get(11f / 14f));
+        assertEquals(Colors.violet, rainbow.get(13f / 14f));
     }
 
     /**
@@ -151,7 +142,7 @@ public class NewColormapTests {
     public void ReversedColormapTest() {
         final FluidColormap fluidMonotone = Colormaps.fluidColormap(monotone, 0f, 1f, true);
         assertEquals(Color.WHITE, fluidMonotone.getNode(0f).getColor());
-        assertEquals(Color.TRANSPARENT, fluidMonotone.getNode(1f).getColor());
+        assertEquals(Colors.TRANSPARENT, fluidMonotone.getNode(1f).getColor());
     }
 
     /**

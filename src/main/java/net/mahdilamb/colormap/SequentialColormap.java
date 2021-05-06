@@ -1,7 +1,7 @@
 package net.mahdilamb.colormap;
 
 import java.util.*;
-
+import java.awt.Color;
 /**
  * Create a sequential colormap. Designed to be extended to create
  * reference colormaps. Also enables making a colormap without using the builder

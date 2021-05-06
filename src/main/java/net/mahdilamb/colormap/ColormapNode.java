@@ -1,5 +1,7 @@
 package net.mahdilamb.colormap;
 
+import java.awt.*;
+
 /**
  * API for a node in a fluid colormap.
  *

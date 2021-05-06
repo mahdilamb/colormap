@@ -1,5 +1,7 @@
 package net.mahdilamb.colormap;
 
+import java.awt.*;
+
 /**
  * Functional interface to be used to monitor changes in color values
  */

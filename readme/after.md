@@ -1,4 +1,4 @@
-## Credits
+## Colormap credits
 
 * Default colormaps include all [ColorBrewer 2.0](https://colorbrewer2.org/) color maps;
 * Smooth Cool Warm, Bent Cool Warm, Black Body, Kindlmann, Extended

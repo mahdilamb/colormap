@@ -1,6 +1,7 @@
 package net.mahdilamb.colormap;
 
 
+import java.awt.*;
 import java.util.Collection;
 import java.util.Iterator;
 

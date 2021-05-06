@@ -3,7 +3,8 @@ package net.mahdilamb.colormap.reference.sequential;
 import net.mahdilamb.colormap.SequentialColormap;
 import net.mahdilamb.colormap.reference.ColormapType;
 import net.mahdilamb.colormap.reference.ReferenceColormap;
-import net.mahdilamb.colormap.Color;
+
+import java.awt.*;
 
 /**
  * Sequential ColorBrewer colormap going through Oranges.

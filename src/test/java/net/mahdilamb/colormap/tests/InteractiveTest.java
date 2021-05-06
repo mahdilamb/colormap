@@ -1,10 +1,7 @@
 package net.mahdilamb.colormap.tests;
 
 
-import net.mahdilamb.colormap.Colormap;
-import net.mahdilamb.colormap.ColormapNode;
-import net.mahdilamb.colormap.Colormaps;
-import net.mahdilamb.colormap.FluidColormap;
+import net.mahdilamb.colormap.*;
 import net.mahdilamb.colormap.reference.sequential.Viridis;
 
 import javax.swing.*;
@@ -40,7 +37,7 @@ public class InteractiveTest {
             public void paintIcon(Component c, Graphics g, int x, int y) {
                 for (int i = 0; i < getIconWidth(); i++) {
                     final float j = ((float) i) / (getIconWidth());
-                    g.setColor(new java.awt.Color(colorMap.get(j).toInteger()));
+                    g.setColor(colorMap.get(j));
                     g.drawLine(i, 1, i, getIconHeight() - 1);
                 }
             }
@@ -69,8 +66,8 @@ public class InteractiveTest {
 
             color = cmap.getNode(value);
             color.addListener(color -> SwingUtilities.invokeLater(() -> {
-                ColorLabel.this.setForeground(color.calculateLuminance() > 0.1791 ? Color.BLACK : Color.WHITE);
-                ColorLabel.this.setBackground(new java.awt.Color(color.toInteger()));
+                ColorLabel.this.setForeground(Colors.calculateLuminance(color) > 0.1791 ? Color.BLACK : Color.WHITE);
+                ColorLabel.this.setBackground(color);
                 final Border border = BorderFactory.createCompoundBorder(
                         BorderFactory.createLineBorder(getBackground(), 0),
                         BorderFactory.createCompoundBorder(

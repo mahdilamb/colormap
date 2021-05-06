@@ -5,6 +5,7 @@ import net.mahdilamb.colormap.Colormaps;
 import net.mahdilamb.colormap.reference.ReferenceColormap;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -12,7 +13,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -41,9 +41,9 @@ public final class GenerateReadme {
             final Colormap cmap = Colormaps.get(cmapName);
             final BufferedImage image = new BufferedImage(192, 20, BufferedImage.TYPE_INT_ARGB);
             for (int x = 0; x < image.getWidth(); ++x) {
-                final int rgb = cmap.get(((double) x) / image.getWidth()).toInteger();
+                final Color rgb = cmap.get(((double) x) / image.getWidth());
                 for (int y = 0; y < image.getHeight(); ++y) {
-                    image.setRGB(x, y, rgb);
+                    image.setRGB(x, y, rgb.getRGB());
                 }
             }
             try {

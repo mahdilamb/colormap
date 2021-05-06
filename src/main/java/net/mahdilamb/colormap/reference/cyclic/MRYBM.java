@@ -1,9 +1,10 @@
 package net.mahdilamb.colormap.reference.cyclic;
 
-import net.mahdilamb.colormap.Color;
 import net.mahdilamb.colormap.SequentialColormap;
 import net.mahdilamb.colormap.reference.ColormapType;
 import net.mahdilamb.colormap.reference.ReferenceColormap;
+
+import java.awt.*;
 
 /**
  * Plotly's cyclic colormap Mrybm

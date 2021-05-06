@@ -1,9 +1,11 @@
 package net.mahdilamb.colormap.reference.qualitative;
 
+import net.mahdilamb.colormap.Colors;
 import net.mahdilamb.colormap.QualitativeColormap;
 import net.mahdilamb.colormap.reference.ColormapType;
 import net.mahdilamb.colormap.reference.ReferenceColormap;
-import net.mahdilamb.colormap.Color;
+
+import java.awt.*;
 
 /**
  * Tableau Tab10
@@ -15,16 +17,16 @@ public final class Tab10 extends QualitativeColormap {
      */
     public Tab10() {
         super(
-                Color.getTableau("blue"),
-                Color.getTableau("orange"),
-                Color.getTableau("green"),
-                Color.getTableau("red"),
-                Color.getTableau("purple"),
-                Color.getTableau("brown"),
-                Color.getTableau("pink"),
-                Color.getTableau("grey"),
-                Color.getTableau("olive"),
-                Color.getTableau("aqua"));
+                Colors.getTableau("blue"),
+                Colors.getTableau("orange"),
+                Colors.getTableau("green"),
+                Colors.getTableau("red"),
+                Colors.getTableau("purple"),
+                Colors.getTableau("brown"),
+                Colors.getTableau("pink"),
+                Colors.getTableau("grey"),
+                Colors.getTableau("olive"),
+                Colors.getTableau("aqua"));
     }
 
 
