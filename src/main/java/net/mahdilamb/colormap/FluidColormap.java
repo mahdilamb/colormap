@@ -98,6 +98,11 @@ public interface FluidColormap extends Colormap {
      */
     Colormap getColormap();
 
+    @Override
+    default boolean isQualitative() {
+        return getColormap().isQualitative();
+    }
+
     /**
      * Change the associated settings
      *

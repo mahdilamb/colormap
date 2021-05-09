@@ -107,6 +107,11 @@ public class QualitativeColormap implements Colormap {
     }
 
     @Override
+    public boolean isQualitative() {
+        return true;
+    }
+
+    @Override
     public final String toString() {
         return String.format("Colormap {%s}", getClass().getSimpleName());
     }

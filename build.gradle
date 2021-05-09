@@ -32,7 +32,7 @@ repositories {
     mavenCentral()
 }
 
-version "0.9.511"
+version "0.9.6"
 group "net.mahdilamb"
 ext.moduleName = 'net.mahdilamb.colormap'
 

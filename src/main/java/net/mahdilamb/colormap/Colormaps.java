@@ -75,6 +75,11 @@ public final class Colormaps {
         }
 
         @Override
+        public boolean isQualitative() {
+            return colormap.isQualitative();
+        }
+
+        @Override
         public boolean equals(Object o) {
             if (this == o) return true;
             if (!(o instanceof ReversedColormap)) return false;

@@ -140,6 +140,11 @@ public class SequentialColormap implements Colormap {
     }
 
     @Override
+    public boolean isQualitative() {
+        return false;
+    }
+
+    @Override
     public final String toString() {
         return String.format("Colormap {%s}", getClass().getSimpleName());
     }

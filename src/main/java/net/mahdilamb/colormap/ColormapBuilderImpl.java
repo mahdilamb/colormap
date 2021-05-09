@@ -25,6 +25,11 @@ abstract class ColormapBuilderImpl<B extends ColormapBuilder<B, Colormap>> imple
                 colors.put((float) i / (sparseColors.size()), sparseColors.get(i));
             }
         }
+
+        @Override
+        protected boolean isQualitative() {
+            return true;
+        }
     }
 
     /**
@@ -55,6 +60,11 @@ abstract class ColormapBuilderImpl<B extends ColormapBuilder<B, Colormap>> imple
                 colors.put((float) i / (sparseColors.size() - 1), sparseColors.get(i));
             }
             setSampler(requested -> Float.isFinite(precision) ? ((float) Math.floor((requested + precision / 2) / precision) * precision) : requested, Colors::lerp);
+        }
+
+        @Override
+        protected boolean isQualitative() {
+            return false;
         }
     }
 
@@ -222,9 +232,14 @@ abstract class ColormapBuilderImpl<B extends ColormapBuilder<B, Colormap>> imple
             throw new UnsupportedOperationException("Cannot create a colormap with 0 colors");
         }
         isBuilt = true;
-        return new ColormapImpl(vSampler, cSampler, colors, NaNColor, lowColor, highColor);
+        return new ColormapImpl(isQualitative(), vSampler, cSampler, colors, NaNColor, lowColor, highColor);
 
     }
+
+    /**
+     * @return whether the built colormap will be qualitative
+     */
+    protected abstract boolean isQualitative();
 
     /**
      * Default implementation of a colormap that samples values between 0 and 1.
@@ -269,6 +284,7 @@ abstract class ColormapBuilderImpl<B extends ColormapBuilder<B, Colormap>> imple
         private final Color highColor;
         private final Collection<Float> originalKeys;
         private final String colormapLabel;
+        private final boolean isQualitative;
 
         /**
          * Default implementation of a colormap as used by {@link ColormapBuilderImpl}
@@ -280,7 +296,7 @@ abstract class ColormapBuilderImpl<B extends ColormapBuilder<B, Colormap>> imple
          * @param lowColor  the color to use if the value is below 0
          * @param highColor the color to use if the value is greater than 0
          */
-        ColormapImpl(ValueSampler vSampler, ColorSampler cSampler, NavigableMap<Float, Color> colors, Color NaNColor, Color lowColor, Color highColor) {
+        ColormapImpl(final boolean isQualitative, ValueSampler vSampler, ColorSampler cSampler, NavigableMap<Float, Color> colors, Color NaNColor, Color lowColor, Color highColor) {
             this.colors = Objects.requireNonNull(colors);
             this.NaNColor = Objects.requireNonNull(NaNColor);
             this.lowColor = Objects.requireNonNull(lowColor);
@@ -289,6 +305,7 @@ abstract class ColormapBuilderImpl<B extends ColormapBuilder<B, Colormap>> imple
             this.cSampler = Objects.requireNonNull(cSampler);
             originalKeys = new ArrayList<>(colors.keySet());
             colormapLabel = colors.toString();
+            this.isQualitative = isQualitative;
         }
 
         @Override
@@ -342,7 +359,7 @@ abstract class ColormapBuilderImpl<B extends ColormapBuilder<B, Colormap>> imple
 
         @Override
         public Iterable<Color> colors() {
-            return ()->new Iterator<>() {
+            return () -> new Iterator<>() {
                 private final Iterator<Map.Entry<Float, Color>> source = colors.entrySet().iterator();
 
                 @Override
@@ -355,6 +372,11 @@ abstract class ColormapBuilderImpl<B extends ColormapBuilder<B, Colormap>> imple
                     return source.next().getValue();
                 }
             };
+        }
+
+        @Override
+        public boolean isQualitative() {
+            return isQualitative;
         }
 
         @Override

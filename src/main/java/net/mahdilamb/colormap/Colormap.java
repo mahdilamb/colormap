@@ -91,4 +91,9 @@ public interface Colormap extends Iterable<Float> {
             }
         };
     }
+
+    /**
+     * @return whether this colormap is qualitative or sequential
+     */
+    boolean isQualitative();
 }
