@@ -15,7 +15,11 @@ plugins {
 /**
  * Set the java version. Version 8 and upwards should worked. Has been tested with Java 8 and 11
  */
-def javaVersion = hasProperty('jdk') ? JavaVersion.toVersion(getProperty('jdk') as String) : JavaVersion.VERSION_11
+def javaVersion = JavaVersion.VERSION_11
+if (hasProperty('javaVersion')) {
+    javaVersion = JavaVersion.toVersion(getProperty('javaVersion') as String)
+    println "Building with Java Version=" + javaVersion
+}
 apply plugin: "com.bmuschko.nexus"
 java {
     modularity.inferModulePath = javaVersion >= JavaVersion.VERSION_1_9
