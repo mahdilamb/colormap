@@ -1516,10 +1516,10 @@ public final class Colormaps {
         }
     }
 
-    private final static Map<CharSequence, Object> referenceColormaps = new HashMap<>();
+    private final static Map<ReferenceColormapKey, Object> referenceColormaps = new HashMap<>();
 
     private static void cacheColormaps() throws IOException, ClassNotFoundException {
-        final String packagePath = ReferenceColormap.class.getPackageName().replace(".", "/");
+        final String packagePath = ReferenceColormap.class.getPackage().getName().replace(".", "/");
         final File packageName = new File(packagePath);
         final URL codeSource = ReferenceColormap.class.getProtectionDomain().getCodeSource().getLocation();
         if (new File(codeSource.getPath()).isDirectory()) {
@@ -1601,7 +1601,7 @@ public final class Colormaps {
                 e.printStackTrace();
             }
         }
-        return (Set<C>) Collections.unmodifiableSet(((Map<?, ?>) referenceColormaps).keySet());
+        return (Set<C>) Collections.unmodifiableSet(((Map<? extends C, ?>) referenceColormaps).keySet());
     }
 
     /**
@@ -1625,7 +1625,7 @@ public final class Colormaps {
             colormapType = "*";
         }
         //format to match key
-        final CharSequence requestedClass = new ReferenceColormapKey(colormapType.toLowerCase(), colormapName.toLowerCase());
+        final ReferenceColormapKey requestedClass = new ReferenceColormapKey(colormapType.toLowerCase(), colormapName.toLowerCase());
         //see if there is a match
         final Object match = referenceColormaps.get(requestedClass);
         //if it is a class, need to create instance and cache

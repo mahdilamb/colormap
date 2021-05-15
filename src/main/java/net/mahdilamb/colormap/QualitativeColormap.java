@@ -1,9 +1,7 @@
 package net.mahdilamb.colormap;
 
 import java.awt.*;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
+import java.util.*;
 import java.util.List;
 
 /**
@@ -84,7 +82,7 @@ public class QualitativeColormap implements Colormap {
             for (int i = 0; i < vals.length; ++i) {
                 vals[i] = (float) t * i;
             }
-            positions = List.of(vals);
+            positions = Collections.unmodifiableList(Arrays.asList(vals));
         }
         return positions;
     }

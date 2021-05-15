@@ -117,7 +117,7 @@ public class SequentialColormap implements Colormap {
             for (int i = 0; i < colors.length; ++i) {
                 vals[i] = (float) t * i;
             }
-            positions = List.of(vals);
+            positions = Collections.unmodifiableList(Arrays.asList(vals));
         }
         return positions;
     }
