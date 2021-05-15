@@ -1,28 +1,31 @@
 buildscript {
     repositories {
         mavenCentral()
-
     }
     dependencies {
         classpath("com.bmuschko:gradle-nexus-plugin:2.3.1")
-
     }
 }
+
 plugins {
-    id("java-library")
+    id 'java'
     id("maven")
     id("signing")
-    id("org.spongepowered.plugin") version "0.6"
-
 }
+/**
+ * Set the java version. Version 8 and upwards should worked. Has been tested with Java 8 and 11
+ */
+def javaVersion = JavaVersion.VERSION_11
 apply plugin: "com.bmuschko.nexus"
 java {
-    modularity.inferModulePath = true
+    modularity.inferModulePath = javaVersion >= JavaVersion.VERSION_1_9
 }
 compileJava {
-    sourceCompatibility = JavaVersion.VERSION_11
-//will work with Java 1.8, but this is required as there is a module-info.java
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = javaVersion
+    targetCompatibility = javaVersion
+    if (javaVersion < JavaVersion.VERSION_1_9) {
+        excludes += ['**/module-info.java']
+    }
 }
 
 test {
@@ -32,7 +35,7 @@ repositories {
     mavenCentral()
 }
 
-version "0.9.6"
+version "0.9.61"
 group "net.mahdilamb"
 ext.moduleName = 'net.mahdilamb.colormap'
 
