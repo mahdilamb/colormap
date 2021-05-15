@@ -124,7 +124,7 @@ public class SequentialColormap implements Colormap {
 
     @Override
     public Iterable<Color> colors() {
-        return () -> new Iterator<>() {
+        return () -> new Iterator<Color>() {
             private int i = 0;
 
             @Override

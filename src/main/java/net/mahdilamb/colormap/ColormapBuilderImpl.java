@@ -359,7 +359,7 @@ abstract class ColormapBuilderImpl<B extends ColormapBuilder<B, Colormap>> imple
 
         @Override
         public Iterable<Color> colors() {
-            return () -> new Iterator<>() {
+            return () -> new Iterator<Color>() {
                 private final Iterator<Map.Entry<Float, Color>> source = colors.entrySet().iterator();
 
                 @Override

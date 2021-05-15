@@ -77,7 +77,7 @@ public interface Colormap extends Iterable<Float> {
      * @return an iterable over the colors
      */
     default Iterable<Color> colors() {
-        return () -> new Iterator<>() {
+        return () -> new Iterator<Color>() {
             private final Iterator<Float> source = getDefinedPositions().iterator();
 
             @Override
