@@ -1,5 +1,5 @@
-![Java (JDK11)](https://github.com/mahdilamb/colormap/workflows/Java%20(JDK11)%20CI%20with%20Gradle/badge.svg)
-![Java (JDK8)](https://github.com/mahdilamb/colormap/workflows/Java%20(JDK8)%20CI%20with%20Gradle/badge.svg)
+![Java (JDK11)](https://github.com/mahdilamb/colormap/workflows/JDK11%20with%20Gradle/badge.svg)
+![Java (JDK8)](https://github.com/mahdilamb/colormap/workflows/JDK8%20with%20Gradle/badge.svg)
 
 # Colormap
 
