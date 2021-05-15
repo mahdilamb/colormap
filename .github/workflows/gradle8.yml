@@ -24,6 +24,6 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Remove module-info.java
-        run: rm ${{ github.workspace }}/colormap/src/main/java/module-info.java
+        run: rm ${{ github.workspace }}/src/main/java/module-info.java
       - name: Build with Gradle
         run: ./gradlew build --project-prop javaVersion=1.8
